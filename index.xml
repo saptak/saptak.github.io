@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>@saptak</title>
+      <title> on @saptak </title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on @saptak</description>
-    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-    
-    
-    <lastBuildDate>Fri, 06 Feb 2015 13:03:40 PST</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <author>Alexander Ivanov</author>
+    <updated>2015-02-06 13:03:40 -0800 PST</updated>
     
     <item>
       <title>about</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Fri, 06 Feb 2015 13:03:40 PST</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/about/</guid>
       <description></description>
     </item>
@@ -25,7 +20,7 @@
       <title>Real time Data Ingestion in HBase &amp; Hive using Storm Bolt</title>
       <link>http://localhost:1313/posts/Real%20time%20Data%20Ingestion%20in%20HBase%20-%20Hive%20using%20Storm%20Bolt/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0835</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/Real%20time%20Data%20Ingestion%20in%20HBase%20-%20Hive%20using%20Storm%20Bolt/</guid>
       <description>
 
@@ -563,7 +558,7 @@ public void configureHBaseBolt(TopologyBuilder builder)
       <title>Ingesting and processing Real-time events with Apache Storm</title>
       <link>http://localhost:1313/posts/Ingesting%20and%20processing%20Real-time%20events%20with%20Apache%20Storm/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0825</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/Ingesting%20and%20processing%20Real-time%20events%20with%20Apache%20Storm/</guid>
       <description>
 
@@ -871,7 +866,7 @@ tuple.getStringByField(TruckScheme.FIELD_LONGITUDE));
       <title>Introducing Apache Hadoop to Developers</title>
       <link>http://localhost:1313/posts/Introducing%20Apache%20Hadoop%20to%20Developers/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0820</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/Introducing%20Apache%20Hadoop%20to%20Developers/</guid>
       <description>
 
@@ -1153,7 +1148,7 @@ tuple.getStringByField(TruckScheme.FIELD_LONGITUDE));
       <title>How To Process Data with Apache Pig</title>
       <link>http://localhost:1313/posts/How%20To%20Process%20Data%20with%20Apache%20Pig/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0810</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/How%20To%20Process%20Data%20with%20Apache%20Pig/</guid>
       <description>
 
@@ -1275,7 +1270,7 @@ dump join_data;
       <title>How To Process Data with Apache Hive</title>
       <link>http://localhost:1313/posts/How%20To%20Process%20Data%20with%20Apache%20Hive/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0805</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/How%20To%20Process%20Data%20with%20Apache%20Hive/</guid>
       <description>
 
@@ -1435,7 +1430,7 @@ ON (a.year = b.year AND a.runs = b.runs) ;
       <title>Faster Pig with Tez</title>
       <link>http://localhost:1313/posts/Faster%20Pig%20with%20Tez/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0802</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/Faster%20Pig%20with%20Tez/</guid>
       <description>
 
@@ -1552,7 +1547,7 @@ DUMP join_data;
       <title>Hello World</title>
       <link>http://localhost:1313/posts/Hello%20World%20-%20An%20introduction%20to%20Hadoop%20with%20Hive%20and%20Pig/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0801</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/Hello%20World%20-%20An%20introduction%20to%20Hadoop%20with%20Hive%20and%20Pig/</guid>
       <description>
 
@@ -1900,7 +1895,7 @@ line is executed.&lt;/p&gt;
       <title>first</title>
       <link>http://localhost:1313/posts/first/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 PST</pubDate>
-      
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/first/</guid>
       <description></description>
     </item>
@@ -1908,8 +1903,8 @@ line is executed.&lt;/p&gt;
     <item>
       <title></title>
       <link>http://localhost:1313/posts/Simulating%20and%20transporting%20Realtime%20event%20stream%20with%20Apache%20Kafka/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UT</pubDate>
-      
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <author>Alexander Ivanov</author>
       <guid>http://localhost:1313/posts/Simulating%20and%20transporting%20Realtime%20event%20stream%20with%20Apache%20Kafka/</guid>
       <description>
 
