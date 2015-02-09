@@ -271,6 +271,93 @@
 
 <p>Then save it and quit vi.</p>
 
+<h3 id="submit-the-entities-to-the-cluster:3b4d68d2b2e7a23ada5b6252c859a493">Submit the entities to the cluster:</h3>
+
+<h4 id="cluster-specification:3b4d68d2b2e7a23ada5b6252c859a493">Cluster Specification</h4>
+
+<p>Cluster specification is one per cluster.</p>
+
+<p>See below for a sample cluster specification file.</p>
+
+<p><img src="http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/cluster-spec.png" alt="" />
+</p>
+
+<p>Back to our scenario, lets submit the ‘oregon cluster’ entity to Falcon. This signifies the primary Hadoop cluster located in the Oregon data center.</p>
+
+<p><code>falcon entity -type cluster -submit -file oregonCluster.xml</code></p>
+
+<p>Then lets submit the ‘virginia cluster’ entity to Falcon. This signifies the backup Hadoop cluster located in the Virginia data center</p>
+
+<p><code>falcon entity -type cluster -submit -file virginiaCluster.xml</code></p>
+
+<p>If you view the XML file you will see how the cluster location and purpose has been captured in the XML file.</p>
+
+<h4 id="feed-specification:3b4d68d2b2e7a23ada5b6252c859a493">Feed Specification</h4>
+
+<p>A feed (a.k.a dataset) signifies a location of data and its associated replication policy and late arrival cut-off time.</p>
+
+<p>See below for a sample feed (a.k.a dataset) specification file.</p>
+
+<p><img src="http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/feed-spec.png" alt="" />
+</p>
+
+<p>Back to our scenario, let’s submit the source of the raw email feed. This feed signifies the raw emails that are being downloaded into the Hadoop cluster. These emails will be used by the email cleansing process.</p>
+
+<p><code>falcon entity -type feed -submit -file rawEmailFeed.xml</code></p>
+
+<p>Now let’s define the feed entity which will handle the end of the pipeline to store the cleansed email. This feed signifies the emails produced by the cleanse email process. It also takes care of replicating the cleansed email dataset to the backup cluster (virginia cluster)</p>
+
+<p><code>falcon entity -type feed -submit -file cleansedEmailFeed.xml</code></p>
+
+<h4 id="process:3b4d68d2b2e7a23ada5b6252c859a493">Process</h4>
+
+<p>A process defines configuration for a workflow. A workflow is a directed acyclic graph(DAG) which defines the job for the workflow engine. A process definition defines the configurations required to run the workflow job. For example, process defines the frequency at which the workflow should run, the clusters on which the workflow should run, the inputs and outputs for the workflow, how the workflow failures should be handled, how the late inputs should be handled and so on.</p>
+
+<p>Here is an example of what a process specification looks like:</p>
+
+<p><img src="http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/process-spec.png" alt="" />
+</p>
+
+<p>Back to our scenario, let’s submit the ingest and the cleanse process respectively:</p>
+
+<p>The ingest process is responsible for calling the Oozie workflow that downloads the raw emails from the web into the primary Hadoop cluster under the location specified in the rawEmailFeed.xml It also takes care of handling late data arrivals</p>
+
+<p><code>falcon entity -type process -submit -file emailIngestProcess.xml</code></p>
+
+<p>The cleanse process is responsible for calling the pig script that cleans the raw emails and produces the clean emails that are then replicated to the backup Hadoop cluster</p>
+
+<p><code>falcon entity -type process -submit -file cleanseEmailProcess.xml</code></p>
+
+<h3 id="schedule-the-falcon-entities:3b4d68d2b2e7a23ada5b6252c859a493">Schedule the Falcon entities</h3>
+
+<p>So, all that is left now is to schedule the feeds and processes to get it going.</p>
+
+<h4 id="ingest-the-feed:3b4d68d2b2e7a23ada5b6252c859a493">Ingest the feed</h4>
+
+<p><code>falcon entity -type feed -schedule -name rawEmailFeed</code></p>
+
+<p><code>falcon entity -type process -schedule -name rawEmailIngestProcess</code></p>
+
+<h4 id="cleanse-the-emails:3b4d68d2b2e7a23ada5b6252c859a493">Cleanse the emails</h4>
+
+<p><code>falcon entity -type feed -schedule -name cleansedEmailFeed</code></p>
+
+<p><code>falcon entity -type process -schedule -name cleanseEmailProcess</code></p>
+
+<h3 id="processing:3b4d68d2b2e7a23ada5b6252c859a493">Processing</h3>
+
+<p>In a few seconds you should notice that that Falcon has started ingesting files from the internet and dumping them to new folders like below on HDFS:</p>
+
+<p><img src="http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/input.png" alt="" />
+</p>
+
+<p>In a couple of minutes you should notice a new folder called processed under which the files processed through the data pipeline are being emitted:</p>
+
+<p><img src="http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/output.png" alt="" />
+</p>
+
+<p>We just created an end-to-end data pipeline to process data. The power of the Apache Falcon framework is its flexibility to work with pretty much any open source or proprietary data processing products out there.</p>
+
 	    </div>
 	    
 	<div class="about">
