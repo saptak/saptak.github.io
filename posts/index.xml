@@ -5,7 +5,236 @@
     <link>http://saptak.github.io/posts/</link>
     <language>en-us</language>
     <author>Alexander Ivanov</author>
-    <updated>2015-02-06 11:58:26 -0835 -0835</updated>
+    <updated>2015-02-08 23:00:24 -0800 PST</updated>
+    
+    <item>
+      <title>Incremental Backup of Data from HDP to Azure using Falcon for Disaster Recovery and Burst capacity</title>
+      <link>http://saptak.github.io/posts/Incremental-Backup-of-Data-from-HDP-to-Azure-using-Falcon-for-Disaster-Recovery-and-Burst-capacity/</link>
+      <pubDate>Sun, 08 Feb 2015 23:00:24 PST</pubDate>
+      <author>Alexander Ivanov</author>
+      <guid>http://saptak.github.io/posts/Incremental-Backup-of-Data-from-HDP-to-Azure-using-Falcon-for-Disaster-Recovery-and-Burst-capacity/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Apache Falcon simplifies the configuration of data motion with: replication; lifecycle management; lineage and traceability. This provides data governance consistency across Hadoop components.&lt;/p&gt;
+
+&lt;h2 id=&#34;scenario:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Scenario&lt;/h2&gt;
+
+&lt;p&gt;In this tutorial we will walk through a scenario where email data gets processed on multiple HDP 2.2 clusters around the country then gets backed up hourly on a cloud hosted cluster . In our example:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This cluster is hosted on Windows Azure.&lt;/li&gt;
+&lt;li&gt;Data arrives from all the West Coast production servers. The input data feeds are often late for up to 4 hrs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The goal is to clean the raw data to remove sensitive information like credit card numbers and make it available to our marketing data science team for customer churn analysis.&lt;/p&gt;
+
+&lt;p&gt;To simulate this scenario, we have a pig script grabbing the freely available Enron emails from the internet and feeding it into the pipeline.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/arch.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;prerequisite:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Prerequisite&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A cluster with Apache Hadoop 2.2 configured&lt;/li&gt;
+&lt;li&gt;A cluster with Apache Falcon configured&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The easiest way to meet the above prerequisites is to download the &lt;a href=&#34;http://hortonworks.com/downloads&#34;&gt;HDP Sandbox&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;After downloading the environment, confirm that Apache Falcon is running. Below are the steps to validate that:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;if Ambari is not configured on your Sandbox, go &lt;code&gt;http://127.0.0.1:8000/about/&lt;/code&gt; and enable Ambari.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image01.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Once Ambari is enabled, navigate to Ambari at &lt;code&gt;http://127.0.0.1:8080&lt;/code&gt;, login with username and password of&lt;code&gt;admin&lt;/code&gt; and &lt;code&gt;admin&lt;/code&gt; respectively. Then check if Falcon is running.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image04.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;If Falcon is not running, start Falcon:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image07.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h2 id=&#34;steps-for-the-scenario:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Steps for the Scenario&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Create cluster specification XML file&lt;/li&gt;
+&lt;li&gt;Create feed (aka dataset) specification XML file
+
+&lt;ul&gt;
+&lt;li&gt;Reference cluster specification&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Create the process specification XML file
+
+&lt;ul&gt;
+&lt;li&gt;Reference cluster specification – defines where the process runs&lt;/li&gt;
+&lt;li&gt;Reference feed specification – defines the datasets that the process manipulates&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We have already created the necessary xml files. In this step we are going to download the specifications and use them to define the topology and submit the storm job.&lt;/p&gt;
+
+&lt;h3 id=&#34;staging-the-component-of-the-app-on-hdfs:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Staging the component of the App on HDFS&lt;/h3&gt;
+
+&lt;p&gt;In this step we will stage the pig script and the necessary folder structure for inbound and outbound feeds on the HDFS:&lt;/p&gt;
+
+&lt;p&gt;First download this &lt;a href=&#34;http://hortonassets.s3.amazonaws.com/tutorial/falcon/falcon.zip&#34;&gt;zip file&lt;/a&gt; called &lt;a href=&#34;http://hortonassets.s3.amazonaws.com/tutorial/falcon/falcon.zip&#34;&gt;&lt;code&gt;falcon.zip&lt;/code&gt;&lt;/a&gt; to your local host machine.&lt;/p&gt;
+
+&lt;p&gt;Navigate using your browser to the Hue – File Browser interface at &lt;a href=&#34;http://127.0.0.1:8000/filebrowser/&#34;&gt;http://127.0.0.1:8000/filebrowser/&lt;/a&gt; to explore the HDFS.&lt;/p&gt;
+
+&lt;p&gt;Navigate to &lt;code&gt;/user/ambari-qa&lt;/code&gt; folder like below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/file-browser.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Now we will upload the zip file we just downloaded:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/uploadzip.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;This should also unzip the zip file and create a folder structure with a folder called &lt;code&gt;falcon&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;setting-up-the-destination-storage-on-microsoft-azure:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Setting up the destination storage on Microsoft Azure&lt;/h3&gt;
+
+&lt;p&gt;Login to the Windows Azure portal at &lt;a href=&#34;http://manage.windowsazure.com/&#34;&gt;http://manage.windowsazure.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image13.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Create a storage account&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image16.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Wait for the storage account to be provisioned&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image19.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Copy the access key and the account name in a text document. We will use the access key and the account name in later steps&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image22.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;The other information you will want to note down is the blob endpoint of the storage account we just created&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image25.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;code&gt;Containers&lt;/code&gt; tab and create a new container called &lt;code&gt;myfirstcontainer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image26.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;configuring-access-to-azure-blob-store-from-hadoop:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Configuring access to Azure Blob store from Hadoop&lt;/h3&gt;
+
+&lt;p&gt;Login to Ambari – &lt;a href=&#34;http://127.0.0.1:8080&#34;&gt;http://127.0.0.1:8080&lt;/a&gt; with the credentials &lt;code&gt;admin&lt;/code&gt; and &lt;code&gt;admin&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image27.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Then click on HDFS from the bar on the left and then select the &lt;code&gt;Configs&lt;/code&gt; tab.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image28.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Scroll down to the bottom of the page to the &lt;code&gt;Custom hdfs-site&lt;/code&gt; section and click on &lt;code&gt;Add property...&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image31.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;In the &lt;code&gt;Add Property&lt;/code&gt; dialog, the key name will start with &lt;code&gt;fs.azure.account.key.&lt;/code&gt; followed by your blob endpoint that you noted down in a previous step. The value will be the Azure storage key that you noted down in a previous step. Once you have filled in the values click the &lt;code&gt;Add&lt;/code&gt; button:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image34.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Once you are back out of the new key dialog you will have to &lt;code&gt;Save&lt;/code&gt; it by clicking on the green &lt;code&gt;Save&lt;/code&gt; button:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image31.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Then restart all the service by clicking on the orange &lt;code&gt;Restart&lt;/code&gt; button:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image36.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Wait for all the restart to complete&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image38.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Now let’s test if we can access our container on the Azure Blob Store.&lt;/p&gt;
+
+&lt;p&gt;SSH in to the VM:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ssh root@127.0.0.1 -p 2222;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The password is &lt;code&gt;hadoop&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;hdfs dfs -ls -R wasb://myfirstcontainer@saptak.blob.core.windows.net/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Issue the command from our cluster on the SSH’d terminal&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image40.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;h3 id=&#34;staging-the-specifications:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Staging the specifications&lt;/h3&gt;
+
+&lt;p&gt;From the SSH session, first we will change our user to &lt;code&gt;ambari-qa&lt;/code&gt;. Type:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;su ambari-qa&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Go to the users home directory:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;cd ~&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Download the topology, feed and process definitions:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;wget http://hortonassets.s3.amazonaws.com/tutorial/falcon/falconDemo.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image10.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Unzip the file:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;unzip ./falconDemo.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Change Directory to the folder created:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;cd falconChurnDemo/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now let’s modify the &lt;code&gt;cleansedEmailFeed.xml&lt;/code&gt; to point the backup cluster to our Azure Blob Store container.&lt;/p&gt;
+
+&lt;p&gt;Use &lt;code&gt;vi&lt;/code&gt; to edit the file:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image42.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Modify the value of &lt;code&gt;location&lt;/code&gt; element of the &lt;code&gt;backupCluster&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image44.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;to look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://hortonassets.s3.amazonaws.com/falcon2/image46.png&#34; alt=&#34;&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Then save it and quit vi.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Real time Data Ingestion in HBase &amp; Hive using Storm Bolt</title>
