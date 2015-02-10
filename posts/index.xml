@@ -1177,8 +1177,6 @@ tuple.getStringByField(TruckScheme.FIELD_LONGITUDE));
       <guid>http://saptak.in/posts/Introducing-Apache-Hadoop-to-Developers/</guid>
       <description>
 
-&lt;h1 id=&#34;introducing-apache-hadoop-to-developers:a7a2d5d01513835f7ec9120856d20f33&#34;&gt;Introducing Apache Hadoop to Developers&lt;/h1&gt;
-
 &lt;p&gt;Apache Hadoop is a community driven open-source project goverened by the &lt;a href=&#34;http://apache.org/&#34;&gt;Apache Software Foundation&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;It was originally implemented at Yahoo based on papers published by Google in 2003 and 2004. Hadoop committers today work at several different organizations like Hortonworks, Microsoft, Facebook, Cloudera and many others around the world.&lt;/p&gt;
