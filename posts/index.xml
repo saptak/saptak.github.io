@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-      <title>Posts on saptak.github.io </title>
-    <link>http://saptak.github.io/posts/</link>
+      <title>Posts on saptak.in </title>
+    <link>http://saptak.in/posts/</link>
     <language>en-us</language>
     <author>Alexander Ivanov</author>
     <updated>2015-02-08 23:00:24 -0800 PST</updated>
     
     <item>
       <title>Incremental Backup of Data from HDP to Azure using Falcon for Disaster Recovery and Burst capacity</title>
-      <link>http://saptak.github.io/posts/Incremental-Backup-of-Data-from-HDP-to-Azure-using-Falcon-for-Disaster-Recovery-and-Burst-capacity/</link>
+      <link>http://saptak.in/posts/Incremental-Backup-of-Data-from-HDP-to-Azure-using-Falcon-for-Disaster-Recovery-and-Burst-capacity/</link>
       <pubDate>Sun, 08 Feb 2015 23:00:24 PST</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Incremental-Backup-of-Data-from-HDP-to-Azure-using-Falcon-for-Disaster-Recovery-and-Burst-capacity/</guid>
+      <guid>http://saptak.in/posts/Incremental-Backup-of-Data-from-HDP-to-Azure-using-Falcon-for-Disaster-Recovery-and-Burst-capacity/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction:3b4d68d2b2e7a23ada5b6252c859a493&#34;&gt;Introduction&lt;/h2&gt;
@@ -325,10 +325,10 @@
     
     <item>
       <title>Real time Data Ingestion in HBase &amp; Hive using Storm Bolt</title>
-      <link>http://saptak.github.io/posts/Real-time-Data-Ingestion-in-HBase-Hive-using-Storm-Bolt/</link>
+      <link>http://saptak.in/posts/Real-time-Data-Ingestion-in-HBase-Hive-using-Storm-Bolt/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0835</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Real-time-Data-Ingestion-in-HBase-Hive-using-Storm-Bolt/</guid>
+      <guid>http://saptak.in/posts/Real-time-Data-Ingestion-in-HBase-Hive-using-Storm-Bolt/</guid>
       <description>
 
 &lt;h2 id=&#34;overview:683d6eeaf4bd2c379e5d5e6856741786&#34;&gt;Overview&lt;/h2&gt;
@@ -863,10 +863,10 @@ public void configureHBaseBolt(TopologyBuilder builder)
     
     <item>
       <title>Ingesting and processing Real-time events with Apache Storm</title>
-      <link>http://saptak.github.io/posts/Ingesting-and-processing-Real-time-events-with-Apache-Storm/</link>
+      <link>http://saptak.in/posts/Ingesting-and-processing-Real-time-events-with-Apache-Storm/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0825</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Ingesting-and-processing-Real-time-events-with-Apache-Storm/</guid>
+      <guid>http://saptak.in/posts/Ingesting-and-processing-Real-time-events-with-Apache-Storm/</guid>
       <description>
 
 &lt;p&gt;Trucking business is a high-risk business where truck drivers venture into remote areas, often despite harsh weather conditions and chaotic traffic on a daily basis. Using this solution illustrating Modern Data Archtecture with Hortonworks Data Platform, we have developed a centralized management system that can help reduce risk and lower the total cost of operations. This system can take into consideration adverse weather conditions, the driver’s driving patterns, current traffic conditions and other criteria to alert and inform the management staff and the drivers themselves when risk factors run high.&lt;/p&gt;
@@ -1171,10 +1171,10 @@ tuple.getStringByField(TruckScheme.FIELD_LONGITUDE));
     
     <item>
       <title>Introducing Apache Hadoop to Developers</title>
-      <link>http://saptak.github.io/posts/Introducing-Apache-Hadoop-to-Developers/</link>
+      <link>http://saptak.in/posts/Introducing-Apache-Hadoop-to-Developers/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0820</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Introducing-Apache-Hadoop-to-Developers/</guid>
+      <guid>http://saptak.in/posts/Introducing-Apache-Hadoop-to-Developers/</guid>
       <description>
 
 &lt;h1 id=&#34;introducing-apache-hadoop-to-developers:a7a2d5d01513835f7ec9120856d20f33&#34;&gt;Introducing Apache Hadoop to Developers&lt;/h1&gt;
@@ -1454,10 +1454,10 @@ public class WordCount {
     
     <item>
       <title>How To Process Data with Apache Pig</title>
-      <link>http://saptak.github.io/posts/How-To-Process-Data-with-Apache-Pig/</link>
+      <link>http://saptak.in/posts/How-To-Process-Data-with-Apache-Pig/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0810</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/How-To-Process-Data-with-Apache-Pig/</guid>
+      <guid>http://saptak.in/posts/How-To-Process-Data-with-Apache-Pig/</guid>
       <description>
 
 &lt;h3 id=&#34;what-is-pig:5609619f1b7e8e7ca114d6788385767c&#34;&gt;What is Pig?&lt;/h3&gt;
@@ -1576,10 +1576,10 @@ dump join_data;
     
     <item>
       <title>How To Process Data with Apache Hive</title>
-      <link>http://saptak.github.io/posts/How-To-Process-Data-with-Apache-Hive/</link>
+      <link>http://saptak.in/posts/How-To-Process-Data-with-Apache-Hive/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0805</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/How-To-Process-Data-with-Apache-Hive/</guid>
+      <guid>http://saptak.in/posts/How-To-Process-Data-with-Apache-Hive/</guid>
       <description>
 
 &lt;p&gt;This tutorial was derived from material in the Hortonworks developer training. These classes cover uses of the tools in the Hortonworks Data Platform and how to develop applications and projects using the Hortonworks Data Platform. You can find more information about this subject at &lt;a href=&#34;http://hortonworks.com/training/class/hadoop-2-data-analysis-pig-hive/&#34;&gt;Data Analysis with Pig &amp;amp; Hive&lt;/a&gt;&lt;/p&gt;
@@ -1736,10 +1736,10 @@ ON (a.year = b.year AND a.runs = b.runs) ;
     
     <item>
       <title>Faster Pig with Tez</title>
-      <link>http://saptak.github.io/posts/Faster-Pig-with-Tez/</link>
+      <link>http://saptak.in/posts/Faster-Pig-with-Tez/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0802</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Faster-Pig-with-Tez/</guid>
+      <guid>http://saptak.in/posts/Faster-Pig-with-Tez/</guid>
       <description>
 
 &lt;h3 id=&#34;what-is-pig:e386b11da5fb7c1ae40ec8cf08dfc1f8&#34;&gt;What is Pig?&lt;/h3&gt;
@@ -1853,10 +1853,10 @@ DUMP join_data;
     
     <item>
       <title>Hello World</title>
-      <link>http://saptak.github.io/posts/Hello-World-An-introduction-to-Hadoop-with-Hive-and-Pig/</link>
+      <link>http://saptak.in/posts/Hello-World-An-introduction-to-Hadoop-with-Hive-and-Pig/</link>
       <pubDate>Fri, 06 Feb 2015 11:58:26 -0801</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Hello-World-An-introduction-to-Hadoop-with-Hive-and-Pig/</guid>
+      <guid>http://saptak.in/posts/Hello-World-An-introduction-to-Hadoop-with-Hive-and-Pig/</guid>
       <description>
 
 &lt;h1 id=&#34;hello-world-an-introduction-to-hadoop-with-hive-and-pig:25b6d0ea085b0540568e67295b767eff&#34;&gt;Hello World! – An introduction to Hadoop with Hive and Pig&lt;/h1&gt;
@@ -2201,10 +2201,10 @@ line is executed.&lt;/p&gt;
     
     <item>
       <title></title>
-      <link>http://saptak.github.io/posts/Simulating-and-transporting-Realtime-event-stream-with-Apache-Kafka/</link>
+      <link>http://saptak.in/posts/Simulating-and-transporting-Realtime-event-stream-with-Apache-Kafka/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
       <author>Alexander Ivanov</author>
-      <guid>http://saptak.github.io/posts/Simulating-and-transporting-Realtime-event-stream-with-Apache-Kafka/</guid>
+      <guid>http://saptak.in/posts/Simulating-and-transporting-Realtime-event-stream-with-Apache-Kafka/</guid>
       <description>
 
 &lt;h1 id=&#34;new-simulating-and-transporting-realtime-event-stream-with-apache-kafka:f0dd3463aace966fb2126bf4cf1c0578&#34;&gt;NEW: Simulating and transporting Realtime event stream with Apache Kafka&lt;/h1&gt;
