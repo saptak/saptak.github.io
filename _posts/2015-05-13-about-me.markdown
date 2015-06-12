@@ -3,7 +3,7 @@ published: true
 title: Saptak Sen
 layout: post
 ---
-[![minipic](https://scontent-b-sea.xx.fbcdn.net/hphotos-xap1/t31.0-8/10914923_10152607091624249_7413078667121636289_o.jpg =250x)](http://saptak.github.io/about/)
+[![minipic](https://scontent-b-sea.xx.fbcdn.net/hphotos-xap1/t31.0-8/10914923_10152607091624249_7413078667121636289_o.jpg)](http://saptak.github.io/about/)
 img[alt="minipic"] {
   max-width:  20px;
   display: block;
