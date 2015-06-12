@@ -401,6 +401,6 @@ a.pagination-item:hover {
   }
 }
 img[alt="minipic"] {
-  max-width:  20px;
+  max-width:  60px;
   display: block;
 }
