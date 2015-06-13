@@ -3,6 +3,6 @@ highlighter: pygments
 markdown: kramdown
 url: http://saptak.in
 title: saptak.in
-tagline: The filtered bits I am interested in.
+tagline: The filtered bits I am interested .in
 description: The opinion I express on this site are mine and not of my employer
 paginate: 2
