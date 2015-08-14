@@ -15,9 +15,7 @@ In this tutorial we are going walk the process of:
 
 [Download Hortonworks Sandbox](http://hortonworks.com/products/hortonworks-sandbox/#install)
 
-##### Run Sandbox and connect to it from SSH
-
-Let’s open a shell to our Sandbox through SSH:  
+Once you have download the Hortonworks sandbox and run the VM, open a commandline shell to our Sandbox through SSH:  
 
 ![](https://www.dropbox.com/s/tzsxvsnxfo26jn7/Screenshot_2015-04-13_07_58_43.png?dl=1)
 
