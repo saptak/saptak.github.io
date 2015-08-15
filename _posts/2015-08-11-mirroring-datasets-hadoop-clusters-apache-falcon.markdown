@@ -8,6 +8,7 @@ Apache Falcon is a framework to simplify data pipeline processing and management
 It provides data management services such as retention, replications across clusters, archival etc. It makes it much simpler to onboard new workflows/pipelines, with support for late data handling and retry policies. It allows you to easily define relationship between various data and processing elements and integrate with metastore/catalog such as Hive/HCatalog. Finally it also lets you capture lineage information for feeds and processes.
 
 In this tutorial we are going walk the process of:
+
 * Defining the cluster entities
 * Defining and executing a job to mirror data between two clusters
 
@@ -79,10 +80,10 @@ hadoop fs -mkdir /apps/falcon/backupCluster/staging
 
 ![](http://www.dropbox.com/s/v0ydcb0him66uui/Screenshot%202015-08-07%2010.31.37.png?dl=1)
 
-Now we need to change the permission recursively on the `falcon`directory on HDFS
+Now we need to change the permission recursively on the `falcon` directory on HDFS
 
 ```bash
-hadoop fs -chown -R falcon /apps/falcon/*
+hadoop fs -chmod -R 777 /apps/falcon/*
 ```
 ![](http://www.dropbox.com/s/5g0xo5rfx4h8poy/Screenshot%202015-08-07%2010.33.32.png?dl=1)
 
@@ -111,7 +112,7 @@ hadoop fs -chown -R falcon /apps/falcon/*
 hadoop fs -chmod -R 755 /apps/falcon/primaryCluster/working /apps/falcon/backupCluster/working
 ```
 
-![](http://www.dropbox.com/s/i05cdsdegc6z9g8/Screenshot%202015-08-07%2010.43.50.png?dl=1
+![](http://www.dropbox.com/s/i05cdsdegc6z9g8/Screenshot%202015-08-07%2010.43.50.png?dl=1)
 
 Now let's navigate to the Falcon UI on our browser. The Falcon UI is by default at port 15000. The default username is `ambari-qa` and the password is `admin`.
 
@@ -274,4 +275,4 @@ After a few minutes, use the HDFS View in the Ambari console to check the `/user
 
 ![](http://www.dropbox.com/s/vpbine4pzyu4vo2/Screenshot%202015-08-10%2014.41.20.png?dl=1)
 
-In this tutorial we walked through the process of defining the cluster entities represing two different cluster and then mirroring datasets between them. In the next tutorial we will work through defining various data feeds and processing them to refine the data.
+In this tutorial we walked through the process of defining the cluster entities representing two different clusters and then mirroring the datasets between them. In the next tutorial we will work through defining various data feeds and processing them to refine the data.
