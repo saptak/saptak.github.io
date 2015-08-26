@@ -20,6 +20,18 @@ Once you have download the Hortonworks sandbox and run the VM, navigate to the A
 
 ![](http://www.dropbox.com/s/ddpzb9y5n3hav6o/Screenshot%202015-08-19%2016.28.48.png?dl=1)
 
+### Scenario
+
+In this tutorial we will walk through a scenario where email data lands hourly on a cluster. In our example:
+
+  * This cluster is the primary cluster located in the Oregon data center.
+  * Data arrives from all the West Coast production servers. The input data feeds are often late for up to 4 hrs.
+
+The goal is to clean the raw data to remove sensitive information like credit card numbers and make it available to our marketing data science team for customer churn analysis.
+
+To simulate this scenario, we have a pig script grabbing the freely available Enron emails from the internet and feeding it into the pipeline.
+
+![](http://hortonassets.s3.amazonaws.com/tutorial/falcon/images/arch.png)
 
 
 ###Starting Falcon
@@ -209,67 +221,270 @@ Click `Save` to persist the `backupCluster` entity.
 
 ![](http://www.dropbox.com/s/u14draatq25sr3s/Screenshot%202015-08-07%2010.51.33.png?dl=1)
 
-###Defining the Feed entities
+###Defining the rawEmailFeed entity
+
+To create a feed entity click on the `Feed` button on the top of the main page on the Falcon Web UI.
+
+Then click on the edit button over XML Preview area on the right hand side of the screen and replace the XML content with the XML document below:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<feed name="rawEmailFeed" description="Raw customer email feed" xmlns="uri:falcon:feed:0.1">
+    <tags>externalSystem=USWestEmailServers</tags>
+    <groups>churnAnalysisDataPipeline</groups>
+    <frequency>hours(1)</frequency>
+    <timezone>UTC</timezone>
+    <late-arrival cut-off="hours(1)"/>
+    <clusters>
+        <cluster name="primaryCluster" type="source">
+            <validity start="2015-07-22T01:00Z" end="2015-07-22T10:00Z"/>
+            <retention limit="days(90)" action="delete"/>
+        </cluster>
+    </clusters>
+    <locations>
+        <location type="data" path="/user/ambari-qa/falcon/demo/primary/input/enron/${YEAR}-${MONTH}-${DAY}-${HOUR}"/>
+        <location type="stats" path="/"/>
+        <location type="meta" path="/"/>
+    </locations>
+    <ACL owner="ambari-qa" group="users" permission="0x755"/>
+    <schema location="/none" provider="/none"/>
+</feed>
+```
+
+Click `Finish` on the top of the XML Preview area
 
 ![](http://www.dropbox.com/s/ne2877qvxl7apl0/Screenshot%202015-08-11%2015.09.14.png?dl=1)
 
+Falcon UI should have automatically parsed out the values from the XML and populated in the right fields. Once you have verified that these are the correct values press `Next`.
+
 ![](http://www.dropbox.com/s/wxq9b5gbk0crgly/Screenshot%202015-08-11%2015.14.21.png?dl=1)
+
+On the Clusters page ensure you modify the validity to a time slice which is in the very near future.
+
+Click `Next`
 
 ![](http://www.dropbox.com/s/tdit1iys7od1lva/Screenshot%202015-08-11%2015.15.35.png?dl=1)
 
+Save the feed
+
 ![](http://www.dropbox.com/s/k55ijdij8i6avso/Screenshot%202015-08-11%2015.16.01.png?dl=1)
+
+###Defining the rawEmailIngestProcess entity
+
+Now lets define the `rawEmailIngestProcess`.
+
+To create a process entity click on the `Process` button on the top of the main page on the Falcon Web UI.
+
+Then click on the edit button over XML Preview area on the right hand side of the screen and replace the XML content with the XML document below:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<process name="rawEmailIngestProcess" xmlns="uri:falcon:process:0.1">
+    <tags>email=testemail</tags>
+    <clusters>
+        <cluster name="primaryCluster">
+            <validity start="2015-07-22T01:00Z" end="2015-07-22T10:00Z"/>
+        </cluster>
+    </clusters>
+    <parallel>1</parallel>
+    <order>FIFO</order>
+    <frequency>hours(1)</frequency>
+    <timezone>UTC</timezone>
+    <outputs>
+        <output name="output" feed="rawEmailFeed" instance="now(0,0)"/>
+    </outputs>
+    <workflow name="emailIngestWorkflow" version="4.0.1" engine="oozie" path="/user/ambari-qa/falcon/demo/apps/ingest/fs"/>
+    <retry policy="exp-backoff" delay="minutes(3)" attempts="3"/>
+    <ACL owner="ambari-qa" group="users" permission="0x755"/>
+</process>
+```
+Click `Finish` on the top of the XML Preview area
 
 ![](http://www.dropbox.com/s/k9cm0fveefdrfgk/Screenshot%202015-08-11%2015.17.01.png?dl=1)
 
+Accept the default values and click next
+
 ![](http://www.dropbox.com/s/g7dlc0lijvybkam/Screenshot%202015-08-11%2015.17.19.png?dl=1)
+
+On the Clusters page ensure you modify the validity to a time slice which is in the very near future and then click next
 
 ![](http://www.dropbox.com/s/b4udackmnu8m5a9/Screenshot%202015-08-11%2015.18.02.png?dl=1)
 
+Accept the default values and click Next
 
 ![](http://www.dropbox.com/s/3bf4dhk8nonssst/Screenshot%202015-08-11%2015.18.15.png?dl=1)
 
+Let's `Save` the process.
+
 ![](http://www.dropbox.com/s/0cgbrb8gh306ccz/Screenshot%202015-08-11%2015.18.37.png?dl=1)
+
+###Defining the cleansedEmailFeed
+
+Again, to create a feed entity click on the `Feed` button on the top of the main page on the Falcon Web UI.
+
+Then click on the edit button over XML Preview area on the right hand side of the screen and replace the XML content with the XML document below:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<feed name="cleansedEmailFeed" description="Cleansed customer emails" xmlns="uri:falcon:feed:0.1">
+    <tags>cleanse=cleaned</tags>
+    <groups>churnAnalysisDataPipeline</groups>
+    <frequency>hours(1)</frequency>
+    <timezone>UTC</timezone>
+    <late-arrival cut-off="hours(4)"/>
+    <clusters>
+        <cluster name="primaryCluster" type="source">
+            <validity start="2015-07-22T01:00Z" end="2015-07-22T10:00Z"/>
+            <retention limit="hours(90)" action="delete"/>
+            <locations>
+                <location type="data" path="/user/ambari-qa/falcon/demo/primary/processed/enron/${YEAR}-${MONTH}-${DAY}-${HOUR}"/>
+                <location type="stats" path="/"/>
+                <location type="meta" path="/"/>
+            </locations>
+        </cluster>
+        <cluster name="backupCluster" type="target">
+            <validity start="2015-07-22T01:00Z" end="2015-07-22T10:00Z"/>
+            <retention limit="hours(90)" action="delete"/>
+            <locations>
+                <location type="data" path="/falcon/demo/bcp/processed/enron/${YEAR}-${MONTH}-${DAY}-${HOUR}"/>
+                <location type="stats" path="/"/>
+                <location type="meta" path="/"/>
+            </locations>
+        </cluster>
+    </clusters>
+    <locations>
+        <location type="data" path="/user/ambari-qa/falcon/demo/processed/enron/${YEAR}-${MONTH}-${DAY}-${HOUR}"/>
+        <location type="stats" path="/"/>
+        <location type="meta" path="/"/>
+    </locations>
+    <ACL owner="ambari-qa" group="users" permission="0x755"/>
+    <schema location="/none" provider="/none"/>
+</feed>
+```
+Click `Finish` on the top of the XML Preview area
 
 ![](http://www.dropbox.com/s/eibbg47a2jw5t1s/Screenshot%202015-08-11%2015.35.10.png?dl=1)
 
+Accept the default values and click Next
+
 ![](http://www.dropbox.com/s/8xbise44h40imtv/Screenshot%202015-08-11%2015.35.49.png?dl=1)
 
+Accept the default values and click Next
+
 ![](http://www.dropbox.com/s/3y7kyu0ngiamwep/Screenshot%202015-08-11%2015.35.58.png?dl=1)
+
+On the Clusters page ensure you modify the validity to a time slice which is in the very near future and then click Next
 
 ![](http://www.dropbox.com/s/5ahsbuvuzs24crv/Screenshot%202015-08-11%2015.36.35.png?dl=1)
 
 ![](http://www.dropbox.com/s/nf3ym257dn04851/Screenshot%202015-08-11%2015.37.05.png?dl=1)
 
+Accept the default values and click Save
+
 ![](http://www.dropbox.com/s/mvd9olqxst6cfzl/Screenshot%202015-08-11%2015.37.21.png?dl=1)
+
+### Defining the cleanseEmailProcess
+
+Now lets define the `cleanseEmailProcess`.
+
+Again, to create a process entity click on the `Process` button on the top of the main page on the Falcon Web UI.
+
+Then click on the edit button over XML Preview area on the right hand side of the screen and replace the XML content with the XML document below:
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<process name="cleanseEmailProcess" xmlns="uri:falcon:process:0.1">
+    <tags>cleanse=yes</tags>
+    <clusters>
+        <cluster name="primaryCluster">
+            <validity start="2015-07-22T01:00Z" end="2015-07-22T10:00Z"/>
+        </cluster>
+    </clusters>
+    <parallel>1</parallel>
+    <order>FIFO</order>
+    <frequency>hours(1)</frequency>
+    <timezone>UTC</timezone>
+    <inputs>
+        <input name="input" feed="rawEmailFeed" start="now(0,0)" end="now(0,0)"/>
+    </inputs>
+    <outputs>
+        <output name="output" feed="cleansedEmailFeed" instance="now(0,0)"/>
+    </outputs>
+    <workflow name="emailCleanseWorkflow" version="pig-0.13.0" engine="pig" path="/user/ambari-qa/falcon/demo/apps/pig/id.pig"/>
+    <retry policy="exp-backoff" delay="minutes(5)" attempts="3"/>
+    <ACL owner="ambari-qa" group="users" permission="0x755"/>
+</process>
+```
+Click `Finish` on the top of the XML Preview area
 
 ![](http://www.dropbox.com/s/67euk40jojsmioz/Screenshot%202015-08-11%2015.39.34.png?dl=1)
 
+Accept the default values and click Next
+
 ![](http://www.dropbox.com/s/dpmpfhdfwkyb5dc/Screenshot%202015-08-11%2015.39.53.png?dl=1)
+
+On the Clusters page ensure you modify the validity to a time slice which is in the very near future and then click Next
 
 ![](http://www.dropbox.com/s/80gtpe4ov99ebyf/Screenshot%202015-08-11%2015.40.24.png?dl=1)
 
+Select the Input and Output Feeds as shown below and Save
+
 ![](http://www.dropbox.com/s/w3jdrtu2o4krxhk/Screenshot%202015-08-11%2015.40.40.png?dl=1)
+
+###Running the feeds
+
+From the Falcon Web UI home page search for the Feeds we created
 
 ![](http://www.dropbox.com/s/wbo7xboeu596fwf/Screenshot%202015-08-11%2015.41.34.png?dl=1)
 
+Select the rawEmailFeed by clicking on the checkbox
+
 ![](http://www.dropbox.com/s/djgbw9o6i9jbfh2/Screenshot%202015-08-11%2015.41.56.png?dl=1)
+
+Then click on the Schedule button on the top of the search results
 
 ![](http://www.dropbox.com/s/pq8inbov0vuho3x/Screenshot%202015-08-11%2015.42.04.png?dl=1)
 
+Next run the cleansedEmailFeed in the same way
+
 ![](http://www.dropbox.com/s/rkqmzqhjxsp353k/Screenshot%202015-08-11%2015.42.30.png?dl=1)
+
+####Running the processes
+
+From the Falcon Web UI home page search for the Process we created
 
 ![](http://www.dropbox.com/s/m9t309isyw9fme5/Screenshot%202015-08-11%2015.42.55.png?dl=1)
 
+Select the cleanseEmailProcess by clicking on the checkbox
+
 ![](http://www.dropbox.com/s/o0f6uiywmb4hdzs/Screenshot%202015-08-11%2015.43.07.png?dl=1)
+
+Then click on the Schedule button on the top of the search results
 
 ![](http://www.dropbox.com/s/5wrpsl7e46ov563/Screenshot%202015-08-11%2015.43.31.png?dl=1)
 
+Next run the rawEmailIngestProcess in the same way
+
 ![](http://www.dropbox.com/s/afsxyy215xcnanf/Screenshot%202015-08-11%2015.43.41.png?dl=1)
+
+If you visit the Oozie process page, you can seen the processes running
 
 ![](http://www.dropbox.com/s/mlleewsrrn5u0ty/Screenshot%202015-08-11%2015.44.23.png?dl=1)
 
+###Input and Output of the pipeline
+
+Now that the feeds and processes are running, we can check the dataset being ingressed and the dataset egressed on HDFS.
+
 ![](http://www.dropbox.com/s/fusow13whgtd7oa/Screenshot%202015-08-11%2015.45.48.png?dl=1)
+
+Here is the data being ingressed
 
 ![](http://www.dropbox.com/s/lpq8sxywi47tg37/Screenshot%202015-08-11%2016.31.37.png?dl=1)
 
+and here is the data being egressed from the pipeline
+
 ![](http://www.dropbox.com/s/b442uvtrjtuzr6o/Screenshot%202015-08-11%2017.13.05.png?dl=1)
+
+## Summary
+
+In this tutorial we walked through a scenario to clean the raw data to remove sensitive information like credit card numbers and make it available to our marketing data science team for customer churn analysis by defining a data pipeline with Apache Falcon.
