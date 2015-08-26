@@ -131,6 +131,14 @@ Next we will need to create the `working` directories for `primaryCluster` and `
 hadoop fs -mkdir /apps/falcon/primaryCluster/working
 hadoop fs -mkdir /apps/falcon/backupCluster/working
 ```
+Finally you needs to set the proper permission on staging/working directories:
+
+```bash
+hadoop fs -chmod 777 /apps/falcon/primaryCluster/staging
+hadoop fs -chmod 755 /apps/falcon/primaryCluster/working
+hadoop fs -chmod 777 /apps/falcon/backupCluster/staging
+hadoop fs -chmod 755 /apps/falcon/backupCluster/working
+```
 
 ![](http://www.dropbox.com/s/midzw0tr3rs7eov/Screenshot%202015-08-07%2010.36.12.png?dl=1)
 
@@ -485,6 +493,6 @@ and here is the data being egressed from the pipeline
 
 ![](http://www.dropbox.com/s/b442uvtrjtuzr6o/Screenshot%202015-08-11%2017.13.05.png?dl=1)
 
-## Summary
+### Summary
 
 In this tutorial we walked through a scenario to clean the raw data to remove sensitive information like credit card numbers and make it available to our marketing data science team for customer churn analysis by defining a data pipeline with Apache Falcon.
