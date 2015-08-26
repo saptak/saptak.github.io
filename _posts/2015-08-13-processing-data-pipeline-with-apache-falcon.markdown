@@ -131,6 +131,9 @@ Next we will need to create the `working` directories for `primaryCluster` and `
 hadoop fs -mkdir /apps/falcon/primaryCluster/working
 hadoop fs -mkdir /apps/falcon/backupCluster/working
 ```
+
+![](http://www.dropbox.com/s/midzw0tr3rs7eov/Screenshot%202015-08-07%2010.36.12.png?dl=1)
+
 Finally you needs to set the proper permission on staging/working directories:
 
 ```bash
@@ -139,8 +142,6 @@ hadoop fs -chmod 755 /apps/falcon/primaryCluster/working
 hadoop fs -chmod 777 /apps/falcon/backupCluster/staging
 hadoop fs -chmod 755 /apps/falcon/backupCluster/working
 ```
-
-![](http://www.dropbox.com/s/midzw0tr3rs7eov/Screenshot%202015-08-07%2010.36.12.png?dl=1)
 
 Let's open the Falcon Web UI. You can easily launch the Falcon Web UI from Ambari:
 
