@@ -1,6 +1,6 @@
 ---
 published: true
-title: Data Workflow on Hadoop clusters with Apache Falcon
+title: Processing Data Pipeline on Hadoop clusters with Apache Falcon
 layout: post
 ---
 
@@ -54,6 +54,7 @@ Then login as user `hdfs`
 ```bash
 su - hdfs
 ```
+
 Then download the file falcon.zip with the following command"
 
 ```
@@ -73,11 +74,13 @@ Now let's give ourselves permission to upload files
 ```
 hadoop fs -chmod -R 777 /user/ambari-qa
 ```
+
 then let's create a folder `falcon` under `ambari-qa` with the command
 
 ```
 hadoop fs -mkdir /user/ambari-qa/falcon
 ```
+
 ![](http://www.dropbox.com/s/lnzlibnqqijcjms/Screenshot%202015-08-25%2018.24.59.png?dl=1)
 
 Now let's upload the decompressed folder with the command
@@ -159,6 +162,7 @@ Then click on the `edit` button over XML Preview area on the right hand side of 
     </properties>
 </cluster>
 ```
+
 Click `Finish` on top of the XML Preview area to save the XML.
 ![](http://www.dropbox.com/s/uvkbmrgsmrgpn9b/Screenshot%202015-08-07%2010.49.25.png?dl=1)
 
@@ -196,6 +200,7 @@ Then click on the `edit` button over XML Preview area on the right hand side of 
     </properties>
 </cluster>
 ```
+
 Click `Finish` on top of the XML Preview area to save the XML and then the `Next` button to verify the values.
 
 ![](http://www.dropbox.com/s/ohr0egsj7rmi9nq/Screenshot%202015-08-07%2010.51.14.png?dl=1)
