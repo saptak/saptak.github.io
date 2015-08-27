@@ -54,7 +54,9 @@ Once, Falcon starts, Ambari should clearly indicate as below that the service ha
 
 ###Downloading and staging the dataset
 
-Now let's stage the dataset using the commandline. First SSH into the Hortonworks Sandbox with the command:
+Now let's stage the dataset using the commandline. Although we perform many of these file operations below using the command line, you can also do the same with the `HDFS Files View` in Ambari.
+
+First SSH into the Hortonworks Sandbox with the command:
 
 
 ![](http://www.dropbox.com/s/tzsxvsnxfo26jn7/Screenshot_2015-04-13_07_58_43.png?dl=1)
@@ -134,7 +136,7 @@ hadoop fs -mkdir /apps/falcon/backupCluster/working
 
 ![](http://www.dropbox.com/s/midzw0tr3rs7eov/Screenshot%202015-08-07%2010.36.12.png?dl=1)
 
-Finally you needs to set the proper permission on staging/working directories:
+Finally you need to set the proper permissions on the staging/working directories:
 
 ```bash
 hadoop fs -chmod 777 /apps/falcon/primaryCluster/staging
