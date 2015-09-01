@@ -143,6 +143,7 @@ hadoop fs -chmod 777 /apps/falcon/primaryCluster/staging
 hadoop fs -chmod 755 /apps/falcon/primaryCluster/working
 hadoop fs -chmod 777 /apps/falcon/backupCluster/staging
 hadoop fs -chmod 755 /apps/falcon/backupCluster/working
+hadoop fs –chown –R falcon /apps/falcon/*
 ```
 
 Let's open the Falcon Web UI. You can easily launch the Falcon Web UI from Ambari:
