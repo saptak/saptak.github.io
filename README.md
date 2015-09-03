@@ -23,7 +23,7 @@ documentation for more info.
 As an alternative to installing Ruby and Jekyll, if you're a user of
 [Docker](https://www.docker.com/) and [Docker
 Compose](https://docs.docker.com/compose/), you can run a Docker image of
-yevgeniy-brikman-homepage that has all the dependencies already setup for you.
+saptak.github.io that has all the dependencies already setup for you.
 
 On Linux:
 
