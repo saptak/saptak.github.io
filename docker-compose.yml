@@ -1,5 +1,5 @@
-web:  
-  image: brikis98/yevgeniy-brikman-homepage
+web:
+  image: 
   volumes:
     - .:/src
   ports:

@@ -1,7 +1,7 @@
 FILES_TO_CONVERT_GLOB = "_posts/*.md"
 FRONT_MATTER = "---"
 EXPECTED_FRONT_MATTER_COUNT = 2
-BLOGSPOT_PATTERN = 'brikis98.blogspot'
+BLOGSPOT_PATTERN = 'saptaksen.blogspot'
 
 files = Dir[FILES_TO_CONVERT_GLOB]
 
