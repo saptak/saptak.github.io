@@ -5,7 +5,7 @@ url: "http://saptak.in"
 # Internal nav
 nav:
   main:
-    writing: "/writing"
+    blog: "/writing"
     #speaking: "/speaking"
     #projects: "/projects"
     #photos: "/photos"
