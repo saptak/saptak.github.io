@@ -1,41 +1,23 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
   {% include head.html %}
-
-  <body>
-
-    {% include sidebar.html %}
-
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-            <a href="/" title="Home">{{ site.title }}</a>
-            <small>{{ site.tagline }}</small>
-          </h3>
-        </div>
-      </div>
-
-      <div class="container content">
-        {{ content }}
-      </div>
-    </div>
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-  </body>
-  <!-- Hotjar Tracking Code for saptak.in -->
-  <script>
-      (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:56148,hjsv:5};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-      })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
-  </script>
-
+</head>
+<body>
+  {% include nav.html %}
+  {% if page.include_header %}
+    {% include header.html %}
+  {% endif %}
+  <main class="container block p3">
+    {{ content }}
+  </main>
+  {% if page.bottom_include %}
+    {% include {{ page.bottom_include }} %}
+  {% endif %}
+  {% include footer.html %}
+  {% include scripts.html %}
+</body>
 </html>
