@@ -7,7 +7,7 @@ tags:
 - Falcon, Hadoop
 modified_time: '2015-08-11T15:11:18.054-07:00'
 ---
-Apache Falcon is a framework to simplify data pipeline processing and management on Hadoop clusters.
+Apache Falcon is a framework to simplify data pipeline processing and management on Hadoop clusters. 
 
 It provides data management services such as retention, replications across clusters, archival etc. It makes it much simpler to onboard new workflows/pipelines, with support for late data handling and retry policies. It allows you to easily define relationship between various data and processing elements and integrate with metastore/catalog such as Hive/HCatalog. Finally it also lets you capture lineage information for feeds and processes.
 
