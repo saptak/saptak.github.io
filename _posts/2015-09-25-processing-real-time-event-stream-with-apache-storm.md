@@ -4,7 +4,8 @@ title: Processing realtime event stream with Apache Storm
 date: '2015-09-25T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- Storm, Hadoop
+- storm
+- hadoop
 modified_time: '2015-09-25T15:11:18.054-07:00'
 ---
 ### Introduction

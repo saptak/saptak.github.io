@@ -4,7 +4,8 @@ title: Apache Spark Tutorial with Hortonworks Data Platform
 date: '2015-09-12T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- Spark, Hadoop
+- spark
+- hadoop
 modified_time: '2015-09-12T15:11:18.054-07:00'
 ---
 Apache Spark is a fast, in-memory data processing engine with an elegant development API that allows data workers to efficiently execute algorithms which require iterative access to datasets, like machine learning algorithms. Spark on YARN enables deep integration with Hadoop and other YARN enabled workloads in the enterprise.

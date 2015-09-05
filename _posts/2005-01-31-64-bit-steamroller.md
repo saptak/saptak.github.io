@@ -5,7 +5,7 @@ date: '2005-01-31T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
 - 64-bit
-- Windows
+- windows
 modified_time: '2005-01-31T15:11:18.054-07:00'
 ---
 

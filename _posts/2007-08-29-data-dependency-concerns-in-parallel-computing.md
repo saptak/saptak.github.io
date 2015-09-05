@@ -4,8 +4,8 @@ title: Data dependency concerns in parallel computing
 date: '2007-08-29T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- HPC
-- Parallel Computing
+- hpc
+- parallel computing
 modified_time: '2007-08-29T15:11:18.054-07:00'
 ---
 

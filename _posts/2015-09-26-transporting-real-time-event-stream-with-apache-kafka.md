@@ -4,7 +4,8 @@ title: Transporting realtime event stream with Apache Kafka
 date: '2015-09-26T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- Kafka, Hadoop
+- kafka
+- hadoop
 modified_time: '2015-09-26T15:11:18.054-07:00'
 ---
 

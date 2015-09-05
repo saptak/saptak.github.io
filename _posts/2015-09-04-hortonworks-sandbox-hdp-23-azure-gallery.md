@@ -4,9 +4,9 @@ title: Hortonworks Sandbox with HDP 2.3 is now available on Microsoft Azure Gall
 date: '2015-09-04T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- Hadoop
-- Azure
-- Sandbox
+- hadoop
+- azure
+- sandbox
 modified_time: '2015-09-04T15:11:18.054-07:00'
 ---
 

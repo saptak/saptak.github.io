@@ -4,8 +4,8 @@ title: How to build a Hadoop VM with Ambari and Vagrant
 date: '2014-02-07T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- Vagrant
-- Hadoop
+- vagrant
+- hadoop
 modified_time: '2014-02-07T15:11:18.054-07:00'
 ---
 

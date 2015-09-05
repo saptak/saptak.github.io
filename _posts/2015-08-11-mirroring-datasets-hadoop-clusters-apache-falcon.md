@@ -4,8 +4,8 @@ layout: post
 date: '2015-08-11T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- Falcon
-- Hadoop
+- falcon
+- hadoop
 modified_time: '2015-08-11T15:11:18.054-07:00'
 ---
 Apache Falcon is a framework to simplify data pipeline processing and management on Hadoop clusters.

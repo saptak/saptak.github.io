@@ -4,8 +4,8 @@ title: Deploying a Hadoop cluster on EC2
 date: '2014-02-04T12:34:00.001-07:00'
 author: Saptak Sen
 tags:
-- EC2
-- Hadoop
+- ec2
+- hadoop
 modified_time: '2014-02-04T15:11:18.054-07:00'
 ---
 
