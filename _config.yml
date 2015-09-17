@@ -65,7 +65,7 @@ permalink: "/writing/:year/:month/:day/:title"
 sass:
   sass_dir: "/assets/css"
   style: :compressed
-highlighter: pygments
+highlighter: coderay
 timezone: 'America/Los_Angeles'
 markdown: redcarpet
 
