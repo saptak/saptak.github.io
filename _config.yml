@@ -78,8 +78,8 @@ gems:
 
 redcarpet:
   extensions:
+    - footnotes
     - hard_wrap
     - no_intra_emphasis
     - autolink
     - strikethrough
-    - fenced_code_blocks
