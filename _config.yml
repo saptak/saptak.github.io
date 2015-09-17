@@ -67,6 +67,7 @@ sass:
   style: :compressed
 highlighter: pygments
 timezone: 'America/Los_Angeles'
+markdown: redcarpet
 
 # Plugins (GitHub Pages only support a few)
 gems:
