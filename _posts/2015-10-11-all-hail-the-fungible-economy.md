@@ -55,17 +55,17 @@ Understand that there was a large subsection of the humanity on this planet who 
 
 With this new influx of participants into the global economy, the rate of innovation will accelerate. The middle class in developed countries will also lose their advantage in commanding higher standard of living just because of where they were born.
 
-The income gap in developing nations among the top 1% and the rest is already incredibly high and that will continue to widen. The trend of increasing income gap in developed economies will continue to accelerate as well between the fungible workforce and their new employers.
+The income gap between the top 1% and the rest is already incredibly high in developing economies and that will continue to widen. The trend of increasing income gap between the fungible workforce and their new employers in developed economies will continue to accelerate as well.
 
 So, in short, expect dramatic changes in next 10 years on how we work, live, educate ourselves. As continuous ferecious change becomes the new normal, the relevance of our skill sets will be continuously and ferociously changing too.
 
-### How not to be Fungible?
+#### How not to be Fungible?
 
 ![](https://cdn-images-2.medium.com/max/1600/1*O-pE04ggKe37lNlv6_2fEg.jpeg)
 
 As I looked out of my bedroom window at the golden leaves on the tree outside, I remembered that the only way to avoid the destiny of _fungibiliving_is by **_continuous self renewal_**.
 
-To put it as the poetic advice that Dora had for Marlin in the movie “_Finding Nemo_” in a similarly dynamic world:
+To put it as the poetic advice that Dory had for Marlin in the movie “_Finding Nemo_” in a similarly dynamic world:
 
 > Just keep learning. Just keep learning, learning, learning….
 
