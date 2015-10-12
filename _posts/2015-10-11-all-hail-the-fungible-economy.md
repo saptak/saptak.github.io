@@ -63,7 +63,7 @@ So, in short, expect dramatic changes in next 10 years on how we work, live, edu
 
 ![](https://cdn-images-2.medium.com/max/1600/1*O-pE04ggKe37lNlv6_2fEg.jpeg)
 
-As I looked out of my bedroom window at the golden leaves on the tree outside, I remembered that the only way to avoid the destiny of _fungibiliving_is by **_continuous self renewal_**.
+As I looked out of my bedroom window at the golden leaves on the tree outside, I remembered that the only way to avoid the destiny of _fungibiliving_ is by **_continuous self renewal_**.
 
 To put it as the poetic advice that Dory had for Marlin in the movie “_Finding Nemo_” in a similarly dynamic world:
 
