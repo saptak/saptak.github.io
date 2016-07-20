@@ -1,16 +1,5 @@
 <footer class="sticky-footer border-top border-light-gray gray h6">
-  <script>
-    (function() {
-      var cx = '007069857876288036852:0b2gkhh00ey';
-      var gcse = document.createElement('script');
-      gcse.type = 'text/javascript';
-      gcse.async = true;
-      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(gcse, s);
-    })();
-  </script>
-  <gcse:search></gcse:search>
+
   <div class="sm-col px2">
     &copy; {{ site.time | date: "%Y" }} {{ site.name }}.
   </div>
@@ -22,4 +11,16 @@
       </a>
     {% endfor %}
   </div>
+  <script>
+  (function() {
+    var cx = '007069857876288036852:0b2gkhh00ey';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
 </footer>
