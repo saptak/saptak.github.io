@@ -10,17 +10,18 @@
         <i class="fa fa-fw fa-lg fa-{{ external_url.icon }}"></i>
       </a>
     {% endfor %}
+    <script>
+    (function() {
+      var cx = '007069857876288036852:0b2gkhh00ey';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  <gcse:search></gcse:search>
   </div>
-  <script>
-  (function() {
-    var cx = '007069857876288036852:0b2gkhh00ey';
-    var gcse = document.createElement('script');
-    gcse.type = 'text/javascript';
-    gcse.async = true;
-    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-<gcse:search></gcse:search>
+
 </footer>
