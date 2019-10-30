@@ -53,7 +53,7 @@ contact_urls:
     label: "GitHub"
     icon: "github-square"
   email:
-    url: "mailto:sen@ysaptak.in"
+    url: "mailto:sen@saptak.in"
     label: "Email"
     value: "sen@saptak.in"
     icon: "envelope-square"
