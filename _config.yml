@@ -1,4 +1,10 @@
-# Website settings
+# Site settings
+name: "Saptak Sen"
+title: "Saptak Sen"
+description: "Personal website of Saptak Sen - Programmer, entrepreneur, writer, speaker, traveler"
+repository: saptak/saptak.github.io
+
+# Website URL settings
 baseurl: ""
 url: "http://saptak.in"
 
