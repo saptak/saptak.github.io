@@ -70,7 +70,7 @@ plugins:
   - jekyll-sitemap
 
 # Required plugins for github pages
-gems:
+plugins:
   - jekyll-paginate
   - jekyll-sitemap
 
