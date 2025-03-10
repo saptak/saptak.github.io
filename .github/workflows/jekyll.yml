@@ -19,6 +19,7 @@ jobs:
     - name: Set permissions
       run: chmod -R 777 .
       
+    # Install dependencies and build
     - name: Build the site
       run: |
         bundle install
