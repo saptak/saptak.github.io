@@ -5,7 +5,7 @@ gem 'github-pages', group: :jekyll_plugins
 
 # Lock to versions that work with GitHub Pages
 gem 'tzinfo', '~> 2.0.6'
-gem 'nokogiri', '~> 1.13.10'
+gem 'nokogiri', '~> 1.18.3'
 gem 'activesupport', '~> 8.0.1'
 
 # Additional plugins
