@@ -1,12 +1,7 @@
 source 'https://rubygems.org'
 
+# Rely on github-pages to manage all dependencies
 gem 'github-pages', group: :jekyll_plugins
-
-# Explicitly specify tzinfo version
-gem 'tzinfo', '~> 1.2.11'
-
-# Nokogiri version as specified by GitHub Pages
-gem 'nokogiri', '>= 1.13.6', '< 2.0'
 
 # Additional plugins
 group :jekyll_plugins do
