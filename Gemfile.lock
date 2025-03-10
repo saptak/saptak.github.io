@@ -267,8 +267,6 @@ PLATFORMS
 DEPENDENCIES
   activesupport (~> 6.0.0)
   github-pages
-  jekyll-paginate
-  jekyll-sitemap
   nokogiri (~> 1.18.3)
   tzinfo (~> 1.2.11)
 
