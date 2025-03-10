@@ -4,11 +4,15 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
+    
+    # Add this step to set permissions for all files
+    - name: Set permissions
+      run: chmod -R 777 .
+      
     - name: Build the site in the jekyll/builder container
       run: |
         docker run \
