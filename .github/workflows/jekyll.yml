@@ -15,7 +15,7 @@ jobs:
     
     # Deploy to GitHub Pages
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-pages-artifact@v3
       
   # Deploy job
   deploy:
