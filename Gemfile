@@ -4,9 +4,10 @@ source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
 
 # Lock to versions that work with GitHub Pages
-gem 'tzinfo', '~> 2.0.6'
-gem 'nokogiri', '~> 1.13.10'
-gem 'activesupport', '~> 8.0.1'
+gem 'tzinfo', '~> 1.2.11'
+# Update Nokogiri to the latest version
+gem 'nokogiri', '~> 1.18.3'
+gem 'activesupport', '~> 6.0.0'
 
 # Additional plugins
 group :jekyll_plugins do
