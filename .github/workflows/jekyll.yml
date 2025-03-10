@@ -12,9 +12,10 @@ jobs:
     - name: Build Jekyll site
       uses: actions/jekyll-build-pages@v1
       
+    
     # Deploy to GitHub Pages
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v1
+      uses: actions/upload-pages-artifact@v4
       
   # Deploy job
   deploy:
