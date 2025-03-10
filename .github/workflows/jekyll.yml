@@ -5,30 +5,29 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     
-    # Set up Ruby 2.7 specifically
-    - name: Set up Ruby 2.7
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-    
-    # Set permissions
-    - name: Set permissions
-      run: chmod -R 777 .
+    # Use the official GitHub Pages action
+    - name: Build Jekyll site
+      uses: actions/jekyll-build-pages@v1
       
-    # Install dependencies and build
-    - name: Build the site
-      run: |
-        bundle install
-        bundle exec jekyll build --future
-    
-    # Optional: Deploy to GitHub Pages
-    - name: Deploy to GitHub Pages
-      if: success() && github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_site
+    # Deploy to GitHub Pages
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      
+  # Deploy job
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
