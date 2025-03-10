@@ -1,5 +1,11 @@
-# Website settings
-baseurl: "/"
+# Site settings
+name: "Saptak Sen"
+title: "Saptak Sen"
+description: "Personal website of Saptak Sen - Programmer, entrepreneur, writer, speaker, traveler"
+repository: saptak/saptak.github.io
+
+# Website URL settings
+baseurl: ""
 url: "http://saptak.in"
 
 # Internal nav
@@ -8,78 +14,75 @@ nav:
     blog: "/writing"
     #speaking: "/speaking"
     #projects: "/projects"
-    #photos: "/photos"
-  writing:
-    all: "/writing"
-    popular: "/writing/popular"
-    tags: "/writing/tags"
-    rss: "/feed.xml"
 
 # Bio settings
 name: "Saptak Sen"
-slogan: "Programmer, entrepreneur, writer, speaker, traveler"
-description: "The home page of Saptak Sen, product manager, author, and software engineer at Hortonworks and Microsoft."
-thumbnail_path: "saptak_profile_med.jpg"
-paypal_address: "http://paypal.me/saptak"
-spark_book_url: "http://saptak.in/spark"
-website_repo_url: "https://github.com/saptak/saptak.github.io"
-hortonworks_url: "http://saptak.in/"
-
-# URLs
-contact_urls:
+nickname: Saptak
+job: "developer, entrepreneur, marketer, startup guy."
+bio: "I work at IBM on Watson Data Platform. I've worked with a bunch of data products, helped out with marketing websites, and built products I'd want to use. Programmer, traveller and a data geek."
+location: "California"
+email: "saptak@gmail.com"
+contact:
   twitter:
-    url: "https://twitter.com/saptak"
-    label: "Twitter"
-    icon: "twitter-square"
-    username: "@saptak"
+    url: https://twitter.com/saptaks
+    name: Twitter
   linkedin:
-    url: "https://www.linkedin.com/in/saptak"
-    label: "LinkedIn"
-    icon: "linkedin-square"
+    url: https://www.linkedin.com/in/saptaks
+    name: LinkedIn
   facebook:
-    url: "https://www.facebook.com/saptak"
-    label: "Facebook"
-    icon: "facebook-square"
-  google:
-    url: "https://plus.google.com/+SaptakSen"
-    label: "Google+"
-    icon: "google-plus-square"
+    url: https://facebook.com/saptaks
+    name: Facebook
+  googleplus:
+    url: https://plus.google.com/+SaptakSen
+    name: Google+
   slideshare:
-    url: "https://www.slideshare.net/saptak"
-    label: "SlideShare"
-    icon: "slideshare"
-  github:
-    url: "https://github.com/saptak"
-    label: "GitHub"
-    icon: "github-square"
-  email:
-    url: "mailto:sen@saptak.in"
-    label: "Email"
-    value: "sen@saptak.in"
-    icon: "envelope-square"
+    url: https://www.slideshare.net/Saptak
+    name: SlideShare
 
-# Jekyll build settings
-paginate: 10
-paginate_path: "/writing/page:num"
-permalink: "/writing/:year/:month/:day/:title"
-sass:
-  sass_dir: "/assets/css"
-  style: :compressed
+# Build settings
+markdown: kramdown
 highlighter: rouge
-timezone: 'America/Los_Angeles'
-# markdown: redcarpet
 
-# Plugins (GitHub Pages only support a few)
-gems:
-  - jekyll-redirect-from
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: pretty
+paginate: 5
+
+# Default settings
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  -
+    scope:
+      path: ""
+      type: "drafts"
+    values:
+      layout: "post"
+
+# Plugins
+plugins:
+  - jekyll-paginate
   - jekyll-sitemap
 
-# redcarpet
+# Required plugins for github pages
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
 
-redcarpet:
-  extensions:
-    - footnotes
-    - hard_wrap
-    - no_intra_emphasis
-    - autolink
-    - strikethrough
+# Excluded files
+exclude:
+  - LICENSE.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
