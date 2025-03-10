@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem 'github-pages', group: :jekyll_plugins
 
-# Use a stable tzinfo version
-gem 'tzinfo', '~> 1.2.11'
+# Use a stable tzinfo version compatible with GitHub Pages
+gem 'tzinfo', '~> 1.2.9'
 
 # Update Nokogiri to the latest version
 gem 'nokogiri', '~> 1.18.3'
