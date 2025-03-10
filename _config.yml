@@ -1,6 +1,7 @@
 # Website settings
 baseurl: "/"
 url: "http://saptak.in"
+excerpt_separator: ""
 
 # Internal nav
 nav:
