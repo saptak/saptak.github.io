@@ -115,6 +115,12 @@ blockquote {
     color: var(--heading-color) !important;
   }
 
+  // Ensure logo works in dark mode
+  .nav-button img.circle {
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--card-bg) !important;
+  }
+
   // Force all links to use the dark mode link color
   a:not(.dark-mode-toggle):not(.button) {
     color: var(--link-color) !important;
