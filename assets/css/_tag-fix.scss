@@ -1,0 +1,38 @@
+// Fix for post tags display
+.tags-container {
+  display: inline !important;
+  white-space: nowrap !important;
+}
+
+.tag-link {
+  display: inline !important;
+  white-space: nowrap !important;
+}
+
+.tag-separator {
+  display: inline !important;
+  white-space: nowrap !important;
+  margin-right: 0.2rem !important;
+}
+
+@media screen and (max-width: 40em) {
+  // On mobile screens, ensure tags remain on same line
+  .mr1.nowrap {
+    display: block !important;
+    margin-bottom: 0.3rem !important;
+    white-space: nowrap !important;
+  }
+  
+  // Better tag handling for mobile
+  .tags-container {
+    display: inline !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+  
+  // Ensure tag links don't break
+  a.tag-link {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+}
