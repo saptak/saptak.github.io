@@ -1,0 +1,35 @@
+<!-- Immediate inline script to fix tags -->
+<script>
+  (function() {
+    // Execute immediately
+    function fixTags() {
+      // Select all tags
+      var tagLinks = document.querySelectorAll('a[href*="#"]');
+      for (var i = 0; i < tagLinks.length; i++) {
+        var link = tagLinks[i];
+        if (link.getAttribute('href').includes('/tags/') || 
+            link.getAttribute('href').startsWith('#')) {
+          link.style.cssText = 'display: inline !important; float: none !important;';
+          
+          // Fix parents
+          if (link.parentNode) {
+            link.parentNode.style.cssText = 'display: inline !important; white-space: normal !important;';
+            
+            if (link.parentNode.parentNode) {
+              link.parentNode.parentNode.style.cssText = 'display: block !important; white-space: normal !important;';
+            }
+          }
+        }
+      }
+    }
+    
+    // Run immediately 
+    fixTags();
+    
+    // And also run after the page is fully loaded
+    document.addEventListener('DOMContentLoaded', fixTags);
+    
+    // And also run after a short delay to catch any late changes
+    setTimeout(fixTags, 500);
+  })();
+</script>

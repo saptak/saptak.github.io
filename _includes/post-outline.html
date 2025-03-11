@@ -14,6 +14,26 @@
     <a href="{{ include.post.url }}"><h2 class="mt0 post-title-wrap">{{ include.post.title }}</h2></a>
     <p class="mb0 left-align">{{ include.post.excerpt | strip_html | truncate: 165, '...'  }} 
     <div><a href="{{ include.post.url }}" class="h6">Continue Reading &raquo;</a></p></div>
-    {% include post-metadata.html post=include.post %}
+    
+    <div class="gray h6">
+      <span class="mr1 nowrap">
+        <i class="fa fa-calendar"></i>
+        <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}">{{ include.post.date | date:"%b %d, %Y" }}</time>
+      </span>
+      
+      {% include inline-tags.html post=include.post %}
+      
+      {% if page.include_comments %}
+        <span class="mr1 nowrap">
+          <i class="fa fa-comments"></i>
+          {% if page.id == include.post.id %}
+            {% assign comment_url_base = "" %}
+          {% else %}
+            {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
+          {% endif %}
+          <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}">Comments</a>
+        </span>
+      {% endif %}
+    </div>
   </div>
 </article>
