@@ -1,14 +1,17 @@
 ---
-layout: post
-title: Using Hive and ORC with Apache Spark
-date: '2014-06-21T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-21T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-21-hive-orc-spark copy.jpg
+layout: post
+modified_time: '2014-06-21T15:11:18.054-07:00'
 tags:
 - hive
 - hadoop
 - spark
-modified_time: '2014-06-21T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-21-hive-orc-spark copy.jpg
+title: Using Hive and ORC with Apache Spark
 ---
+
 In this tutorial, we will explore how you can access and analyze data on Hive from Spark.
 
 Spark SQL uses the Spark engine to execute SQL queries either on data sets persisted in HDFS or on existing RDDs. It allows you to manipulate data with SQL statements within a Spark program.

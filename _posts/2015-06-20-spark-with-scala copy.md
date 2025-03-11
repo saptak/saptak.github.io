@@ -1,13 +1,16 @@
 ---
-layout: post
-title: Exploring Spark with Scala
-date: '2014-06-20T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-20T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-20-spark-with-scala copy.jpg
+layout: post
+modified_time: '2014-06-20T15:11:18.054-07:00'
 tags:
 - spark
 - hadoop
-modified_time: '2014-06-20T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-20-spark-with-scala copy.jpg
+title: Exploring Spark with Scala
 ---
+
 In this section we are going to walk through the process of using Scala and Apache Spark to interactively analyze data on a Apache Hadoop Cluster.
 
 By the end of this tutorial, you will have learned:

@@ -1,11 +1,23 @@
 ---
-layout: post
-title: "Comprehensive Guide to GenAI Gateway Options for Enterprise Customers"
+author: Saptak
+categories:
+- technology
+- artificial-intelligence
+- enterprise
 date: 2025-03-10
-categories: [technology, artificial-intelligence, enterprise]
-tags: [genai, ai-gateway, llm, enterprise-ai, security, governance]
-author: "Saptak"
-excerpt: "A detailed overview of the leading GenAI gateway solutions available for enterprise customers, including features, benefits, and considerations for implementation."
+excerpt: A detailed overview of the leading GenAI gateway solutions available for
+  enterprise customers, including features, benefits, and considerations for implementation.
+header_image_path: /assets/img/blog/headers/2025-03-10-genai-gateway-options.jpg
+layout: post
+tags:
+- genai
+- ai-gateway
+- llm
+- enterprise-ai
+- security
+- governance
+thumbnail_path: /assets/img/blog/thumbnails/2025-03-10-genai-gateway-options.jpg
+title: Comprehensive Guide to GenAI Gateway Options for Enterprise Customers
 ---
 
 # Comprehensive Guide to GenAI Gateway Options for Enterprise Customers

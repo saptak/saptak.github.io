@@ -1,13 +1,15 @@
 ---
-layout: post
-title: Hortonworks Sandbox with HDP 2.3 is now available on Microsoft Azure Gallery
-date: '2015-09-04T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2015-09-04T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-09-04-hortonworks-sandbox-hdp-23-azure-gallery.jpg
+layout: post
+modified_time: '2015-09-04T15:11:18.054-07:00'
 tags:
 - hadoop
 - azure
 - sandbox
-modified_time: '2015-09-04T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-09-04-hortonworks-sandbox-hdp-23-azure-gallery.jpg
+title: Hortonworks Sandbox with HDP 2.3 is now available on Microsoft Azure Gallery
 ---
 
 We are excited to announce the general availability of [Hortonworks Sandbox](http://hortonworks.com/sandbox) with HDP 2.3 on [Microsoft Azure](http://azure.microsoft.com/en-us/) Gallery. Hortonworks Sandbox is already a very popular environment for developers, data scientists and administrators to learn and experiment with the latest innovations in [Hortonworks Data Platform](http://hortonworks.com/hdp).

@@ -1,12 +1,16 @@
 ---
-layout: post
-title: Basics of programming Apache Spark
-date: '2014-06-18T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-18T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-18-basics-of-programming-apache-spark
+  copy.jpg
+layout: post
+modified_time: '2014-06-18T15:11:18.054-07:00'
 tags:
 - spark
 - hadoop
-modified_time: '2014-06-18T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-18-basics-of-programming-apache-spark
+  copy.jpg
+title: Basics of programming Apache Spark
 ---
 
 ###Concepts

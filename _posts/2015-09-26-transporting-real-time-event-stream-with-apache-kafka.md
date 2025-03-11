@@ -1,14 +1,15 @@
 ---
-layout: post
-title: Transporting realtime event stream with Apache Kafka
-date: '2015-09-26T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2015-09-26T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-09-26-transporting-real-time-event-stream-with-apache-kafka.jpg
+layout: post
+modified_time: '2015-09-26T15:11:18.054-07:00'
 tags:
 - kafka
 - hadoop
-modified_time: '2015-09-26T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-09-26-transporting-real-time-event-stream-with-apache-kafka.jpg
+title: Transporting realtime event stream with Apache Kafka
 ---
-
 
 ## Introduction
 

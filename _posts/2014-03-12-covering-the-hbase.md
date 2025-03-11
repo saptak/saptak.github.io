@@ -1,12 +1,14 @@
 ---
-layout: post
-title: Covering the HBase
-date: '2014-03-12T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-03-12T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2014-03-12-covering-the-hbase.jpg
+layout: post
+modified_time: '2014-03-12T15:11:18.054-07:00'
 tags:
 - hbase
 - hadoop
-modified_time: '2014-03-12T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2014-03-12-covering-the-hbase.jpg
+title: Covering the HBase
 ---
 
 Apache HBase was initially developed by Powerset, a natural language search engine startup in 2006. Then in 2008 they contributed the code base to the Apache Software Foundation so that the broad community could develop and extend this key piece of software. Since then, HBase has seen major changes and massive adoption and is now firmly established as the defacto standard NoSQL database for Hadoop.

@@ -1,13 +1,18 @@
 ---
-layout: post
-title: Installing Apache Spark 1.3.1 on HDP 2.2.4.2
-date: '2014-06-16T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-16T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-16-installing-apache-spark-1-3-1
+  copy.jpg
+layout: post
+modified_time: '2014-06-16T15:11:18.054-07:00'
 tags:
 - spark
 - hadoop
-modified_time: '2014-06-16T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-16-installing-apache-spark-1-3-1
+  copy.jpg
+title: Installing Apache Spark 1.3.1 on HDP 2.2.4.2
 ---
+
 In this section we will configure Spark 1.3.1 on Hortonworks Sandbox with HDP 2.2.
 
 Login as root to your Sandbox and add the repo that has Spark 1.3.1 using the following command

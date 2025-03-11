@@ -1,12 +1,14 @@
 ---
-layout: post
-title: Data Structures in Python
-date: '2016-03-11T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2016-03-11T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2016-03-11-data-structures-in-python.jpg
+layout: post
+modified_time: '2016-03-11T12:34:00.001-07:00'
 tags:
 - Data Structure
 - Python
-modified_time: '2016-03-11T12:34:00.001-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2016-03-11-data-structures-in-python.jpg
+title: Data Structures in Python
 ---
 
 In this post we will explore Data types in Python. The important thing about data structures in that you organize data to make certain things efficient.
@@ -27,4 +29,4 @@ We can emulate the operations on a list, but a stack is very different than a li
 
 Lists are great for small amount of data, but as we scale to 10s of thousand or 100s of thousand elements we need a data structure that scales better.
 
-A tuple looks exactly like a list except the elements are heterogenous and 
+A tuple looks exactly like a list except the elements are heterogenous and

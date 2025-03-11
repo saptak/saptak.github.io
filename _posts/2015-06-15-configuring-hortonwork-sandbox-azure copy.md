@@ -1,13 +1,18 @@
 ---
-layout: post
-title: Configuring Hortonworks Sandbox on Azure
-date: '2014-06-15T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-15T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-15-configuring-hortonwork-sandbox-azure
+  copy.jpg
+layout: post
+modified_time: '2014-06-15T15:11:18.054-07:00'
 tags:
 - azure
 - hadoop
-modified_time: '2014-06-15T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-15-configuring-hortonwork-sandbox-azure
+  copy.jpg
+title: Configuring Hortonworks Sandbox on Azure
 ---
+
 For folks attending the workshop at Hadoop Summit, San Jose 2015 we provided Microsoft Azure Pass. If you already have an Azure account skip this step. If you are following along at home you can sign-up for an [Azure Trial](http://azure.microsoft.com/en-us/pricing/free-trial/) or [download the Hortonworks Sandbox](http://hortonworks.com/sandbox) on your machine.
 
 To use the Microsoft Azure Pass navigate to [http://www.microsoftazurepass.com](http://www.microsoftazurepass.com)

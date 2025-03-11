@@ -1,12 +1,14 @@
 ---
-layout: post
-title: 64 bit Steamroller on our way
-date: '2005-01-31T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2005-01-31T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2005-01-31-64-bit-steamroller.jpg
+layout: post
+modified_time: '2005-01-31T15:11:18.054-07:00'
 tags:
 - 64-bit
 - windows
-modified_time: '2005-01-31T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2005-01-31-64-bit-steamroller.jpg
+title: 64 bit Steamroller on our way
 ---
 
 Over the weekend I installed and configured a new build [v. 1421] of the Windows XP x64 Edition on my Compaq Presario 3000 Laptop with a 64-bit processor (just in case you have not noticed it on the screenshot above).[  

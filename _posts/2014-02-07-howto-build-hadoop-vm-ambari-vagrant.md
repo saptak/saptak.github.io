@@ -1,12 +1,14 @@
 ---
-layout: post
-title: How to build a Hadoop VM with Ambari and Vagrant
-date: '2014-02-07T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-02-07T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2014-02-07-howto-build-hadoop-vm-ambari-vagrant.jpg
+layout: post
+modified_time: '2014-02-07T15:11:18.054-07:00'
 tags:
 - vagrant
 - hadoop
-modified_time: '2014-02-07T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2014-02-07-howto-build-hadoop-vm-ambari-vagrant.jpg
+title: How to build a Hadoop VM with Ambari and Vagrant
 ---
 
 In this post, we will explore how to quickly and easily spin up our own VM with [Vagrant](http://www.vagrantup.com/) and [Apache Ambari](http://hortonworks.com/hadoop/ambari). Vagrant is very popular with developers as it lets one mirror the production environment in a VM while staying with all the IDEs and tools in the comfort of the host OS.

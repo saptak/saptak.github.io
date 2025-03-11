@@ -1,13 +1,16 @@
 ---
-layout: post
-title: Installing Apache Spark 1.2.0 on HDP 2.2
-date: '2014-06-17T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-17T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-17-Installing-Spark-1-2 copy.jpg
+layout: post
+modified_time: '2014-06-17T15:11:18.054-07:00'
 tags:
 - spark
 - hadoop
-modified_time: '2014-06-17T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-17-Installing-Spark-1-2 copy.jpg
+title: Installing Apache Spark 1.2.0 on HDP 2.2
 ---
+
 After SSH'ing into your Sandbox, use `su` to login as root.
 Now let's get the bits using the command
 

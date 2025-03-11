@@ -1,8 +1,9 @@
 ---
-layout: post
-title: Securing HDFS, Hive and HBase with Knox and Ranger
-date: '2015-09-08T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2015-09-08T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-09-08-securing-hdfs-hive-hbase-knox-ranger.jpg
+layout: post
+modified_time: '2015-09-08T15:11:18.054-07:00'
 tags:
 - ranger
 - knox
@@ -10,8 +11,10 @@ tags:
 - hbase
 - security
 - hadoop
-modified_time: '2015-09-08T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-09-08-securing-hdfs-hive-hbase-knox-ranger.jpg
+title: Securing HDFS, Hive and HBase with Knox and Ranger
 ---
+
 ### Introduction
 
 Apache Ranger delivers a comprehensive approach to security for a Hadoop cluster. It provides central security policy administration across the core enterprise security requirements of authorization, accounting and data protection.

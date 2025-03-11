@@ -1,13 +1,16 @@
 ---
-layout: post
-title: A Lap around Apache Spark 1.3.1 with HDP 2.3
-date: '2014-06-24T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-24T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-23-spark-with-hdp copy.jpg
+layout: post
+modified_time: '2014-06-24T15:11:18.054-07:00'
 tags:
 - spark
 - hadoop
-modified_time: '2014-06-24T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-23-spark-with-hdp copy.jpg
+title: A Lap around Apache Spark 1.3.1 with HDP 2.3
 ---
+
 This Apache Spark 1.3.1 with HDP 2.3 guide walks you through many of the newer features of Apache Spark 1.3.1 on YARN.
 
 Hortonworks recently announced general availability of Spark 1.3.1 on the HDP platform. Apache Spark is a fast moving community and Hortonworks plans frequent releases to allow evaluation and production use of the latest capabilities of Apache Spark on HDP for our customers.

@@ -1,12 +1,14 @@
 ---
-layout: post
-title: All hail the Fungible Economy
-date: '2015-10-11T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2015-10-11T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-10-11-all-hail-the-fungible-economy.jpg
+layout: post
+modified_time: '2015-10-11T15:11:18.054-07:00'
 tags:
 - economy
 - future
-modified_time: '2015-10-11T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-10-11-all-hail-the-fungible-economy.jpg
+title: All hail the Fungible Economy
 ---
 
 ![](https://cdn-images-2.medium.com/max/1600/1*zRLZUyOsk53i2gXVjkM_OQ.jpeg)

@@ -1,3 +1,8 @@
+---
+header_image_path: /assets/img/blog/headers/2015-09-24-ingesting-real-time-streams-hive-hbase.jpg
+thumbnail_path: /assets/img/blog/thumbnails/2015-09-24-ingesting-real-time-streams-hive-hbase.jpg
+---
+
 ### **Real Time data Ingestion in Hbase and Hive using Storm **
 
 #### **Introduction**

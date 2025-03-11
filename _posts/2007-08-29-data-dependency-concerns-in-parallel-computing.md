@@ -1,12 +1,14 @@
 ---
-layout: post
-title: Data dependency concerns in parallel computing
-date: '2007-08-29T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2007-08-29T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2007-08-29-data-dependency-concerns-in-parallel-computing.jpg
+layout: post
+modified_time: '2007-08-29T15:11:18.054-07:00'
 tags:
 - hpc
 - parallel computing
-modified_time: '2007-08-29T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2007-08-29-data-dependency-concerns-in-parallel-computing.jpg
+title: Data dependency concerns in parallel computing
 ---
 
 The most severe bottlenecks in high performance systems in majority cases results from I/O operations. To buffer I/O or other slow accesses, engineers devised cache.   

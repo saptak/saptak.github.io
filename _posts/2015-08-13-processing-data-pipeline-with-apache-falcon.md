@@ -1,13 +1,16 @@
 ---
-title: Processing Data Pipeline on Hadoop clusters with Apache Falcon
-layout: post
-date: '2015-08-13T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2015-08-13T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-08-13-processing-data-pipeline-with-apache-falcon.jpg
+layout: post
+modified_time: '2015-08-13T15:11:18.054-07:00'
 tags:
 - falcon
 - hadoop
-modified_time: '2015-08-13T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-08-13-processing-data-pipeline-with-apache-falcon.jpg
+title: Processing Data Pipeline on Hadoop clusters with Apache Falcon
 ---
+
 Apache Falcon is a framework to simplify data pipeline processing and management on Hadoop clusters.
 
 It makes it much simpler to onboard new workflows/pipelines, with support for late data handling and retry policies. It allows you to easily define relationship between various data and processing elements and integrate with metastore/catalog such as Hive/HCatalog. Finally it also lets you capture lineage information for feeds and processes.In this tutorial we are going walk the process of:

@@ -1,11 +1,23 @@
 ---
-layout: post
-title: "The Evolving Landscape of AI Code Generation Tools in 2025"
+author: Saptak
+categories:
+- technology
+- artificial-intelligence
+- software-development
 date: 2025-03-10
-categories: [technology, artificial-intelligence, software-development]
-tags: [ai-coding, code-generation, developer-tools, programming, llm]
-author: "Saptak"
-excerpt: "A comprehensive overview of the current AI code generation tools and technologies, their capabilities, limitations, and how they're transforming software development practices."
+excerpt: A comprehensive overview of the current AI code generation tools and technologies,
+  their capabilities, limitations, and how they're transforming software development
+  practices.
+header_image_path: /assets/img/blog/headers/2025-03-10-ai-code-generation-tools.jpg
+layout: post
+tags:
+- ai-coding
+- code-generation
+- developer-tools
+- programming
+- llm
+thumbnail_path: /assets/img/blog/thumbnails/2025-03-10-ai-code-generation-tools.jpg
+title: The Evolving Landscape of AI Code Generation Tools in 2025
 ---
 
 # The Evolving Landscape of AI Code Generation Tools in 2025

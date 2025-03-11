@@ -1,12 +1,24 @@
 ---
-layout: post
-title: "Envoy Gateway: Transforming Enterprise API Management"
-date: 2025-03-09
-categories: [Cloud Native, Kubernetes, API Management]
-tags: [envoy, gateway, kubernetes, api-gateway, microservices, cloud-native]
 author: Saptak
-description: "An in-depth exploration of Envoy Gateway customer scenarios and implementation patterns for enterprise API management."
+categories:
+- Cloud Native
+- Kubernetes
+- API Management
+date: 2025-03-09
+description: An in-depth exploration of Envoy Gateway customer scenarios and implementation
+  patterns for enterprise API management.
+header_image_path: /assets/img/blog/headers/2025-03-09-envoy-gateway.jpg
 image: /assets/images/envoy-gateway-header.jpg
+layout: post
+tags:
+- envoy
+- gateway
+- kubernetes
+- api-gateway
+- microservices
+- cloud-native
+thumbnail_path: /assets/img/blog/thumbnails/2025-03-09-envoy-gateway.jpg
+title: 'Envoy Gateway: Transforming Enterprise API Management'
 ---
 
 # Envoy Gateway: Transforming Enterprise API Management

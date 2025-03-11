@@ -1,12 +1,14 @@
 ---
-layout: post
-title: Deploying a Hadoop cluster on EC2
-date: '2014-02-04T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-02-04T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2014-02-04-deploying-hadoop-ec2.jpg
+layout: post
+modified_time: '2014-02-04T15:11:18.054-07:00'
 tags:
 - ec2
 - hadoop
-modified_time: '2014-02-04T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2014-02-04-deploying-hadoop-ec2.jpg
+title: Deploying a Hadoop cluster on EC2
 ---
 
 In this post, we’ll walk through the process of deploying an Apache Hadoop 2 cluster on the EC2 cloud service offered by Amazon Web Services (AWS), using [Hortonworks Data Platform](http://hortonworks.com/products/hdp).

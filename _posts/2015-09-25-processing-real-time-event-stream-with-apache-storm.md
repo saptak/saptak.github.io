@@ -1,13 +1,16 @@
 ---
-layout: post
-title: Processing realtime event stream with Apache Storm
-date: '2015-09-25T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2015-09-25T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-09-25-processing-real-time-event-stream-with-apache-storm.jpg
+layout: post
+modified_time: '2015-09-25T15:11:18.054-07:00'
 tags:
 - storm
 - hadoop
-modified_time: '2015-09-25T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-09-25-processing-real-time-event-stream-with-apache-storm.jpg
+title: Processing realtime event stream with Apache Storm
 ---
+
 ### Introduction
 
 In this tutorial, we will explore [Apache Storm](http://hortonworks.com/hadoop/storm) and use it with [Apache Kafka](http://hortonworks.com/hadoop/kafka) to develop a multi-stage event processing pipeline.

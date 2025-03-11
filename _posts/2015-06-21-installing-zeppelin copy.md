@@ -1,13 +1,16 @@
 ---
-layout: post
-title: Installing and configuring Zeppelin
-date: '2014-06-22T12:34:00.001-07:00'
 author: Saptak Sen
+date: '2014-06-22T12:34:00.001-07:00'
+header_image_path: /assets/img/blog/headers/2015-06-21-installing-zeppelin copy.jpg
+layout: post
+modified_time: '2014-06-22T15:11:18.054-07:00'
 tags:
 - spark
 - hadoop
-modified_time: '2014-06-22T15:11:18.054-07:00'
+thumbnail_path: /assets/img/blog/thumbnails/2015-06-21-installing-zeppelin copy.jpg
+title: Installing and configuring Zeppelin
 ---
+
 ```bash
 git clone https://github.com/apache/incubator-zeppelin.git
 mv incubator-zeppelin/ /opt/
