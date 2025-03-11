@@ -24,7 +24,14 @@
   // Apply theme immediately to prevent flash
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
+    document.body.setAttribute('data-theme', theme);
     updateToggleButton(theme === 'dark');
+    
+    // Force a repaint by triggering layout
+    document.body.style.display = 'none';
+    // Get computed style to force a layout recalculation
+    window.getComputedStyle(document.body).backgroundColor;
+    document.body.style.display = '';
   }
 
   // Check for saved theme preference or use the system preference
