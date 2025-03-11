@@ -45,11 +45,18 @@ body {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
   transition: background-color var(--transition-time), color var(--transition-time);
+  // Preserve the original font-family
+  font-family: "Merriweather", serif !important;
+  // Preserve original font size and line height
+  font-size: 1rem !important;
+  line-height: 1.75rem !important;
+  letter-spacing: 0.01rem !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--heading-color) !important;
   transition: color var(--transition-time);
+  font-family: "Open Sans", sans-serif !important;
 }
 
 a {
@@ -135,7 +142,8 @@ blockquote {
     border-color: var(--border-color) !important;
   }
   
-  p, span, div {
+  // Only target content text, not all p, span, div elements
+  .post p, .post span, .container p {
     color: var(--text-color) !important;
   }
   
