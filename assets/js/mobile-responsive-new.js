@@ -29,26 +29,33 @@
         document.querySelector('.post-list')) {
       
       // Direct fix for blog post titles in the listing
-      const blogTitles = document.querySelectorAll('.post-title, .posts h1, .posts h2, .post-link h1, .post-link h2');
+      const blogTitles = document.querySelectorAll('.post-title, .posts h1, .posts h2, .post-link');
       blogTitles.forEach(title => {
         // Force proper text wrapping
-        title.style.display = 'inline-block';
+        title.style.display = 'block';
         title.style.width = '100%';
         title.style.maxWidth = '100%';
-        title.style.boxSizing = 'border-box';
-        title.style.paddingRight = '5px';
+        title.style.wordBreak = 'normal';
         title.style.overflowWrap = 'break-word';
-        title.style.wordWrap = 'break-word';
-        title.style.wordBreak = 'break-word';
-        title.style.hyphens = 'auto';
         title.style.whiteSpace = 'normal';
         
-        // Apply styles to parent container if needed
-        const parent = title.parentElement;
-        if (parent) {
-          parent.style.width = '100%';
-          parent.style.maxWidth = '100%';
-          parent.style.boxSizing = 'border-box';
+        // Remove any padding or margins that might interfere with wrapping
+        title.style.paddingRight = '0';
+        title.style.marginRight = '0';
+        title.style.textAlign = 'left';
+        
+        // Force the text to be visible in mobile browsers
+        const computedStyle = window.getComputedStyle(title);
+        const textContent = title.textContent;
+        
+        // If the text is likely to be cut off, try to force it to wrap
+        if (textContent.length > 30) {
+          // Insert a zero-width space after every few words to encourage wrapping
+          const words = textContent.split(' ');
+          if (words.length > 3) {
+            // We don't actually modify the content, just ensure wrapping
+            title.style.wordBreak = 'break-word';
+          }
         }
       });
     }

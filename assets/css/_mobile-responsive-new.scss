@@ -1,17 +1,31 @@
 // Mobile responsive styles with minimal changes
 // This file contains targeted fixes for mobile devices
 
+// Target post containers to allow proper wrapping
+.post, .posts, article, .post-container, .post-link {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
+}
+
+// Fix for post heading containers
+.post-heading, .post-header, .post-link, .post-title-container {
+  width: 100% !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+}
+
 // Direct fix for blog post titles that are getting clipped
-.posts .post-title, .post-list .post-title, .post-link h1, .post-link h2, h1.post-title, h2.post-title {
-  display: inline-block !important;
+.post-title, .posts h1, .posts h2, .post-link, .posts .post-title {
+  display: block !important; /* Changed from inline-block to block */
   width: 100% !important;
   max-width: 100% !important;
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
-  word-break: break-word !important; /* This property helps break long words */
+  word-break: normal !important; /* Changed from break-word to normal */
   white-space: normal !important;
-  hyphens: auto !important;
-  padding-right: 5px !important;
+  hyphens: none !important; /* Disabled hyphens */
   box-sizing: border-box !important;
   overflow: visible !important;
 }
@@ -90,16 +104,15 @@
     padding-right: 0.5rem !important;
   }
   
-  // Even stronger fix for blog post titles on small screens
-  .posts .post-title, .post-list .post-title, .post-link h1, .post-link h2 {
-    font-size: 1.2rem !important;
+  // Fix for blog post titles on small screens
+  .post-title, .posts h1, .posts h2, .post-link, .posts .post-title {
+    font-size: 1.3rem !important;
     line-height: 1.4 !important;
-    width: 95% !important; /* Slightly narrower than the container */
-    overflow-wrap: anywhere !important; /* Forces wrapping at any point if needed */
-    word-break: break-all !important; /* More aggressive word breaking if needed */
-    padding-right: 10px !important; /* Extra padding on the right */
     margin-right: 0 !important;
-    letter-spacing: -0.02em !important; /* Slightly tighter letter spacing */
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    text-align: left !important;
   }
   
   .post-meta {
