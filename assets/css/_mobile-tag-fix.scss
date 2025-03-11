@@ -1,0 +1,38 @@
+// Mobile-specific tag display fix
+@media screen and (max-width: 768px) {
+  // Force all tags to stay on the same line
+  .tags-container {
+    display: inline !important;
+    white-space: nowrap !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  // Make tag links display inline with no wrapping
+  .tag-link {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+  
+  // Make sure commas stay with the tags
+  .tag-separator {
+    display: inline !important;
+    white-space: nowrap !important;
+  }
+  
+  // Container for tags needs to be block level on mobile for proper display
+  span.mr1.nowrap:has(.fa-tags) {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+  
+  // Ensure fa-tags icon stays with the tags
+  .fa-tags {
+    display: inline !important;
+    margin-right: 0.3rem !important;
+  }
+}
