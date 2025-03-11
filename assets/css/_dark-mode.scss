@@ -17,7 +17,7 @@
   --footer-bg: #f5f5f5;
   --footer-text: #666666;
   --nav-bg: #ffffff;
-  --transition-time: 0.3s;
+  --transition-time: 0.2s;
 }
 
 [data-theme="dark"] {
@@ -44,7 +44,7 @@
 body {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
-  transition: background-color var(--transition-time), color var(--transition-time);
+
   // Preserve the original font-family
   font-family: "Merriweather", serif !important;
   // Preserve original font size and line height
@@ -55,13 +55,13 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--heading-color) !important;
-  transition: color var(--transition-time);
+
   font-family: "Open Sans", sans-serif !important;
 }
 
 a {
   color: var(--link-color) !important;
-  transition: color var(--transition-time);
+
   
   &:hover {
     color: var(--link-hover-color) !important;
@@ -71,18 +71,18 @@ a {
 pre, code {
   background-color: var(--code-bg);
   color: var(--code-color);
-  transition: background-color var(--transition-time), color var(--transition-time);
+
 }
 
 blockquote {
   border-left-color: var(--blockquote-border);
   color: var(--blockquote-text);
-  transition: border-left-color var(--transition-time), color var(--transition-time);
+
 }
 
 .border, .border-top, .border-right, .border-bottom, .border-left {
   border-color: var(--border-color) !important;
-  transition: border-color var(--transition-time);
+
 }
 
 .border-light-gray {
@@ -91,12 +91,12 @@ blockquote {
 
 .bg-white {
   background-color: var(--card-bg) !important;
-  transition: background-color var(--transition-time);
+
 }
 
 .gray {
   color: var(--footer-text) !important;
-  transition: color var(--transition-time);
+
 }
 
 .bg-splash-gray {
@@ -240,5 +240,5 @@ blockquote {
 
 // Images in dark mode
 [data-theme="dark"] img:not([src*=".svg"]) {
-  filter: brightness(0.8) contrast(1.2);
+  filter: brightness(0.85) contrast(1.1);
 }
