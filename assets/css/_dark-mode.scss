@@ -137,21 +137,21 @@ blockquote {
 // Dark mode toggle button styles
 .dark-mode-toggle {
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
-  margin-left: 1rem;
+  padding: 0.3rem;
+  margin-left: 0.5rem;
   background-color: var(--button-bg);
   color: var(--button-text);
   border: none;
   border-radius: 3px;
-  font-size: 0.9rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   transition: background-color var(--transition-time);
+  line-height: 0;
   
   svg {
-    margin-right: 0.4rem;
-    width: 1rem;
-    height: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
     fill: currentColor;
   }
   
