@@ -1,6 +1,6 @@
 <nav class="clearfix border-bottom border-light-gray">
   <div class="left">
-    <a href="{{ site.baseurl }}" class="button py2 button-transparent nav-button caps">
+    <a href="{% include home-url.html %}" class="button py2 button-transparent nav-button caps">
       {% if site.thumbnail_path %}
         <span class="inline-block align-middle mr1">
           <img src="/assets/img/{{ site.thumbnail_path }}" alt="{{ site.name }}" class="circle" width="24" height="24" style="vertical-align: middle;">
