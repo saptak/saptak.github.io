@@ -1,0 +1,13 @@
+{% if include.post.tags.size > 0 %}
+<div style="margin-top: 8px; margin-bottom: 8px;">
+  <i class="fa fa-tags" style="margin-right: 5px;"></i>
+  {% for tag in include.post.tags %}
+    {% if page.is_tags_page %}
+      {% assign tag_url_base = "" %}
+    {% else %}
+      {% assign tag_url_base = "/writing/tags/" %}
+    {% endif %}
+    <a href="{{ tag_url_base }}#{{ tag | uri_escape }}" style="display: inline; color: #3498db;">{{ tag }}</a>{% unless forloop.last %}<span style="display: inline; margin: 0 2px;">,</span>{% endunless %}
+  {% endfor %}
+</div>
+{% endif %}
