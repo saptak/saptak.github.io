@@ -5,10 +5,10 @@
     <i class="fa fa-calendar"></i>
     <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}">{{ include.post.date | date:"%b %d, %Y" }}</time>
   </span>
-  {% if include.post.tags.size > 0 %}{% comment %}Remove whitespace{% endcomment %}
-    <span class="mr1 nowrap" style="display:inline-block; white-space:nowrap;">
+  {% if include.post.tags.size > 0 %}
+    <span class="mr1 nowrap tag-container-parent">
       <i class="fa fa-tags"></i>
-      <span class="tags-container" style="display:inline; white-space:nowrap;">{% for tag in include.post.tags %}{% if page.is_tags_page %}{% assign tag_url_base = "" %}{% else %}{% assign tag_url_base = "/writing/tags/" %}{% endif %}<a href="{{ tag_url_base }}#{{ tag | uri_escape }}" class="tag-link" style="display:inline; white-space:nowrap;">{{ tag }}</a>{% unless forloop.last %}<span class="tag-separator" style="display:inline; white-space:nowrap;">,</span>{% endunless %}{% endfor %}</span>
+      <span class="tags-container">{% for tag in include.post.tags %}{% if page.is_tags_page %}{% assign tag_url_base = "" %}{% else %}{% assign tag_url_base = "/writing/tags/" %}{% endif %}<a href="{{ tag_url_base }}#{{ tag | uri_escape }}" class="tag-link">{{ tag }}</a>{% unless forloop.last %}<span class="tag-separator">,</span>{% endunless %}{% endfor %}</span>
     </span>
   {% endif %}  
   {% if page.include_comments %}

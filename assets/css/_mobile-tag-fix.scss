@@ -1,38 +1,74 @@
-// Mobile-specific tag display fix
+// Mobile-specific tag display fix without using inline styles
 @media screen and (max-width: 768px) {
-  // Force all tags to stay on the same line
+  // Container for tag groups
   .tags-container {
-    display: inline !important;
-    white-space: nowrap !important;
-    overflow-x: auto !important;
+    display: block !important;
+    white-space: normal !important;
+    overflow: visible !important;
     width: 100% !important;
-    max-width: 100% !important;
+    
+    &:after {
+      content: "" !important;
+      display: table !important;
+      clear: both !important;
+    }
   }
   
-  // Make tag links display inline with no wrapping
+  // Tag links should be block elements that float left
   .tag-link {
-    display: inline !important;
-    white-space: nowrap !important;
+    display: inline-block !important;
+    float: left !important;
+    margin-right: 0.4rem !important;
+    margin-bottom: 0.4rem !important;
+    white-space: normal !important;
+    background-color: #f1f1f1 !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+    font-size: 0.8rem !important;
   }
   
-  // Make sure commas stay with the tags
+  // Separators should be hidden on mobile for cleaner display
   .tag-separator {
-    display: inline !important;
-    white-space: nowrap !important;
+    display: none !important;
   }
   
-  // Container for tags needs to be block level on mobile for proper display
-  span.mr1.nowrap:has(.fa-tags) {
+  // Parent container needs clearfix
+  span.mr1.nowrap:has(.fa-tags),
+  .tag-container-parent {
     display: block !important;
     width: 100% !important;
-    overflow-x: auto !important;
-    margin-top: 0.2rem !important;
-    margin-bottom: 0.2rem !important;
+    overflow: visible !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.8rem !important;
+    
+    &:after {
+      content: "" !important;
+      display: table !important;
+      clear: both !important;
+    }
   }
   
-  // Ensure fa-tags icon stays with the tags
-  .fa-tags {
-    display: inline !important;
-    margin-right: 0.3rem !important;
+  // The tags icon should be displayed as a block element
+  .mr1.nowrap .fa-tags,
+  .tag-container-parent .fa-tags {
+    display: block !important;
+    margin-bottom: 0.4rem !important;
+    float: none !important;
+  }
+  
+  // Special clearfix class added by JavaScript
+  .clearfix-tags:after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+  }
+  
+  // Pill styling for mobile tags
+  .tag-pill {
+    transition: background-color 0.2s ease !important;
+    
+    &:hover {
+      background-color: #e0e0e0 !important;
+    }
   }
 }

@@ -1,0 +1,21 @@
+// Desktop-specific tag display fix
+@media screen and (min-width: 769px) {
+  // For desktop, we'll use a more traditional inline approach
+  .tags-container {
+    display: inline !important;
+  }
+  
+  .tag-link {
+    display: inline !important;
+  }
+  
+  .tag-separator {
+    display: inline !important;
+    margin-right: 0.2rem !important;
+  }
+  
+  // Add a small margin to the tags icon for better spacing
+  .mr1.nowrap .fa-tags {
+    margin-right: 0.3rem !important;
+  }
+}
