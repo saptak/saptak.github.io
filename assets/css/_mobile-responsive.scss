@@ -1,0 +1,49 @@
+// Mobile responsive styles with minimal changes
+// This file contains targeted fixes for mobile devices
+
+// Main container padding adjustments
+@media screen and (max-width: 40em) {
+  main.container {
+    padding: 1rem !important; // Reduce padding on small screens
+  }
+  
+  // Adjust images to not overflow their containers
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  // Fix for tables overflowing
+  table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  // Improve dark mode toggle placement and nav layout on mobile
+  .dark-mode-toggle {
+    margin-right: 0.5rem;
+  }
+  
+  // Make text more readable on small screens
+  body {
+    font-size: 16px !important; // Ensure readable font size
+    line-height: 1.6 !important; // Increase line height for better readability
+  }
+  
+  // Improve code block readability
+  pre, code {
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+}
+
+// Improve navigation menu on very small screens (phones)
+@media screen and (max-width: 30em) {
+  .nav-button.caps {
+    font-size: 0.8rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+}
