@@ -1,13 +1,13 @@
 <nav class="clearfix border-bottom border-light-gray">
   <div class="left">
-    <a href="{% include home-url.html %}" class="button py2 button-transparent nav-button caps">
-      {% if site.thumbnail_path %}
-        <span class="inline-block align-middle mr1">
-          <img src="/assets/img/{{ site.thumbnail_path }}" alt="{{ site.name }}" class="circle" width="24" height="24" style="vertical-align: middle;">
-        </span>
-      {% endif %}
-      {{ site.name }}
-    </a>
+    <div class="site-logo-wrapper">
+      <a href="{% include home-url.html %}" class="site-logo-link">
+        {% if site.thumbnail_path %}
+          <img src="/assets/img/{{ site.thumbnail_path }}" alt="{{ site.name }}" class="site-logo-image" width="24" height="24">
+        {% endif %}
+        <span class="site-logo-text">{{ site.name }}</span>
+      </a>
+    </div>
   </div>
   <ul class="right list-reset m0 nav-collapse">  
     <li class="inline-block m0">
