@@ -1,6 +1,25 @@
 // Mobile responsive styles with minimal changes
 // This file contains targeted fixes for mobile devices
 
+// Fix for blog titles and excerpts not wrapping on mobile
+.posts .post-title,
+.posts .post-summary,
+.posts .post-meta,
+.post-title,
+.post-content p,
+.post-excerpt,
+.post-summary {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  max-width: 100%;
+}
+
 // Main container padding adjustments
 @media screen and (max-width: 40em) {
   main.container {
@@ -36,6 +55,14 @@
   pre, code {
     word-break: break-word;
     white-space: pre-wrap;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  // Fix for long URLs in blog posts
+  a {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -45,5 +72,32 @@
     font-size: 0.8rem !important;
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
+  }
+  
+  // Enhanced text wrapping for blog list items on very small screens
+  .posts .post-link {
+    display: block;
+    width: 100%;
+  }
+  
+  .posts .post-title {
+    font-size: 1.3rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .posts .post-meta {
+    font-size: 0.8rem !important;
+    white-space: normal !important;
+  }
+  
+  .posts .post-summary {
+    font-size: 0.9rem !important;
+  }
+  
+  // Force text to stay inside its container
+  .post, .posts, .post-link, .post-title, .post-content, .post-summary, .post-excerpt {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
