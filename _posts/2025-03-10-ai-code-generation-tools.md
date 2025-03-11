@@ -9,6 +9,7 @@ excerpt: A comprehensive overview of the current AI code generation tools and te
   their capabilities, limitations, and how they're transforming software development
   practices.
 header_image_path: /assets/img/blog/headers/2025-03-10-ai-code-generation-tools.jpg
+image_credit: Photo by Unsplash
 layout: post
 tags:
 - ai-coding

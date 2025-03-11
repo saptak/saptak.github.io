@@ -9,6 +9,7 @@ description: An in-depth exploration of Envoy Gateway customer scenarios and imp
   patterns for enterprise API management.
 header_image_path: /assets/img/blog/headers/2025-03-09-envoy-gateway.jpg
 image: /assets/images/envoy-gateway-header.jpg
+image_credit: Photo by Unsplash
 layout: post
 tags:
 - envoy

@@ -2,6 +2,7 @@
 author: Saptak Sen
 date: '2015-09-26T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2015-09-26-transporting-real-time-event-stream-with-apache-kafka.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2015-09-26T15:11:18.054-07:00'
 tags:

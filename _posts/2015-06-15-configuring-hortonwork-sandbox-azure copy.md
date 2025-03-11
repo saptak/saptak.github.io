@@ -3,6 +3,7 @@ author: Saptak Sen
 date: '2014-06-15T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2015-06-15-configuring-hortonwork-sandbox-azure
   copy.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2014-06-15T15:11:18.054-07:00'
 tags:

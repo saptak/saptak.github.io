@@ -8,6 +8,7 @@ date: 2025-03-10
 excerpt: A detailed overview of the leading GenAI gateway solutions available for
   enterprise customers, including features, benefits, and considerations for implementation.
 header_image_path: /assets/img/blog/headers/2025-03-10-genai-gateway-options.jpg
+image_credit: Photo by Unsplash
 layout: post
 tags:
 - genai

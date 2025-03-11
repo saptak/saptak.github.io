@@ -2,6 +2,7 @@
 author: Saptak Sen
 date: '2007-08-29T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2007-08-29-data-dependency-concerns-in-parallel-computing.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2007-08-29T15:11:18.054-07:00'
 tags:

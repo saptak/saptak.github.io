@@ -2,6 +2,7 @@
 author: Saptak Sen
 date: '2015-09-08T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2015-09-08-securing-hdfs-hive-hbase-knox-ranger.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2015-09-08T15:11:18.054-07:00'
 tags:

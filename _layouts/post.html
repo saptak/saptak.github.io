@@ -1,11 +1,19 @@
 ---
 layout: default
 bottom_include: comments.html
-include_header: post_header.html
 include_comments:
   embed: true
   count: true
 ---
+
+{% if page.header_image_path %}
+<div class="post-header-image-container">
+  <img src="{{ page.header_image_path }}" alt="{{ page.title }}" class="post-header-image">
+  {% if page.image_credit %}
+  <div class="post-header-image-credit">Image: {{ page.image_credit }}</div>
+  {% endif %}
+</div>
+{% endif %}
 
 <article class="post">
   {{ content }}

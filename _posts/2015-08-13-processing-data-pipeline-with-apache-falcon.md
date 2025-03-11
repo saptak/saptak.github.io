@@ -2,6 +2,7 @@
 author: Saptak Sen
 date: '2015-08-13T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2015-08-13-processing-data-pipeline-with-apache-falcon.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2015-08-13T15:11:18.054-07:00'
 tags:

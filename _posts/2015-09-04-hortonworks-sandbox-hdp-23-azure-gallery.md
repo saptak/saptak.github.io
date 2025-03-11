@@ -2,6 +2,7 @@
 author: Saptak Sen
 date: '2015-09-04T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2015-09-04-hortonworks-sandbox-hdp-23-azure-gallery.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2015-09-04T15:11:18.054-07:00'
 tags:

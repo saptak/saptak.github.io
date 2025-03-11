@@ -1,5 +1,6 @@
 ---
 header_image_path: /assets/img/blog/headers/2015-09-24-ingesting-real-time-streams-hive-hbase.jpg
+image_credit: Photo by Unsplash
 thumbnail_path: /assets/img/blog/thumbnails/2015-09-24-ingesting-real-time-streams-hive-hbase.jpg
 ---
 

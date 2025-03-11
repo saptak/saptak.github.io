@@ -3,6 +3,7 @@ author: Saptak Sen
 date: '2014-06-24T12:34:00.001-07:00'
 header_image_path: /assets/img/blog/headers/2015-06-24-analyzing-data-ipython-notebook-spark
   copy.jpg
+image_credit: Photo by Unsplash
 layout: post
 modified_time: '2014-06-15T15:11:18.054-07:00'
 tags:
