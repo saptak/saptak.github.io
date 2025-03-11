@@ -1,0 +1,56 @@
+// Comprehensive fix for tag display issues
+.tags-container {
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+.tag-link {
+  display: inline-block !important;
+  white-space: nowrap !important;
+}
+
+.tag-separator {
+  display: inline-block !important;
+  white-space: nowrap !important;
+  margin: 0 0.2rem !important;
+}
+
+// Remove all instances of commas being displayed as line breaks
+span.mr1.nowrap,
+.tags-container,
+.tag-link,
+.tag-separator {
+  &::after,
+  &::before {
+    white-space: normal !important;
+    display: inline !important;
+  }
+}
+
+// Fix for all screen sizes
+@media screen and (max-width: 768px) {
+  .mr1.nowrap {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    margin-bottom: 0.3rem !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+  }
+  
+  .tags-container {
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    overflow-x: auto !important;
+  }
+  
+  .fa-tags {
+    margin-right: 0.3rem !important;
+  }
+}
