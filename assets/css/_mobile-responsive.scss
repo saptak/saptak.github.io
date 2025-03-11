@@ -1,29 +1,115 @@
 // Mobile responsive styles with minimal changes
 // This file contains targeted fixes for mobile devices
 
-// Fix for blog titles and excerpts not wrapping on mobile
-.posts .post-title,
-.posts .post-summary,
-.posts .post-meta,
-.post-title,
-.post-content p,
+// Fix for all pre and code blocks
+pre, code {
+  white-space: pre-wrap !important;
+  word-break: break-all !important;
+  word-wrap: break-word !important;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+// Fix for markdown content
+.markdown-body, .markdown {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+// Fix for code blocks
+.highlight, .highlighter-rouge {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+}
+
+// Universal fix for horizontal scrolling on mobile - applied to all screens
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+// Direct fixes for the writing/blog page
+.writing, .posts, .post-list {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+// Aggressive text wrapping for all blog content
+.post-title, 
+.post h1, .post h2, .post h3,
+.posts h1, .posts h2, .posts h3, 
+.post-link,
+.post-date,
+.post-meta,
+.post-summary,
 .post-excerpt,
-.post-summary {
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  -ms-word-break: break-all;
-  word-break: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+.post-content p,
+.post-content li,
+.post-content a {
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
+}
+
+// Fix for long URLs in blog posts
+a {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  display: inline-block;
   max-width: 100%;
 }
 
 // Main container padding adjustments
 @media screen and (max-width: 40em) {
-  main.container {
-    padding: 1rem !important; // Reduce padding on small screens
+  // More aggressive mobile fixes for blog listings
+  .writing-container,
+  .writing-section,
+  .posts,
+  .post-list,
+  .post,
+  .post-link,
+  .post-title,
+  .post-meta,
+  .post-excerpt,
+  .post-date {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-wrap: break-word !important;
+  }
+  
+  .post-link, .post-title {
+    font-size: 1.2rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  // Fix for any potential table layout issues
+  .post-list-item, .post-item {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  // Fix for post dates that might be causing overflow
+  .post-date, .post-meta {
+    font-size: 0.8rem !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+  }
+  
+  // Force container width to be the viewport width
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
   }
   
   // Adjust images to not overflow their containers
