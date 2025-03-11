@@ -1,5 +1,30 @@
 # Saptak Sen Home Page
 
+## Blog Images
+
+The blog now includes automatic image handling:
+
+- Each blog post can have a thumbnail image (shown in the list view)
+- Each blog post can have a header image (shown at the top of the post)
+- Images are automatically sourced from Unsplash's free license collection
+
+### Adding Images to Blog Posts
+
+To add images to all blog posts:
+
+```bash
+cd _scripts
+bash update_blog_images.sh
+```
+
+This will:
+1. Find appropriate free images based on your post content
+2. Download and save them to the appropriate directories
+3. Update your blog post frontmatter
+4. Commit and push the changes to GitHub
+
+See `_scripts/README.md` for more details.
+
 This is the code for the [Saptak Sen Home Page](http://saptak.in).
 
 

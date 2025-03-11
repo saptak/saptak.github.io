@@ -1,3 +1,9 @@
+{% if page.header_image_path %}
+<div class="post-header-image-container">
+  <img src="{{ page.header_image_path }}" alt="{{ page.title }}" class="post-header-image">
+</div>
+{% endif %}
+
 <div class="container">
   {% include header-h1.html h1_class="mt0 mb1" %}
   <div>{% include post-metadata.html post=page time_estimate=true time_estimate_minutes=page.time_estimate_minutes %}</div>
