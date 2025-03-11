@@ -1,41 +1,20 @@
 /**
- * Mobile-specific fix for tag display without inline styles
+ * Simple fix for tag display as comma-separated list
  */
 (function() {
   document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on mobile
-    const isMobile = window.innerWidth <= 768;
+    // Add a class to identify the tag containers that have been processed
+    document.querySelectorAll('.tags-container').forEach(container => {
+      container.classList.add('tags-processed');
+    });
     
-    if (isMobile) {
-      // Add a class to the body for mobile-specific styling
-      document.body.classList.add('mobile-view');
-      
-      // Find all tag containers
-      const tagContainers = document.querySelectorAll('.tags-container');
-      
-      tagContainers.forEach(container => {
-        // Add a clearfix class to help with floating elements
-        container.classList.add('clearfix-tags');
-        
-        // Find all tag links in this container
-        const tagLinks = container.querySelectorAll('.tag-link');
-        tagLinks.forEach((link, index) => {
-          // Add mobile-specific class
-          link.classList.add('mobile-tag-link');
-          
-          // Add pill styling for mobile tags
-          link.classList.add('tag-pill');
-        });
-      });
-    }
+    // Make sure the body has a class that indicates JS is active
+    document.body.classList.add('js-enabled');
     
-    // Handle window resize
-    window.addEventListener('resize', function() {
-      const isMobileNow = window.innerWidth <= 768;
-      if (isMobileNow) {
-        document.body.classList.add('mobile-view');
-      } else {
-        document.body.classList.remove('mobile-view');
+    // Fix any excessive spacing in separators
+    document.querySelectorAll('.tag-separator').forEach(sep => {
+      if (sep.textContent.trim() === ',') {
+        sep.textContent = ', ';
       }
     });
   });

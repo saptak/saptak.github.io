@@ -1,6 +1,6 @@
-// Desktop-specific tag display fix
+// Desktop-specific tag display fix for comma-separated tags
 @media screen and (min-width: 769px) {
-  // For desktop, we'll use a more traditional inline approach
+  // Standard inline display for tags
   .tags-container {
     display: inline !important;
   }
@@ -11,11 +11,12 @@
   
   .tag-separator {
     display: inline !important;
-    margin-right: 0.2rem !important;
+    margin-right: 0.25rem !important;
   }
   
   // Add a small margin to the tags icon for better spacing
-  .mr1.nowrap .fa-tags {
+  .mr1.nowrap .fa-tags,
+  .tag-container-parent .fa-tags {
     margin-right: 0.3rem !important;
   }
 }

@@ -1,74 +1,37 @@
-// Mobile-specific tag display fix without using inline styles
+// Mobile-specific tag display fix with simple comma-separated wrapping
 @media screen and (max-width: 768px) {
   // Container for tag groups
   .tags-container {
     display: block !important;
-    white-space: normal !important;
-    overflow: visible !important;
     width: 100% !important;
-    
-    &:after {
-      content: "" !important;
-      display: table !important;
-      clear: both !important;
-    }
+    overflow: visible !important;
+    white-space: normal !important; // Allow natural wrapping
   }
   
-  // Tag links should be block elements that float left
+  // Simple inline tag links
   .tag-link {
-    display: inline-block !important;
-    float: left !important;
-    margin-right: 0.4rem !important;
-    margin-bottom: 0.4rem !important;
+    display: inline !important;
     white-space: normal !important;
-    background-color: #f1f1f1 !important;
-    padding: 2px 8px !important;
-    border-radius: 12px !important;
-    font-size: 0.8rem !important;
   }
   
-  // Separators should be hidden on mobile for cleaner display
+  // Separator commas should be displayed inline
   .tag-separator {
-    display: none !important;
+    display: inline !important;
+    margin-right: 0.25rem !important;
   }
   
-  // Parent container needs clearfix
+  // Parent container needs proper margins
   span.mr1.nowrap:has(.fa-tags),
   .tag-container-parent {
     display: block !important;
     width: 100% !important;
-    overflow: visible !important;
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.8rem !important;
-    
-    &:after {
-      content: "" !important;
-      display: table !important;
-      clear: both !important;
-    }
+    margin-top: 0.3rem !important;
+    margin-bottom: 0.3rem !important;
   }
   
-  // The tags icon should be displayed as a block element
+  // The tags icon should be displayed inline
   .mr1.nowrap .fa-tags,
   .tag-container-parent .fa-tags {
-    display: block !important;
-    margin-bottom: 0.4rem !important;
-    float: none !important;
-  }
-  
-  // Special clearfix class added by JavaScript
-  .clearfix-tags:after {
-    content: "" !important;
-    display: table !important;
-    clear: both !important;
-  }
-  
-  // Pill styling for mobile tags
-  .tag-pill {
-    transition: background-color 0.2s ease !important;
-    
-    &:hover {
-      background-color: #e0e0e0 !important;
-    }
+    margin-right: 0.3rem !important;
   }
 }
