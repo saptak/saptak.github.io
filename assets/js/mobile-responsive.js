@@ -4,20 +4,6 @@
 (function() {
   // Function to run when the DOM is loaded
   function enhanceMobileExperience() {
-    // Add touch-friendly tap targets
-    const navLinks = document.querySelectorAll('nav a, .button');
-    navLinks.forEach(link => {
-      // Add a small delay to avoid accidental double taps
-      link.addEventListener('touchend', function(e) {
-        if (!link.classList.contains('no-delay') && !link.hasAttribute('data-no-delay')) {
-          e.preventDefault();
-          setTimeout(function() {
-            window.location = link.href;
-          }, 100);
-        }
-      });
-    });
-    
     // Add aria attributes to improve accessibility
     const mainContent = document.querySelector('main');
     if (mainContent) {
@@ -40,36 +26,45 @@
         document.querySelector('.posts') || 
         document.querySelector('.post-list')) {
       
-      // Ensure no horizontal scrolling is possible, but don't hide overflow completely
-      document.documentElement.style.overflowX = 'visible';
-      document.body.style.overflowX = 'visible';
-      
-      // Find all blog post titles and ensure they display properly
-      const postTitles = document.querySelectorAll('.post-title, .post-link');
-      postTitles.forEach(title => {
-        // Use a more gentle approach for text wrapping
-        title.style.wordBreak = 'normal';
-        title.style.overflowWrap = 'break-word';
-        title.style.width = 'auto';
-        title.style.maxWidth = '100%';
-        title.style.display = 'block';
-        title.style.paddingRight = '8px';
+      // Direct fix for text clipping in blog posts
+      const fixTextClipping = function() {
+        // Target all post elements that might have text clipping
+        const postElements = document.querySelectorAll('.post-title, .post-link, .post-meta, .post-summary, .post-date, .post-excerpt');
         
-        // Prevent text clipping by ensuring container has enough space
-        const parentEl = title.parentElement;
-        if (parentEl) {
-          parentEl.style.paddingRight = '8px';
-          parentEl.style.boxSizing = 'border-box';
-        }
-      });
+        postElements.forEach(el => {
+          // Apply direct anti-clipping fixes
+          el.style.overflow = 'visible';
+          el.style.paddingRight = '16px';
+          el.style.marginRight = '4px';
+          el.style.boxSizing = 'content-box';
+          el.style.maxWidth = 'calc(100% - 20px)';
+          el.style.width = 'auto';
+          el.style.wordBreak = 'normal';
+          el.style.overflowWrap = 'normal';
+          el.style.wordWrap = 'normal';
+          
+          // Also apply to parent for extra safety
+          if (el.parentElement) {
+            el.parentElement.style.overflow = 'visible';
+            el.parentElement.style.paddingRight = '8px';
+          }
+        });
+        
+        // Force proper container sizing
+        const containers = document.querySelectorAll('.container, .posts, .post-list, .writing');
+        containers.forEach(container => {
+          container.style.maxWidth = '100%';
+          container.style.paddingRight = '16px';
+          container.style.boxSizing = 'border-box';
+          container.style.overflow = 'visible';
+        });
+      };
       
-      // Process all links in posts to ensure they wrap
-      const postLinks = document.querySelectorAll('.post a, .posts a');
-      postLinks.forEach(link => {
-        link.style.wordBreak = 'break-word';
-        link.style.overflowWrap = 'break-word';
-        link.style.maxWidth = '100%';
-      });
+      // Run once on load
+      fixTextClipping();
+      
+      // Run again after a slight delay to catch any dynamic content
+      setTimeout(fixTextClipping, 500);
     }
   }
   
