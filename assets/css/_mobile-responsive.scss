@@ -36,23 +36,25 @@ html, body {
   overflow-x: hidden;
 }
 
-// Aggressive text wrapping for all blog content
+// Fixes for text clipping in blog list items
 .post-title, 
-.post h1, .post h2, .post h3,
-.posts h1, .posts h2, .posts h3, 
 .post-link,
-.post-date,
 .post-meta,
+.post-date,
 .post-summary,
-.post-excerpt,
-.post-content p,
-.post-content li,
-.post-content a {
+.post-excerpt {
+  display: block !important;
+  padding-right: 4px !important; /* Add a small right padding to prevent clipping */
+  box-sizing: border-box !important;
+  text-overflow: clip !important; /* Change from ellipsis to clip */
+  white-space: normal !important; /* Ensure text can wrap to multiple lines */
+  width: 100% !important;
+  max-width: 100% !important;
+  /* Use a more gentle word breaking approach */
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
-  word-break: break-word !important;
-  hyphens: auto !important;
-  max-width: 100% !important;
+  word-break: normal !important; /* Change from break-word to normal */
+  hyphens: manual !important; /* Change from auto to manual */
 }
 
 // Fix for long URLs in blog posts
@@ -65,28 +67,25 @@ a {
 
 // Main container padding adjustments
 @media screen and (max-width: 40em) {
-  // More aggressive mobile fixes for blog listings
+  // More specific adjustments for blog listing items (prevent text clipping)
   .writing-container,
   .writing-section,
   .posts,
-  .post-list,
-  .post,
-  .post-link,
-  .post-title,
-  .post-meta,
-  .post-excerpt,
-  .post-date {
-    width: 100% !important;
+  .post-list {
+    width: auto !important; /* Changed from 100% to auto */
     max-width: 100% !important;
     box-sizing: border-box !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    overflow-wrap: break-word !important;
+    padding-left: 4px !important; /* Added small padding */
+    padding-right: 4px !important; /* Added small padding */
+    overflow-x: visible !important; /* Allow content to be visible */
+    margin-right: 4px !important; /* Add a small right margin */
   }
   
   .post-link, .post-title {
     font-size: 1.2rem !important;
     line-height: 1.4 !important;
+    padding-right: 8px !important; /* Add extra padding to prevent clipping */
+    letter-spacing: -0.01em !important; /* Slightly reduce letter spacing */
   }
   
   // Fix for any potential table layout issues
@@ -103,13 +102,14 @@ a {
     white-space: normal !important;
   }
   
-  // Force container width to be the viewport width
+  // Force container width with proper padding
   .container {
-    width: 100% !important;
+    width: auto !important; /* Changed from 100% to auto */
     max-width: 100% !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 12px !important; /* Increased from 1rem */
+    padding-right: 12px !important; /* Increased from 1rem */
     box-sizing: border-box !important;
+    overflow-x: visible !important; /* Changed from hidden to visible */
   }
   
   // Adjust images to not overflow their containers

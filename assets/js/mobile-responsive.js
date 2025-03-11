@@ -40,18 +40,27 @@
         document.querySelector('.posts') || 
         document.querySelector('.post-list')) {
       
-      // Ensure no horizontal scrolling is possible
-      document.documentElement.style.overflowX = 'hidden';
-      document.body.style.overflowX = 'hidden';
+      // Ensure no horizontal scrolling is possible, but don't hide overflow completely
+      document.documentElement.style.overflowX = 'visible';
+      document.body.style.overflowX = 'visible';
       
-      // Find all blog post titles and ensure they can wrap
+      // Find all blog post titles and ensure they display properly
       const postTitles = document.querySelectorAll('.post-title, .post-link');
       postTitles.forEach(title => {
-        title.style.wordBreak = 'break-word';
+        // Use a more gentle approach for text wrapping
+        title.style.wordBreak = 'normal';
         title.style.overflowWrap = 'break-word';
-        title.style.width = '100%';
+        title.style.width = 'auto';
         title.style.maxWidth = '100%';
         title.style.display = 'block';
+        title.style.paddingRight = '8px';
+        
+        // Prevent text clipping by ensuring container has enough space
+        const parentEl = title.parentElement;
+        if (parentEl) {
+          parentEl.style.paddingRight = '8px';
+          parentEl.style.boxSizing = 'border-box';
+        }
       });
       
       // Process all links in posts to ensure they wrap
