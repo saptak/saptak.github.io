@@ -9,14 +9,18 @@ include_comments:
 {% if page.header_image_path %}
 <div class="post-header-image-container">
   <img src="{{ page.header_image_path }}" alt="{{ page.title }}" class="post-header-image">
-  {% if page.image_credit %}
-  <div class="post-header-image-credit">Image: {{ page.image_credit }}</div>
-  {% endif %}
 </div>
 {% endif %}
 
 <article class="post">
   {{ content }}
+  
+  {% if page.image_credit %}
+  <div class="image-credit-footer">
+    <p><em>Header image: {{ page.image_credit }}</em></p>
+  </div>
+  {% endif %}
+  
   <div class="mt4 mb4">{% include post-navigation.html %}</div>
   <div class="mt4">{% include author-share.html %}</div>
 </article>

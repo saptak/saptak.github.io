@@ -42,15 +42,22 @@
     height: 100%;
     object-fit: cover;
   }
+}
+
+// Image credit footer
+.image-credit-footer {
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  color: #666;
   
-  .post-header-image-credit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 4px 8px;
-    font-size: 12px;
-    font-style: italic;
+  [data-theme="dark"] & {
+    border-top-color: #444;
+    color: #999;
+  }
+  
+  p {
+    margin: 0;
   }
 }
