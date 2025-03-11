@@ -14,14 +14,15 @@ To add images to all blog posts:
 
 ```bash
 cd _scripts
-bash update_blog_images.sh
+bash update_with_venv.sh
 ```
 
 This will:
-1. Find appropriate free images based on your post content
-2. Download and save them to the appropriate directories
-3. Update your blog post frontmatter
-4. Commit and push the changes to GitHub
+1. Set up a Python virtual environment with required dependencies
+2. Find appropriate free images based on your post content
+3. Download and save them to the appropriate directories
+4. Update your blog post frontmatter
+5. Commit and push the changes to GitHub
 
 See `_scripts/README.md` for more details.
 

@@ -4,28 +4,31 @@ These scripts help you add free Unsplash images to your blog posts.
 
 ## Setup
 
-The Python script requires a few dependencies:
+The Python script requires a few dependencies that will be installed in a virtual environment:
 
 ```bash
-pip install python-frontmatter pyyaml requests
+bash setup_venv.sh
 ```
+
+This will create a virtual environment in the `_scripts/venv` directory and install all required packages.
 
 ## Usage
 
-1. Make the scripts executable:
+1. Test the script on a single post:
    ```bash
-   bash _scripts/chmod_scripts.sh
+   bash test_with_venv.sh
    ```
 
-2. Run the update script:
+2. Run the script on all blog posts:
    ```bash
-   bash _scripts/update_blog_images.sh
+   bash update_with_venv.sh
    ```
 
 This will:
-1. Add Unsplash images to all blog posts that don't already have images
-2. Commit the changes to Git
-3. Push the changes to GitHub
+1. Set up a Python virtual environment with all dependencies
+2. Add Unsplash images to all blog posts that don't already have images
+3. Commit the changes to Git
+4. Push the changes to GitHub
 
 ## How It Works
 
