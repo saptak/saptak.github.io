@@ -9,6 +9,19 @@
 <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}{{ site.nav.writing.rss }}">
 {% include favicon.html %}
 {% include styles.html %}
+<!-- Dark mode initialization to prevent flash -->
+<script>
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (savedTheme === null && prefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
 <script src="//load.sumome.com/" data-sumo-site-id="b49b2276c652916249c300f15e94a8f692f635a2e2fc22dcbfb5ea7de36c5923" async="async"></script>
 
 <![if lt IE 9]><script type="text/javascript">
