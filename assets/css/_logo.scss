@@ -1,42 +1,12 @@
 // Logo styling
-.site-logo-wrapper {
-  height: 100%;
-  display: block;
-  padding: 0.5rem 0;
-}
-
-.site-logo-link {
+.nav-button {
   display: flex;
   align-items: center;
-  text-decoration: none;
   cursor: pointer;
-  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.5rem 1rem;
-  color: inherit;
+  pointer-events: auto !important;
   
-  &:hover {
-    opacity: 0.8;
+  img, span {
+    pointer-events: auto !important;
   }
 }
 
-.site-logo-image {
-  border-radius: 50%;
-  margin-right: 0.5rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 2px;
-}
-
-.site-logo-text {
-  display: inline-block;
-}
-
-// Dark mode styles
-[data-theme="dark"] {
-  .site-logo-image {
-    background-color: #2d2d2d;
-    border-color: #444;
-  }
-}
