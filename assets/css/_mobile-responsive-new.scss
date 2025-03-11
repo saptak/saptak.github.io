@@ -1,0 +1,86 @@
+// Mobile responsive styles with minimal changes
+// This file contains targeted fixes for mobile devices
+
+// Basic mobile container adjustments
+@media screen and (max-width: 40em) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  // Make text more readable on small screens
+  body {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+  
+  // Ensure main container has proper constraints
+  .container, main, article {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+  
+  // Make images responsive
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  // Fix for tables overflowing
+  table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// Blog-specific fixes
+@media screen and (max-width: 40em) {
+  // Basic post and list fixes
+  .posts, .post-list {
+    width: 100% !important; 
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  
+  // Fix text wrapping in blog titles and content
+  .post-title, .post-link, .post-meta, .post-summary {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  // Improve readability of code blocks
+  pre, code {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+// Extra adjustments for very small screens
+@media screen and (max-width: 30em) {
+  .nav-button.caps {
+    font-size: 0.8rem !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  .post-title, .post-link {
+    font-size: 1.2rem !important;
+    line-height: 1.4 !important;
+  }
+  
+  .post-meta {
+    font-size: 0.9rem !important;
+  }
+}
