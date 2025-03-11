@@ -28,11 +28,28 @@
         document.querySelector('.posts') || 
         document.querySelector('.post-list')) {
       
-      // Ensure each post element fits its container
-      document.querySelectorAll('.post-title, .post-link, .post-meta').forEach(el => {
-        el.style.wordWrap = 'break-word';
-        el.style.maxWidth = '100%';
-        el.style.boxSizing = 'border-box';
+      // Direct fix for blog post titles in the listing
+      const blogTitles = document.querySelectorAll('.post-title, .posts h1, .posts h2, .post-link h1, .post-link h2');
+      blogTitles.forEach(title => {
+        // Force proper text wrapping
+        title.style.display = 'inline-block';
+        title.style.width = '100%';
+        title.style.maxWidth = '100%';
+        title.style.boxSizing = 'border-box';
+        title.style.paddingRight = '5px';
+        title.style.overflowWrap = 'break-word';
+        title.style.wordWrap = 'break-word';
+        title.style.wordBreak = 'break-word';
+        title.style.hyphens = 'auto';
+        title.style.whiteSpace = 'normal';
+        
+        // Apply styles to parent container if needed
+        const parent = title.parentElement;
+        if (parent) {
+          parent.style.width = '100%';
+          parent.style.maxWidth = '100%';
+          parent.style.boxSizing = 'border-box';
+        }
       });
     }
   }
