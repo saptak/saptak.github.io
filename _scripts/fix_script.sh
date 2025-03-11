@@ -9,9 +9,9 @@ chmod +x _scripts/*.sh
 
 # Commit the changes
 git add .
-git commit -m "Add blog image system with Unsplash integration"
+git commit -m "Fix blog image script with better error handling and improved image selection"
 
 # Push changes
 git push origin master
 
-echo "Changes committed and pushed to GitHub."
+echo "Fixes committed and pushed to GitHub."

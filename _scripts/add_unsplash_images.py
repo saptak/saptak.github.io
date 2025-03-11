@@ -1,12 +1,26 @@
 #!/usr/bin/env python3
 import os
 import re
-import yaml
+import sys
 import requests
 import random
 from urllib.parse import quote_plus
 from pathlib import Path
-import frontmatter
+
+# Try to import required modules with helpful error messages
+try:
+    import yaml
+except ImportError:
+    print("Error: 'pyyaml' module is not installed.")
+    print("Please install it with: pip install pyyaml")
+    sys.exit(1)
+
+try:
+    import frontmatter
+except ImportError:
+    print("Error: 'python-frontmatter' module is not installed.")
+    print("Please install it with: pip install python-frontmatter")
+    sys.exit(1)
 
 # Configuration
 BLOG_DIR = Path('/Users/saptak/code/saptak.github.io/_posts')
@@ -65,6 +79,8 @@ def find_unsplash_image_url(keywords):
     search_term = '-'.join(keywords)
     search_url = UNSPLASH_SEARCH_URL.format(quote_plus(search_term))
     
+    print(f"Searching Unsplash for: {search_term}")
+    
     try:
         # Get the search results page
         headers = {
@@ -77,22 +93,36 @@ def find_unsplash_image_url(keywords):
             return find_unsplash_image_url(['abstract', 'technology'])
         
         # Extract image URLs from the response
-        # This is a very simple pattern that might need to be adjusted based on actual Unsplash HTML structure
-        img_pattern = r'https://images\.unsplash\.com/[^\s\'\"]+\?ixlib=rb[^\s\'\"\&]+'
+        # This pattern aims to capture Unsplash image URLs with their parameters
+        img_pattern = r'https://images\.unsplash\.com/[\w.-]+\?[\w=&\-%]+'  
         img_urls = re.findall(img_pattern, response.text)
         
-        # Filter for only license=free images
-        free_img_urls = [url for url in img_urls if 'license=free' in url or 'license=unsplash' in url]
+        # Filter for more likely content images (typically larger ones)
+        filtered_urls = []
+        for url in img_urls:
+            # Skip tiny thumbnails
+            if 'w=20' in url or 'h=20' in url:
+                continue
+            # Prioritize larger images
+            if 'w=1080' in url or 'h=768' in url or 'q=80' in url:
+                filtered_urls.append(url)
         
-        if not free_img_urls:
-            # If no free images, use any image
-            if img_urls:
-                return random.choice(img_urls)
-            else:
-                print(f"No images found for {search_term}. Falling back to abstract.")
-                return find_unsplash_image_url(['abstract', 'technology'])
-        
-        return random.choice(free_img_urls)
+        if filtered_urls:
+            img_urls = filtered_urls
+            
+        # If we have URLs, pick one at random
+        if img_urls:
+            chosen_url = random.choice(img_urls)
+            print(f"Found image for {search_term}")
+            return chosen_url
+            
+        print(f"No images found for {search_term}. Trying different keywords.")
+        # Try with just the first keyword plus 'abstract'
+        if len(keywords) > 1:
+            return find_unsplash_image_url(['abstract', keywords[0]])
+            
+        # Last resort - fall back to generic abstract
+        return find_unsplash_image_url(['abstract', 'digital'])
     
     except Exception as e:
         print(f"Error finding image: {e}")
@@ -111,6 +141,7 @@ def download_image(url, destination):
             with open(destination, 'wb') as f:
                 for chunk in response.iter_content(1024):
                     f.write(chunk)
+            print(f"Downloaded image to {destination}")
             return True
         else:
             print(f"Failed to download image: HTTP {response.status_code}")
@@ -128,7 +159,7 @@ def update_post_with_images(post_path):
         
         # Generate base filename from post date and slug
         post_date = post.get('date', '')
-        if post_date:
+        if hasattr(post_date, 'strftime'):
             date_part = post_date.strftime('%Y-%m-%d')
         else:
             date_part = os.path.basename(post_path).split('-', 3)[:3]
@@ -149,38 +180,76 @@ def update_post_with_images(post_path):
         
         # Extract keywords for image search
         keywords = extract_keywords(post)
-        print(f"Searching images for {base_filename} with keywords: {keywords}")
+        print(f"Using keywords for {base_filename}: {keywords}")
         
-        # Get image URLs
+        # Get image URL
         image_url = find_unsplash_image_url(keywords)
         
         # Download and save images
         thumbnail_rel_path = f"/assets/img/blog/thumbnails/{base_filename}.jpg"
         header_rel_path = f"/assets/img/blog/headers/{base_filename}.jpg"
         
-        if download_image(image_url, thumbnail_path):
+        thumbnail_success = download_image(image_url, thumbnail_path)
+        header_success = download_image(image_url, header_path)
+        
+        # Only update the frontmatter if downloads were successful
+        if thumbnail_success and header_success:
             post['thumbnail_path'] = thumbnail_rel_path
-        
-        if download_image(image_url, header_path):
             post['header_image_path'] = header_rel_path
-        
-        # Save updated post
-        with open(post_path, 'w') as f:
-            f.write(frontmatter.dumps(post))
-        
-        print(f"Updated post with images: {post_path}")
+            
+            # Save updated post
+            with open(post_path, 'w') as f:
+                f.write(frontmatter.dumps(post))
+            
+            print(f"✅ Updated post with images: {post_path}")
+            return True
+        else:
+            print(f"❌ Failed to download images for: {post_path}")
+            return False
     
     except Exception as e:
-        print(f"Error updating post {post_path}: {e}")
+        print(f"❌ Error updating post {post_path}: {e}")
+        return False
 
 def main():
     """Main function to process all blog posts."""
     # Get all markdown files in the blog directory
     post_files = sorted(list(BLOG_DIR.glob('*.md')))
     
+    if not post_files:
+        print(f"No blog posts found in {BLOG_DIR}. Please check the directory.")
+        return
+    
+    print(f"Found {len(post_files)} blog posts to process.")
+    
+    success_count = 0
+    skip_count = 0
+    error_count = 0
+    
     for post_path in post_files:
-        print(f"Processing {post_path}...")
-        update_post_with_images(post_path)
+        print(f"\nProcessing {post_path.name}...")
+        try:
+            # Read the post with frontmatter to check if already has images
+            post = frontmatter.load(post_path)
+            
+            # Skip if already has images defined
+            if post.get('thumbnail_path') and post.get('header_image_path'):
+                print(f"Skipping: Post already has images")
+                skip_count += 1
+                continue
+                
+            if update_post_with_images(post_path):
+                success_count += 1
+            else:
+                error_count += 1
+        except Exception as e:
+            print(f"Error processing post {post_path.name}: {e}")
+            error_count += 1
+    
+    print(f"\nCompleted processing {len(post_files)} blog posts:")
+    print(f"- {success_count} posts updated with images")
+    print(f"- {skip_count} posts skipped (already had images)")
+    print(f"- {error_count} posts encountered errors")
 
 if __name__ == '__main__':
     main()
