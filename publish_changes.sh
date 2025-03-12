@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Fix mobile blog alignment with simplified code"
+git commit -m "Minimal fix for mobile navigation alignment"
 
 # Push to GitHub
 echo "Pushing to GitHub..."
