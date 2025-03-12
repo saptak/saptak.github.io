@@ -1,0 +1,58 @@
+/* Fix alignment of dark mode button and navigation items on desktop */
+
+/* Adjust the list item that contains the dark mode toggle to ensure vertical alignment */
+.nav-collapse li:first-child {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+/* Container for nav items to ensure consistent alignment */
+.nav-collapse ul {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Ensure list items are aligned center */
+.nav-collapse ul li {
+  display: flex;
+  align-items: center;
+}
+
+/* Fix alignment for the dark mode toggle button */
+#dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin: 0;
+  vertical-align: middle;
+}
+
+/* Fix the alignment of the SVG inside the button */
+.dark-mode-toggle-icon {
+  display: block;
+  vertical-align: middle;
+}
+
+/* Ensure navigation buttons are aligned with the dark mode toggle */
+.button.nav-button {
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  vertical-align: middle;
+  height: 100%;
+}
+
+/* Ensure BLOG text is vertically centered */
+.nav-button.caps {
+  display: flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  height: 100% !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: normal !important;
+}

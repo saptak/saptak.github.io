@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Completely remove hamburger menu icon and display dark mode button and blog label directly"
+git commit -m "Fix header elements: remove hamburger menu and fix alignment of dark mode button and blog label"
 
 # Push to GitHub
 echo "Pushing to GitHub..."
