@@ -20,10 +20,10 @@
       navCollapse.style.maxHeight = 'none';
       navCollapse.style.overflow = 'visible';
       
-      // Hide the nav toggle button if it exists
+      // Completely remove the nav toggle button if it exists
       var navToggle = document.querySelector('.nav-toggle');
-      if (navToggle) {
-        navToggle.style.display = 'none';
+      if (navToggle && navToggle.parentNode) {
+        navToggle.parentNode.removeChild(navToggle);
       }
     }
   }
