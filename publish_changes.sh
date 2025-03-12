@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Ultra-minimal fix: just remove hamburger menu"
+git commit -m "Direct fix: replace nav markup with simple HTML"
 
 # Push to GitHub
 echo "Pushing to GitHub..."
