@@ -1,0 +1,54 @@
+// Override the responsive navigation to hide the hamburger and show items directly
+@import "settings";
+
+// Hide the hamburger toggle at all screen sizes
+.nav-toggle {
+  display: none !important;
+}
+
+// Always display the nav items even on smaller screens
+.js .nav-collapse {
+  position: relative;
+  max-height: none !important;
+  clip: auto !important;
+  overflow: visible !important;
+}
+
+// Adjustments for smaller screens
+@media screen and (max-width: $breakPoint) {
+  .nav-collapse {
+    clear: none !important;
+    float: right !important;
+    
+    li {
+      display: inline-block !important;
+    }
+    
+    a {
+      border-top: none !important;
+      width: auto !important;
+    }
+  }
+  
+  // Make sure buttons have appropriate sizing on mobile
+  .nav-button.caps {
+    font-size: 0.8rem !important;
+    padding-left: 0.4rem !important;
+    padding-right: 0.4rem !important;
+  }
+  
+  // Ensure dark mode button and blog label are visible and properly sized
+  .dark-mode-toggle {
+    display: inline-block !important;
+    padding: 0.5rem !important;
+  }
+}
+
+// Improve the layout for very small screens
+@media screen and (max-width: 30em) {
+  .nav-button.caps {
+    font-size: 0.7rem !important;
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
+  }
+}

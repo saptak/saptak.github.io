@@ -72,6 +72,14 @@ def search_unsplash(search_terms, api_key):
     if not api_key:
         print("Error: Unsplash API key not provided")
         print("You need to get an API key from https://unsplash.com/developers")
+        
+        # Ask user if they want to enter a key now
+        user_input = input("Would you like to enter an API key now? (y/n): ")
+        if user_input.lower() == 'y':
+            api_key = input("Enter your Unsplash API key: ")
+            if api_key.strip():
+                return search_unsplash(search_terms, api_key.strip())
+        
         sys.exit(1)
     
     url = "https://api.unsplash.com/search/photos"

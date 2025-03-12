@@ -1,0 +1,35 @@
+/* One-line tag display fix */
+.tags-container {
+  display: inline !important;
+}
+
+.tags-container a.tag-link {
+  display: inline !important;
+}
+
+.tags-container .tag-separator {
+  display: inline !important;
+}
+
+/* Remove any display:block that might be causing breaks */
+.mr1.nowrap {
+  white-space: normal !important;
+}
+
+/* Direct fix for each tag taking up a new line */
+.mr1.nowrap a.tag-link::after,
+.mr1.nowrap .tag-separator::after {
+  content: "" !important;
+  display: inline !important;
+}
+
+/* Force inline display on the tag container */
+.tag-container-parent {
+  white-space: normal !important;
+}
+
+/* Ensure tag links don't cause line breaks */
+a.tag-link {
+  float: none !important;
+  display: inline !important;
+}
