@@ -1,5 +1,37 @@
 /* Fix alignment of dark mode button and navigation items on desktop */
 
+/* Fix vertical alignment of site name */
+.left .nav-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: normal !important;
+}
+
+.left .nav-button span {
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  line-height: normal !important;
+}
+
+/* Center the overall navigation vertically */
+nav[role="navigation"] {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 56px !important; /* Ensure consistent height */
+}
+
+/* Ensure the left div containing the site name is properly aligned */
+nav[role="navigation"] .left {
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
 /* Adjust the list item that contains the dark mode toggle to ensure vertical alignment */
 .nav-collapse li:first-child {
   display: flex !important;

@@ -6,8 +6,45 @@
     // Get the darkMode toggle button and the blog button
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const blogButton = document.querySelector('.nav-button.caps');
+    const siteNameLink = document.querySelector('.left .nav-button');
     
     if (!darkModeToggle) return;
+    
+    // Fix site name alignment
+    if (siteNameLink) {
+      siteNameLink.style.display = 'flex';
+      siteNameLink.style.alignItems = 'center';
+      siteNameLink.style.justifyContent = 'center';
+      siteNameLink.style.height = '100%';
+      siteNameLink.style.paddingTop = '0';
+      siteNameLink.style.paddingBottom = '0';
+      siteNameLink.style.lineHeight = 'normal';
+      
+      // Also fix the span inside
+      const siteNameSpan = siteNameLink.querySelector('span');
+      if (siteNameSpan) {
+        siteNameSpan.style.display = 'inline-flex';
+        siteNameSpan.style.alignItems = 'center';
+        siteNameSpan.style.verticalAlign = 'middle';
+        siteNameSpan.style.lineHeight = 'normal';
+      }
+      
+      // Fix the parent div
+      const leftDiv = document.querySelector('nav[role="navigation"] .left');
+      if (leftDiv) {
+        leftDiv.style.display = 'flex';
+        leftDiv.style.alignItems = 'center';
+        leftDiv.style.height = '100%';
+      }
+    }
+    
+    // Fix overall navigation
+    const mainNav = document.querySelector('nav[role="navigation"]');
+    if (mainNav) {
+      mainNav.style.display = 'flex';
+      mainNav.style.alignItems = 'center';
+      mainNav.style.minHeight = '56px';
+    }
     
     // Check for any flex layout issues
     const navCollapse = document.querySelector('.nav-collapse');

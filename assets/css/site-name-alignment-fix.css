@@ -1,0 +1,35 @@
+/* Additional CSS to specifically fix site name vertical alignment */
+
+/* Override the py2 class that's adding vertical padding to the site name */
+.left .nav-button.py2 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Target the specific layout for the site name in the header */
+.left .nav-button {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 56px !important; /* Match the height of the header */
+}
+
+/* Ensure the text is vertically centered */
+.left .nav-button span {
+  position: relative !important;
+  top: 0 !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+}
+
+/* Fix any existing margin issues */
+.left {
+  margin: 0 !important;
+}
+
+/* Force consistent line height */
+nav[role="navigation"] * {
+  line-height: normal !important;
+}

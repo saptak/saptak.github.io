@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Fix header elements: remove hamburger menu and fix alignment of dark mode button and blog label"
+git commit -m "Fix header elements: remove hamburger menu and fix alignment of site name, dark mode button and blog label"
 
 # Push to GitHub
 echo "Pushing to GitHub..."
