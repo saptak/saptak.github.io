@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Minimal fix for mobile navigation alignment"
+git commit -m "Ultra-minimal fix: just remove hamburger menu"
 
 # Push to GitHub
 echo "Pushing to GitHub..."

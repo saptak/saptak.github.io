@@ -1,0 +1,15 @@
+/* Ultra-minimal fix to remove hamburger and show nav */
+
+/* Remove hamburger completely */
+.nav-toggle {
+  display: none !important;
+}
+
+/* Make navigation always visible */
+.js .nav-collapse {
+  position: static !important;
+  max-height: none !important;
+  clip: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
