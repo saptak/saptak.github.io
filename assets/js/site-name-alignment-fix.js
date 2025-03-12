@@ -10,21 +10,21 @@
     
     if (!siteNameLink || !leftDiv || !mainNav) return;
     
-    // Set explicit height for the navigation
-    mainNav.style.height = '56px';
-    mainNav.style.minHeight = '56px';
+    // Set natural height for the navigation
+    mainNav.style.height = '';
+    mainNav.style.minHeight = '';
     
     // Fix the left div containing the site name
     leftDiv.style.display = 'flex';
     leftDiv.style.alignItems = 'center';
-    leftDiv.style.height = '56px';
+    leftDiv.style.height = '';
     leftDiv.style.margin = '0';
     
     // Fix the site name link
     siteNameLink.style.display = 'flex';
     siteNameLink.style.alignItems = 'center';
     siteNameLink.style.justifyContent = 'center';
-    siteNameLink.style.height = '56px';
+    siteNameLink.style.height = '';
     siteNameLink.style.paddingTop = '0';
     siteNameLink.style.paddingBottom = '0';
     
@@ -34,7 +34,7 @@
       siteNameSpan.style.display = 'flex';
       siteNameSpan.style.alignItems = 'center';
       siteNameSpan.style.justifyContent = 'center';
-      siteNameSpan.style.height = '56px';
+      siteNameSpan.style.height = '';
       siteNameSpan.style.lineHeight = 'normal';
     }
   }

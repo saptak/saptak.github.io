@@ -1,0 +1,43 @@
+/* CSS to ensure header remains compact while maintaining alignment */
+
+/* Make sure the nav keeps its natural compact size */
+nav[role="navigation"] {
+  min-height: initial !important;
+  height: auto !important;
+}
+
+/* Ensure all elements inside the navigation use natural sizing */
+nav[role="navigation"] * {
+  height: auto !important;
+  min-height: initial !important;
+  padding-top: 0.5rem !important; /* Restore reasonable padding */
+  padding-bottom: 0.5rem !important;
+}
+
+/* Fix specific padding for the site name */
+.left .nav-button.py2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* Ensure buttons still have padding */
+.button.py2 {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* Adjust the dark mode toggle to match the more compact header */
+#dark-mode-toggle {
+  padding: 0.25rem !important;
+  margin: 0 !important;
+}
+
+/* Keep flex behavior for alignment while respecting natural sizing */
+.nav-collapse ul, 
+.nav-collapse li,
+.left .nav-button,
+.left .nav-button span {
+  display: flex !important;
+  align-items: center !important;
+  height: auto !important;
+}

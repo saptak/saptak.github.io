@@ -22,7 +22,7 @@
 nav[role="navigation"] {
   display: flex !important;
   align-items: center !important;
-  min-height: 56px !important; /* Ensure consistent height */
+  min-height: auto !important; /* Remove fixed height */
 }
 
 /* Ensure the left div containing the site name is properly aligned */

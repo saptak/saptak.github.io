@@ -11,7 +11,7 @@
   position: relative !important;
   display: flex !important;
   align-items: center !important;
-  height: 56px !important; /* Match the height of the header */
+  height: auto !important; /* Allow natural height */
 }
 
 /* Ensure the text is vertically centered */
@@ -21,7 +21,7 @@
   transform: none !important;
   display: flex !important;
   align-items: center !important;
-  height: 100% !important;
+  height: auto !important; /* Allow natural height */
 }
 
 /* Fix any existing margin issues */

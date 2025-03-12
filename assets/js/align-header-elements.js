@@ -43,7 +43,8 @@
     if (mainNav) {
       mainNav.style.display = 'flex';
       mainNav.style.alignItems = 'center';
-      mainNav.style.minHeight = '56px';
+      // Remove fixed height
+      mainNav.style.minHeight = '';
     }
     
     // Check for any flex layout issues
