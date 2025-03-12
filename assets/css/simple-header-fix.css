@@ -1,0 +1,55 @@
+/* Simple, targeted fix for header issues */
+
+/* Remove hamburger menu completely */
+.nav-toggle {
+  display: none !important;
+}
+
+/* Make navigation always visible */
+.js .nav-collapse {
+  position: relative !important;
+  max-height: none !important;
+  clip: auto !important;
+  overflow: visible !important;
+}
+
+/* Make sure header has a standard size */
+nav[role="navigation"] {
+  padding: 0.25rem 0 !important;
+}
+
+/* Fix alignment of left content (site name) */
+.left .nav-button {
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Fix alignment of right content (dark mode button and blog) */
+.nav-collapse {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.nav-collapse li {
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+}
+
+/* Ensure dark mode toggle is aligned */
+#dark-mode-toggle {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.25rem !important;
+}
+
+/* Ensure blog label is aligned */
+.nav-button.caps {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}

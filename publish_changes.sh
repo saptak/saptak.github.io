@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Fix header elements: restore compact header while maintaining alignment"
+git commit -m "Simplify header fixes with minimal code"
 
 # Push to GitHub
 echo "Pushing to GitHub..."
