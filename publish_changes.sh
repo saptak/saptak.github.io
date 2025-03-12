@@ -16,7 +16,7 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Simplify header fixes with minimal code"
+git commit -m "Fix mobile blog alignment with simplified code"
 
 # Push to GitHub
 echo "Pushing to GitHub..."

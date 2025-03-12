@@ -13,43 +13,82 @@
   overflow: visible !important;
 }
 
-/* Make sure header has a standard size */
-nav[role="navigation"] {
-  padding: 0.25rem 0 !important;
-}
-
-/* Fix alignment of left content (site name) */
-.left .nav-button {
-  padding-top: 0.5rem !important;
-  padding-bottom: 0.5rem !important;
-  display: inline-flex !important;
-  align-items: center !important;
-}
-
-/* Fix alignment of right content (dark mode button and blog) */
+/* Base alignment for all screen sizes */
 .nav-collapse {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
 }
 
 .nav-collapse li {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
-  vertical-align: middle !important;
 }
 
-/* Ensure dark mode toggle is aligned */
 #dark-mode-toggle {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: 0.25rem !important;
+  padding: 0.5rem !important;
 }
 
-/* Ensure blog label is aligned */
 .nav-button.caps {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
-  padding-top: 0.5rem !important;
-  padding-bottom: 0.5rem !important;
+  padding: 0.5rem !important;
+}
+
+/* Fix site name alignment */
+.left .nav-button {
+  padding: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Mobile-specific fixes */
+@media screen and (max-width: 768px) {
+  /* Fix for blog label alignment on mobile */
+  .nav-collapse {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+  
+  /* Ensure blog label alignment */
+  .nav-button.caps, li .nav-button.caps {
+    display: flex !important;
+    align-items: center !important;
+    vertical-align: middle !important;
+    line-height: normal !important;
+    margin: 0 !important;
+    padding: 8px !important;
+  }
+  
+  /* Fix dark mode toggle on mobile */
+  #dark-mode-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    margin: 0 !important;
+    padding: 8px !important;
+  }
+  
+  /* Make sure buttons are aligned */
+  .nav-collapse li {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    height: 100% !important;
+  }
+  
+  /* Direct rule for BLOG text */
+  a[href="/writing"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    padding: 8px !important;
+    vertical-align: middle !important;
+  }
 }
