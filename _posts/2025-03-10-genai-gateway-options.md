@@ -156,6 +156,40 @@ A GenAI gateway serves as an intermediary layer between your organization's appl
 - More complex implementation
 - Higher price point than some alternatives
 
+### 9. Envoy AI Gateway
+
+**Overview**: An open-source solution built on Envoy Proxy and Envoy Gateway for efficient, scalable AI integration at enterprise scale.
+
+**Key Features**:
+- Built on Envoy Proxy's high-performance, concurrent request handling architecture
+- Unified API interface for multiple LLM providers (AWS Bedrock, OpenAI, with Google Gemini coming soon)
+- Token-based rate limiting for granular cost control
+- Streamlined provider authentication management
+- Kubernetes-native deployment through Envoy Gateway
+
+**Best For**: Organizations seeking a high-performance, open-source solution for standardizing AI service access across multiple providers.
+
+**Limitations**:
+- Currently in early release with evolving capabilities
+- Requires Kubernetes for deployment
+
+### 10. Uber GenAI Gateway
+
+**Overview**: Uber's internal LLM gateway solution that mirrors the OpenAI API while providing support for both external and self-hosted models.
+
+**Key Features**:
+- OpenAI API-compatible interface for easier adoption and integration
+- Supports over 60 distinct LLM use cases across Uber's business units
+- Incorporates external providers (OpenAI, Vertex AI) alongside internal LLMs
+- Comprehensive features including authentication, caching, and observability
+- Written in Go for high-performance request handling
+
+**Best For**: Organizations looking to implement similar architectural patterns for their own internal AI gateway solutions.
+
+**Limitations**:
+- Not available as a commercial product (internal Uber solution)
+- Architectural patterns can be learned from but require implementation
+
 ### 8. Hugging Face Enterprise Gateway
 
 **Overview**: Enterprise-grade access layer for Hugging Face's vast model ecosystem.
@@ -248,6 +282,32 @@ Design your implementation with future growth in mind:
 - Authentication scalability
 - Cross-region deployments
 - High availability requirements
+
+## Emerging Open-Source and Enterprise Approaches to GenAI Gateways
+
+### The Rise of High-Performance Proxy-Based Solutions
+
+A notable trend in the GenAI gateway landscape is the emergence of high-performance, proxy-based solutions that address the scalability limitations of Python-based approaches. These newer solutions offer significant advantages for organizations operating AI at enterprise scale:
+
+- **Concurrent Request Handling**: Frameworks built on technologies like Envoy Proxy (C++) and Go provide substantially better performance for handling multiple simultaneous AI requests compared to Python-based implementations that are limited by the Global Interpreter Lock (GIL).
+
+- **Kubernetes-Native Deployment**: Modern gateway solutions are increasingly designed for cloud-native environments, with Kubernetes becoming the preferred deployment platform for ensuring scalability and resilience.
+
+- **Token-Based Rate Limiting**: Advanced solutions are moving beyond simple request counting to token-aware rate limiting, providing more precise cost control for large language model usage.
+
+The Tetrate and Bloomberg collaboration on Envoy AI Gateway exemplifies this approach, leveraging Envoy's proven performance in high-throughput environments to create a standardized interface for GenAI services. Similarly, Uber's internal GenAI Gateway, implemented in Go, demonstrates the enterprise pattern of creating unified access layers that abstract away provider differences.
+
+### Enterprise Implementation Patterns
+
+Uber's approach to their internal GenAI Gateway offers valuable insights for enterprises building similar solutions:
+
+- **API Compatibility**: By mirroring the OpenAI API interface, Uber simplified adoption across their engineering teams, allowing for consistent integration patterns regardless of the underlying model provider.
+
+- **Multi-Provider Support**: Their architecture accommodates both external commercial models and internal self-hosted models behind a unified interface, creating flexibility in model selection.
+
+- **Core Enterprise Features**: The implementation incorporates critical enterprise capabilities including robust authentication, performance monitoring, and caching mechanisms to optimize both cost and performance.
+
+These patterns illustrate how organizations are moving beyond simple API proxying to create comprehensive AI platforms that standardize access, governance, and observability across their AI initiatives.
 
 ## Emerging Trends in GenAI Gateways
 
