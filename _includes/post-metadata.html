@@ -2,21 +2,21 @@
 
 <div class="gray h6" style="display: block; width: 100%;">
   <div style="display: block; margin-bottom: 5px;">
-    <i class="fa fa-calendar"></i>
-    <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}">{{ include.post.date | date:"%b %d, %Y" }}</time>
+    <i class="fa fa-calendar" style="display: inline-block; vertical-align: middle;"></i>
+    <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}" style="display: inline-block; vertical-align: middle; margin-left: 3px;">{{ include.post.date | date:"%b %d, %Y" }}</time>
   </div>
   
   {% include inline-tags.html post=include.post %}
   
   {% if page.include_comments %}
   <div style="display: block; margin-top: 5px;">
-    <i class="fa fa-comments"></i>
+    <i class="fa fa-comments" style="display: inline-block; vertical-align: middle;"></i>
     {% if page.id == include.post.id %}
       {% assign comment_url_base = "" %}
     {% else %}
       {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
     {% endif %}
-    <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}">Comments</a>
+    <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}" style="display: inline-block; vertical-align: middle; margin-left: 3px;">Comments</a>
   </div>
   {% endif %}  
   {% if include.time_estimate %}
