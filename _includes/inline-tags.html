@@ -1,16 +1,18 @@
 {% if include.post.tags.size > 0 %}
-<div style="margin-top: 5px; display: block; clear: both;">
-  <i class="fa fa-tags" style="display: inline-block; vertical-align: middle; margin-right: 3px;"></i>
-  <span style="display: inline-block; vertical-align: middle;">
-    {% assign tag_count = include.post.tags.size %}
-    {% for tag in include.post.tags %}
-      {% if page.is_tags_page %}
-        {% assign tag_url_base = "" %}
-      {% else %}
-        {% assign tag_url_base = "/writing/tags/" %}
-      {% endif %}
-      <a href="{{ tag_url_base }}#{{ tag | uri_escape }}" style="color: #3498db; display: inline;">{{ tag }}</a>{% if forloop.index != tag_count %}<span style="display: inline; margin: 0 3px 0 1px;">,</span>{% endif %}
-    {% endfor %}
+<div style="margin-top: 5px; display: block; clear: both; line-height: 1.5;">
+  <span style="white-space: nowrap;">
+    <i class="fa fa-tags" aria-hidden="true" style="position: relative; top: 0;"></i>
+    <span style="position: relative; margin-left: 5px;">
+      {% assign tag_count = include.post.tags.size %}
+      {% for tag in include.post.tags %}
+        {% if page.is_tags_page %}
+          {% assign tag_url_base = "" %}
+        {% else %}
+          {% assign tag_url_base = "/writing/tags/" %}
+        {% endif %}
+        <a href="{{ tag_url_base }}#{{ tag | uri_escape }}" style="color: #3498db; display: inline;">{{ tag }}</a>{% if forloop.index != tag_count %}<span style="display: inline; margin: 0 3px 0 1px;">,</span>{% endif %}
+      {% endfor %}
+    </span>
   </span>
 </div>
 {% endif %}

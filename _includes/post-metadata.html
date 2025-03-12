@@ -1,22 +1,30 @@
 {% capture separator %}<span class="px1">|</span>{% endcapture %}
 
 <div class="gray h6" style="display: block; width: 100%;">
-  <div style="display: block; margin-bottom: 5px;">
-    <i class="fa fa-calendar" style="display: inline-block; vertical-align: middle;"></i>
-    <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}" style="display: inline-block; vertical-align: middle; margin-left: 3px;">{{ include.post.date | date:"%b %d, %Y" }}</time>
+  <div style="display: block; margin-bottom: 5px; line-height: 1.5;">
+    <span style="white-space: nowrap;">
+      <i class="fa fa-calendar" aria-hidden="true" style="position: relative; top: 0;"></i>
+      <span style="position: relative; margin-left: 5px;">
+        <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}">{{ include.post.date | date:"%b %d, %Y" }}</time>
+      </span>
+    </span>
   </div>
   
   {% include inline-tags.html post=include.post %}
   
   {% if page.include_comments %}
-  <div style="display: block; margin-top: 5px;">
-    <i class="fa fa-comments" style="display: inline-block; vertical-align: middle;"></i>
-    {% if page.id == include.post.id %}
-      {% assign comment_url_base = "" %}
-    {% else %}
-      {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
-    {% endif %}
-    <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}" style="display: inline-block; vertical-align: middle; margin-left: 3px;">Comments</a>
+  <div style="display: block; margin-top: 5px; line-height: 1.5;">
+    <span style="white-space: nowrap;">
+      <i class="fa fa-comments" aria-hidden="true" style="position: relative; top: 0;"></i>
+      <span style="position: relative; margin-left: 5px;">
+        {% if page.id == include.post.id %}
+          {% assign comment_url_base = "" %}
+        {% else %}
+          {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
+        {% endif %}
+        <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}">Comments</a>
+      </span>
+    </span>
   </div>
   {% endif %}  
   {% if include.time_estimate %}
