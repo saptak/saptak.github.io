@@ -1,0 +1,56 @@
+/* CSS to completely remove the hamburger menu */
+
+/* Remove the hamburger menu toggle */
+.nav-toggle {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
+/* Ensure navigation is always visible */
+.js .nav-collapse {
+  position: static !important;
+  overflow: visible !important;
+  clip: auto !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Make sure nav items are always visible */
+.nav-collapse.closed {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Force navigation to stay open */
+.nav-collapse {
+  display: flex !important;
+  justify-content: flex-end !important;
+  position: relative !important;
+  float: right !important;
+  width: auto !important;
+}
+
+/* Ensure menu items are always visible on mobile */
+@media screen and (max-width: 45em) {
+  .nav-collapse {
+    float: right !important;
+    clear: none !important;
+    position: relative !important;
+  }
+  
+  .nav-collapse ul li {
+    display: inline-block !important;
+  }
+  
+  .nav-collapse a {
+    border-top: none !important;
+    width: auto !important;
+  }
+}
