@@ -74,7 +74,7 @@ The ability to have a unified service discovery solution can be transformative. 
 
 ## Enterprise-Grade Service Mesh: Beyond Open Source
 
-For organizations running mission-critical workloads on Istio, the open-source version might not provide the level of support and enterprise features needed. This is where Tetrate Istio Subscription (TIS) comes into play, offering an enterprise-grade distribution with additional capabilities and support.
+For organizations running mission-critical workloads on Istio, Tetrate Istio Subscription (TIS) offers an enterprise-grade distribution with additional capabilities and support.
 
 TIS provides significant value for organizations running Istio on EKS, including long-term support, guaranteed availability, timely updates, and critical security patches. The distribution includes Istio builds that have been thoroughly tested for compatibility and performance on EKS, and even offers FIPS-compatible builds for organizations with stringent compliance requirements.
 
