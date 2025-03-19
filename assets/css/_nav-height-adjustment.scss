@@ -1,11 +1,10 @@
 // Nav height adjustment for larger logo
-header nav.clearfix, 
 nav.clearfix {
   // Keep the same total height but provide space for the larger logo
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important; // Ensure proper spacing between left and right
-  width: 100% !important; // Ensure nav takes full width
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // Ensure proper spacing between left and right
+  width: 100%; // Ensure nav takes full width
   
   // Make sure the border stays at the bottom
   &.border-bottom {
@@ -14,18 +13,18 @@ nav.clearfix {
   
   // Ensure vertical centering and proper justification
   > .left {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    float: none !important; // Override float property
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    float: none; // Override float property
   }
   
   > .right {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    margin-left: auto !important; // Push to the right
-    float: none !important; // Override float property
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto; // Push to the right
+    float: none; // Override float property
   }
   
   // Adjust button padding to compensate
@@ -37,23 +36,22 @@ nav.clearfix {
 
 // Fix for mobile view
 @media (max-width: 45em) {
-  header nav.clearfix,
   nav.clearfix {
     .left {
-      height: 45px !important;
-      display: flex !important;
-      align-items: center !important;
+      height: 45px;
+      display: flex;
+      align-items: center;
     }
     
     .right {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-end !important;
-      flex-wrap: wrap !important; // Allow wrapping on small screens
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap; // Allow wrapping on small screens
     }
     
     .nav-button {
-      margin-left: 0.25rem !important;
+      margin-left: 0.25rem;
     }
   }
 }

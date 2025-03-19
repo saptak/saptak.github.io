@@ -194,9 +194,9 @@ blockquote {
   cursor: pointer;
   padding: 0.3rem;
   margin-left: 0.5rem;
-  background-color: transparent !important; /* Transparent background with !important */
-  color: #000000 !important; /* Black icon in light mode with !important */
-  border: none !important;
+  background-color: transparent;
+  color: #000000;
+  border: none;
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
@@ -232,8 +232,8 @@ blockquote {
 
 // In dark mode, use white color
 [data-theme="dark"] .dark-mode-toggle {
-  background-color: transparent !important; /* Keep transparent in dark mode with !important */
-  color: #ffffff !important; /* White icon in dark mode with !important */
+  background-color: transparent;
+  color: #ffffff;
 }
 
 @media (max-width: 40em) {

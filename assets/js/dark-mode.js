@@ -35,19 +35,9 @@
       if (theme === 'dark') {
         lightModeLogo.style.display = 'none';
         darkModeLogo.style.display = 'inline-block';
-        // Update dark mode toggle color
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        if (darkModeToggle) {
-          darkModeToggle.style.color = '#ffffff';
-        }
       } else {
         lightModeLogo.style.display = 'inline-block';
         darkModeLogo.style.display = 'none';
-        // Update dark mode toggle color
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        if (darkModeToggle) {
-          darkModeToggle.style.color = '#000000';
-        }
       }
     }
   }
