@@ -5,8 +5,13 @@
   cursor: pointer;
   pointer-events: auto !important;
   
-  img, span {
+  img {
+    width: 50px; /* Increased logo size */
+    height: auto;
+    pointer-events: auto !important;
+  }
+  
+  span {
     pointer-events: auto !important;
   }
 }
-
