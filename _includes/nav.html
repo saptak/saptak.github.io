@@ -15,7 +15,7 @@
     </span>
     {% for nav_item in site.nav.main %}
       <span style="display: inline-block; vertical-align: middle;">
-        <a href="{{ nav_item[1] }}" class="button button-transparent py2 h6 nav-button caps{% if page.nav_item == nav_item[0] %} link-color{% endif %}" style="vertical-align: middle;">{{ nav_item[0] }}</a>
+        <a href="{{ nav_item[1] }}" class="button button-transparent py2 h6 nav-button caps{% if page.nav_item == nav_item[0] %} link-color{% endif %}" style="vertical-align: middle;">{{ nav_item[0] | upcase }}</a>
       </span>
     {% endfor %}
   </div>
