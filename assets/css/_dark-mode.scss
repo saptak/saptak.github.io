@@ -242,3 +242,20 @@ blockquote {
 [data-theme="dark"] img:not([src*=".svg"]) {
   filter: brightness(0.85) contrast(1.1);
 }
+
+.light-mode-logo {
+  display: inline-block;
+}
+
+.dark-mode-logo {
+  display: none;
+}
+
+body.dark-mode {
+  .light-mode-logo {
+    display: none;
+  }
+  .dark-mode-logo {
+    display: inline-block;
+  }
+}
