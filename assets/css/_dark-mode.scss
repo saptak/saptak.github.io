@@ -194,14 +194,14 @@ blockquote {
   cursor: pointer;
   padding: 0.3rem;
   margin-left: 0.5rem;
-  background-color: #000000; /* Black background in light mode */
-  color: #ffffff; /* White icon in light mode */
+  background-color: transparent; /* Transparent background */
+  color: #000000; /* Black icon in light mode */
   border: none;
   border-radius: 3px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background-color var(--transition-time);
+  transition: color var(--transition-time);
   line-height: 0;
   font-size: 0; /* Remove any potential text */
   
@@ -222,23 +222,18 @@ blockquote {
   }
   
   &:hover {
-    opacity: 0.9;
+    opacity: 0.7;
   }
   
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
   }
 }
 
-// In dark mode, reverse colors
+// In dark mode, use white color
 [data-theme="dark"] .dark-mode-toggle {
-  background-color: #ffffff; /* White background in dark mode */
-  color: #000000; /* Black icon in dark mode */
-  
-  &:focus {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
-  }
+  background-color: transparent; /* Keep transparent in dark mode */
+  color: #ffffff; /* White icon in dark mode */
 }
 
 @media (max-width: 40em) {

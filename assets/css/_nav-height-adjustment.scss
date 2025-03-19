@@ -3,16 +3,26 @@ nav.clearfix {
   // Keep the same total height but provide space for the larger logo
   display: flex;
   align-items: center;
+  justify-content: space-between; // Ensure proper spacing between left and right
+  width: 100%; // Ensure nav takes full width
   
   // Make sure the border stays at the bottom
   &.border-bottom {
     border-bottom-width: 1px !important;
   }
   
-  // Ensure vertical centering
-  .left, .right {
+  // Ensure vertical centering and proper justification
+  .left {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto; // Push to the right
   }
   
   // Adjust button padding to compensate
@@ -29,6 +39,17 @@ nav.clearfix {
       height: 45px;
       display: flex;
       align-items: center;
+    }
+    
+    .right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap; // Allow wrapping on small screens
+    }
+    
+    .nav-button {
+      margin-left: 0.25rem;
     }
   }
 }
