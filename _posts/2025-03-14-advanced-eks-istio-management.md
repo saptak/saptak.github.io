@@ -12,6 +12,8 @@ title: A Journey Through Advanced Kubernetes and Service Mesh Management on AWS
 
 # A Journey Through Advanced Kubernetes and Service Mesh Management on AWS
 
+![eks-istio-architecture.jpg](/assets/img/eks-istio-architecture.jpg)
+
 In the ever-evolving landscape of cloud computing, organizations face mounting challenges as they transition from monolithic applications to distributed microservices architectures. This shift, while bringing unprecedented flexibility and scalability, has introduced new complexities in how we manage, secure, and observe our applications. Let's explore some cutting-edge approaches for mastering these challenges on Amazon Web Services.
 
 ## The Evolution of Kubernetes Management
