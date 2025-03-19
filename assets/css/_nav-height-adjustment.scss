@@ -1,0 +1,34 @@
+// Nav height adjustment for larger logo
+nav.clearfix {
+  // Keep the same total height but provide space for the larger logo
+  display: flex;
+  align-items: center;
+  
+  // Make sure the border stays at the bottom
+  &.border-bottom {
+    border-bottom-width: 1px !important;
+  }
+  
+  // Ensure vertical centering
+  .left, .right {
+    display: flex;
+    align-items: center;
+  }
+  
+  // Adjust button padding to compensate
+  .button.py2 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+}
+
+// Fix for mobile view
+@media (max-width: 45em) {
+  nav.clearfix {
+    .left {
+      height: 45px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

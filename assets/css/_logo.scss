@@ -4,14 +4,24 @@
   align-items: center;
   cursor: pointer;
   pointer-events: auto !important;
+  overflow: visible; /* Allows logo to visually extend outside without breaking layout */
   
   img {
-    width: 50px; /* Increased logo size */
-    height: auto;
+    width: auto; /* Let height control the scaling */
+    height: 32px; /* Set standard height for logos */
     pointer-events: auto !important;
+    transform: translateY(-1px); /* Slight vertical adjustment */
+    max-width: none; /* Prevent max-width restrictions */
   }
   
   span {
     pointer-events: auto !important;
   }
+}
+
+// Logo-specific styles
+.light-mode-logo, .dark-mode-logo {
+  height: 32px;
+  vertical-align: middle;
+  transform: translateY(-1px);
 }
