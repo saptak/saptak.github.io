@@ -12,8 +12,6 @@ title: A Journey Through Advanced Kubernetes and Service Mesh Management on AWS
 
 # A Journey Through Advanced Kubernetes and Service Mesh Management on AWS
 
-![eks-istio-architecture.jpg](/assets/img/eks-istio-architecture.jpg)
-
 In the ever-evolving landscape of cloud computing, organizations face mounting challenges as they transition from monolithic applications to distributed microservices architectures. This shift, while bringing unprecedented flexibility and scalability, has introduced new complexities in how we manage, secure, and observe our applications. Let's explore some cutting-edge approaches for mastering these challenges on Amazon Web Services.
 
 ## The Evolution of Kubernetes Management
@@ -35,6 +33,8 @@ The combination of Auto Mode and Karpenter provides the best of both worlds—AW
 This approach isn't without trade-offs. Direct access to nodes via SSH or SSM is disallowed, customization of the default AMI isn't permitted, and there's an additional management fee associated with using Auto Mode. However, for most organizations, these limitations are far outweighed by the operational benefits gained.
 
 ## Securing the Mesh: Building Controlled Pathways
+
+![eks-istio-architecture.jpg](/assets/img/eks-istio-architecture.jpg)
 
 As applications become more distributed, securing communication between services becomes increasingly critical. This is where service mesh technologies like Istio play a vital role, providing a dedicated infrastructure layer for managing service-to-service communication. However, deploying Istio on EKS requires careful consideration, especially when it comes to controlling how services communicate with the outside world.
 
