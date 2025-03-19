@@ -194,8 +194,8 @@ blockquote {
   cursor: pointer;
   padding: 0.3rem;
   margin-left: 0.5rem;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+  background-color: #000000; /* Black background in light mode */
+  color: #ffffff; /* White icon in light mode */
   border: none;
   border-radius: 3px;
   display: inline-flex;
@@ -219,7 +219,6 @@ blockquote {
     width: 1.2rem;
     height: 1.2rem;
     fill: currentColor;
-    filter: grayscale(100%); /* Black and white icon */
   }
   
   &:hover {
@@ -228,7 +227,17 @@ blockquote {
   
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(77, 163, 255, 0.5);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+}
+
+// In dark mode, reverse colors
+[data-theme="dark"] .dark-mode-toggle {
+  background-color: #ffffff; /* White background in dark mode */
+  color: #000000; /* Black icon in dark mode */
+  
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
   }
 }
 
