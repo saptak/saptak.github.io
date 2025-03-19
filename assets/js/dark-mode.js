@@ -26,6 +26,20 @@
     document.documentElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
     updateToggleButton(theme === 'dark');
+    
+    // Toggle logo visibility based on theme
+    const lightModeLogo = document.querySelector('.light-mode-logo');
+    const darkModeLogo = document.querySelector('.dark-mode-logo');
+    
+    if (lightModeLogo && darkModeLogo) {
+      if (theme === 'dark') {
+        lightModeLogo.style.display = 'none';
+        darkModeLogo.style.display = 'inline-block';
+      } else {
+        lightModeLogo.style.display = 'inline-block';
+        darkModeLogo.style.display = 'none';
+      }
+    }
   }
 
   // Check for saved theme preference or use the system preference

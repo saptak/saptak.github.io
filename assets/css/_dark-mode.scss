@@ -244,6 +244,7 @@ blockquote {
   filter: brightness(0.85) contrast(1.1);
 }
 
+// Logo toggle styles 
 .light-mode-logo {
   display: inline-block;
 }
@@ -252,7 +253,8 @@ blockquote {
   display: none;
 }
 
-body.dark-mode {
+// Support both data-theme and body.dark-mode approaches
+[data-theme="dark"], body.dark-mode {
   .light-mode-logo {
     display: none;
   }
