@@ -12,6 +12,7 @@
     pointer-events: auto !important;
     transform: translateY(-1px); /* Slight vertical adjustment */
     max-width: none; /* Prevent max-width restrictions */
+    object-fit: contain; /* Preserve aspect ratio */
   }
   
   span {
@@ -22,6 +23,9 @@
 // Logo-specific styles
 .light-mode-logo, .dark-mode-logo {
   height: 32px;
+  width: auto;
   vertical-align: middle;
   transform: translateY(-1px);
+  object-fit: contain;
+  aspect-ratio: auto; /* Maintain natural aspect ratio */
 }
