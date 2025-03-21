@@ -314,15 +314,14 @@ spec:
         value: /v1/planning
 
 ---
-author: Saptak
-categories: cloud-native ai-security generative-ai
-date: 2025-03-20 09:00:00 -0500
-header_image_path: /assets/img/blog/headers/2025-03-20-securing-optimizing-multi-agent-ai-with-envoy-gateway.jpg
-image_credit: Photo by Ales Nesetril on Unsplash
-layout: post
-tags: envoy-gateway multi-agent-ai llm security governance cost-optimization
-thumbnail_path: /assets/img/blog/thumbnails/2025-03-20-securing-optimizing-multi-agent-ai-with-envoy-gateway.jpg
-title: Securing and Optimizing Multi-Agent Generative AI Systems with Envoy AI Gateway
+# Define AI Service Backends
+apiVersion: ai.gateway.envoyproxy.io/v1alpha1
+kind: AIServiceBackend
+metadata:
+  name: reasoning-agent
+spec:
+  provider: openai
+  endpoint: https://api.openai.com
 ---
 apiVersion: ai.gateway.envoyproxy.io/v1alpha1
 kind: AIServiceBackend
