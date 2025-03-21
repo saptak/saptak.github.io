@@ -43,11 +43,25 @@
     
     // Update Mermaid theme if Mermaid is loaded
     if (typeof mermaid !== 'undefined') {
+      // Update theme
       mermaid.initialize({
         startOnLoad: false,
         theme: theme === 'dark' ? 'dark' : 'default'
       });
-      // Re-render all Mermaid diagrams
+      
+      // Clean up and re-render all Mermaid diagrams
+      document.querySelectorAll('.mermaid').forEach(function(el) {
+        // Store the original diagram definition
+        var diagramDef = el.textContent || el.innerText;
+        
+        // Clear existing content (to avoid duplicate rendering)
+        el.innerHTML = diagramDef;
+        
+        // Mark as not rendered
+        el.removeAttribute('data-processed');
+      });
+      
+      // Re-render all diagrams
       mermaid.run();
     }
   }

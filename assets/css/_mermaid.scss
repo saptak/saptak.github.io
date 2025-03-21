@@ -1,0 +1,67 @@
+// Mermaid diagram styles
+.mermaid {
+  margin: 1.5rem 0;
+  text-align: center;
+  overflow-x: auto;
+  
+  svg {
+    max-width: 100%;
+    height: auto !important;
+  }
+  
+  .label {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+  }
+  
+  .node rect,
+  .node circle,
+  .node ellipse,
+  .node polygon,
+  .node path {
+    fill: var(--bg-secondary-color, #f6f8fa);
+    stroke: var(--border-color, #999);
+  }
+  
+  .edgePath .path {
+    stroke: var(--text-color, #333);
+  }
+  
+  .edgeLabel {
+    background-color: var(--bg-color, #fff);
+    color: var(--text-color, #333);
+  }
+  
+  .cluster rect {
+    fill: var(--bg-secondary-color, #f6f8fa);
+    stroke: var(--border-color, #999);
+  }
+}
+
+// Dark mode specific styles
+[data-theme="dark"] {
+  .mermaid {
+    .node rect,
+    .node circle,
+    .node ellipse,
+    .node polygon,
+    .node path {
+      fill: var(--bg-secondary-color, #2a2a2a);
+      stroke: var(--border-color, #777);
+    }
+    
+    .edgePath .path {
+      stroke: var(--text-color, #ddd);
+    }
+    
+    .edgeLabel {
+      background-color: var(--bg-color, #1e1e1e);
+      color: var(--text-color, #ddd);
+    }
+    
+    .cluster rect {
+      fill: var(--bg-secondary-color, #2a2a2a);
+      stroke: var(--border-color, #777);
+    }
+  }
+}

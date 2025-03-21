@@ -12,10 +12,27 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mermaid@10.8.0/dist/mermaid.min.js"></script>
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Mermaid
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false, // We'll manually render diagrams
       theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
     });
+    
+    // Find all code blocks with language-mermaid class and render them
+    document.querySelectorAll('pre code.language-mermaid').forEach(function(codeBlock) {
+      // Create a div to replace the code block
+      var div = document.createElement('div');
+      div.className = 'mermaid';
+      div.innerHTML = codeBlock.textContent;
+      div.style.backgroundColor = 'transparent';
+      
+      // Replace the <pre><code> with the mermaid div
+      var pre = codeBlock.parentNode;
+      pre.parentNode.replaceChild(div, pre);
+    });
+    
+    // Run the renderer
+    mermaid.run();
   });
 </script>
 {% include disqus-scripts.html %}
