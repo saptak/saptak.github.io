@@ -40,6 +40,16 @@
         darkModeLogo.style.display = 'none';
       }
     }
+    
+    // Update Mermaid theme if Mermaid is loaded
+    if (typeof mermaid !== 'undefined') {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: theme === 'dark' ? 'dark' : 'default'
+      });
+      // Re-render all Mermaid diagrams
+      mermaid.run();
+    }
   }
 
   // Check for saved theme preference or use the system preference
