@@ -14,7 +14,7 @@ title: Securing and Optimizing Multi-Agent Generative AI Systems with Envoy AI G
 
 ## Introduction
 
-In today's rapidly evolving AI landscape, organizations are increasingly adopting multi-agent generative AI systems to solve complex business problems. These systems, composed of multiple specialized AI agents working together, offer enhanced capabilities but also introduce new challenges in security, governance, and cost management.
+Organizations are increasingly adopting multi-agent generative AI systems to solve complex business problems. These systems, composed of multiple specialized AI agents working together, offer enhanced capabilities but also introduce new challenges in security, governance, and cost management.
 
 Envoy AI Gateway, an open-source project built on the proven Envoy Proxy and Envoy Gateway technology, provides a robust solution for managing traffic between application clients and generative AI services. Released in February 2025 as a collaborative effort between Tetrate, Bloomberg, and the Cloud Native Computing Foundation (CNCF) community, Envoy AI Gateway is designed to address the unique challenges of AI traffic management.
 

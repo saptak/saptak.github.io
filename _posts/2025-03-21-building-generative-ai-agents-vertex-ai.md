@@ -19,7 +19,7 @@ title: Building Generative AI Agents with Vertex AI Agent Builder
 
 # Building Generative AI Agents with Vertex AI Agent Builder
 
-In today's rapidly evolving technological landscape, Generative AI agents are transforming how businesses interact with customers and manage internal operations. These intelligent virtual assistants can understand natural language, respond to complex queries, and execute tasks with remarkable efficiency. This blog post will guide you through the process of creating your own AI agent using Google Cloud's Vertex AI Agent Builder.
+Generative AI agents are transforming how businesses interact with customers and manage internal operations. These intelligent virtual assistants can understand natural language, respond to complex queries, and execute tasks with remarkable efficiency. This blog post will guide you through the process of creating your own AI agent using Google Cloud's Vertex AI Agent Builder.
 
 ## What Are Generative AI Agents?
 
