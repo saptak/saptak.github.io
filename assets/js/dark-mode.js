@@ -49,20 +49,36 @@
         theme: theme === 'dark' ? 'dark' : 'default'
       });
       
-      // Clean up and re-render all Mermaid diagrams
-      document.querySelectorAll('.mermaid').forEach(function(el) {
-        // Store the original diagram definition
-        var diagramDef = el.textContent || el.innerText;
+      try {
+        // Clean up the existing diagrams more thoroughly
+        document.querySelectorAll('.mermaid').forEach(function(el) {
+          // Get the original diagram definition
+          var diagramDef = el.getAttribute('data-original-code') || el.textContent || el.innerText;
+          
+          // Store the original code if not already stored
+          if (!el.getAttribute('data-original-code')) {
+            el.setAttribute('data-original-code', diagramDef);
+          }
+          
+          // Create a new div to replace the old one
+          var newDiv = document.createElement('div');
+          newDiv.className = 'mermaid';
+          newDiv.setAttribute('data-original-code', diagramDef);
+          newDiv.textContent = diagramDef;
+          
+          // Replace the old element with the new one
+          if (el.parentNode) {
+            el.parentNode.replaceChild(newDiv, el);
+          }
+        });
         
-        // Clear existing content (to avoid duplicate rendering)
-        el.innerHTML = diagramDef;
-        
-        // Mark as not rendered
-        el.removeAttribute('data-processed');
-      });
-      
-      // Re-render all diagrams
-      mermaid.run();
+        // Re-render all diagrams after a small delay
+        setTimeout(function() {
+          mermaid.run();
+        }, 50);
+      } catch (e) {
+        console.error('Error updating Mermaid diagrams:', e);
+      }
     }
   }
 

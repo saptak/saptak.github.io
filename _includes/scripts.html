@@ -18,13 +18,19 @@
       theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
     });
     
-    // Find all code blocks with language-mermaid class and render them
+    // Find all code blocks with language-mermaid class and convert them
     document.querySelectorAll('pre code.language-mermaid').forEach(function(codeBlock) {
+      // Save the original code
+      var originalCode = codeBlock.textContent;
+      
       // Create a div to replace the code block
       var div = document.createElement('div');
       div.className = 'mermaid';
-      div.innerHTML = codeBlock.textContent;
+      div.innerHTML = originalCode;
       div.style.backgroundColor = 'transparent';
+      
+      // Store the original code for potential re-renders
+      div.setAttribute('data-original-code', originalCode);
       
       // Replace the <pre><code> with the mermaid div
       var pre = codeBlock.parentNode;
@@ -32,7 +38,11 @@
     });
     
     // Run the renderer
-    mermaid.run();
+    try {
+      mermaid.run();
+    } catch (e) {
+      console.error('Error initializing Mermaid diagrams:', e);
+    }
   });
 </script>
 {% include disqus-scripts.html %}
