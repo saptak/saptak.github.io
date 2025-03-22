@@ -1,11 +1,23 @@
 ---
-layout: post
-title: "Building Intelligent Agents with Semantic Kernel: A Comprehensive Guide"
+categories:
+- AI
+- Development
 date: 2025-03-22
-categories: [AI, Development]
-tags: [semantic-kernel, agents, dotnet, azure, openai]
+description: Learn how to build intelligent multi-agent systems using Microsoft's
+  Semantic Kernel framework and Azure services to create powerful, collaborative AI
+  applications.
+header_image_path: /assets/img/blog/headers/2025-03-22-building-intelligent-agents-with-semantic-kernel.jpg
 image: /assets/images/semantic-kernel-agents-header.jpg
-description: "Learn how to build intelligent multi-agent systems using Microsoft's Semantic Kernel framework and Azure services to create powerful, collaborative AI applications."
+image_credit: Photo by Patrick Lindenberg on Unsplash
+layout: post
+tags:
+- semantic-kernel
+- agents
+- dotnet
+- azure
+- openai
+thumbnail_path: /assets/img/blog/thumbnails/2025-03-22-building-intelligent-agents-with-semantic-kernel.jpg
+title: 'Building Intelligent Agents with Semantic Kernel: A Comprehensive Guide'
 ---
 
 # Building Intelligent Agents with Semantic Kernel: A Comprehensive Guide
