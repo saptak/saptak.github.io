@@ -1,9 +1,14 @@
 ---
-layout: post
-title: "Building Advanced AI Agent Systems: From Fundamentals to Scalable Architecture"
-description: "A comprehensive guide to developing sophisticated AI agent systems that can execute complex tasks through deep thought, research, tool-calling, and distributed operations."
-date: 2025-03-21
 categories: ai agents langchain langgraph
+date: 2025-03-21
+description: A comprehensive guide to developing sophisticated AI agent systems that
+  can execute complex tasks through deep thought, research, tool-calling, and distributed
+  operations.
+header_image_path: /assets/img/blog/headers/2025-03-21-building-advanced-ai-agent-systems.jpg
+image_credit: Photo by Maxim Hopman on Unsplash
+layout: post
+thumbnail_path: /assets/img/blog/thumbnails/2025-03-21-building-advanced-ai-agent-systems.jpg
+title: 'Building Advanced AI Agent Systems: From Fundamentals to Scalable Architecture'
 ---
 
 ## Introduction: The Rising Bar for AI-Powered Agents
