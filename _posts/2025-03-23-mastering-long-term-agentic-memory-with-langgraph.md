@@ -504,6 +504,14 @@ Based on real-world implementations and the latest research, here are some best 
 
 8. **Add human-in-the-loop capability**: Allow users to review, correct, or delete memories to ensure accuracy and build trust.
 
+**LangGraph Memory Store Types**
+
+| Store Type | Description | Use Cases | Persistence |
+|------------|-------------|-----------|-------------|
+| `InMemoryStore` | In-memory storage for development and testing | Quick prototyping, non-critical data | Non-persistent |
+| Vector Database | External database for semantic search using vector embeddings | Scalable knowledge retrieval, semantic search | Persistent |
+| Potential Custom Stores | Developer-defined storage solutions tailored to specific application needs | Specialized data storage or retrieval needs | Depends on implementation |
+
 ## Conclusion
 
 Long-term memory transforms AI agents from simple responders to truly helpful assistants that learn, adapt, and personalize over time. By implementing semantic, episodic, and procedural memory in your LangGraph-based agents, you can create experiences that feel more human, more helpful, and more intelligent.
