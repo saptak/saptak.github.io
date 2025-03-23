@@ -504,7 +504,7 @@ Based on real-world implementations and the latest research, here are some best 
 
 8. **Add human-in-the-loop capability**: Allow users to review, correct, or delete memories to ensure accuracy and build trust.
 
-**LangGraph Memory Store Types**
+### LangGraph Memory Store Types
 
 | Store Type | Description | Use Cases | Persistence |
 |------------|-------------|-----------|-------------|
