@@ -508,7 +508,7 @@ Based on real-world implementations and the latest research, here are some best 
 
 | Store Type | Description | Use Cases | Persistence |
 |------------|-------------|-----------|-------------|
-| `InMemoryStore` | In-memory storage for development and testing | Quick prototyping, non-critical data | Non-persistent |
+| InMemoryStore | In-memory storage for development and testing | Quick prototyping, non-critical data | Non-persistent |
 | Vector Database | External database for semantic search using vector embeddings | Scalable knowledge retrieval, semantic search | Persistent |
 | Potential Custom Stores | Developer-defined storage solutions tailored to specific application needs | Specialized data storage or retrieval needs | Depends on implementation |
 
