@@ -3,7 +3,7 @@ categories:
 - AI
 - Development
 - Langgraph
-date: 2025-03-23
+date: 2025-03-23 07:09:33 -0700
 description: A deep dive into why, how, and when to use different types of long-term
   memory in AI agents built with Langgraph.
 header_image_path: /assets/img/blog/headers/2025-03-23-mastering-long-term-agentic-memory-with-langgraph.jpg
