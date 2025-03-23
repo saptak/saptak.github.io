@@ -3,6 +3,13 @@
 # Make the script executable
 chmod +x "$0"
 
+# Get commit message from arguments or prompt for one
+if [ $# -eq 0 ]; then
+  read -p "Enter commit message: " COMMIT_MESSAGE
+else
+  COMMIT_MESSAGE="$*"
+fi
+
 # Change to the git repository directory
 cd /Users/saptak/code/saptak.github.io
 
@@ -16,10 +23,11 @@ git add .
 
 # Commit the changes
 echo "Committing changes..."
-git commit -m "Direct fix: replace nav markup with simple HTML"
+git commit -m "$COMMIT_MESSAGE"
 
 # Push to GitHub
 echo "Pushing to GitHub..."
 git push origin master
 
 echo "Changes published to GitHub!"
+echo "GitHub Actions will now build and deploy your site."
