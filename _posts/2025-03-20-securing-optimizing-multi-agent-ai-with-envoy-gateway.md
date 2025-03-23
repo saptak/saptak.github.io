@@ -58,6 +58,21 @@ Envoy AI Gateway is an open-source project that leverages Envoy Gateway to manag
 - **Failover Management**: Automatic rerouting in case of service disruptions
 - **Observability**: Comprehensive monitoring and logging capabilities
 
+### Currently Supported Providers
+
+Envoy AI Gateway currently supports integration with:
+
+- **OpenAI** - Connect to OpenAI's GPT models
+- **AWS Bedrock** - Access AWS Bedrock's suite of foundation models
+
+More providers are planned for future releases. The project recommends following security best practices when configuring providers, including:
+
+- Storing credentials securely using Kubernetes secrets
+- Never committing API keys or credentials to version control
+- Regularly rotating credentials
+- Using the principle of least privilege when setting up access
+- Monitoring usage and setting up appropriate rate limits
+
 ## Architecture of Multi-Agent Systems with Envoy AI Gateway
 
 Let's explore how Envoy AI Gateway fits into a multi-agent generative AI architecture:
@@ -228,6 +243,8 @@ graph LR
 
 This comprehensive visibility enables organizations to enforce governance policies effectively while gaining insights into system usage patterns.
 
+> **Note on API Changes**: The token rate limiting implementation in Envoy AI Gateway has evolved. While earlier versions used a `TokenRateLimitPolicy` CRD, the current implementation leverages Envoy Gateway's Global Rate Limit API through the `BackendTrafficPolicy` resource and token tracking in the `AIGatewayRoute` resource.
+
 ## Cost Optimization in Multi-Agent Systems
 
 One of the significant challenges in multi-agent systems is managing costs, especially when different agents might use different LLM providers with varying pricing models. Envoy AI Gateway offers several mechanisms for cost optimization:
@@ -240,20 +257,25 @@ sequenceDiagram
     participant Gateway as Envoy AI Gateway
     participant LLM as LLM Provider
     
-    App->>Gateway: Request (with prompt)
+    App->>Gateway: Request (with prompt and user ID)
     Gateway->>Gateway: Token estimation
-    Gateway->>Gateway: Check rate limits
+    Gateway->>Gateway: Check rate limits for user and model
     Gateway->>LLM: Forward request (if within limits)
-    LLM->>Gateway: Response
-    Gateway->>Gateway: Update token usage
+    LLM->>Gateway: Response with token usage
+    Gateway->>Gateway: Extract and store token usage
     Gateway->>App: Return response
 ```
 
-Envoy AI Gateway implements token-based rate limiting, which is more cost-effective than simple request-based limiting for generative AI services. This approach allows organizations to:
+Envoy AI Gateway implements token-based rate limiting by automatically extracting token usage from LLM responses. Unlike simple request-based rate limiting, this approach makes cost management more accurate and effective for generative AI services.
 
-1. **Set token budgets** for different teams, projects, or individual agents
-2. **Prevent unexpected cost spikes** due to large or inefficient prompts
-3. **Allocate resources efficiently** based on business priorities
+Key benefits of token-based rate limiting include:
+
+1. **Set model-specific token budgets** for different teams, projects, or individual agents, accounting for the varying costs of different models
+2. **Prevent unexpected cost spikes** due to large or inefficient prompts by monitoring actual token usage
+3. **Track different types of token usage** (input tokens, output tokens, or total tokens) to implement more nuanced cost control strategies
+4. **Create custom token calculation formulas** using CEL expressions to weight different types of usage based on their cost impact
+
+The check for whether the total count has reached the limit happens during each request. When a request is received, AI Gateway checks if processing this request would exceed the configured token limit. If the limit would be exceeded, the request is rejected with a 429 status code. If within the limit, the request is processed and its token usage is counted towards the total.
 
 ### Unified API and Provider Selection
 
@@ -271,15 +293,65 @@ Let's walk through a practical implementation of Envoy AI Gateway for multi-agen
 
 ```bash
 # Install Envoy Gateway
-kubectl apply -f https://github.com/envoyproxy/gateway/releases/download/latest/install.yaml
+helm upgrade -i eg oci://docker.io/envoyproxy/gateway-helm \
+  --version v0.0.0-latest \
+  --namespace envoy-gateway-system \
+  --create-namespace
 
 # Install Envoy AI Gateway
-kubectl apply -f https://github.com/envoyproxy/ai-gateway/releases/download/latest/install.yaml
+helm upgrade -i aieg oci://docker.io/envoyproxy/ai-gateway-helm \
+  --version v0.0.0-latest \
+  --namespace envoy-ai-gateway-system \
+  --create-namespace
+
+# Deploy a basic configuration
+kubectl apply -f https://raw.githubusercontent.com/envoyproxy/ai-gateway/main/examples/basic/basic.yaml
+
+# Verify installations are ready
+kubectl wait --timeout=2m -n envoy-gateway-system deployment/envoy-gateway --for=condition=Available
+kubectl wait --timeout=2m -n envoy-ai-gateway-system deployment/ai-gateway-controller --for=condition=Available
 ```
+
+### Configuring and Testing the Gateway
+
+First, let's see how to set up and test a basic gateway:
+
+```bash
+# Deploy a basic configuration
+kubectl apply -f https://raw.githubusercontent.com/envoyproxy/ai-gateway/main/examples/basic/basic.yaml
+
+# Wait for the Gateway pod to be ready
+kubectl wait pods --timeout=2m \
+  -l gateway.envoyproxy.io/owning-gateway-name=envoy-ai-gateway-basic \
+  -n envoy-gateway-system \
+  --for=condition=Ready
+
+# Configure Gateway URL
+export GATEWAY_URL=$(kubectl get gateway/envoy-ai-gateway-basic -o jsonpath='{.status.addresses[0].value}')
+
+# If EXTERNAL-IP is <pending>, use port forwarding instead:
+# export GATEWAY_URL="http://localhost:8080"
+# kubectl port-forward -n envoy-gateway-system svc/[service-name] 8080:80
+
+# Make a test request
+curl -H "Content-Type: application/json" \
+  -d '{
+      "model": "some-cool-self-hosted-model",
+      "messages": [
+          {
+              "role": "system",
+              "content": "Hi."
+          }
+      ]
+  }' \
+  $GATEWAY_URL/v1/chat/completions
+```
+
+This will return a test response from the mock backend. For real AI model integration, you'll need to connect providers as shown in the next section.
 
 ### Configuring Multi-Agent Access
 
-Below is an example configuration for a multi-agent system:
+Now let's look at an example configuration for a multi-agent system:
 
 ```yaml
 # Define an AI Gateway Route
@@ -360,23 +432,87 @@ spec:
 
 ### Setting Up Token-Based Rate Limiting
 
+Envoy AI Gateway provides token-based rate limiting for AI traffic through integration with Envoy Gateway's Global Rate Limit API. This allows organizations to control costs by limiting token usage rather than just request counts.
+
+First, configure token tracking in your `AIGatewayRoute`:
+
 ```yaml
-# Define Rate Limit Policy
 apiVersion: ai.gateway.envoyproxy.io/v1alpha1
-kind: TokenRateLimitPolicy
+kind: AIGatewayRoute
 metadata:
-  name: token-limits
+  name: multi-agent-route
+spec:
+  # Other settings...
+  llmRequestCosts:
+    - metadataKey: llm_input_token
+      type: InputToken    # Counts tokens in the request
+    - metadataKey: llm_output_token
+      type: OutputToken   # Counts tokens in the response
+    - metadataKey: llm_total_token
+      type: TotalToken    # Tracks combined usage
+```
+
+Then, configure actual rate limits using a `BackendTrafficPolicy`:
+
+```yaml
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: BackendTrafficPolicy
+metadata:
+  name: model-specific-token-limit-policy
+  namespace: default
 spec:
   targetRefs:
-  - name: multi-agent-route
-  limits:
-  - tokens: 1000000  # 1M tokens
-    period: hour
-    scope: namespace
-  - tokens: 10000000  # 10M tokens
-    period: day
-    scope: namespace
+    - name: envoy-ai-gateway
+      kind: Gateway
+      group: gateway.networking.k8s.io
+  rateLimit:
+    type: Global
+    global:
+      rules:
+        # Rate limit rule for expensive models
+        - clientSelectors:
+            - headers:
+                - name: x-user-id
+                  type: Distinct
+                - name: x-ai-eg-model
+                  type: Exact
+                  value: gpt-4
+          limit:
+            requests: 1000000    # 1M tokens per hour
+            unit: Hour
+          cost:
+            request:
+              from: Number
+              number: 0      # Set to 0 so only token usage counts
+            response:
+              from: Metadata
+              metadata:
+                namespace: io.envoy.ai_gateway
+                key: llm_total_token    # Uses total tokens from responses
+        
+        # Rate limit rule for less expensive models
+        - clientSelectors:
+            - headers:
+                - name: x-user-id
+                  type: Distinct
+                - name: x-ai-eg-model
+                  type: Exact
+                  value: gpt-3.5-turbo
+          limit:
+            requests: 10000000    # 10M tokens per day
+            unit: Day
+          cost:
+            request:
+              from: Number
+              number: 0
+            response:
+              from: Metadata
+              metadata:
+                namespace: io.envoy.ai_gateway
+                key: llm_total_token
 ```
+
+This configuration enables you to set different token limits for different models based on their costs, helping to prevent unexpected expenses while allowing flexibility with more cost-effective models.
 
 ## Monitoring and Observability
 
@@ -432,9 +568,27 @@ By leveraging Envoy AI Gateway in your multi-agent architecture, you can:
 
 As the AI landscape continues to evolve, open-source projects like Envoy AI Gateway will play a crucial role in making advanced AI architectures more accessible, secure, and cost-effective for organizations of all sizes.
 
+If you run into any issues while implementing Envoy AI Gateway in your multi-agent system, you can get help from the community through the [Envoy AI Gateway Slack channel](https://envoyproxy.slack.com/archives/C07Q4N24VAA) or by filing an issue on [GitHub](https://github.com/envoyproxy/ai-gateway/issues).
+
+## Summary of Updates (March 2025)
+
+This blog post has been updated with the latest information from the Envoy AI Gateway documentation:
+
+1. **Installation and Setup**: Updated with the latest Helm-based installation commands, which replace the previous kubectl-based approach.
+
+2. **Token Rate Limiting**: The token rate limiting implementation in Envoy AI Gateway has evolved. While earlier versions used a `TokenRateLimitPolicy` CRD, the current implementation leverages Envoy Gateway's Global Rate Limit API through the `BackendTrafficPolicy` resource and token tracking in the `AIGatewayRoute` resource.
+
+3. **Provider Support**: Added details about the currently supported providers (OpenAI and AWS Bedrock) and how credentials are managed securely.
+
+4. **Usage-Based Rate Limiting**: Added details on the token tracking capabilities that include InputToken, OutputToken, TotalToken, and custom CEL expressions for advanced token calculations.
+
+5. **Testing Gateway**: Added instructions for configuring and testing a basic gateway deployment, including how to handle port forwarding when EXTERNAL-IP is pending.
+
 ## Additional Resources
 
 - [Envoy AI Gateway GitHub Repository](https://github.com/envoyproxy/ai-gateway)
 - [Envoy AI Gateway Documentation](https://aigateway.envoyproxy.io/)
-- [Getting Started Guide](https://aigateway.envoyproxy.io/getting-started/)
-- [Join the Envoy Community](https://envoyproxy.io/community)
+- [Getting Started Guide](https://aigateway.envoyproxy.io/docs/getting-started/)
+- [Weekly Community Meetings](https://docs.google.com/document/d/10e1sfsF-3G3Du5nBHGmLjXw5GVMqqCvFDqp_O65B0_w/edit?tab=t.0) (Thursdays)
+- [Join the Envoy AI Gateway Slack](https://envoyproxy.slack.com/archives/C07Q4N24VAA)
+- [GitHub Discussions](https://github.com/envoyproxy/ai-gateway/issues?q=is%3Aissue+label%3Adiscussion)
