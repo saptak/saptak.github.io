@@ -22,6 +22,27 @@ title: Long-Term Agentic Memory with LangGraph
 
 Imagine having a personal assistant who forgets your preferences, past conversations, and previous instructions each time you interact with them. Not very helpful, right? This is precisely the challenge that long-term memory in AI agents aims to solve. In this comprehensive guide, we'll explore how to implement effective long-term memory in LangGraph-powered agents, focusing on the three primary types of memory: semantic, episodic, and procedural.
 
+```mermaid
+flowchart TD
+    A[User Input] --> B[Agent with Long-Term Memory]
+    B --> C[Response]
+    
+    subgraph "Memory Systems"
+        D[Semantic Memory<br>Facts & Knowledge]
+        E[Episodic Memory<br>Past Experiences]
+        F[Procedural Memory<br>Task Knowledge]
+    end
+    
+    B <--> D
+    B <--> E
+    B <--> F
+    
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style D fill:#bbf,stroke:#333,stroke-width:1px
+    style E fill:#bfb,stroke:#333,stroke-width:1px
+    style F fill:#ffb,stroke:#333,stroke-width:1px
+```
+
 ## Why Long-Term Memory Matters in Agents
 
 AI agents without memory are like goldfish—they forget everything between conversations. This limitation fundamentally restricts what they can accomplish and how helpful they can be. Memory is what enables agents to:
@@ -37,6 +58,34 @@ LangGraph, a powerful framework for building agentic workflows, provides robust 
 ## Understanding the Three Types of Memory
 
 Human memory systems have been a source of inspiration for implementing memory in AI agents. The three primary types we'll focus on are:
+
+```mermaid
+classDiagram
+    class LongTermMemory {
+        +retrieve()
+        +store()
+    }
+    class SemanticMemory {
+        +facts: dict
+        +storeFact(subject, predicate, object)
+        +retrieveRelevantFacts(query)
+    }
+    class EpisodicMemory {
+        +episodes: list
+        +storeEpisode(observation, thoughts, action, result)
+        +retrieveSimilarEpisodes(query)
+    }
+    class ProceduralMemory {
+        +procedures: dict
+        +storeSystemPrompt(name, prompt)
+        +retrieveSystemPrompt(name)
+        +updateSystemPrompt(name, feedback)
+    }
+    
+    LongTermMemory <|-- SemanticMemory
+    LongTermMemory <|-- EpisodicMemory
+    LongTermMemory <|-- ProceduralMemory
+```
 
 ### 1. Semantic Memory: Storing Facts and Knowledge
 
@@ -65,6 +114,27 @@ Procedural memory relates to knowing how to perform specific tasks or follow cer
 ## Implementation Patterns for Long-Term Memory
 
 There are two primary patterns for implementing memory updates in LangGraph:
+
+```mermaid
+flowchart TB
+    subgraph "Hot Path (Conscious Formation)"
+        A1[User Input] --> B1[Agent Processing]
+        B1 --> C1[Store in Memory<br>During Interaction]
+        C1 --> D1[Response to User]
+    end
+    
+    subgraph "Background (Subconscious Formation)"
+        A2[User Input] --> B2[Agent Processing]
+        B2 --> D2[Response to User]
+        
+        D2 -.-> E[Conversation End/Idle]
+        E -.-> F[Background Memory<br>Formation Process]
+        F -.-> G[Update Memory Store]
+    end
+    
+    style C1 fill:#f96,stroke:#333,stroke-width:2px
+    style F fill:#f96,stroke:#333,stroke-width:2px
+```
 
 ### 1. Hot Path (Conscious Formation)
 
@@ -96,6 +166,22 @@ This pattern involves updating memory asynchronously after a conversation has co
 ## Implementing Semantic Memory in LangGraph
 
 Semantic memory is often the most straightforward type to implement and provides immediate value to agents. Here's how to implement it using LangGraph and LangMem:
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Agent
+    participant MemoryManager
+    participant MemoryStore
+    
+    User->>Agent: Request with context
+    Agent->>MemoryStore: Search for relevant facts
+    MemoryStore-->>Agent: Return relevant facts
+    Agent->>Agent: Process request with facts
+    Agent->>User: Response
+    Agent->>MemoryManager: Extract facts from conversation
+    MemoryManager->>MemoryStore: Store new facts
+```
 
 ```python
 from langmem import create_memory_manager
@@ -150,6 +236,23 @@ tools = [
 
 Episodic memory often takes the form of few-shot examples that help the agent learn from past interactions. Here's an implementation:
 
+```mermaid
+flowchart LR
+    A[User Interaction] --> B{Successful?}
+    B -->|Yes| C[Extract as Episode]
+    C --> D[Store in Episodic Memory]
+    
+    E[New Similar Task] --> F[Search Episodic Memory]
+    F --> G[Retrieve Relevant Episodes]
+    G --> H[Add as Few-Shot Examples]
+    H --> I[Improved Response]
+    
+    style C fill:#bfb,stroke:#333,stroke-width:1px
+    style D fill:#bfb,stroke:#333,stroke-width:1px
+    style G fill:#bfb,stroke:#333,stroke-width:1px
+    style H fill:#bfb,stroke:#333,stroke-width:1px
+```
+
 ```python
 from langmem import create_memory_manager
 from pydantic import BaseModel, Field
@@ -197,6 +300,28 @@ def triage_router(state, config, store):
 
 Procedural memory typically involves updating the system prompt based on feedback and experience:
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Agent
+    participant PromptOptimizer
+    participant PromptStore
+    
+    User->>Agent: Provides feedback on interaction
+    Agent->>PromptOptimizer: Send conversation and feedback
+    PromptOptimizer->>PromptStore: Retrieve current system prompts
+    PromptStore-->>PromptOptimizer: Return current prompts
+    PromptOptimizer->>PromptOptimizer: Analyze and improve prompts
+    PromptOptimizer->>PromptStore: Store updated prompts
+    
+    Note over PromptOptimizer,PromptStore: Procedural memory update
+    
+    User->>Agent: New interaction
+    Agent->>PromptStore: Retrieve latest prompts
+    PromptStore-->>Agent: Return improved prompts
+    Agent->>User: Better response using updated procedures
+```
+
 ```python
 from langmem import create_multi_prompt_optimizer
 
@@ -242,6 +367,39 @@ for i, updated_prompt in enumerate(updated):
 ## Building a Complete Email Agent with All Three Memory Types
 
 Let's put it all together to create an email assistant with comprehensive memory capabilities:
+
+```mermaid
+graph TD
+    subgraph "Email Agent Architecture"
+        A[START] --> B[Triage Router]
+        B -- "Email Request" --> C[Response Agent]
+        C -- "Complete" --> D[END]
+        
+        subgraph "Memory Systems"
+            E[Semantic Memory<br>User Facts]
+            F[Episodic Memory<br>Previous Email Patterns]
+            G[Procedural Memory<br>Email Writing Procedures]
+        end
+        
+        B <--> F
+        C <--> E
+        C <--> G
+        
+        H[Tool: Write Email]
+        I[Tool: Check Calendar]
+        J[Tool: Manage Memory]
+        K[Tool: Search Memory]
+        
+        C --> H
+        C --> I
+        C --> J
+        C --> K
+    end
+    
+    style E fill:#bbf,stroke:#333,stroke-width:1px
+    style F fill:#bfb,stroke:#333,stroke-width:1px
+    style G fill:#ffb,stroke:#333,stroke-width:1px
+```
 
 ```python
 from langgraph.graph import StateGraph, START, END
@@ -329,6 +487,41 @@ email_agent = email_agent.compile(store=store)
 ## Best Practices for Long-Term Memory in LangGraph
 
 Based on real-world implementations and the latest research, here are some best practices for implementing memory in your agents:
+
+```mermaid
+mindmap
+    root((Memory Best<br>Practices))
+        Separation
+            ::icon(fa fa-folder)
+            Semantic
+            Episodic
+            Procedural
+        Namespacing
+            ::icon(fa fa-tag)
+            By User
+            By Application
+            By Context
+        Formation
+            ::icon(fa fa-cogs)
+            Hot Path
+            Background
+            Hybrid
+        Privacy
+            ::icon(fa fa-lock)
+            Proper Scoping
+            User Controls
+            Data Minimization
+        Retrieval
+            ::icon(fa fa-search)
+            Semantic Search
+            Recency Weighting
+            Relevance Filtering
+        Maintenance
+            ::icon(fa fa-wrench)
+            Consolidation
+            Expiration
+            Human Review
+```
 
 1. **Separate memory types by function**: Keep semantic, episodic, and procedural memory separate to maintain clean boundaries and specific purposes.
 
