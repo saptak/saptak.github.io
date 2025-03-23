@@ -488,41 +488,6 @@ email_agent = email_agent.compile(store=store)
 
 Based on real-world implementations and the latest research, here are some best practices for implementing memory in your agents:
 
-```mermaid
-mindmap
-    root((Memory Best<br>Practices))
-        Separation
-            ::icon(fa fa-folder)
-            Semantic
-            Episodic
-            Procedural
-        Namespacing
-            ::icon(fa fa-tag)
-            By User
-            By Application
-            By Context
-        Formation
-            ::icon(fa fa-cogs)
-            Hot Path
-            Background
-            Hybrid
-        Privacy
-            ::icon(fa fa-lock)
-            Proper Scoping
-            User Controls
-            Data Minimization
-        Retrieval
-            ::icon(fa fa-search)
-            Semantic Search
-            Recency Weighting
-            Relevance Filtering
-        Maintenance
-            ::icon(fa fa-wrench)
-            Consolidation
-            Expiration
-            Human Review
-```
-
 1. **Separate memory types by function**: Keep semantic, episodic, and procedural memory separate to maintain clean boundaries and specific purposes.
 
 2. **Implement proper namespacing**: Use namespaces to organize memories by user, application, or context to prevent cross-contamination.
