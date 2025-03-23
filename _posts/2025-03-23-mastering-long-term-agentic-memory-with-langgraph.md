@@ -2,7 +2,7 @@
 categories:
 - AI
 - Development
-- Langgraph
+- LangGraph
 date: 2025-03-23 07:09:33 -0700
 description: A deep dive into why, how, and when to use different types of long-term
   memory in AI agents built with Langgraph.
@@ -20,7 +20,7 @@ title: Long-Term Agentic Memory with LangGraph
 
 # Long-Term Agentic Memory with LangGraph
 
-Imagine having a personal assistant who forgets your preferences, past conversations, and previous instructions each time you interact with them. Not very helpful, right? This is precisely the challenge that long-term memory in AI agents aims to solve. In this comprehensive guide, we'll explore how to implement effective long-term memory in Langgraph-powered agents, focusing on the three primary types of memory: semantic, episodic, and procedural.
+Imagine having a personal assistant who forgets your preferences, past conversations, and previous instructions each time you interact with them. Not very helpful, right? This is precisely the challenge that long-term memory in AI agents aims to solve. In this comprehensive guide, we'll explore how to implement effective long-term memory in LangGraph-powered agents, focusing on the three primary types of memory: semantic, episodic, and procedural.
 
 ## Why Long-Term Memory Matters in Agents
 
@@ -32,7 +32,7 @@ AI agents without memory are like goldfish—they forget everything between conv
 - Provide personalized responses
 - Build upon previous conversations
 
-Langgraph, a powerful framework for building agentic workflows, provides robust support for implementing various memory types that can dramatically enhance your agent's capabilities. Let's dive into understanding these memory types and how to implement them effectively.
+LangGraph, a powerful framework for building agentic workflows, provides robust support for implementing various memory types that can dramatically enhance your agent's capabilities. Let's dive into understanding these memory types and how to implement them effectively.
 
 ## Understanding the Three Types of Memory
 
@@ -64,7 +64,7 @@ Procedural memory relates to knowing how to perform specific tasks or follow cer
 
 ## Implementation Patterns for Long-Term Memory
 
-There are two primary patterns for implementing memory updates in Langgraph:
+There are two primary patterns for implementing memory updates in LangGraph:
 
 ### 1. Hot Path (Conscious Formation)
 
@@ -95,7 +95,7 @@ This pattern involves updating memory asynchronously after a conversation has co
 
 ## Implementing Semantic Memory in LangGraph
 
-Semantic memory is often the most straightforward type to implement and provides immediate value to agents. Here's how to implement it using Langgraph and LangMem:
+Semantic memory is often the most straightforward type to implement and provides immediate value to agents. Here's how to implement it using LangGraph and LangMem:
 
 ```python
 from langmem import create_memory_manager
@@ -326,7 +326,7 @@ email_agent.add_edge(START, "triage_router")
 email_agent = email_agent.compile(store=store)
 ```
 
-## Best Practices for Long-Term Memory in Langgraph
+## Best Practices for Long-Term Memory in LangGraph
 
 Based on real-world implementations and the latest research, here are some best practices for implementing memory in your agents:
 
@@ -348,7 +348,7 @@ Based on real-world implementations and the latest research, here are some best 
 
 ## Conclusion
 
-Long-term memory transforms AI agents from simple responders to truly helpful assistants that learn, adapt, and personalize over time. By implementing semantic, episodic, and procedural memory in your Langgraph-based agents, you can create experiences that feel more human, more helpful, and more intelligent.
+Long-term memory transforms AI agents from simple responders to truly helpful assistants that learn, adapt, and personalize over time. By implementing semantic, episodic, and procedural memory in your LangGraph-based agents, you can create experiences that feel more human, more helpful, and more intelligent.
 
 The combination of these memory types mirrors human cognitive processes, allowing agents to remember facts, learn from experiences, and refine their behaviors over time. As you implement these capabilities, you'll find your agents becoming increasingly valuable to users as they build up knowledge and adapt to specific needs and preferences.
 
