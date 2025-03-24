@@ -523,7 +523,6 @@ LangGraph and the supporting ecosystem of tools like LangMem provide a powerful 
 ## References
 
 1. LangChain Documentation: [Memory for Agents](https://blog.langchain.dev/memory-for-agents/)
-2. DeepLearning.AI Course: [Long-Term Agentic Memory with LangGraph](https://www.deeplearning.ai/short-courses/long-term-agentic-memory-with-langgraph/)
-3. LangMem SDK: [Launch Announcement](https://blog.langchain.dev/langmem-sdk-launch/)
-4. LangGraph Documentation: [Memory Concepts](https://langchain-ai.github.io/langgraph/concepts/memory/)
-5. LangChain Blog: [Launching Long-Term Memory Support](https://blog.langchain.dev/launching-long-term-memory-support-in-langgraph/)
+2. LangMem SDK: [Launch Announcement](https://blog.langchain.dev/langmem-sdk-launch/)
+3. LangGraph Documentation: [Memory Concepts](https://langchain-ai.github.io/langgraph/concepts/memory/)
+4. LangChain Blog: [Launching Long-Term Memory Support](https://blog.langchain.dev/launching-long-term-memory-support-in-langgraph/)
