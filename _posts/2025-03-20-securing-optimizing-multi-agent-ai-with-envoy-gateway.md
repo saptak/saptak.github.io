@@ -125,8 +125,6 @@ graph TD
     end
     
     AIBackend --> Provider1[OpenAI]
-    AIBackend --> Provider2[Anthropic]
-    AIBackend --> Provider3[Custom LLM]
     AIBackend --> Provider4[AWS Bedrock]
     
     subgraph "Custom Resources"
