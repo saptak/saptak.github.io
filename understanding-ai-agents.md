@@ -1,15 +1,9 @@
 ---
-author: Saptak
-categories: &id001
-- artificial-intelligence
-- agents
-date: 2025-03-23
-header_image_path: /assets/img/blog/headers/2025-03-23-understanding-ai-agents.jpg
-image_credit: Photo by Steve Ding on Unsplash
 layout: post
-tags: *id001
-thumbnail_path: /assets/img/blog/thumbnails/2025-03-23-understanding-ai-agents.jpg
-title: 'Understanding AI Agents: Architecture, Components, and Implementation'
+title: "Understanding AI Agents: Architecture, Components, and Implementation"
+date: 2025-03-23
+categories: artificial-intelligence agents
+author: Saptak
 ---
 
 # Understanding AI Agents: Architecture, Components, and Implementation

@@ -145,6 +145,19 @@ def update_front_matter(post_info, image_paths, image_credit):
     front_matter['header_image_path'] = image_paths['header']
     front_matter['image_credit'] = image_credit
     
+    # Fix categories and tags format if needed
+    if 'categories' in front_matter and isinstance(front_matter['categories'], str):
+        # Convert space-separated string to a list
+        front_matter['categories'] = front_matter['categories'].split()
+    
+    # Ensure tags are present
+    if 'categories' in front_matter and 'tags' not in front_matter:
+        # Use categories as tags if tags don't exist
+        if isinstance(front_matter['categories'], list):
+            front_matter['tags'] = front_matter['categories']
+        else:
+            front_matter['tags'] = [front_matter['categories']]
+    
     # Convert the front matter to YAML
     new_front_matter = yaml.dump(front_matter, default_flow_style=False)
     

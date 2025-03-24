@@ -1,6 +1,9 @@
 ---
 author: Saptak
-categories: cloud kubernetes istio
+categories:
+- cloud
+- kubernetes
+- istio
 date: 2025-03-14
 header_image_path: /assets/img/blog/headers/2025-03-14-advanced-eks-istio-management.jpg
 image_credit: Photo by Kvistholt Photography on Unsplash

@@ -1,5 +1,6 @@
 ---
-categories: artificial-intelligence
+categories:
+- artificial-intelligence
 date: 2025-03-18
 header_image_path: /assets/img/blog/headers/2025-03-18-building-intelligent-collaborations.jpg
 image_credit: Photo by Carlos Muza on Unsplash

@@ -1,6 +1,7 @@
 ---
 author: Saptak
-categories: ai-development
+categories:
+- ai-development
 date: 2025-03-13
 description: A comprehensive guide to integrating OpenAI's Responses API with Google
   Gemini, creating powerful multi-model applications that leverage the strengths of
