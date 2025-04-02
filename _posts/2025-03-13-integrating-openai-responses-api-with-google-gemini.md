@@ -17,11 +17,11 @@ tags:
 - integration
 - ai
 thumbnail_path: /assets/img/blog/thumbnails/2025-03-13-integrating-openai-responses-api-with-google-gemini.jpg
-title: Building Powerful AI Applications by Integrating OpenAI Responses API with
+title: Powerful AI Applications by Integrating OpenAI Responses API with
   Google Gemini
 ---
 
-# Building Powerful AI Applications by Integrating OpenAI Responses API with Google Gemini
+# Powerful AI Applications by Integrating OpenAI Responses API with Google Gemini
 
 We've entered what industry leaders call the "agentic era" - where AI systems not only understand and generate content but also take actions on behalf of users. OpenAI's new Responses API and Google's Gemini models, now accessible through the OpenAI Library, represent significant milestones in this evolution. This post explores how to integrate these technologies, creating versatile applications that leverage the unique advantages of each platform.
 

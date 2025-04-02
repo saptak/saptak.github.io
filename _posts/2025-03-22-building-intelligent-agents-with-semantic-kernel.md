@@ -17,10 +17,10 @@ tags:
 - azure
 - openai
 thumbnail_path: /assets/img/blog/thumbnails/2025-03-22-building-intelligent-agents-with-semantic-kernel.jpg
-title: 'Building Intelligent Agents with Semantic Kernel: A Comprehensive Guide'
+title: 'Intelligent Agents with Semantic Kernel: A Comprehensive Guide'
 ---
 
-# Building Intelligent Agents with Semantic Kernel: A Comprehensive Guide
+# Intelligent Agents with Semantic Kernel: A Comprehensive Guide
 
 Developers are constantly seeking efficient ways to integrate large language models (LLMs) into their applications. Microsoft's Semantic Kernel provides a powerful framework for building AI agents that can collaborate to solve complex problems. In this comprehensive guide, we'll explore how to build intelligent multi-agent systems using Semantic Kernel, with a focus on the Creative Writing Assistant example.
 

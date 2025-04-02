@@ -8,10 +8,10 @@ image_credit: Photo by Nik on Unsplash
 layout: post
 tags: pydantic-ai mcp llm agents ai-development
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-01-building-powerful-ai-agents-with-pydantic-ai-and-mcp-servers.jpg
-title: Building Powerful AI Agents with Pydantic AI and MCP Servers
+title: AI Agents with Pydantic AI and MCP Servers
 ---
 
-# Building Powerful AI Agents with Pydantic AI and MCP Servers
+# AI Agents with Pydantic AI and MCP Servers
 
 ## Introduction
 
