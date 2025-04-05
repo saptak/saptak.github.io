@@ -21,11 +21,11 @@ tags:
 - crewai
 - vertex-ai
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-04-comprehensive-guide-to-google-cloud-agent-starter-pack.jpg
-title: 'Comprehensive Guide to Google Cloud Agent Starter Pack: Accelerating Generative
+title: 'Guide to Google Cloud Agent Starter Pack: Accelerating Generative
   AI Agent Development'
 ---
 
-# Comprehensive Guide to Google Cloud Agent Starter Pack
+# Guide to Google Cloud Agent Starter Pack
 
 ## Introduction
 
@@ -33,7 +33,7 @@ Developing production-ready agents can be challenging and time-consuming. Moving
 
 Google Cloud's Agent Starter Pack addresses these challenges by providing a comprehensive solution that significantly reduces the time-to-production for developers building Generative AI applications. It offers a collection of production-ready Generative AI Agent templates built specifically for Google Cloud, accelerating development by providing a holistic solution that addresses common challenges in deployment, operations, evaluation, customization, and observability.
 
-In this comprehensive guide, we'll explore the Agent Starter Pack, its features, available agent templates, deployment options, and how to get started with building your own Generative AI agents on Google Cloud.
+In this guide, we'll explore the Agent Starter Pack, its features, available agent templates, deployment options, and how to get started with building your own Generative AI agents on Google Cloud.
 
 ## What is the Agent Starter Pack?
 
