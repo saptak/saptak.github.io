@@ -132,7 +132,7 @@ The project is implemented using Google's Gemini API, a state-of-the-art generat
 
 1. Setup and API configuration with Kaggle's environment
 2. Data acquisition and preprocessing from multiple mental health datasets
-3. Model configuration using Gemini-1.5-flash
+3. Model configuration using Gemini-2.5-pro-exp
 4. Implementation of mental health analysis functions
 5. Development of response generation with evidence retrieval
 6. Integration of context management for ongoing conversations
@@ -157,14 +157,16 @@ import re
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 ```
 
 ### Model Configuration
 
-The system utilizes Google's Gemini-1.5-flash model, which offers a good balance between performance and response time:
+The system utilizes Google's Gemini-2.5-pro-exp model, which offers a good balance between performance and response time:
 
 ```python
-model_name = 'models/gemini-1.5-flash-latest'
+model_name = 'models/gemini-2.5-pro-exp-03-25'
 model = genai.GenerativeModel(model_name)
 ```
 
