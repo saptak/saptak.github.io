@@ -328,21 +328,6 @@ While the system demonstrates significant potential, several important limitatio
 
 ### Ethical Considerations
 
-```mermaid
-graph TD
-    A[Ethical Considerations] --> B[Privacy and Data Security]
-    A --> C[Transparency and Expectations]
-    A --> D[Harm Prevention and Safety]
-    A --> E[Human Oversight]
-    A --> F[Bias and Fairness]
-    
-    B --> B1[Secure handling of sensitive mental health data]
-    C --> C1[Clear communication about AI capabilities and limitations]
-    D --> D1[Protocol for crisis detection and intervention]
-    E --> E1[Professional review of critical responses]
-    F --> F1[Addressing potential biases in training data]
-```
-
 - **Privacy and Data Security**: Mental health data is highly sensitive and requires rigorous protection.
 - **Transparency**: Users must clearly understand they are interacting with an AI system.
 - **Harm Prevention**: The system must include safeguards for crisis situations and potential self-harm.
@@ -369,8 +354,9 @@ As we continue to develop these technologies, maintaining a focus on human-cente
 
 ## References
 
-1. Mental Health in Tech Survey Dataset (OSMI)
-2. Mental Health Corpus Dataset (Reihaneh Amdari)
-3. Suicide Prevention Dataset (Nikhileswar Komati)
-4. Google Generative AI (Gemini) Documentation
-5. World Health Organization Mental Health Guidelines
+1. [Mental Health in Tech Survey Dataset (OSMI)](https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey)
+2. [Mental Health Corpus Dataset (Reihaneh Amdari)](https://www.kaggle.com/datasets/reihanenamdari/mental-health-corpus)
+3. [Suicide Prevention Dataset (Nikhileswar Komati)](https://www.kaggle.com/datasets/nikhileswarkomati/suicide-watch)
+4. [Mental Health Analysis and Support Notebook](https://www.kaggle.com/code/saptaksen/mental-health-analysis-and-support)
+5. [Google Generative AI (Gemini) Documentation](https://ai.google.dev/docs/gemini_api_overview)
+6. [World Health Organization Mental Health Guidelines](https://www.who.int/health-topics/mental-health)
