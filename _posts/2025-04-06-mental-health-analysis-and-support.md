@@ -162,7 +162,7 @@ The project is implemented using Google's Gemini API, a state-of-the-art generat
 
 1. Setup and API configuration with Kaggle's environment
 2. Data acquisition and preprocessing from multiple mental health datasets
-3. Model configuration using Gemini-2.5-pro-exp
+3. Model configuration using Gemini-2.5-pro-preview
 4. Implementation of mental health analysis functions with structured output
 5. Development of response generation with evidence retrieval via RAG
 6. Integration of context management for ongoing conversations
@@ -178,7 +178,7 @@ import google.generativeai as genai
 import chromadb
 import kagglehub
 from langgraph.graph import StateGraph, END
-from google.generativeai import types
+from typing import TypedDict, Dict, Any
 
 # Standard libraries
 import pandas as pd
@@ -187,15 +187,16 @@ import json
 import matplotlib.pyplot as plt
 import seaborn as sns
 import re
-from typing import TypedDict, Dict, Any
+import nltk
+from IPython.display import display, Markdown, Image
 ```
 
 ### Model Configuration
 
-The system utilizes Google's Gemini-2.5-pro-exp model, which offers a good balance between performance and response time:
+The system utilizes Google's Gemini-2.5-pro-preview model, which offers a good balance between performance and response time:
 
 ```python
-model_name = 'models/gemini-2.5-pro-exp-03-25'
+model_name = 'models/gemini-2.5-pro-preview-03-25'
 model = genai.GenerativeModel(model_name)
 ```
 
