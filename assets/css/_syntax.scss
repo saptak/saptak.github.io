@@ -17,8 +17,8 @@ pre {
     padding: 10px;
     font-family: Inconsolata, monospace, sans-serif;
     font-size: 0.9em;
-    white-space: pre;
-    overflow: auto;
+    white-space: pre-wrap; /* Allow wrapping */
+    word-wrap: break-word; /* Ensure long words break */
     background: #F7FAFB;
     border-radius: 3px;
 }

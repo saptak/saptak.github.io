@@ -14,3 +14,9 @@
 .width-120 {
   width: 120px;
 }
+
+@media (min-width: 64em) {
+  .container {
+    max-width: 72em; /* Increased from 64em for thinner margins */
+  }
+}
