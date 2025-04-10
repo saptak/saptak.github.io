@@ -6,7 +6,8 @@ categories:
 - mental-health
 date: 2025-04-06
 header_image_path: /assets/img/blog/headers/2025-04-06-mental-health-analysis-and-support.jpg
-image_credit: Photo by Kvistholt Photography on Unsplash
+image_credit: Photo by Jamie Street on Unsplash
+image_credit_url: https://unsplash.com/photos/heart-shaped-bowl-with-strawberries-tb5A-QTI6xg
 layout: post
 tags: generative-ai mental-health analysis support nlp gemini-ai kaggle langgraph
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-06-mental-health-analysis-and-support.jpg
@@ -262,14 +263,47 @@ Do NOT diagnose. Offer support, validation, and relevant information or coping s
 If the user expresses severe distress or mentions self-harm/suicide (indicated by analysis results or keywords), prioritize safety and strongly recommend contacting crisis resources (like 988) or emergency services.
 
 --- Analysis Results ---
-{analysis_results_str}
-
+author: Saptak Sen
+categories:
+- machine-learning
+- ai
+- mental-health
+date: 2025-04-06
+header_image_path: /assets/img/blog/headers/2025-04-06-mental-health-analysis-and-support.jpg
+image_credit: Photo by Jamie Street on Unsplash
+image_credit_url: https://unsplash.com/photos/heart-shaped-bowl-with-strawberries-tb5A-QTI6xg
+layout: post
+tags: generative-ai mental-health analysis support nlp gemini-ai kaggle langgraph
+thumbnail_path: /assets/img/blog/thumbnails/2025-04-06-mental-health-analysis-and-support.jpg
+title: Leveraging Generative AI for Mental Health Analysis and Support
 --- Relevant Info ---
-{retrieved_context}
-
+author: Saptak Sen
+categories:
+- machine-learning
+- ai
+- mental-health
+date: 2025-04-06
+header_image_path: /assets/img/blog/headers/2025-04-06-mental-health-analysis-and-support.jpg
+image_credit: Photo by Jamie Street on Unsplash
+image_credit_url: https://unsplash.com/photos/heart-shaped-bowl-with-strawberries-tb5A-QTI6xg
+layout: post
+tags: generative-ai mental-health analysis support nlp gemini-ai kaggle langgraph
+thumbnail_path: /assets/img/blog/thumbnails/2025-04-06-mental-health-analysis-and-support.jpg
+title: Leveraging Generative AI for Mental Health Analysis and Support
 --- User Input ---
-{user_input}
-
+author: Saptak Sen
+categories:
+- machine-learning
+- ai
+- mental-health
+date: 2025-04-06
+header_image_path: /assets/img/blog/headers/2025-04-06-mental-health-analysis-and-support.jpg
+image_credit: Photo by Jamie Street on Unsplash
+image_credit_url: https://unsplash.com/photos/heart-shaped-bowl-with-strawberries-tb5A-QTI6xg
+layout: post
+tags: generative-ai mental-health analysis support nlp gemini-ai kaggle langgraph
+thumbnail_path: /assets/img/blog/thumbnails/2025-04-06-mental-health-analysis-and-support.jpg
+title: Leveraging Generative AI for Mental Health Analysis and Support
 --- Instructions ---
 Based on the user input, the analysis results, and the relevant info provided, generate a concise, empathetic, and helpful response directly addressing the user. 
 1. Acknowledge the user's feelings.
