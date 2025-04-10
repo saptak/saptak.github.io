@@ -2,8 +2,8 @@
 categories: ai technology
 date: 2025-04-10
 header_image_path: /assets/img/blog/headers/2025-04-10-agent2agent-vs-mcp.jpg
-image_credit: Photo by Marius Masalar on Unsplash
-image_credit_url: https://unsplash.com/photos/stylus-pen-in-front-of-table-computer-UCETKvFMBC4
+image_credit: Photo by Markus Spiske on Unsplash
+image_credit_url: https://unsplash.com/photos/matrix-movie-still-iar-afB0QQw
 layout: post
 tags:
 - ai
