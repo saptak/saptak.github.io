@@ -38,6 +38,8 @@ def setup_argparse():
     parser.add_argument('--api-key', help='Unsplash API key (overrides hardcoded key)')
     parser.add_argument('--force', action='store_true',
                         help='Force update even if no current images exist')
+    parser.add_argument('--branch', default='master',
+                       help='Git branch to push to (default: master)')
     return parser.parse_args()
 
 def extract_post_info(post_path):
@@ -194,25 +196,63 @@ def update_front_matter(post_info, image_paths, image_info):
     print(f"Updated front matter in {post_info['post_path']}")
     return True
 
-def git_operations(post_info, image_paths):
+def git_operations(post_info, full_image_paths, branch='master'):
     """Commit and push changes to Git repository."""
     try:
-        # Add changes to Git
-        subprocess.run(['git', 'add', post_info['post_path']], check=True)
-        subprocess.run(['git', 'add', image_paths['thumbnail']], check=True)
-        subprocess.run(['git', 'add', image_paths['header']], check=True)
+        # Get the git root directory
+        git_root = subprocess.run(
+            ['git', 'rev-parse', '--show-toplevel'],
+            check=True,
+            capture_output=True,
+            text=True
+        ).stdout.strip()
         
-        # Commit changes
-        commit_message = GIT_COMMIT_MESSAGE_TEMPLATE.format(post_info['title'])
-        subprocess.run(['git', 'commit', '-m', commit_message], check=True)
+        # Change to the git root directory
+        original_dir = os.getcwd()
+        os.chdir(git_root)
         
-        # Push changes
-        subprocess.run(['git', 'push', 'origin', 'master'], check=True)
+        try:
+            # Add changes to Git (using relative paths from git root)
+            post_rel_path = os.path.relpath(post_info['post_path'], git_root)
+            thumb_rel_path = os.path.relpath(full_image_paths['thumbnail'], git_root)
+            header_rel_path = os.path.relpath(full_image_paths['header'], git_root)
+            
+            print(f"Adding files to git: {post_rel_path}, {thumb_rel_path}, {header_rel_path}")
+            
+            subprocess.run(['git', 'add', post_rel_path], check=True)
+            subprocess.run(['git', 'add', thumb_rel_path], check=True)
+            subprocess.run(['git', 'add', header_rel_path], check=True)
+            
+            # Check if there are changes to commit
+            status = subprocess.run(
+                ['git', 'status', '--porcelain'],
+                check=True,
+                capture_output=True,
+                text=True
+            ).stdout.strip()
+            
+            if not status:
+                print("No changes to commit")
+                return True
+            
+            # Commit changes
+            commit_message = GIT_COMMIT_MESSAGE_TEMPLATE.format(post_info['title'])
+            subprocess.run(['git', 'commit', '-m', commit_message], check=True)
+            
+            # Push changes
+            subprocess.run(['git', 'push', 'origin', branch], check=True)
+            
+            print("Successfully committed and pushed changes to the repository")
+            return True
         
-        print("Successfully committed and pushed changes to the repository")
-        return True
+        finally:
+            # Return to original directory
+            os.chdir(original_dir)
+            
     except subprocess.CalledProcessError as e:
         print(f"Error in Git operations: {e}")
+        print(f"Command output: {e.stdout if hasattr(e, 'stdout') else 'No output'}")
+        print(f"Command error: {e.stderr if hasattr(e, 'stderr') else 'No error output'}")
         return False
 
 def main():
@@ -276,7 +316,7 @@ def main():
     # Git operations
     if not args.no_commit:
         print("Performing Git operations...")
-        git_operations(post_info, image_paths)
+        git_operations(post_info, full_image_paths, args.branch)
     
     print(f"\nImage update complete for post: {post_info['title']}")
     print(f"Image credit: {image_info['credit']}")
