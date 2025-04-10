@@ -1,11 +1,10 @@
 ---
-layout: post
-title: "Agent2Agent vs MCP: The Complementary Protocols Shaping the Future of Agentic AI"
-date: 2025-04-10
 categories: ai technology
+date: 2025-04-10
 header_image_path: /assets/img/blog/headers/2025-04-10-agent2agent-vs-mcp.jpg
-thumbnail_path: /assets/img/blog/thumbnails/2025-04-10-agent2agent-vs-mcp.jpg
-image_credit: Photo by Rami Al-zayat on Unsplash
+image_credit: Photo by Marius Masalar on Unsplash
+image_credit_url: https://unsplash.com/photos/stylus-pen-in-front-of-table-computer-UCETKvFMBC4
+layout: post
 tags:
 - ai
 - technology
@@ -13,6 +12,9 @@ tags:
 - interoperability
 - google
 - anthropic
+thumbnail_path: /assets/img/blog/thumbnails/2025-04-10-agent2agent-vs-mcp.jpg
+title: 'Agent2Agent vs MCP: The Complementary Protocols Shaping the Future of Agentic
+  AI'
 ---
 
 # Agent2Agent vs MCP: The Complementary Protocols Shaping the Future of Agentic AI
