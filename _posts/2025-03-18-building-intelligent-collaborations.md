@@ -3,7 +3,8 @@ categories:
 - artificial-intelligence
 date: 2025-03-18
 header_image_path: /assets/img/blog/headers/2025-03-18-building-intelligent-collaborations.jpg
-image_credit: Photo by Carlos Muza on Unsplash
+image_credit: Photo by New Material on Unsplash
+image_credit_url: https://unsplash.com/photos/a-group-of-colorful-balls-gPASJNVOuM0
 layout: post
 tags:
 - multi-agent-systems
@@ -12,8 +13,8 @@ tags:
 - generative-ai
 - langchain
 thumbnail_path: /assets/img/blog/thumbnails/2025-03-18-building-intelligent-collaborations.jpg
-title: 'Intelligent Collaborations: Multi-Agent Systems with LangGraph, Event
-  Driven Architecture, and Generative AI'
+title: 'Intelligent Collaborations: Multi-Agent Systems with LangGraph, Event Driven
+  Architecture, and Generative AI'
 ---
 # Intelligent Collaborations: Multi-Agent Systems with LangGraph, Event Driven Architecture, and Generative AI
 
