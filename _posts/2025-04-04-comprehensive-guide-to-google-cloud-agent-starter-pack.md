@@ -9,7 +9,8 @@ description: A deep dive into Google Cloud's Agent Starter Pack - a collection o
   and deployment of AI agents.
 header_image_path: /assets/img/blog/headers/2025-04-04-comprehensive-guide-to-google-cloud-agent-starter-pack.jpg
 image: /assets/images/agent-starter-pack.png
-image_credit: Photo by Rami Al-zayat on Unsplash
+image_credit: Photo by Lanju Fotografie on Unsplash
+image_credit_url: https://unsplash.com/photos/silhouette-of-man-holding-flashlight-BvAoCypqRXU
 layout: post
 tags:
 - google-cloud
@@ -21,8 +22,8 @@ tags:
 - crewai
 - vertex-ai
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-04-comprehensive-guide-to-google-cloud-agent-starter-pack.jpg
-title: 'Guide to Google Cloud Agent Starter Pack: Accelerating Generative
-  AI Agent Development'
+title: 'Guide to Google Cloud Agent Starter Pack: Accelerating Generative AI Agent
+  Development'
 ---
 
 # Guide to Google Cloud Agent Starter Pack
