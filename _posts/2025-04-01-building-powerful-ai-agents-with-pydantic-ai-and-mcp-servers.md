@@ -4,7 +4,8 @@ categories:
 - development
 date: 2025-04-01 14:00:00 -0400
 header_image_path: /assets/img/blog/headers/2025-04-01-building-powerful-ai-agents-with-pydantic-ai-and-mcp-servers.jpg
-image_credit: Photo by Nik on Unsplash
+image_credit: Photo by NOAA on Unsplash
+image_credit_url: https://unsplash.com/photos/black-camera-3z7Ouv9lpQg
 layout: post
 tags: pydantic-ai mcp llm agents ai-development
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-01-building-powerful-ai-agents-with-pydantic-ai-and-mcp-servers.jpg
