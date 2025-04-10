@@ -153,7 +153,10 @@ flowchart TD
         A2A3 --> MP[Message Passing Between Agents]
         A2A4 --> Negotiate[Payload Format Negotiation]
     end
-    
+```
+
+```mermaid
+ flowchart TD   
     subgraph "Model Context Protocol"
         MCP[Model Context Protocol]
         MCP --> MCP1[Data & Tool Access]
@@ -166,7 +169,10 @@ flowchart TD
         MCP3 --> Actions[Executing Actions via Tools]
         MCP4 --> API[Standardized API Integration]
     end
-    
+ ```
+
+ ```mermaid
+flowchart TD
     Agent1[Agent 1] <--"A2A: Agent-to-Agent Communication"--> Agent2[Agent 2]
     Agent1 <--"MCP: Agent-to-Resource Communication"--> Resource[External Resource]
     Agent2 <--"MCP: Agent-to-Resource Communication"--> Resource
