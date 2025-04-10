@@ -8,7 +8,8 @@ description: Learn how to build intelligent multi-agent systems using Microsoft'
   applications.
 header_image_path: /assets/img/blog/headers/2025-03-22-building-intelligent-agents-with-semantic-kernel.jpg
 image: /assets/images/semantic-kernel-agents-header.jpg
-image_credit: Photo by Patrick Lindenberg on Unsplash
+image_credit: Photo by Yohan Marion on Unsplash
+image_credit_url: https://unsplash.com/photos/a-plate-of-fruit-salad-on-a-wooden-table-QJV9PxdiE3c
 layout: post
 tags:
 - semantic-kernel
