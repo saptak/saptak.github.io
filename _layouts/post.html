@@ -41,6 +41,7 @@ include_comments:
     let utterance = null;
     let voices = [];
     let preferredVoice = null;
+    let voicesLoaded = false; // Flag to track if voices are ready
 
     // Check if SpeechSynthesis is supported
     if (!('speechSynthesis' in window)) {
@@ -54,7 +55,13 @@ include_comments:
     // Function to populate voices and select a preferred one
     function populateAndSelectVoice() {
       voices = speechSynthesis.getVoices();
-      console.log("Available voices:", voices); 
+      if (voices.length > 0) {
+          voicesLoaded = true; // Set flag only when voices are actually available
+          console.log("Available voices:", voices); 
+      } else {
+          console.warn("getVoices() returned empty list.");
+          return; // Don't proceed with selection if no voices
+      }
       
       // --- Voice Selection Logic ---
       // Try to find a high-quality, non-local English voice first
@@ -110,13 +117,14 @@ include_comments:
 
     ttsButton.addEventListener('click', () => {
       // Ensure voices are loaded before trying to speak
-      if (speechSynthesis.getVoices().length === 0) {
-          console.warn("Voices not loaded yet, trying again shortly.");
-          // Optionally trigger voice loading again or wait
-          speechSynthesis.onvoiceschanged = () => { 
-              populateAndSelectVoice(); 
-              // Maybe automatically trigger speak if user clicked? Needs careful state management.
-          };
+      if (!voicesLoaded) {
+          console.warn("Voices not loaded yet. Please wait a moment and try again.");
+          // Re-attach handler in case it got detached or missed the initial event
+          if (speechSynthesis.onvoiceschanged !== undefined) {
+              speechSynthesis.onvoiceschanged = populateAndSelectVoice;
+          }
+          // Attempt to populate again, just in case
+          populateAndSelectVoice(); 
           return; // Prevent speaking until voices are ready
       }
         
@@ -165,9 +173,13 @@ include_comments:
           console.error('Speech synthesis error:', event);
           resetButtonToPlay();
         };
-        // Clear queue and speak
-        speechSynthesis.cancel(); // Ensure nothing else is queued or speaking
-        speechSynthesis.speak(utterance);
+        // Clear queue, resume, wait briefly, then speak (for Chrome compatibility)
+        speechSynthesis.cancel(); 
+        speechSynthesis.resume(); // Ensure synth is active
+        // Use setTimeout to allow cancel to finish before speaking
+        setTimeout(() => {
+            speechSynthesis.speak(utterance);
+        }, 50); // Small delay (50ms)
       }
     });
 
