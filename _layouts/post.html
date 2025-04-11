@@ -39,6 +39,8 @@ include_comments:
     const postContent = document.getElementById('post-content-for-tts');
     let isSpeaking = false;
     let utterance = null;
+    let voices = [];
+    let preferredVoice = null;
 
     // Check if SpeechSynthesis is supported
     if (!('speechSynthesis' in window)) {
@@ -47,6 +49,46 @@ include_comments:
         ttsButton.style.display = 'none'; // Hide button if not supported
       }
       return; 
+    }
+
+    // Function to populate voices and select a preferred one
+    function populateAndSelectVoice() {
+      voices = speechSynthesis.getVoices();
+      console.log("Available voices:", voices); 
+      
+      // --- Voice Selection Logic ---
+      // Try to find a high-quality, non-local English voice first
+      preferredVoice = voices.find(voice => 
+        !voice.localService && voice.lang.startsWith('en') && /Google|Microsoft|Enhanced|Premium/i.test(voice.name)
+      );
+
+      // If no premium voice found, try any non-local English voice
+      if (!preferredVoice) {
+        preferredVoice = voices.find(voice => !voice.localService && voice.lang.startsWith('en'));
+      }
+
+      // If still no voice, try any English voice
+      if (!preferredVoice) {
+        preferredVoice = voices.find(voice => voice.lang.startsWith('en'));
+      }
+      
+      // Fallback to the first available voice if no English one is found
+      if (!preferredVoice && voices.length > 0) {
+          preferredVoice = voices[0];
+      }
+
+      if (preferredVoice) {
+        console.log("Selected voice:", preferredVoice.name, `(${preferredVoice.lang})`);
+      } else {
+        console.warn("Could not find a preferred voice, using browser default.");
+      }
+      // --- End Voice Selection Logic ---
+    }
+
+    // Voices might load asynchronously
+    populateAndSelectVoice(); // Attempt initial load
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateAndSelectVoice;
     }
     
     // Ensure button and content exist
@@ -68,6 +110,12 @@ include_comments:
         }
         
         utterance = new SpeechSynthesisUtterance(textToSpeak);
+        
+        // Assign the preferred voice if found
+        if (preferredVoice) {
+          utterance.voice = preferredVoice;
+        }
+
         // SVG Icons
         const playIconSVG = `
           <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
