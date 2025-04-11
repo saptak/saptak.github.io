@@ -181,11 +181,13 @@ include_comments:
       newUtterance.onend = () => {
         // onend fires for both completion and cancellation.
         console.log('Speech synthesis ended (completed or cancelled).');
+        speechSynthesis.cancel(); // Explicitly cancel again on end
         resetButtonToPlay(); 
       };
 
       newUtterance.onerror = (event) => {
         console.error('Speech synthesis error:', event);
+        speechSynthesis.cancel(); // Explicitly cancel again on error
         resetButtonToPlay(); 
       };
       
