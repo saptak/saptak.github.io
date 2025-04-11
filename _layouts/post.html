@@ -13,7 +13,12 @@ include_comments:
 {% endif %}
 
 <article class="post">
-  <button id="tts-button" aria-label="Listen to this post" title="Listen to this post" style="margin-bottom: 1em; padding: 0.3em 0.6em; cursor: pointer; font-size: 1.2em; line-height: 1; border: 1px solid #ccc; background: none;">▶</button>
+  <button id="tts-button" aria-label="Listen to this post" title="Listen to this post" style="margin-bottom: 1em; padding: 0; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #888; background: none; display: flex; align-items: center; justify-content: center; color: #888;">
+    <!-- SVG Play Icon -->
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+  </button>
   <div id="post-content-for-tts">
     {{ content }}
   </div>
@@ -63,32 +68,41 @@ include_comments:
         }
         
         utterance = new SpeechSynthesisUtterance(textToSpeak);
-        
+        // SVG Icons
+        const playIconSVG = `
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>`;
+        const stopIconSVG = `
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M6 6h12v12H6z"/>
+          </svg>`;
+
         utterance.onstart = () => {
             isSpeaking = true;
-            ttsButton.textContent = '■'; // Stop icon
+            ttsButton.innerHTML = stopIconSVG; // Stop icon SVG
             ttsButton.setAttribute('aria-label', 'Stop listening');
             ttsButton.setAttribute('title', 'Stop listening');
             console.log('Speech synthesis started.');
         };
 
-        utterance.onend = () => {
+        const resetButtonToPlay = () => {
           isSpeaking = false;
-          ttsButton.textContent = '▶'; // Play icon
+          ttsButton.innerHTML = playIconSVG; // Play icon SVG
           ttsButton.setAttribute('aria-label', 'Listen to this post');
           ttsButton.setAttribute('title', 'Listen to this post');
+        }
+
+        utterance.onend = () => {
+          resetButtonToPlay();
           console.log('Speech synthesis finished.');
         };
 
         // Ensure button resets on error
         utterance.onerror = (event) => {
           console.error('Speech synthesis error:', event);
-          isSpeaking = false;
-          ttsButton.textContent = '▶'; // Play icon
-          ttsButton.setAttribute('aria-label', 'Listen to this post');
-          ttsButton.setAttribute('title', 'Listen to this post');
+          resetButtonToPlay();
         };
-        
         // Clear queue and speak
         speechSynthesis.cancel(); // Ensure nothing else is queued or speaking
         speechSynthesis.speak(utterance);
