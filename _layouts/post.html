@@ -42,6 +42,7 @@ include_comments:
     let voices = [];
     let preferredVoice = null;
     let voicesLoaded = false; // Flag to track if voices are ready
+    let keepAliveInterval = null; // Interval timer for keep-alive
 
     // Check if SpeechSynthesis is supported
     if (!('speechSynthesis' in window)) {
@@ -90,6 +91,34 @@ include_comments:
         console.warn("Could not find a preferred voice, using browser default.");
       }
       // --- End Voice Selection Logic ---
+      
+      // Start keep-alive once voices are loaded
+      if (voicesLoaded && !keepAliveInterval) {
+          startKeepAlive();
+      }
+    }
+
+    // Function to start the keep-alive interval
+    function startKeepAlive() {
+        if (keepAliveInterval) return; // Already running
+        console.log("Starting keep-alive interval.");
+        keepAliveInterval = setInterval(() => {
+            if (!isSpeaking && !speechSynthesis.speaking) {
+                console.log("Keep-alive: Sending silent utterance.");
+                const silentUtterance = new SpeechSynthesisUtterance('');
+                silentUtterance.volume = 0; // Make it silent
+                speechSynthesis.speak(silentUtterance);
+            }
+        }, 14000); // Every 14 seconds
+    }
+
+    // Function to stop the keep-alive interval
+    function stopKeepAlive() {
+        if (keepAliveInterval) {
+            console.log("Stopping keep-alive interval.");
+            clearInterval(keepAliveInterval);
+            keepAliveInterval = null;
+        }
     }
 
     // Voices might load asynchronously
@@ -114,33 +143,27 @@ include_comments:
       <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
         <path d="M6 6h12v12H6z"/>
       </svg>`;
+      
+    // Separate function to reset button state
+    const resetButtonToPlay = () => {
+      isSpeaking = false;
+      ttsButton.innerHTML = playIconSVG; 
+      ttsButton.setAttribute('aria-label', 'Listen to this post');
+      ttsButton.setAttribute('title', 'Listen to this post');
+      startKeepAlive(); // Restart keep-alive when speech ends/errors
+    }
 
-    ttsButton.addEventListener('click', () => {
-      // Ensure voices are loaded before trying to speak
-      if (!voicesLoaded) {
-          console.warn("Voices not loaded yet. Please wait a moment and try again.");
-          // Re-attach handler in case it got detached or missed the initial event
-          if (speechSynthesis.onvoiceschanged !== undefined) {
-              speechSynthesis.onvoiceschanged = populateAndSelectVoice;
-          }
-          // Attempt to populate again, just in case
-          populateAndSelectVoice(); 
-          return; // Prevent speaking until voices are ready
-      }
-        
-      if (isSpeaking) {
-        speechSynthesis.cancel(); // Stop speaking
-        // Note: onend event will handle resetting the button state
-      } else {
+    // Separate function to initiate speech
+    function startSpeaking() {
         const textToSpeak = postContent.textContent || postContent.innerText || '';
         if (textToSpeak.trim().length === 0) {
             console.warn('No text content found to speak.');
+            resetButtonToPlay(); // Reset button if nothing to speak
             return;
         }
         
         utterance = new SpeechSynthesisUtterance(textToSpeak);
         
-        // Assign the preferred voice ONLY if it's validly set
         if (preferredVoice && preferredVoice instanceof SpeechSynthesisVoice) {
           utterance.voice = preferredVoice;
           console.log("Using voice:", preferredVoice.name);
@@ -149,42 +172,66 @@ include_comments:
         }
 
         utterance.onstart = () => {
+            stopKeepAlive(); // Stop keep-alive when real speech starts
             isSpeaking = true;
-            ttsButton.innerHTML = stopIconSVG; // Stop icon SVG
+            ttsButton.innerHTML = stopIconSVG; 
             ttsButton.setAttribute('aria-label', 'Stop listening');
             ttsButton.setAttribute('title', 'Stop listening');
             console.log('Speech synthesis started.');
         };
 
-        const resetButtonToPlay = () => {
-          isSpeaking = false;
-          ttsButton.innerHTML = playIconSVG; // Play icon SVG
-          ttsButton.setAttribute('aria-label', 'Listen to this post');
-          ttsButton.setAttribute('title', 'Listen to this post');
-        }
-
         utterance.onend = () => {
-          resetButtonToPlay();
-          console.log('Speech synthesis finished.');
+          // onend fires for both completion and cancellation.
+          // Only log finish if it wasn't cancelled by the user clicking stop.
+          if (isSpeaking) { 
+              console.log('Speech synthesis finished.');
+          } else {
+              console.log('Speech synthesis cancelled.');
+          }
+          resetButtonToPlay(); 
         };
 
-        // Ensure button resets on error
         utterance.onerror = (event) => {
           console.error('Speech synthesis error:', event);
-          resetButtonToPlay();
+          resetButtonToPlay(); 
         };
-        // Clear queue, resume, wait briefly, then speak (for Chrome compatibility)
+        
+        // Clear queue just before speaking
         speechSynthesis.cancel(); 
-        speechSynthesis.resume(); // Ensure synth is active
-        // Use setTimeout to allow cancel to finish before speaking
-        setTimeout(() => {
-            speechSynthesis.speak(utterance);
-        }, 50); // Small delay (50ms)
+        speechSynthesis.speak(utterance);
+    }
+
+    ttsButton.addEventListener('click', () => {
+      // 1. Check if voices are loaded
+      if (!voicesLoaded) {
+          console.warn("Voices not loaded yet. Please wait a moment and try again.");
+          populateAndSelectVoice(); // Try loading again
+          return; 
       }
+
+      // 2. Handle stopping speech
+      if (isSpeaking) {
+        isSpeaking = false; // Manually set flag before cancel, as onend might be delayed
+        speechSynthesis.cancel(); // Stop speaking (onend will call resetButtonToPlay)
+        return; 
+      }
+      
+      // 3. Check if synthesizer is stuck (Chrome quirk)
+      if (speechSynthesis.speaking) {
+          console.warn("Synthesizer is busy or stuck. Cancelling previous speech and retrying.");
+          speechSynthesis.cancel();
+          // Retry after a short delay to allow cancellation to complete
+          setTimeout(startSpeaking, 150); // Increased delay slightly
+          return;
+      }
+
+      // 4. If not speaking and synth is ready, start speaking
+      startSpeaking(); 
     });
 
-    // Optional: Stop speech synthesis when navigating away
+    // Optional: Stop speech synthesis and keep-alive when navigating away
     window.addEventListener('beforeunload', () => {
+        stopKeepAlive();
         if (isSpeaking) {
             speechSynthesis.cancel();
         }
