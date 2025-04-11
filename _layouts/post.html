@@ -80,8 +80,7 @@ include_comments:
           console.log('Speech synthesis finished.');
         };
 
-        // Ensure button resets even if cancelled mid-speech or on error
-        utterance.onboundary = utterance.onend; // Reset if stopped early
+        // Ensure button resets on error
         utterance.onerror = (event) => {
           console.error('Speech synthesis error:', event);
           isSpeaking = false;
