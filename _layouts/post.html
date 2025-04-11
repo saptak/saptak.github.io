@@ -97,8 +97,29 @@ include_comments:
         if (ttsButton) ttsButton.style.display = 'none'; // Hide button if elements missing
         return;
     }
+    
+    // Define SVG Icons once
+    const playIconSVG = `
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>`;
+    const stopIconSVG = `
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+        <path d="M6 6h12v12H6z"/>
+      </svg>`;
 
     ttsButton.addEventListener('click', () => {
+      // Ensure voices are loaded before trying to speak
+      if (speechSynthesis.getVoices().length === 0) {
+          console.warn("Voices not loaded yet, trying again shortly.");
+          // Optionally trigger voice loading again or wait
+          speechSynthesis.onvoiceschanged = () => { 
+              populateAndSelectVoice(); 
+              // Maybe automatically trigger speak if user clicked? Needs careful state management.
+          };
+          return; // Prevent speaking until voices are ready
+      }
+        
       if (isSpeaking) {
         speechSynthesis.cancel(); // Stop speaking
         // Note: onend event will handle resetting the button state
@@ -111,20 +132,13 @@ include_comments:
         
         utterance = new SpeechSynthesisUtterance(textToSpeak);
         
-        // Assign the preferred voice if found
-        if (preferredVoice) {
+        // Assign the preferred voice ONLY if it's validly set
+        if (preferredVoice && preferredVoice instanceof SpeechSynthesisVoice) {
           utterance.voice = preferredVoice;
+          console.log("Using voice:", preferredVoice.name);
+        } else {
+          console.log("Using default voice.");
         }
-
-        // SVG Icons
-        const playIconSVG = `
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-            <path d="M8 5v14l11-7z"/>
-          </svg>`;
-        const stopIconSVG = `
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-            <path d="M6 6h12v12H6z"/>
-          </svg>`;
 
         utterance.onstart = () => {
             isSpeaking = true;
