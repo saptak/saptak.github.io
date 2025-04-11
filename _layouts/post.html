@@ -13,7 +13,10 @@ include_comments:
 {% endif %}
 
 <article class="post">
-  {{ content }}
+  <button id="tts-button" aria-label="Listen to this post" style="margin-bottom: 1em; padding: 0.5em 1em; cursor: pointer;">Listen to Post</button>
+  <div id="post-content-for-tts">
+    {{ content }}
+  </div>
   
   {% if page.image_credit %}
   <div class="image-credit-footer">
@@ -24,3 +27,73 @@ include_comments:
   <div class="mt4 mb4">{% include post-navigation.html %}</div>
   <div class="mt4">{% include author-share.html %}</div>
 </article>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const ttsButton = document.getElementById('tts-button');
+    const postContent = document.getElementById('post-content-for-tts');
+    let isSpeaking = false;
+    let utterance = null;
+
+    // Check if SpeechSynthesis is supported
+    if (!('speechSynthesis' in window)) {
+      console.warn('Speech Synthesis not supported in this browser.');
+      if (ttsButton) {
+        ttsButton.style.display = 'none'; // Hide button if not supported
+      }
+      return; 
+    }
+    
+    // Ensure button and content exist
+    if (!ttsButton || !postContent) {
+        console.error('TTS button or content element not found.');
+        if (ttsButton) ttsButton.style.display = 'none'; // Hide button if elements missing
+        return;
+    }
+
+    ttsButton.addEventListener('click', () => {
+      if (isSpeaking) {
+        speechSynthesis.cancel(); // Stop speaking
+        isSpeaking = false;
+        ttsButton.textContent = 'Listen to Post';
+      } else {
+        const textToSpeak = postContent.textContent || postContent.innerText || '';
+        if (textToSpeak.trim().length === 0) {
+            console.warn('No text content found to speak.');
+            return;
+        }
+        
+        utterance = new SpeechSynthesisUtterance(textToSpeak);
+        
+        utterance.onstart = () => {
+            isSpeaking = true;
+            ttsButton.textContent = 'Stop Listening';
+            console.log('Speech synthesis started.');
+        };
+
+        utterance.onend = () => {
+          isSpeaking = false;
+          ttsButton.textContent = 'Listen to Post';
+          console.log('Speech synthesis finished.');
+        };
+
+        utterance.onerror = (event) => {
+          console.error('Speech synthesis error:', event);
+          isSpeaking = false;
+          ttsButton.textContent = 'Listen to Post';
+        };
+        
+        // Clear queue and speak
+        speechSynthesis.cancel(); // Ensure nothing else is queued or speaking
+        speechSynthesis.speak(utterance);
+      }
+    });
+
+    // Optional: Stop speech synthesis when navigating away
+    window.addEventListener('beforeunload', () => {
+        if (isSpeaking) {
+            speechSynthesis.cancel();
+        }
+    });
+  });
+</script>
