@@ -13,7 +13,7 @@ include_comments:
 {% endif %}
 
 <article class="post">
-  <button id="tts-button" aria-label="Listen to this post" style="margin-bottom: 1em; padding: 0.5em 1em; cursor: pointer;">Listen to Post</button>
+  <button id="tts-button" aria-label="Listen to this post" title="Listen to this post" style="margin-bottom: 1em; padding: 0.3em 0.6em; cursor: pointer; font-size: 1.2em; line-height: 1; border: 1px solid #ccc; background: none;">▶</button>
   <div id="post-content-for-tts">
     {{ content }}
   </div>
@@ -54,8 +54,7 @@ include_comments:
     ttsButton.addEventListener('click', () => {
       if (isSpeaking) {
         speechSynthesis.cancel(); // Stop speaking
-        isSpeaking = false;
-        ttsButton.textContent = 'Listen to Post';
+        // Note: onend event will handle resetting the button state
       } else {
         const textToSpeak = postContent.textContent || postContent.innerText || '';
         if (textToSpeak.trim().length === 0) {
@@ -67,20 +66,28 @@ include_comments:
         
         utterance.onstart = () => {
             isSpeaking = true;
-            ttsButton.textContent = 'Stop Listening';
+            ttsButton.textContent = '■'; // Stop icon
+            ttsButton.setAttribute('aria-label', 'Stop listening');
+            ttsButton.setAttribute('title', 'Stop listening');
             console.log('Speech synthesis started.');
         };
 
         utterance.onend = () => {
           isSpeaking = false;
-          ttsButton.textContent = 'Listen to Post';
+          ttsButton.textContent = '▶'; // Play icon
+          ttsButton.setAttribute('aria-label', 'Listen to this post');
+          ttsButton.setAttribute('title', 'Listen to this post');
           console.log('Speech synthesis finished.');
         };
 
+        // Ensure button resets even if cancelled mid-speech or on error
+        utterance.onboundary = utterance.onend; // Reset if stopped early
         utterance.onerror = (event) => {
           console.error('Speech synthesis error:', event);
           isSpeaking = false;
-          ttsButton.textContent = 'Listen to Post';
+          ttsButton.textContent = '▶'; // Play icon
+          ttsButton.setAttribute('aria-label', 'Listen to this post');
+          ttsButton.setAttribute('title', 'Listen to this post');
         };
         
         // Clear queue and speak
