@@ -43,9 +43,9 @@ Just as you wouldn't let someone drive without passing their test, you shouldn't
 
 ## The Three Pillars of AI Evaluation
 
-Based on the "Agents Companion" document and our research, we can organize AI evaluations into three main categories:
+We can organize AI evaluations into three main categories:
 
-### 1. Assessing Agent Capabilities 
+### 1. Assessing Agent Capabilities
 
 This pillar focuses on evaluating an agent's core abilities, such as its capacity to understand instructions and reason logically. This typically involves:
 
@@ -268,7 +268,7 @@ graph TD
     D --> F
     E --> F
     F --> G[Final Response]
-    
+
     H[Evaluation Framework] --> I[Individual Agent Evals]
     H --> J[Coordination Evals]
     H --> K[Final Response Evals]
@@ -286,7 +286,7 @@ One of the most scalable approaches to AI evaluation is using an LLM to evaluate
 Each great LLM eval contains four distinct parts:
 
 1. **Setting the role**: Provide the judge-LLM a clear role (e.g., "You are an expert evaluator of travel recommendations")
-   
+
 2. **Providing the context**: Include the user query, system response, and any relevant metadata
 
 3. **Providing the goal**: Clearly articulate what to measure (e.g., accuracy, helpfulness, safety)
@@ -296,7 +296,7 @@ Each great LLM eval contains four distinct parts:
 Example prompt template for an LLM-judge:
 
 ```
-You are an expert evaluator of travel recommendations. 
+You are an expert evaluator of travel recommendations.
 
 USER QUERY: {{user_query}}
 AI RESPONSE: {{ai_response}}
@@ -359,7 +359,7 @@ As the field continues to evolve, we can expect even more sophisticated evaluati
 For Product Managers looking to deepen their knowledge of AI evaluations:
 
 1. [Evidently AI's LLM Evaluation Guide](https://www.evidentlyai.com/llm-guide/llm-evaluation) - Comprehensive overview of evaluation approaches
-2. [Arize AI's Blog on Evals](https://arize.com/blog-category/llm/) - Practical insights from industry practitioners 
+2. [Arize AI's Blog on Evals](https://arize.com/blog-category/llm/) - Practical insights from industry practitioners
 3. [Weights & Biases LLM Evaluations Guide](https://wandb.ai/onlineinference/genai-research/reports/LLM-evaluations-Metrics-frameworks-and-best-practices--VmlldzoxMTMxNjQ4NA) - Metrics, frameworks, and best practices
 4. [Lenny's Newsletter: Beyond Vibe Checks - A PM's Guide to Evals](https://www.lennysnewsletter.com/p/beyond-vibe-checks-a-pms-complete) - Product management perspective on AI evaluations
 
