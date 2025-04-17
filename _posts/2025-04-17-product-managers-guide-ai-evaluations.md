@@ -8,8 +8,8 @@ description: A comprehensive guide for Product Managers on implementing effectiv
   evaluation frameworks for AI-powered applications to ensure reliability, consistency,
   and user satisfaction.
 header_image_path: /assets/img/blog/headers/2025-04-17-product-managers-guide-ai-evaluations.jpg
-image_credit: Photo by New Material on Unsplash
-image_credit_url: https://unsplash.com/photos/a-pile-of-coins-ug-sM8DOgsQ
+image_credit: Photo by Nery Montenegro on Unsplash
+image_credit_url: https://unsplash.com/photos/white-and-orange-container-SmEty_TVr80
 layout: post
 tags: *id001
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-17-product-managers-guide-ai-evaluations.jpg
