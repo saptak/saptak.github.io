@@ -7,7 +7,8 @@ date: 2025-04-25
 description: Learn how to build robust AI applications by combining DSPy's declarative
   programming approach with the powerful reasoning capabilities of Gemini Flash 2.5.
 header_image_path: /assets/img/blog/headers/2025-04-25-building-ai-applications-with-dspy-and-gemini-flash.jpg
-image_credit: Photo by Rami Al-zayat on Unsplash
+image_credit: Photo by Xiaole Tao on Unsplash
+image_credit_url: https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-white-desk-Fo-HQUlRGkU
 layout: post
 tags: dspy gemini-flash-2.5 llm ai-programming rag
 thumbnail_path: /assets/img/blog/thumbnails/2025-04-25-building-ai-applications-with-dspy-and-gemini-flash.jpg
