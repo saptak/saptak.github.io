@@ -7,7 +7,8 @@ description: A comprehensive guide to implementing AI Agent Design Patterns usin
   Google's Agent Development Kit (ADK). Learn about ReACT, CodeACT, Tool Use, Self-reflection,
   Multi-agent workflows, and Agentic RAG with practical code examples.
 header_image_path: /assets/img/blog/headers/2025-04-26-powerful-agentic-design-patterns-for-building-ai-agents-with-google-adk.jpg
-image_credit: Photo by freestocks on Unsplash
+image_credit: Photo by JESHOOTS.COM on Unsplash
+image_credit_url: https://unsplash.com/photos/three-black-handled-pliers-on-brown-surface-VdOO4_HFTWM
 layout: post
 tags:
 - agentic-ai
