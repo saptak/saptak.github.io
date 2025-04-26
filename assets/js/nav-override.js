@@ -72,7 +72,7 @@
 
       return navInstance;
     } catch (e) {
-      console.error('Error initializing responsive nav:', e);
+      console.log('Error initializing responsive nav:', e.message);
       return {
         toggle: function() {},
         open: function() {},

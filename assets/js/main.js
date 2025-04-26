@@ -1,7 +1,7 @@
 /*
  * Jekyll does not have support built-in for asset minification. There is a Jekyll
- * Assets Plugin (https://github.com/jekyll-assets/jekyll-assets), but GitHub 
- * Pages does not support it. It's probably possible to generate the assets 
+ * Assets Plugin (https://github.com/jekyll-assets/jekyll-assets), but GitHub
+ * Pages does not support it. It's probably possible to generate the assets
  * locally and check them in, but that seems error prone. As an experiment, I've
  * taken the few JS files I rely on and put their minified versions directly in
  * this file. This can be cleaned up later if I have a significant amount of JS
@@ -23,5 +23,10 @@
 (function() {
   "use strict";
 
-  responsiveNav('.nav-collapse');
+  // Only initialize responsive navigation if the element exists
+  if (document.querySelector('.nav-collapse')) {
+    responsiveNav('.nav-collapse');
+  } else {
+    console.log('Navigation element .nav-collapse not found. Skipping responsive navigation initialization.');
+  }
 })();

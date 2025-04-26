@@ -5,7 +5,7 @@
       <img src="/assets/img/Saptak-Sen-w.lowres.png" alt="{{ site.name }}" class="dark-mode-logo" style="height: 32px; width: auto; vertical-align: middle; transform: translateY(-1px); display: none; object-fit: contain;">
     </a>
   </div>
-  <div class="right">  
+  <div class="right">
     <span style="display: inline-block; vertical-align: middle;">
       <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode" style="vertical-align: middle;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="dark-mode-toggle-icon" width="20" height="20">
@@ -21,3 +21,13 @@
     {% endfor %}
   </div>
 </nav>
+
+<!-- Hidden nav-collapse element to prevent JavaScript errors -->
+<div class="nav-collapse" style="display: none;" aria-hidden="true">
+  <!-- This element is only here to prevent JavaScript errors with responsive-nav.js -->
+  <ul>
+    {% for nav_item in site.nav.main %}
+      <li><a href="{{ nav_item[1] }}">{{ nav_item[0] | upcase }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
