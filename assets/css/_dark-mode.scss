@@ -22,10 +22,10 @@
 
 [data-theme="dark"] {
   --bg-color: #1a1a1a;
-  --text-color: #ffffff;
+  --text-color: #e0e0e0;
   --heading-color: #ffffff;
-  --link-color: #ffffff;
-  --link-hover-color: #ffffff;
+  --link-color: #4da3ff;
+  --link-hover-color: #6fb5ff;
   --border-color: #444444;
   --code-bg: #2d2d2d;
   --code-color: #e0e0e0;
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: var(--link-color) !important;
 
-  
+
   &:hover {
     color: var(--link-hover-color) !important;
   }
@@ -108,16 +108,16 @@ blockquote {
 [data-theme="dark"] {
   background-color: var(--bg-color) !important;
   color: var(--text-color) !important;
-  
+
   header, footer, .container, .site-header, nav, main, section, article {
     background-color: var(--bg-color) !important;
     color: var(--text-color) !important;
   }
-  
+
   .bg-white, .bg-light, .bg-splash-gray {
     background-color: var(--bg-color) !important;
   }
-  
+
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: var(--heading-color) !important;
   }
@@ -128,25 +128,53 @@ blockquote {
     background-color: var(--card-bg) !important;
   }
 
-  // Force all links to use the dark mode link color
+  // Force all links to use the dark mode link color with improved contrast
   a:not(.dark-mode-toggle):not(.button) {
     color: var(--link-color) !important;
+    text-decoration: underline;
   }
-  
+
   a:not(.dark-mode-toggle):not(.button):hover {
     color: var(--link-hover-color) !important;
+    text-decoration: underline;
   }
-  
+
+  // Ensure links in posts and articles have proper contrast
+  .post a, article a, .container a {
+    color: var(--link-color) !important;
+    text-decoration: underline;
+  }
+
+  .post a:hover, article a:hover, .container a:hover {
+    color: var(--link-hover-color) !important;
+    opacity: 0.9;
+  }
+
   // Ensure borders use dark mode colors
   .border, .border-top, .border-right, .border-bottom, .border-left {
     border-color: var(--border-color) !important;
   }
-  
-  // Only target content text, not all p, span, div elements
-  .post p, .post span, .container p {
+
+  // Ensure all text content is properly colored in dark mode
+  .post p, .post span, .post div, .post li, .post td, .post th, .post code,
+  .container p, .container span, .container div, .container li, .container td, .container th,
+  article p, article span, article div, article li, article td, article th,
+  .post-content p, .post-content span, .post-content div, .post-content li,
+  .post-content td, .post-content th, .post-content code {
     color: var(--text-color) !important;
   }
-  
+
+  // Ensure code blocks have proper contrast
+  pre, code, .highlight {
+    background-color: var(--code-bg) !important;
+    color: var(--code-color) !important;
+  }
+
+  // Ensure list items are visible
+  ul, ol {
+    color: var(--text-color) !important;
+  }
+
   .gray, .text-gray {
     color: var(--footer-text) !important;
   }
@@ -156,7 +184,7 @@ blockquote {
 [data-theme="dark"] {
   .highlight {
     background-color: var(--code-bg);
-    
+
     .c, .c1, .cm, .cs, .cd { color: #75715e; } /* Comments */
     .err { color: #f92672; } /* Error */
     .k, .kc, .kd, .kp, .kr, .kt { color: #66d9ef; } /* Keywords */
@@ -204,7 +232,7 @@ blockquote {
   transition: color var(--transition-time);
   line-height: 0;
   font-size: 0; /* Remove any potential text */
-  
+
   /* Hide any text or spans that might be added */
   span, .toggle-text {
     display: none !important;
@@ -214,17 +242,17 @@ blockquote {
     opacity: 0 !important;
     pointer-events: none !important;
   }
-  
+
   svg {
     width: 1.2rem;
     height: 1.2rem;
     fill: currentColor;
   }
-  
+
   &:hover {
     opacity: 0.7;
   }
-  
+
   &:focus {
     outline: none;
   }
@@ -248,7 +276,42 @@ blockquote {
   filter: brightness(0.85) contrast(1.1);
 }
 
-// Logo toggle styles 
+// Additional dark mode improvements for code blocks and inline code
+[data-theme="dark"] {
+  // Improve code block readability
+  pre.highlight, div.highlight, .highlight pre {
+    background-color: #2d2d2d !important;
+    border: 1px solid #444 !important;
+    color: #e0e0e0 !important;
+  }
+
+  // Improve inline code readability
+  code.highlighter-rouge {
+    background-color: #2d2d2d !important;
+    color: #e0e0e0 !important;
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+
+  // Ensure tables have proper contrast
+  table {
+    border-color: var(--border-color) !important;
+
+    th, td {
+      border-color: var(--border-color) !important;
+    }
+
+    th {
+      background-color: #2d2d2d !important;
+    }
+
+    tr:nth-child(even) {
+      background-color: #252525 !important;
+    }
+  }
+}
+
+// Logo toggle styles
 .light-mode-logo {
   display: inline-block;
 }
