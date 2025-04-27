@@ -49,20 +49,19 @@ The gateway pattern, a proven solution for managing complexity in traditional ap
 Understanding the Envoy AI Gateway requires context on how gateway patterns have evolved within the Kubernetes ecosystem. This evolution reflects a continuous drive towards more powerful, flexible, and standardized ways to manage traffic into and within clusters.
 
 
-    Code snippet
-
-timeline \
-    title Gateway API Evolution \
-    2015 : Kubernetes Service abstraction introduced (v1.0) \
-           Envoy Proxy development begins at Lyft \
-    2017 : Envoy Proxy donated to CNCF \
-    2020 : Ingress controllers mature, standardization efforts begin \
-    2022 : Envoy Gateway project launched (built on Envoy Proxy) \
-           Focus on North-South traffic patterns using Gateway API \
-    2023 : Kubernetes Gateway API becomes Generally Available (GA) \
-    2025 : Envoy AI Gateway development initiated (built on Envoy Gateway) \
-           Specialized for AI/LLM inference workloads \
-
+```mermaid
+timeline 
+    title Gateway API Evolution 
+    2015 : Kubernetes Service abstraction introduced (v1.0) 
+           Envoy Proxy development begins at Lyft 
+    2017 : Envoy Proxy donated to CNCF 
+    2020 : Ingress controllers mature, standardization efforts begin 
+    2022 : Envoy Gateway project launched (built on Envoy Proxy) 
+           Focus on North-South traffic patterns using Gateway API 
+    2023 : Kubernetes Gateway API becomes Generally Available (GA) 
+    2025 : Envoy AI Gateway development initiated (built on Envoy Gateway) 
+           Specialized for AI/LLM inference workloads 
+```
 
 Initially, Kubernetes relied on the Service object for basic load balancing. As needs grew more complex, Ingress controllers emerged, offering L7 routing capabilities but suffering from implementation inconsistencies and limited expressiveness.
 
@@ -99,27 +98,26 @@ These AI-specific CRDs work alongside standard Gateway API resources (Gateway, H
 Traditional load balancing (round-robin, least connections) often falls short for AI inference workloads, which can be long-running, stateful (due to caches like KV-cache), and resource-intensive (GPU-bound). AI Gateways, particularly when managing self-hosted models via extensions like the Gateway API Inference Extension, introduce more sophisticated routing mechanisms:
 
 
-    Code snippet
-
-flowchart TB \
-    Client --> Gateway \
-    Gateway --> InferencePool[Inference Pool] \
-    InferencePool --> Picker[Endpoint Picker Extension] \
- \
-    subgraph Metrics Source \
-        direction LR \
-        ModelServer1 --> Metrics1 \
-        ModelServer2 --> Metrics2 \
-        ModelServer3 --> Metrics3 \
-    end \
- \
-    Metrics1 --> Picker \
-    Metrics2 --> Picker \
-    Metrics3 --> Picker \
- \
-    Picker --> OptimalServer \
-    OptimalServer --> Response \
-
+```mermaid
+flowchart TB
+    Client --> Gateway
+    Gateway --> InferencePool[Inference Pool]
+    InferencePool --> Picker[Endpoint Picker Extension]
+ 
+    subgraph Metrics Source
+        direction LR
+        ModelServer1 --> Metrics1
+        ModelServer2 --> Metrics2
+        ModelServer3 --> Metrics3
+    end
+ 
+    Metrics1 --> Picker
+    Metrics2 --> Picker
+    Metrics3 --> Picker
+ 
+    Picker --> OptimalServer
+    OptimalServer --> Response
+```
 
 
 
@@ -154,28 +152,27 @@ Recognizing the complexity of configuring Envoy directly, **Envoy Gateway** was 
 The Envoy AI Gateway architecture maintains a clear separation between the control plane (configuration and management) and the data plane (request processing).
 
 
-    Code snippet
-
-flowchart LR \
-    subgraph Control Plane \
-        AIGWController[AI Gateway Controller] \
-        GWController[Envoy Gateway Controller] \
-        XDS \
-    end \
- \
-    subgraph Data Plane \
-        Proxy[Envoy Proxy] \
-        ExtProc \
-        RateLimitSvc \
-    end \
- \
-    AIGWController --> GWController \
-    GWController --> XDS \
-    XDS --> Proxy \
- \
-    Proxy &lt;--> ExtProc \
-    Proxy &lt;--> RateLimitSvc \
-
+```mermaid
+flowchart LR
+    subgraph Control Plane
+        AIGWController[AI Gateway Controller]
+        GWController[Envoy Gateway Controller]
+        XDS
+    end
+ 
+    subgraph Data Plane
+        Proxy[Envoy Proxy]
+        ExtProc
+        RateLimitSvc
+    end
+ 
+    AIGWController --> GWController
+    GWController --> XDS
+    XDS --> Proxy
+ 
+    Proxy <--> ExtProc
+    Proxy <--> RateLimitSvc
+```
 
 
 
@@ -206,39 +203,37 @@ These CRDs are distinct from the standard Gateway API CRDs (GatewayClass, Gatewa
 The system maintains a clear separation of concerns between the two controllers:
 
 
-    Code snippet
-
-flowchart TD \
-    subgraph UserConfiguration["User Configuration (YAML)"] \
-        AIGW_CRDs \
-        GW_CRDs \
-        Policy_CRDs \
-    end \
- \
-    subgraph ControlPlane["Control Plane"] \
-        AIGWController[AI Gateway Controller] \
-        GWController[Envoy Gateway Controller] \
-    end \
- \
-    subgraph DataPlane["Data Plane"] \
-        EnvoyProxy[Envoy Proxy] \
-        ExtProc[External Processor] \
-        RateLimitSvc \
-    end \
- \
-    UserConfiguration --> ControlPlane \
- \
-    AIGW_CRDs --> AIGWController \
-    Policy_CRDs --> AIGWController \
-    AIGWController -- Creates/Updates --> GW_CRDs \
-    AIGWController -- Configures --> ExtProc \
-    AIGWController -- Configures --> RateLimitSvc \
- \
-    GW_CRDs --> GWController \
-    Policy_CRDs --> GWController \
-    GWController -- xDS APIs --> EnvoyProxy \
- \
-
+```mermaid
+flowchart TD
+    subgraph UserConfiguration["User Configuration (YAML)"]
+        AIGW_CRDs
+        GW_CRDs
+        Policy_CRDs
+    end
+ 
+    subgraph ControlPlane["Control Plane"]
+        AIGWController[AI Gateway Controller]
+        GWController[Envoy Gateway Controller]
+    end
+ 
+    subgraph DataPlane["Data Plane"]
+        EnvoyProxy[Envoy Proxy]
+        ExtProc[External Processor]
+        RateLimitSvc
+    end
+ 
+    UserConfiguration --> ControlPlane
+ 
+    AIGW_CRDs --> AIGWController
+    Policy_CRDs --> AIGWController
+    AIGWController -- Creates/Updates --> GW_CRDs
+    AIGWController -- Configures --> ExtProc
+    AIGWController -- Configures --> RateLimitSvc
+ 
+    GW_CRDs --> GWController
+    Policy_CRDs --> GWController
+    GWController -- xDS APIs --> EnvoyProxy
+```
 
 
 
@@ -258,34 +253,33 @@ This ensures the AI Gateway Controller focuses purely on AI concerns, while the 
 A typical request lifecycle showcases the interaction between the data plane components:
 
 
-    Code snippet
-
-sequenceDiagram \
-    participant Client \
-    participant EnvoyProxy as Envoy Proxy \
-    participant ExtProc as External Processor \
-    participant RateLimitSvc as Rate Limit Service \
-    participant AIProvider as AI Provider Backend \
- \
-    Client->>EnvoyProxy: Request to unified API (e.g., /v1/chat/completions) \
-    Note over EnvoyProxy: Route Matching & Permissions Check \
-    EnvoyProxy->>RateLimitSvc: Check token rate limit (based on user/model) \
-    RateLimitSvc->>EnvoyProxy: OK (or 429 if limit exceeded) \
-    EnvoyProxy->>ExtProc: Process Request (Headers/Body) \
-    Note over ExtProc: Determine target provider/model \
-    ExtProc->>EnvoyProxy: Provider routing info (via dynamic metadata) \
-    Note over EnvoyProxy: Select Upstream Cluster \
-    EnvoyProxy->>ExtProc: Transform Request (Headers/Body) \
-    Note over ExtProc: Translate to provider schema, Inject Credentials (API Key) \
-    ExtProc->>EnvoyProxy: Transformed Request \
-    EnvoyProxy->>AIProvider: Forward request to specific AI Provider \
-    AIProvider->>EnvoyProxy: Provider Response \
-    EnvoyProxy->>ExtProc: Process Response (Headers/Body) \
-    Note over ExtProc: Extract token usage metrics, Transform response to unified schema \
-    ExtProc->>RateLimitSvc: Update token usage counters \
-    ExtProc->>EnvoyProxy: Transformed Response \
-    EnvoyProxy->>Client: Final Response \
-
+```mermaid
+sequenceDiagram
+    participant Client
+    participant EnvoyProxy as Envoy Proxy
+    participant ExtProc as External Processor
+    participant RateLimitSvc as Rate Limit Service
+    participant AIProvider as AI Provider Backend
+ 
+    Client->>EnvoyProxy: Request to unified API (e.g., /v1/chat/completions)
+    Note over EnvoyProxy: Route Matching & Permissions Check
+    EnvoyProxy->>RateLimitSvc: Check token rate limit (based on user/model)
+    RateLimitSvc->>EnvoyProxy: OK (or 429 if limit exceeded)
+    EnvoyProxy->>ExtProc: Process Request (Headers/Body)
+    Note over ExtProc: Determine target provider/model
+    ExtProc->>EnvoyProxy: Provider routing info (via dynamic metadata)
+    Note over EnvoyProxy: Select Upstream Cluster
+    EnvoyProxy->>ExtProc: Transform Request (Headers/Body)
+    Note over ExtProc: Translate to provider schema, Inject Credentials (API Key)
+    ExtProc->>EnvoyProxy: Transformed Request
+    EnvoyProxy->>AIProvider: Forward request to specific AI Provider
+    AIProvider->>EnvoyProxy: Provider Response
+    EnvoyProxy->>ExtProc: Process Response (Headers/Body)
+    Note over ExtProc: Extract token usage metrics, Transform response to unified schema
+    ExtProc->>RateLimitSvc: Update token usage counters
+    ExtProc->>EnvoyProxy: Transformed Response
+    EnvoyProxy->>Client: Final Response
+```
 
 **Request Path (Ingress):**
 
@@ -321,27 +315,26 @@ This flow demonstrates how the ExtProc acts as the central hub for AI-specific l
 For organizations running their own AI models within their infrastructure (e.g., on Kubernetes), optimizing performance and resource utilization is paramount, especially given the high cost of accelerators like GPUs. Envoy AI Gateway supports the **Gateway API Inference Extension**, enabling sophisticated, metrics-driven load balancing for these self-hosted models.
 
 
-    Code snippet
-
-flowchart LR \
-    Client --> AIGW \
-    AIGW -- Routes to --> InfPool \
-    InfPool -- Uses --> EP[Endpoint Picker Extension] \
- \
-    subgraph ModelServers \
-        direction TB \
-        MS1 --> Metrics1 \
-        MS2 --> Metrics2 \
-        MS3 --> Metrics3 \
-    end \
- \
-    Metrics1 --> EP \
-    Metrics2 --> EP \
-    Metrics3 --> EP \
- \
-    EP -- Selects --> OptimalMS \
-    OptimalMS --> Response \
-
+```mermaid
+flowchart LR
+    Client --> AIGW
+    AIGW -- Routes to --> InfPool
+    InfPool -- Uses --> EP[Endpoint Picker Extension]
+ 
+    subgraph ModelServers
+        direction TB
+        MS1 --> Metrics1
+        MS2 --> Metrics2
+        MS3 --> Metrics3
+    end
+ 
+    Metrics1 --> EP
+    Metrics2 --> EP
+    Metrics3 --> EP
+ 
+    EP -- Selects --> OptimalMS
+    OptimalMS --> Response
+```
 
 When leveraging the Inference Extension (which needs to be explicitly enabled via Helm flag --set controller.enableInferenceExtension=true), the AIGatewayRoute can be configured to target an InferencePool resource instead of a standard AIServiceBackend.
 
@@ -475,35 +468,34 @@ In essence, while a traditional API Gateway manages the *connection* to services
 Amazon Web Services (AWS) provides a mature ecosystem for deploying containerized applications and AI services, making it a common target environment for Envoy AI Gateway. A typical deployment leverages several key AWS services:
 
 
-    Code snippet
-
-flowchart TD \
-    Client[External Clients] --> NLB \
-    NLB --> EKSCluster \
- \
-    subgraph EKSCluster \
-        direction LR \
-        subgraph ControlPlaneNodes [Control Plane Nodes] \
-            AIGWC[AI Gateway Controller Pod] \
-            EGC[Envoy Gateway Controller Pod] \
-            Redis \
-        end \
-        subgraph DataPlaneNodes [Data Plane Nodes (CPU-Optimized EC2)] \
-            EnvoyFleet \
-            ExtProc[External Processor Pod(s)] \
-        end \
-    end \
- \
-    EnvoyFleet --> Bedrock \
-    EnvoyFleet --> SageMaker \
-    EnvoyFleet --> SelfHostedModels \
-    EnvoyFleet --> ExternalProvider[External AI Provider (e.g., OpenAI API)] \
-    EnvoyFleet --> OnPrem[On-Prem Models] \
- \
-    EKSCluster --> CloudWatch[CloudWatch (Metrics & Logs)] \
-    EKSCluster --> CloudTrail \
-    EKSCluster --> SecretsManager \
-
+```mermaid
+flowchart TD
+    Client[External Clients] --> NLB
+    NLB --> EKSCluster
+ 
+    subgraph EKSCluster
+        direction LR
+        subgraph ControlPlaneNodes [Control Plane Nodes]
+            AIGWC[AI Gateway Controller Pod]
+            EGC[Envoy Gateway Controller Pod]
+            Redis
+        end
+        subgraph DataPlaneNodes [Data Plane Nodes (CPU-Optimized EC2)]
+            EnvoyFleet
+            ExtProc[External Processor Pod(s)]
+        end
+    end
+ 
+    EnvoyFleet --> Bedrock
+    EnvoyFleet --> SageMaker
+    EnvoyFleet --> SelfHostedModels
+    EnvoyFleet --> ExternalProvider[External AI Provider (e.g., OpenAI API)]
+    EnvoyFleet --> OnPrem[On-Prem Models]
+ 
+    EKSCluster --> CloudWatch[CloudWatch (Metrics & Logs)]
+    EKSCluster --> CloudTrail
+    EKSCluster --> SecretsManager
+```
 
 
 
