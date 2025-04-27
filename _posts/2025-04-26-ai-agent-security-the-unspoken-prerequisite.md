@@ -29,7 +29,7 @@ In the race to deploy AI agents across enterprises, a critical element is consis
 The OWASP Foundation, renowned for its work in web application security, has identified 15 distinct threats specific to AI agent systems. This taxonomy provides a sobering reality check for organizations excited about agentic AI's transformative potential but blind to its unique security challenges.
 
 These threats span the entire agent architecture—from the LLM models powering reasoning capabilities to the tools agents can access, and the memory systems storing sensitive context. Unlike traditional software, AI agents combine autonomous decision-making with powerful system access, creating novel attack vectors that conventional security approaches aren't designed to address.
-![OWASP Agentic Threat Model](assets/img/blog/2025-04-26-ai-agent-security-the-unspoken-prerequisite/owasp15.jpeg)
+![OWASP Agentic Threat Model](/assets/img/blog/2025-04-26-ai-agent-security-the-unspoken-prerequisite/owasp15.jpeg)
 
 ## Four Critical Security Dimensions for AI Agents
 
