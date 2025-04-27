@@ -28,7 +28,7 @@ include_comments:
 {% for i in (offset..end_offset) %}
   {% if i < total_posts %}
     {% assign post = site.posts[i] %}
-    {% include post-outline.html post=post %}
+    {% include blog-post-outline.html post=post %}
   {% endif %}
 {% endfor %}
 

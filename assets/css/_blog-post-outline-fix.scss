@@ -1,0 +1,47 @@
+// Ensure consistent styling between blog and writing post outlines
+
+// Fix for blog post outlines
+article.clearfix {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  
+  // Ensure proper spacing
+  .col.sm-col-4 {
+    padding-right: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .col.sm-col-8 {
+    padding-left: 1rem;
+    box-sizing: border-box;
+  }
+  
+  // Fix title wrapping
+  h2.post-title-wrap {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: normal;
+    white-space: normal;
+  }
+}
+
+// Mobile-specific fixes
+@media screen and (max-width: 40em) {
+  article.clearfix {
+    .col.sm-col-4, .col.sm-col-8 {
+      width: 100%;
+      float: none;
+      padding: 0;
+    }
+    
+    .col.sm-col-4 {
+      margin-bottom: 1rem;
+    }
+  }
+}
