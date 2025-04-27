@@ -7,7 +7,6 @@ excerpt_separator: ""
 nav:
   main:
     blog: "/blog"
-    writing: "/writing"
     gallery: "https://gallery.saptak.in"
     #speaking: "/speaking"
     #projects: "/projects"
