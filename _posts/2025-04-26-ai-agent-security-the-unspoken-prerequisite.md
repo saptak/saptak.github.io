@@ -20,40 +20,6 @@ thumbnail_path: /assets/img/blog/thumbnails/2025-04-26-ai-agent-security-the-uns
 title: 'AI Agent Security: The Unspoken Prerequisite for Enterprise Adoption'
 ---
 
-<div class="mermaid">
-graph TD
-    User((User)) -->|T14,T15| App[Application]
-    
-    Input[Input NL Media] -->|T2| Agent
-    Agent --> Output[Output NL Media]
-    Output -->|T11| App
-    
-    Planning[Planning] -->|T6| Action[Action]
-    Action -->|T8| Tools[Tools / Function Calling]
-    Tools -->|T7| Planning
-    
-    Memory[Memory] -->|T1| Agent
-    ShortTerm[Short-Term] --> Memory
-    
-    Content[(Content)] -->|T3| Agent
-    Database[(Data)] -->|T9| Agent
-    Human[Human in loop] -->|T10| Agent
-    Device[Device] -->|T11| Agent
-    Code[(Code)] -->|T11| Agent
-    API[(Service API)] -->|T12| Agent
-    
-    LTM[Long-Term Memory] -->|T1| Agent
-    VectorDB[Vector Datastore] -->|T4| Agent
-    
-    LLM[LLM Model] -->|T4,T5,T6,T12,T13| Agent
-    AugModel[Augmented Model] --> LLM
-    FunctionCalling[Function Calling] --> AugModel
-    
-    Agent2[Agent #2] -->|T4,T5,T12,T13| App
-    
-    LLM -->|T4,T7,T8,T9,T10| VectorDB
-</div>
-
 # AI Agent Security: The Unspoken Prerequisite for Enterprise Adoption
 
 In the race to deploy AI agents across enterprises, a critical element is consistently overlooked—comprehensive security. While organizations rush to implement these powerful automation tools, they're often building on foundations of sand. The hard truth is that **AI agent security isn't just important; it's the fundamental blocker preventing widespread, safe adoption in production environments**.
@@ -63,6 +29,7 @@ In the race to deploy AI agents across enterprises, a critical element is consis
 The OWASP Foundation, renowned for its work in web application security, has identified 15 distinct threats specific to AI agent systems. This taxonomy provides a sobering reality check for organizations excited about agentic AI's transformative potential but blind to its unique security challenges.
 
 These threats span the entire agent architecture—from the LLM models powering reasoning capabilities to the tools agents can access, and the memory systems storing sensitive context. Unlike traditional software, AI agents combine autonomous decision-making with powerful system access, creating novel attack vectors that conventional security approaches aren't designed to address.
+![OWASP Agentic Threat Model](assets/img/blog/2025-04-26-ai-agent-security-the-unspoken-prerequisite/owasp15.jpeg)
 
 ## Four Critical Security Dimensions for AI Agents
 
