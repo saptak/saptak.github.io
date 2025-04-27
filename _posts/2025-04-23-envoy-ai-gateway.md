@@ -469,32 +469,27 @@ Amazon Web Services (AWS) provides a mature ecosystem for deploying containerize
 
 
 ```mermaid
-flowchart TD
-    Client[External Clients] --> NLB
-    NLB --> EKSCluster
- 
-    subgraph EKSCluster
-        direction LR
-        subgraph ControlPlaneNodes [Control Plane Nodes]
-            AIGWC[AI Gateway Controller Pod]
-            EGC[Envoy Gateway Controller Pod]
-            Redis
-        end
-        subgraph DataPlaneNodes [Data Plane Nodes (CPU-Optimized EC2)]
-            EnvoyFleet
-            ExtProc[External Processor Pod(s)]
-        end
+graph TD
+    Client[External Clients] --> NLB[Network Load Balancer]
+    NLB --> EKS[EKS Cluster]
+    
+    subgraph EKS
+        AIGWC[AI Gateway Controller]
+        EGC[Envoy Gateway Controller]
+        Redis[Redis Cache]
+        EnvoyFleet[Envoy Proxy Fleet]
+        ExtProc[External Processor]
     end
- 
-    EnvoyFleet --> Bedrock
-    EnvoyFleet --> SageMaker
-    EnvoyFleet --> SelfHostedModels
-    EnvoyFleet --> ExternalProvider[External AI Provider (e.g., OpenAI API)]
+    
+    EnvoyFleet --> Bedrock[AWS Bedrock]
+    EnvoyFleet --> SageMaker[SageMaker]
+    EnvoyFleet --> SelfHosted[Self-Hosted Models]
+    EnvoyFleet --> External[External AI Providers]
     EnvoyFleet --> OnPrem[On-Prem Models]
- 
-    EKSCluster --> CloudWatch[CloudWatch (Metrics & Logs)]
-    EKSCluster --> CloudTrail
-    EKSCluster --> SecretsManager
+    
+    EKS --> CloudWatch[CloudWatch]
+    EKS --> CloudTrail[CloudTrail]
+    EKS --> Secrets[Secrets Manager]
 ```
 
 
