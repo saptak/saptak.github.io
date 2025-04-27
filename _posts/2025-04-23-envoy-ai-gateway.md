@@ -26,14 +26,16 @@ toc: true
 
 ## **Introduction: The New Frontier of Enterprise Infrastructure**
 
-Artificial intelligence (AI) inference services are rapidly transitioning from experimental projects to fundamental components of enterprise architecture, joining the ranks of compute, storage, databases, and networking. As organizations increasingly rely on AI models to power applications, drive insights, and maintain a competitive edge, a new set of challenges emerges. How can enterprises efficiently manage access to the burgeoning ecosystem of AI models—now numbering over 400,000 across diverse platforms and hosting providers? How can they ensure security, maintain governance, enforce cost controls, and navigate the internal friction between product teams demanding rapid access and central IT/security teams requiring oversight? This post explores how the Envoy AI Gateway, an open-source project built upon the robust foundations of the Kubernetes Gateway API and the battle-tested Envoy proxy, provides a compelling solution to these critical challenges.
+Artificial intelligence (AI) inference services are rapidly transitioning from experimental projects to fundamental components of enterprise architecture, joining the ranks of compute, storage, databases, and networking. As organizations increasingly rely on AI models to power applications, drive insights, and maintain a competitive edge, a new set of challenges emerges.
+* How can enterprises efficiently manage access to the burgeoning ecosystem of AI models—now numbering over 400,000 across diverse platforms and hosting providers? 
+* How can they ensure security, maintain governance, enforce cost controls, and navigate the internal friction between product teams demanding rapid access and central IT/security teams requiring oversight? 
+
+This post explores how the Envoy AI Gateway, an open-source project built upon the foundations of the Kubernetes Gateway API and the battle-tested Envoy proxy, provides a solution to these critical challenges.
 
 
 ## The AI Integration Challenge: Navigating Complexity and Risk
 
 The integration of AI into enterprise workflows is not merely a technical task; it's a strategic imperative fraught with complexity. The current landscape presents significant hurdles for organizations seeking to leverage AI effectively and responsibly:
-
-
 
 * **Model Proliferation and Diversity:** With hundreds of thousands of models available from numerous providers (OpenAI, AWS Bedrock, Google Gemini, Azure OpenAI, self-hosted models, etc.), managing access and ensuring compatibility becomes a major undertaking. No single model is likely to dominate, mirroring the database ecosystem, necessitating flexibility.
 * **Fragmented Adoption and Governance:** Often, AI adoption happens in silos across different departments (marketing, HR, customer service), each selecting preferred vendors and implementing inconsistent security controls, leading to a fragmented and difficult-to-manage integration landscape. This fragmentation complicates governance, especially with varying regional regulations (like those in Asia/Pacific) and the need for consistent security and compliance. Siloed approaches treat governance and security as separate disciplines, increasing risks.
@@ -237,7 +239,7 @@ flowchart TD
 
 
 
-1. Users (Application Developers, Platform Owners) define configurations using AI Gateway CRDs, standard Gateway API CRDs, and policy CRDs.
+1. **Users** (Application Developers, Platform Owners) define configurations using AI Gateway CRDs, standard Gateway API CRDs, and policy CRDs.
 2. The **AI Gateway Controller** watches its specific CRDs (AIGatewayRoute, BackendSecurityPolicy, etc.). When changes occur, it processes them and:
     * Configures the External Processor (ExtProc) service.
     * Configures the Rate Limit Service with token-based rules derived from BackendTrafficPolicy and AIGatewayRoute.

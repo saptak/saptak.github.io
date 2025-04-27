@@ -6,7 +6,8 @@ excerpt_separator: ""
 # Internal nav
 nav:
   main:
-    blog: "/writing"
+    blog: "/blog"
+    writing: "/writing"
     gallery: "https://gallery.saptak.in"
     #speaking: "/speaking"
     #projects: "/projects"
@@ -15,6 +16,11 @@ nav:
     all: "/writing"
     popular: "/writing/popular"
     tags: "/writing/tags"
+    rss: "/feed.xml"
+  blog:
+    all: "/blog"
+    popular: "/blog/popular"
+    tags: "/blog/tags"
     rss: "/feed.xml"
 
 # Bio settings
@@ -64,6 +70,16 @@ contact_urls:
 paginate: 10
 paginate_path: "/writing/page:num"
 permalink: "/writing/:year/:month/:day/:title"
+
+# Additional permalink structure for /blog route
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      permalink: "/writing/:year/:month/:day/:title"
+      blog_permalink: "/blog/:year/:month/:day/:title"
 sass:
   sass_dir: "/assets/css"
   style: :compressed
