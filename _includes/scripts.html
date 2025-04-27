@@ -17,26 +17,26 @@
       startOnLoad: false, // We'll manually render diagrams
       theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
     });
-    
+
     // Find all code blocks with language-mermaid class and convert them
     document.querySelectorAll('pre code.language-mermaid').forEach(function(codeBlock) {
       // Save the original code
       var originalCode = codeBlock.textContent;
-      
+
       // Create a div to replace the code block
       var div = document.createElement('div');
       div.className = 'mermaid';
       div.innerHTML = originalCode;
       div.style.backgroundColor = 'transparent';
-      
+
       // Store the original code for potential re-renders
       div.setAttribute('data-original-code', originalCode);
-      
+
       // Replace the <pre><code> with the mermaid div
       var pre = codeBlock.parentNode;
       pre.parentNode.replaceChild(div, pre);
     });
-    
+
     // Run the renderer
     try {
       mermaid.run();
@@ -46,14 +46,16 @@
   });
 </script>
 {% include disqus-scripts.html %}
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-59342910-1', 'auto');
-  ga('send', 'pageview');
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59342910-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-59342910-1', {
+    'anonymize_ip': true,
+    'cookie_flags': 'SameSite=None;Secure'
+  });
 </script>
 {% if page.extra_scripts %}
   {% for script in page.extra_scripts %}
