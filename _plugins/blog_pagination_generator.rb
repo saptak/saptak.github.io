@@ -13,7 +13,8 @@ module Jekyll
       # Generate pagination pages (starting from page 2, since page 1 is index.html)
       (2..total_pages).each do |page_num|
         # Create a new page for each pagination page
-        pagination_page = PageWithoutAFile.new(site, site.source, File.join('blog', "page#{page_num}"), "index.html")
+        # Use the correct path structure: blog/page2/index.html instead of blog/page2index.html
+        pagination_page = PageWithoutAFile.new(site, site.source, 'blog', "page#{page_num}/index.html")
 
         # Set the layout and content
         pagination_page.data['layout'] = 'default'
@@ -24,6 +25,7 @@ module Jekyll
         pagination_page.data['include_header'] = 'blog_header.html'
         pagination_page.data['page_num'] = page_num
         pagination_page.data['include_comments'] = { 'count' => true }
+        pagination_page.data['permalink'] = "/blog/page#{page_num}/"
 
         # Use the same content as blog/index.html but don't try to parse front matter
         content = File.read(File.join(site.source, 'blog', 'index.html'))
