@@ -8,8 +8,9 @@ description: A comprehensive look at how AI agent security is the fundamental bl
   preventing widespread enterprise adoption, examining OWASP's 15 agentic threats
   and essential security dimensions.
 header_image_path: /assets/img/blog/headers/2025-04-26-ai-agent-security-the-unspoken-prerequisite.jpg
-image_credit: Photo by ThisisEngineering on Unsplash
+image_credit: Photo by Johannes Plenio on Unsplash
 layout: post
+mermaid: true
 tags:
 - ai-security
 - owasp
@@ -19,52 +20,39 @@ thumbnail_path: /assets/img/blog/thumbnails/2025-04-26-ai-agent-security-the-uns
 title: 'AI Agent Security: The Unspoken Prerequisite for Enterprise Adoption'
 ---
 
-```mermaid
+<div class="mermaid">
 graph TD
-    subgraph App ["Application"]
-    end
+    User((User)) -->|T14,T15| App[Application]
     
-    User[/"User"/] -- "T14, T15" --> App
+    Input[Input NL Media] -->|T2| Agent
+    Agent --> Output[Output NL Media]
+    Output -->|T11| App
     
-    subgraph AgentSystem ["Agent System"]
-        Input["Input (NL, Media)"] -- "T2" --> Agent
-        Agent --> Output["Output (NL, Media)"]
-        Output -- "T11" --> App
-        
-        subgraph ExecutionLoop ["Execution Loop"]
-            Planning -- "T6" --> Action
-            Action -- "T8" --> Tools["Tools / Function Calling"]
-            Tools -- "T7" --> ExecutionLoop
-        end
-        
-        Memory["Memory"] -- "T1" --> Agent
-        ShortTerm["Short-Term"] --> Memory
-    end
+    Planning[Planning] -->|T6| Action[Action]
+    Action -->|T8| Tools[Tools / Function Calling]
+    Tools -->|T7| Planning
     
-    subgraph Services ["Services"]
-        Content[("Content")] -- "T3" --> Agent
-        Database[("Data")] -- "T9" --> Agent
-        Human["Human in the loop"] -- "T10" --> Agent
-        Device -- "T11" --> Agent
-        Code[("Code")] -- "T11" --> Agent
-        API[("Service API")] -- "T12" --> Agent
-    end
+    Memory[Memory] -->|T1| Agent
+    ShortTerm[Short-Term] --> Memory
     
-    subgraph Supporting ["Supporting Services"]
-        LTM["Long-Term Memory"] -- "T1" --> Agent
-        VectorDB["Vector Datastore"] -- "T4" --> Agent
-    end
+    Content[(Content)] -->|T3| Agent
+    Database[(Data)] -->|T9| Agent
+    Human[Human in loop] -->|T10| Agent
+    Device[Device] -->|T11| Agent
+    Code[(Code)] -->|T11| Agent
+    API[(Service API)] -->|T12| Agent
     
-    subgraph ModelSystem ["Model"]
-        LLM["LLM Model"] -- "T4, T5, T6, T12, T13" --> Agent
-        AugModel["Augmented Model"] --> LLM
-        FunctionCalling["Function Calling"] --> AugModel
-    end
+    LTM[Long-Term Memory] -->|T1| Agent
+    VectorDB[Vector Datastore] -->|T4| Agent
     
-    Agent2["Agent #2"] -- "T4, T5, T12, T13" --> App
+    LLM[LLM Model] -->|T4,T5,T6,T12,T13| Agent
+    AugModel[Augmented Model] --> LLM
+    FunctionCalling[Function Calling] --> AugModel
     
-    ModelSystem -- "T4, T7, T8, T9, T10" --> Supporting
-```
+    Agent2[Agent #2] -->|T4,T5,T12,T13| App
+    
+    LLM -->|T4,T7,T8,T9,T10| VectorDB
+</div>
 
 # AI Agent Security: The Unspoken Prerequisite for Enterprise Adoption
 
