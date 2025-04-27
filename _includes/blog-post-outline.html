@@ -1,49 +1,48 @@
-<article class="clearfix mt4 mb2 pb3 pt1{% unless include.exclude_divider %} border-bottom border-light-gray circle-line{% endunless %}">
-  <div class="clearfix">
-    <div class="col sm-col-4 pr2 mb2">
-      <a href="{{ include.post.url }}" class="header-color link-hover-color">
-        {% if include.post.thumbnail_path %}
-          <div class="thumbnail-container">
-            {% include image.html path=include.post.thumbnail_path alt=include.post.title class="thumbnail-image" %}
-          </div>
-        {% else %}
-          <div class="border border-light-gray h1 py4 px4 center">Aa</div>
-        {% endif %}
-      </a>
-    </div>
-    <div class="col sm-col-8 pl2">
-      <a href="{{ include.post.url }}"><h2 class="mt0 post-title-wrap">{{ include.post.title }}</h2></a>
-      <p class="mb0 left-align">{{ include.post.excerpt | strip_html | truncate: 165, '...'  }} 
-      <div><a href="{{ include.post.url }}" class="h6">Continue Reading &raquo;</a></p></div>
-      
-      <div class="gray h6" style="display: block; width: 100%;">
-        <div style="display: block; margin-bottom: 5px; line-height: 1.5;">
-          <span style="white-space: nowrap;">
-            <i class="fa fa-calendar" aria-hidden="true" style="position: relative; top: 0;"></i>
-            <span style="position: relative; margin-left: 5px;">
-              <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}">{{ include.post.date | date:"%b %d, %Y" }}</time>
-            </span>
-          </span>
+<article class="mxn2 clearfix mt4 mb2 pb3 pt1{% unless include.exclude_divider %} border-bottom border-light-gray circle-line{% endunless %}" style="display: block; width: 100%; max-width: 100%; box-sizing: border-box;">
+  <!-- Force horizontal layout with inline styles -->
+  <div class="col sm-col-4 px2 mb2" style="float: left; width: 33.33333%; box-sizing: border-box; display: block;">
+    <a href="{{ include.post.url }}" class="header-color link-hover-color">
+      {% if include.post.thumbnail_path %}
+        <div class="thumbnail-container">
+          {% include image.html path=include.post.thumbnail_path alt=include.post.title class="thumbnail-image" %}
         </div>
-        
-        {% include inline-tags.html post=include.post %}
-        
-        {% if page.include_comments %}
-        <div style="display: block; margin-top: 5px; line-height: 1.5;">
-          <span style="white-space: nowrap;">
-            <i class="fa fa-comments" aria-hidden="true" style="position: relative; top: 0;"></i>
-            <span style="position: relative; margin-left: 5px;">
-              {% if page.id == include.post.id %}
-                {% assign comment_url_base = "" %}
-              {% else %}
-                {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
-              {% endif %}
-              <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}">Comments</a>
-            </span>
+      {% else %}
+        <div class="border border-light-gray h1 py4 px4 center">Aa</div>
+      {% endif %}
+    </a>
+  </div>
+  <div class="col sm-col-8 px2" style="float: left; width: 66.66667%; box-sizing: border-box; display: block;">
+    <a href="{{ include.post.url }}"><h2 class="mt0 post-title-wrap" style="display: block; width: 100%; overflow-wrap: break-word; word-wrap: break-word;">{{ include.post.title }}</h2></a>
+    <p class="mb0 left-align">{{ include.post.excerpt | strip_html | truncate: 165, '...'  }}
+    <div><a href="{{ include.post.url }}" class="h6">Continue Reading &raquo;</a></p></div>
+
+    <div class="gray h6" style="display: block; width: 100%;">
+      <div style="display: block; margin-bottom: 5px; line-height: 1.5;">
+        <span style="white-space: nowrap;">
+          <i class="fa fa-calendar" aria-hidden="true" style="position: relative; top: 0;"></i>
+          <span style="position: relative; margin-left: 5px;">
+            <time datetime="{{ include.post.date | date:"%Y-%m-%d" }}">{{ include.post.date | date:"%b %d, %Y" }}</time>
           </span>
-        </div>
-        {% endif %}
+        </span>
       </div>
+
+      {% include inline-tags.html post=include.post %}
+
+      {% if page.include_comments %}
+      <div style="display: block; margin-top: 5px; line-height: 1.5;">
+        <span style="white-space: nowrap;">
+          <i class="fa fa-comments" aria-hidden="true" style="position: relative; top: 0;"></i>
+          <span style="position: relative; margin-left: 5px;">
+            {% if page.id == include.post.id %}
+              {% assign comment_url_base = "" %}
+            {% else %}
+              {% capture comment_url_base %}{{ include.post.url }}/{% endcapture %}
+            {% endif %}
+            <a href="{{ comment_url_base }}#comments" class="disqus-comment-count" data-disqus-identifier="{{ include.post.id }}">Comments</a>
+          </span>
+        </span>
+      </div>
+      {% endif %}
     </div>
   </div>
 </article>

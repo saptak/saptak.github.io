@@ -1,47 +1,82 @@
 // Ensure consistent styling between blog and writing post outlines
 
-// Fix for blog post outlines
-article.clearfix {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  
-  // Ensure proper spacing
+// Fix for blog post outlines - target both blog and writing routes
+article.mxn2.clearfix {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+
+  // Force horizontal layout
   .col.sm-col-4 {
-    padding-right: 1rem;
-    box-sizing: border-box;
+    float: left !important;
+    width: 33.33333% !important;
+    box-sizing: border-box !important;
+    display: block !important;
   }
-  
+
   .col.sm-col-8 {
-    padding-left: 1rem;
-    box-sizing: border-box;
+    float: left !important;
+    width: 66.66667% !important;
+    box-sizing: border-box !important;
+    display: block !important;
   }
-  
+
   // Fix title wrapping
-  h2.post-title-wrap {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: normal;
-    white-space: normal;
+  h2.post-title-wrap, h2.mt0 {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+    white-space: normal !important;
+  }
+}
+
+// Specific fix for blog route
+.blog-post-outline {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+
+  .post-image-container {
+    flex: 0 0 33.33333% !important;
+    padding-right: 1rem !important;
+  }
+
+  .post-content-container {
+    flex: 0 0 66.66667% !important;
+    padding-left: 1rem !important;
   }
 }
 
 // Mobile-specific fixes
 @media screen and (max-width: 40em) {
-  article.clearfix {
+  article.mxn2.clearfix {
     .col.sm-col-4, .col.sm-col-8 {
-      width: 100%;
-      float: none;
-      padding: 0;
+      width: 100% !important;
+      float: none !important;
+      padding: 0 !important;
     }
-    
+
     .col.sm-col-4 {
-      margin-bottom: 1rem;
+      margin-bottom: 1rem !important;
+    }
+  }
+
+  .blog-post-outline {
+    flex-direction: column !important;
+
+    .post-image-container, .post-content-container {
+      flex: 0 0 100% !important;
+      padding: 0 !important;
+    }
+
+    .post-image-container {
+      margin-bottom: 1rem !important;
     }
   }
 }

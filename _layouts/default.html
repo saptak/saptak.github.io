@@ -7,7 +7,7 @@
   {% include head.html %}
   {% include tag-fix-styles.html %}
 </head>
-<body>
+<body class="{% if page.nav_item == 'blog' %}blog{% endif %}">
   {% include nav.html %}
   {% if page.include_header %}
     {% include header.html %}
