@@ -4,7 +4,7 @@ title: "Saptak Sen: Blog"
 nav_item: blog
 nav_item_writing: all
 header_title: Blog
-include_header: writing_header.html
+include_header: blog_header.html
 include_comments:
   count: true
 ---
@@ -32,26 +32,4 @@ include_comments:
   {% endif %}
 {% endfor %}
 
-<!-- Custom pagination for blog -->
-<div class="pagination clearfix mb3">
-  <div class="left">
-    {% if offset > 0 %}
-      {% if offset <= posts_per_page %}
-        <a class="pagination-item" href="/blog">Newer</a>
-      {% else %}
-        {% assign prev_page = page.page_num | minus: 1 %}
-        <a class="pagination-item" href="/blog/page{{ prev_page }}">Newer</a>
-      {% endif %}
-    {% else %}
-      <span class="pagination-item disabled">Newer</span>
-    {% endif %}
-  </div>
-  <div class="right">
-    {% if end_offset < total_posts %}
-      {% assign next_page = page.page_num | default: 1 | plus: 1 %}
-      <a class="pagination-item" href="/blog/page{{ next_page }}">Older</a>
-    {% else %}
-      <span class="pagination-item disabled">Older</span>
-    {% endif %}
-  </div>
-</div>
+{% include blog-pagination.html %}
