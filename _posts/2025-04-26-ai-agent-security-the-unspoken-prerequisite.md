@@ -30,6 +30,7 @@ The OWASP Foundation, renowned for its work in web application security, has ide
 
 These threats span the entire agent architecture—from the LLM models powering reasoning capabilities to the tools agents can access, and the memory systems storing sensitive context. Unlike traditional software, AI agents combine autonomous decision-making with powerful system access, creating novel attack vectors that conventional security approaches aren't designed to address.
 ![OWASP Agentic Threat Model](/assets/img/blog/2025-04-26-ai-agent-security-the-unspoken-prerequisite/owasp15.jpeg)
+Src: [https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/](https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/)
 
 ## Four Critical Security Dimensions for AI Agents
 
@@ -98,7 +99,7 @@ This extends to Machine Control Protocols (MCPs) as well, where secure design pr
 
 ## Learning from Traditional Software Security
 
-As noted by JPMorgan Chase CISO Pat Opet, the growing risks in software supply chains offer valuable lessons for AI security. Organizations must prioritize security over rushing features to market—a challenge particularly acute in the AI space where competitive pressures drive rapid deployment.
+As [noted by JPMorgan Chase CISO Pat Opet](https://www.jpmorgan.com/technology/technology-blog/open-letter-to-our-suppliers), the growing risks in software supply chains offer valuable lessons for AI security. Organizations must prioritize security over rushing features to market—a challenge particularly acute in the AI space where competitive pressures drive rapid deployment.
 
 ## The Path Forward: Security by Default
 
