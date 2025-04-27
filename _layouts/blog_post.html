@@ -1,6 +1,142 @@
 ---
-layout: post
+layout: default
 nav_item: blog
+bottom_include: comments.html
+include_comments:
+  embed: true
+  count: true
 ---
 
-{{ content }}
+{% if page.header_image_path %}
+<div class="post-header-image-container">
+  <img src="{{ page.header_image_path }}" alt="{{ page.title }}" class="post-header-image">
+</div>
+{% endif %}
+
+<article class="post">
+  <button id="tts-button" aria-label="Listen to this post" title="Listen to this post" style="margin-bottom: 1em; padding: 0; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; border: 2px solid #888; background: none; display: flex; align-items: center; justify-content: center; color: #888;">
+    <!-- SVG Play Icon -->
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M8 5v14l11-7z"/>
+    </svg>
+  </button>
+  <div id="post-content-for-tts">
+    {{ content }}
+  </div>
+
+  {% if page.image_credit %}
+  <div class="image-credit-footer">
+    <p><em>Header image: {{ page.image_credit }}</em></p>
+  </div>
+  {% endif %}
+
+  <div class="mt4 mb4">
+    <!-- Custom post navigation for blog posts -->
+    <div class="clearfix mxn1">
+      <div class="md-col md-col-6 px1">
+        {% if page.original_post.previous %}
+          <a href="/blog/{{ page.original_post.previous.date | date: '%Y/%m/%d' }}/{{ page.original_post.previous.url | split: '/' | last }}">
+            <div class="h6 caps gray">Previous</div>
+            <h4 class="mt0">{{ page.original_post.previous.title }}</h4>
+          </a>
+        {% else %}
+          &nbsp;
+        {% endif %}
+      </div>
+      <div class="md-col md-col-6 px1 right-align">
+        {% if page.original_post.next %}
+          <a href="/blog/{{ page.original_post.next.date | date: '%Y/%m/%d' }}/{{ page.original_post.next.url | split: '/' | last }}">
+            <div class="h6 caps gray">Next</div>
+            <h4 class="mt0">{{ page.original_post.next.title }}</h4>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="mt4">{% include author-share.html %}</div>
+</article>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const ttsButton = document.getElementById('tts-button');
+    const postContent = document.getElementById('post-content-for-tts');
+    let isSpeaking = false;
+    let utterance = null;
+
+    // Check if SpeechSynthesis is supported
+    if (!('speechSynthesis' in window)) {
+      console.warn('Speech Synthesis not supported in this browser.');
+      if (ttsButton) {
+        ttsButton.style.display = 'none'; // Hide button if not supported
+      }
+      return;
+    }
+
+    // Ensure button and content exist
+    if (!ttsButton || !postContent) {
+        console.error('TTS button or content element not found.');
+        if (ttsButton) ttsButton.style.display = 'none'; // Hide button if elements missing
+        return;
+    }
+
+    ttsButton.addEventListener('click', () => {
+      if (isSpeaking) {
+        speechSynthesis.cancel(); // Stop speaking
+        // Note: onend event will handle resetting the button state
+      } else {
+        const textToSpeak = postContent.textContent || postContent.innerText || '';
+        if (textToSpeak.trim().length === 0) {
+            console.warn('No text content found to speak.');
+            return;
+        }
+
+        utterance = new SpeechSynthesisUtterance(textToSpeak);
+        // SVG Icons
+        const playIconSVG = `
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M8 5v14l11-7z"/>
+          </svg>`;
+        const stopIconSVG = `
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M6 6h12v12H6z"/>
+          </svg>`;
+
+        utterance.onstart = () => {
+            isSpeaking = true;
+            ttsButton.innerHTML = stopIconSVG; // Stop icon SVG
+            ttsButton.setAttribute('aria-label', 'Stop listening');
+            ttsButton.setAttribute('title', 'Stop listening');
+            console.log('Speech synthesis started.');
+        };
+
+        const resetButtonToPlay = () => {
+          isSpeaking = false;
+          ttsButton.innerHTML = playIconSVG; // Play icon SVG
+          ttsButton.setAttribute('aria-label', 'Listen to this post');
+          ttsButton.setAttribute('title', 'Listen to this post');
+        }
+
+        utterance.onend = () => {
+          resetButtonToPlay();
+          console.log('Speech synthesis finished.');
+        };
+
+        // Ensure button resets on error
+        utterance.onerror = (event) => {
+          console.error('Speech synthesis error:', event);
+          resetButtonToPlay();
+        };
+        // Clear queue and speak
+        speechSynthesis.cancel(); // Ensure nothing else is queued or speaking
+        speechSynthesis.speak(utterance);
+      }
+    });
+
+    // Optional: Stop speech synthesis when navigating away
+    window.addEventListener('beforeunload', () => {
+        if (isSpeaking) {
+            speechSynthesis.cancel();
+        }
+    });
+  });
+</script>

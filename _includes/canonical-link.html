@@ -1,4 +1,4 @@
-{% if page.layout == "post" %}
+{% if page.layout == "post" or page.layout == "blog_post" %}
   {% if page.nav_item == "blog" %}
     <link rel="canonical" href="{{ site.url }}/writing/{{ page.date | date: '%Y/%m/%d' }}/{{ page.url | split: '/' | last }}">
   {% else %}

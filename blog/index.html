@@ -1,7 +1,6 @@
 ---
 layout: default
 title: "Saptak Sen: Blog"
-redirect_from: "/writing"
 nav_item: blog
 nav_item_writing: all
 header_title: Blog
@@ -11,7 +10,48 @@ include_comments:
 ---
 
 {% include blog-writing-nav.html %}
-{% for post in paginator.posts %}
-  {% include post-outline.html post=post %}
+
+{% assign posts_per_page = 10 %}
+{% assign total_posts = site.posts.size %}
+{% assign page_count = total_posts | divided_by: posts_per_page | plus: 1 %}
+
+{% assign offset = 0 %}
+{% if page.page_num %}
+  {% assign offset = page.page_num | minus: 1 | times: posts_per_page %}
+{% endif %}
+
+{% assign end_offset = offset | plus: posts_per_page %}
+{% if end_offset > total_posts %}
+  {% assign end_offset = total_posts %}
+{% endif %}
+
+{% for i in (offset..end_offset) %}
+  {% if i < total_posts %}
+    {% assign post = site.posts[i] %}
+    {% include post-outline.html post=post %}
+  {% endif %}
 {% endfor %}
-{% include pagination.html %}
+
+<!-- Custom pagination for blog -->
+<div class="pagination clearfix mb3">
+  <div class="left">
+    {% if offset > 0 %}
+      {% if offset <= posts_per_page %}
+        <a class="pagination-item" href="/blog">Newer</a>
+      {% else %}
+        {% assign prev_page = page.page_num | minus: 1 %}
+        <a class="pagination-item" href="/blog/page{{ prev_page }}">Newer</a>
+      {% endif %}
+    {% else %}
+      <span class="pagination-item disabled">Newer</span>
+    {% endif %}
+  </div>
+  <div class="right">
+    {% if end_offset < total_posts %}
+      {% assign next_page = page.page_num | default: 1 | plus: 1 %}
+      <a class="pagination-item" href="/blog/page{{ next_page }}">Older</a>
+    {% else %}
+      <span class="pagination-item disabled">Older</span>
+    {% endif %}
+  </div>
+</div>
