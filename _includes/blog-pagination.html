@@ -5,7 +5,7 @@
       <a href="/blog" title="Previous Page" class="{{ prev_class }}">&laquo; Newer Posts</a>
     {% else %}
       {% assign prev_page = page.page_num | minus: 1 %}
-      <a href="/blog/page{{ prev_page }}/" title="Previous Page" class="{{ prev_class }}">&laquo; Newer Posts</a>
+      <a href="/writing/page{{ prev_page }}/" title="Previous Page" class="{{ prev_class }}">&laquo; Newer Posts</a>
     {% endif %}
   {% elsif offset > 0 %}
     {% assign prev_class="left button button-outline regular" %}
@@ -13,7 +13,7 @@
       <a href="/blog" title="Previous Page" class="{{ prev_class }}">&laquo; Newer Posts</a>
     {% else %}
       {% assign prev_page = page.page_num | minus: 1 %}
-      <a href="/blog/page{{ prev_page }}/" title="Previous Page" class="{{ prev_class }}">&laquo; Newer Posts</a>
+      <a href="/writing/page{{ prev_page }}/" title="Previous Page" class="{{ prev_class }}">&laquo; Newer Posts</a>
     {% endif %}
   {% else %}
     <div class="left px4">&nbsp;</div>
@@ -22,9 +22,9 @@
   <span class="button-height"> Page {{ page.page_num | default: 1 }} of {{ page_count }}</span>
 
   {% if page.page_num and page.page_num < page_count %}
-    <a href="/blog/page{{ page.page_num | plus: 1 }}/" title="Next Page" class="right button button-outline regular">Older Posts &raquo;</a>
+    <a href="/writing/page{{ page.page_num | plus: 1 }}/" title="Next Page" class="right button button-outline regular">Older Posts &raquo;</a>
   {% elsif end_offset < total_posts %}
     {% assign next_page = page.page_num | default: 1 | plus: 1 %}
-    <a href="/blog/page{{ next_page }}/" title="Next Page" class="right button button-outline regular">Older Posts &raquo;</a>
+    <a href="/writing/page{{ next_page }}/" title="Next Page" class="right button button-outline regular">Older Posts &raquo;</a>
   {% endif %}
 </section>
