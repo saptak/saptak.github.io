@@ -8,7 +8,8 @@ date: 2025-05-07
 description: A comprehensive guide to understanding Retrieval-Augmented Generation
   (RAG), its architecture, implementation strategies, and future trends in 2025.
 header_image_path: /assets/img/blog/headers/2025-05-07-ultimate-guide-to-retrieval-augmented-generation-rag.jpg
-image_credit: Photo by freestocks on Unsplash
+image_credit: Photo by Google DeepMind on Unsplash
+image_credit_url: https://unsplash.com/photos/a-crystal-vase-with-pink-flowers-in-it-Oy2yXvl1WLg
 layout: post
 tags: ai llm rag retrieval-augmented-generation enterprise-ai
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-07-ultimate-guide-to-retrieval-augmented-generation-rag.jpg
