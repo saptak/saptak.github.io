@@ -97,7 +97,7 @@ While the process may sound straightforward, the quality of your RAG system is f
    - Department or author
    - Region or language
 
-## Advanced RAG Architectures in 2025
+## Advanced RAG Architectures
 
 RAG has evolved significantly since its introduction, with several specialized architectures now available:
 
@@ -145,7 +145,7 @@ Several techniques can further enhance RAG system performance:
 
 2. **Response Evaluation**: Implementing mechanisms to assess the quality and accuracy of generated responses.
 
-## The Future of RAG: 2025 and Beyond
+## The Future of RAG
 
 Several trends are shaping the future of RAG systems:
 
