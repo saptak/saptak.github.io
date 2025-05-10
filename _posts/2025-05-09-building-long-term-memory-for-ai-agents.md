@@ -23,16 +23,16 @@ In this tutorial, I'll walk you through implementing long-term memory capabiliti
 
 ## Contents
 
-- [Why Memory Management Matters](#why-memory-management-matters)&nbsp;•&nbsp;
-- [Understanding Memzero](#understanding-memzero)&nbsp;•&nbsp;
-- [Setting Up the Environment](#setting-up-the-environment)&nbsp;•&nbsp;
-- [Memzero Cloud: Quick Start Example](#memzero-cloud-quick-start-example)&nbsp;•&nbsp;
-- [Open-Source Memzero with Local Storage](#open-source-memzero-with-local-storage)&nbsp;•&nbsp;
-- [Persistent Memory with Vector Databases](#persistent-memory-with-vector-databases)&nbsp;•&nbsp;
-- [Fine-tuning Memory Prompts](#fine-tuning-memory-prompts)&nbsp;•&nbsp;
-- [Building a Complete Chat Application](#building-a-complete-chat-application)&nbsp;•&nbsp;
-- [Considerations and Challenges](#considerations-and-challenges)&nbsp;•&nbsp;
-- [Conclusion](#conclusion)
+- •&nbsp;[Why Memory Management Matters](#why-memory-management-matters)&nbsp;
+- •&nbsp;[Understanding Memzero](#understanding-memzero)&nbsp;
+- •&nbsp;[Setting Up the Environment](#setting-up-the-environment)&nbsp;
+- •&nbsp;[Memzero Cloud: Quick Start Example](#memzero-cloud-quick-start-example)&nbsp;
+- •&nbsp;[Open-Source Memzero with Local Storage](#open-source-memzero-with-local-storage)&nbsp;
+- •&nbsp;[Persistent Memory with Vector Databases](#persistent-memory-with-vector-databases)&nbsp;
+- •&nbsp;[Fine-tuning Memory Prompts](#fine-tuning-memory-prompts)&nbsp;•&nbsp;
+- •&nbsp;[Building a Complete Chat Application](#building-a-complete-chat-application)&nbsp;
+- •&nbsp;[Considerations and Challenges](#considerations-and-challenges)&nbsp;
+- •&nbsp;[Conclusion](#conclusion)
 
 ## Why Memory Management Matters
 
