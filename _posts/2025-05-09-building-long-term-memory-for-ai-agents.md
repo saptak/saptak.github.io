@@ -23,16 +23,18 @@ In this tutorial, I'll walk you through implementing long-term memory capabiliti
 
 ## Contents
 
-- [Why Memory Management Matters](#why-memory-management-matters)
-- [Understanding Memzero](#understanding-memzero)
-- [Setting Up the Environment](#setting-up-the-environment)
-- [Memzero Cloud: Quick Start Example](#memzero-cloud-quick-start-example)
-- [Open-Source Memzero with Local Storage](#open-source-memzero-with-local-storage)
-- [Persistent Memory with Vector Databases](#persistent-memory-with-vector-databases)
-- [Fine-tuning Memory Prompts](#fine-tuning-memory-prompts)
-- [Building a Complete Chat Application](#building-a-complete-chat-application)
-- [Considerations and Challenges](#considerations-and-challenges)
-- [Conclusion](#conclusion)
+<ul>
+  <li><a href="#why-memory-management-matters">Why Memory Management Matters</a></li>
+  <li><a href="#understanding-memzero">Understanding Memzero</a></li>
+  <li><a href="#setting-up-the-environment">Setting Up the Environment</a></li>
+  <li><a href="#memzero-cloud-quick-start-example">Memzero Cloud: Quick Start Example</a></li>
+  <li><a href="#open-source-memzero-with-local-storage">Open-Source Memzero with Local Storage</a></li>
+  <li><a href="#persistent-memory-with-vector-databases">Persistent Memory with Vector Databases</a></li>
+  <li><a href="#fine-tuning-memory-prompts">Fine-tuning Memory Prompts</a></li>
+  <li><a href="#building-a-complete-chat-application">Building a Complete Chat Application</a></li>
+  <li><a href="#considerations-and-challenges">Considerations and Challenges</a></li>
+  <li><a href="#conclusion">Conclusion</a></li>
+</ul>
 
 ## Why Memory Management Matters
 
