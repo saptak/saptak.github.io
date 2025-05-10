@@ -23,16 +23,16 @@ In this tutorial, I'll walk you through implementing long-term memory capabiliti
 
 ## Contents
 
-- [Why Memory Management Matters](#why-memory-management-matters)
-- [Understanding Memzero](#understanding-memzero)
-- [Setting Up the Environment](#setting-up-the-environment)
-- [Memzero Cloud: Quick Start Example](#memzero-cloud-quick-start-example)
-- [Open-Source Memzero with Local Storage](#open-source-memzero-with-local-storage)
-- [Persistent Memory with Vector Databases](#persistent-memory-with-vector-databases)
-- [Fine-tuning Memory Prompts](#fine-tuning-memory-prompts)
-- [Building a Complete Chat Application](#building-a-complete-chat-application)
-- [Considerations and Challenges](#considerations-and-challenges)
-- [Conclusion](#conclusion)
+-  [Why Memory Management Matters](#why-memory-management-matters)
+-  [Understanding Memzero](#understanding-memzero)
+-  [Setting Up the Environment](#setting-up-the-environment)
+-  [Memzero Cloud: Quick Start Example](#memzero-cloud-quick-start-example)
+-  [Open-Source Memzero with Local Storage](#open-source-memzero-with-local-storage)
+-  [Persistent Memory with Vector Databases](#persistent-memory-with-vector-databases)
+-  [Fine-tuning Memory Prompts](#fine-tuning-memory-prompts)
+-  [Building a Complete Chat Application](#building-a-complete-chat-application)
+-  [Considerations and Challenges](#considerations-and-challenges)
+-  [Conclusion](#conclusion)
 
 ## Why Memory Management Matters
 
@@ -277,55 +277,55 @@ def chat_with_memory():
     conversation = []
     system_prompt = {"role": "system", "content": "You are a helpful AI assistant. Use the provided memories to personalize your responses."}
     conversation.append(system_prompt)
-    
+
     print("Chat with AI (type 'exit' to quit):")
-    
+
     while True:
         # Get user input
         user_input = input("You: ")
         if user_input.lower() == 'exit':
             break
-            
+
         # Add user message to conversation
         conversation.append({"role": "user", "content": user_input})
-        
+
         # Retrieve relevant memories
         relevant_memories = memory.search(query=user_input, limit=3)
-        
+
         # Print retrieved memories (for demonstration)
         if relevant_memories:
             print("Retrieved memories:")
             for mem in relevant_memories:
                 print(f"- {mem.text} (Score: {mem.score:.2f})")
-        
+
         # Create a context with memories for the AI
         memory_context = ""
         if relevant_memories:
             memory_context = "I know the following about you:\n"
             for mem in relevant_memories:
                 memory_context += f"- {mem.text}\n"
-        
+
         # Prepare messages for OpenAI
         ai_messages = conversation.copy()
         if memory_context:
             # Insert memory context as a system message
             ai_messages.insert(1, {"role": "system", "content": memory_context})
-        
+
         # Get AI response
         response = openai_client.chat.completions.create(
             model="gpt-4o-mini",
             messages=ai_messages
         )
-        
+
         # Extract response text
         assistant_message = response.choices[0].message.content
-        
+
         # Print assistant response
         print(f"Assistant: {assistant_message}")
-        
+
         # Add assistant message to conversation
         conversation.append({"role": "assistant", "content": assistant_message})
-        
+
         # Update memory with the new conversation
         memory.add(messages=conversation[-2:])  # Add just the latest user and assistant messages
 
