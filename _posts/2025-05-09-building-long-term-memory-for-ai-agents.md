@@ -23,17 +23,17 @@ In this tutorial, I'll walk you through implementing long-term memory capabiliti
 
 ## Contents
 
-<div class="toc" style="margin-bottom: 20px;">
-  <p><a href="#why-memory-management-matters">Why Memory Management Matters</a></p>
-  <p><a href="#understanding-memzero">Understanding Memzero</a></p>
-  <p><a href="#setting-up-the-environment">Setting Up the Environment</a></p>
-  <p><a href="#memzero-cloud-quick-start-example">Memzero Cloud: Quick Start Example</a></p>
-  <p><a href="#open-source-memzero-with-local-storage">Open-Source Memzero with Local Storage</a></p>
-  <p><a href="#persistent-memory-with-vector-databases">Persistent Memory with Vector Databases</a></p>
-  <p><a href="#fine-tuning-memory-prompts">Fine-tuning Memory Prompts</a></p>
-  <p><a href="#building-a-complete-chat-application">Building a Complete Chat Application</a></p>
-  <p><a href="#considerations-and-challenges">Considerations and Challenges</a></p>
-  <p><a href="#conclusion">Conclusion</a></p>
+<div class="toc-container">
+  <div><a href="#why-memory-management-matters">Why Memory Management Matters</a></div>
+  <div><a href="#understanding-memzero">Understanding Memzero</a></div>
+  <div><a href="#setting-up-the-environment">Setting Up the Environment</a></div>
+  <div><a href="#memzero-cloud-quick-start-example">Memzero Cloud: Quick Start Example</a></div>
+  <div><a href="#open-source-memzero-with-local-storage">Open-Source Memzero with Local Storage</a></div>
+  <div><a href="#persistent-memory-with-vector-databases">Persistent Memory with Vector Databases</a></div>
+  <div><a href="#fine-tuning-memory-prompts">Fine-tuning Memory Prompts</a></div>
+  <div><a href="#building-a-complete-chat-application">Building a Complete Chat Application</a></div>
+  <div><a href="#considerations-and-challenges">Considerations and Challenges</a></div>
+  <div><a href="#conclusion">Conclusion</a></div>
 </div>
 
 ## Why Memory Management Matters
