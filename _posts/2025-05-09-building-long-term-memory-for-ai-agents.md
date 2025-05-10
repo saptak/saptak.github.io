@@ -23,16 +23,38 @@ In this tutorial, I'll walk you through implementing long-term memory capabiliti
 
 ## Contents
 
-- •&nbsp;[Why Memory Management Matters](#why-memory-management-matters)&nbsp;
-- •&nbsp;[Understanding Memzero](#understanding-memzero)&nbsp;
-- •&nbsp;[Setting Up the Environment](#setting-up-the-environment)&nbsp;
-- •&nbsp;[Memzero Cloud: Quick Start Example](#memzero-cloud-quick-start-example)&nbsp;
-- •&nbsp;[Open-Source Memzero with Local Storage](#open-source-memzero-with-local-storage)&nbsp;
-- •&nbsp;[Persistent Memory with Vector Databases](#persistent-memory-with-vector-databases)&nbsp;
-- •&nbsp;[Fine-tuning Memory Prompts](#fine-tuning-memory-prompts)&nbsp;•&nbsp;
-- •&nbsp;[Building a Complete Chat Application](#building-a-complete-chat-application)&nbsp;
-- •&nbsp;[Considerations and Challenges](#considerations-and-challenges)&nbsp;
-- •&nbsp;[Conclusion](#conclusion)
+<table style="border:none; margin-bottom: 20px; border-collapse: collapse; width: 100%;">
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#why-memory-management-matters">Why Memory Management Matters</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#understanding-memzero">Understanding Memzero</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#setting-up-the-environment">Setting Up the Environment</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#memzero-cloud-quick-start-example">Memzero Cloud: Quick Start Example</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#open-source-memzero-with-local-storage">Open-Source Memzero with Local Storage</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#persistent-memory-with-vector-databases">Persistent Memory with Vector Databases</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#fine-tuning-memory-prompts">Fine-tuning Memory Prompts</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#building-a-complete-chat-application">Building a Complete Chat Application</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#considerations-and-challenges">Considerations and Challenges</a></td>
+  </tr>
+  <tr>
+    <td style="padding: 6px 0; border: none;"><a href="#conclusion">Conclusion</a></td>
+  </tr>
+</table>
 
 ## Why Memory Management Matters
 
