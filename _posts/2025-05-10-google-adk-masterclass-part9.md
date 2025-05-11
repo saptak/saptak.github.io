@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 9: Sequential Workflows'
 
 # Google ADK Masterclass Part 9: Sequential Workflows
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorial](./2025-05-10-google-adk-masterclass-part8.md), we explored callbacks and the agent lifecycle in ADK. Now, we'll dive into one of the most powerful workflow patterns in ADK: sequential workflows.
+In our [previous tutorial](./google-adk-masterclass-part8), we explored callbacks and the agent lifecycle in ADK. Now, we'll dive into one of the most powerful workflow patterns in ADK: sequential workflows.
 
 Sequential workflows allow you to create structured, multi-step processes where agents execute in a predetermined order. This approach is ideal for complex tasks that require step-by-step processing, where each step builds on the results of the previous one.
 
@@ -956,4 +956,4 @@ graph TD
         D
     end
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part10)
+[Next...](./google-adk-masterclass-part10)

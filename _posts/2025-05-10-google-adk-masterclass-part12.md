@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 12: Practical Applications and Deployment'
 
 # Google ADK Masterclass Part 12: Practical Applications and Deployment
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorials](./2025-05-10-google-adk-masterclass-part11.md), we've explored the fundamentals of Google's Agent Development Kit (ADK) and various workflow patterns. Now, in this final part of our series, we'll focus on practical applications and deployment strategies to move your agent systems into production.
+In our [previous tutorials](./google-adk-masterclass-part11), we've explored the fundamentals of Google's Agent Development Kit (ADK) and various workflow patterns. Now, in this final part of our series, we'll focus on practical applications and deployment strategies to move your agent systems into production.
 
 Building powerful agents locally is just the first step. To create real impact, you need to deploy these agents in a way that makes them accessible, reliable, and scalable. In this tutorial, we'll cover real-world applications of ADK and strategies for deploying your agents to production environments.
 

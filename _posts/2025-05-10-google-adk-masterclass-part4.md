@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 4: Structured Outputs with ADK'
 
 # Google ADK Masterclass Part 4: Structured Outputs with ADK
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorials](./2025-05-10-google-adk-masterclass-part3.md), we explored creating agents with different models and adding tools to enhance their capabilities. As you build more complex agent systems, especially those that interact with other applications or APIs, ensuring consistent and predictable output formats becomes crucial.
+In our [previous tutorials](./google-adk-masterclass-part3), we explored creating agents with different models and adding tools to enhance their capabilities. As you build more complex agent systems, especially those that interact with other applications or APIs, ensuring consistent and predictable output formats becomes crucial.
 
 In this tutorial, we'll explore how ADK enables structured outputs to ensure your agents return data in exactly the format your applications need.
 
@@ -359,4 +359,4 @@ graph TD
     F --> I[Return Structured Response]
     H --> I
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part5)
+[Next...](./google-adk-masterclass-part5)

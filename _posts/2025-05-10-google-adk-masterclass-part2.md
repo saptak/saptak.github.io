@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 2: Adding Tools to Your Agents'
 
 # Google ADK Masterclass Part 2: Adding Tools to Your Agents
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In the [previous part](./2025-05-10-google-adk-masterclass-part1.md) of our Google ADK Masterclass, we set up our environment and created our first basic agent. Now, let's take our agents to the next level by adding tools.
+In the [previous part](./google-adk-masterclass-part1) of our Google ADK Masterclass, we set up our environment and created our first basic agent. Now, let's take our agents to the next level by adding tools.
 
 Tools are one of the most powerful features in ADK, enabling agents to interact with external systems, perform complex calculations, search the web, and much more. In this tutorial, we'll explore the different types of tools available and how to integrate them into your agents.
 
@@ -292,4 +292,4 @@ graph TD
     D --> I[Return to User]
     H --> I
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part3)
+[Next...](./google-adk-masterclass-part3)

@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 7: Building Multi-Agent Solutions'
 
 # Google ADK Masterclass Part 7: Building Multi-Agent Solutions
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorials](./2025-05-10-google-adk-masterclass-part6.md), we've explored creating individual agents with various capabilities. While single agents can be powerful, complex problems often benefit from a divide-and-conquer approach where multiple specialized agents collaborate.
+In our [previous tutorials](./google-adk-masterclass-part6), we've explored creating individual agents with various capabilities. While single agents can be powerful, complex problems often benefit from a divide-and-conquer approach where multiple specialized agents collaborate.
 
 In this tutorial, we'll dive into ADK's multi-agent capabilities, showing you how to build systems where agents with different specialties work together to accomplish complex tasks.
 
@@ -846,4 +846,4 @@ graph TD
     F --> J[Final Response]
     I --> J
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part8)
+[Next...](./google-adk-masterclass-part8)

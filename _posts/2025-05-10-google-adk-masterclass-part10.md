@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 10: Parallel Execution Workflows'
 
 # Google ADK Masterclass Part 10: Parallel Execution Workflows
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorial](./2025-05-10-google-adk-masterclass-part9.md), we explored sequential workflows, where agents execute in a predetermined order. While sequential workflows are excellent for step-by-step processes, they aren't the most efficient approach when multiple independent tasks need to be completed.
+In our [previous tutorial](./google-adk-masterclass-part9), we explored sequential workflows, where agents execute in a predetermined order. While sequential workflows are excellent for step-by-step processes, they aren't the most efficient approach when multiple independent tasks need to be completed.
 
 This is where parallel execution workflows shine. Instead of running agents one after another, parallel workflows allow multiple agents to work simultaneously on different aspects of a task. This approach can dramatically improve efficiency and reduce overall processing time.
 
@@ -1009,4 +1009,4 @@ graph TD
         H
     end
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part11)
+[Next...](./google-adk-masterclass-part11)

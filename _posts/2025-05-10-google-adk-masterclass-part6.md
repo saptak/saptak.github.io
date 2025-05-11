@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 6: Persisting Sessions to a Database'
 
 # Google ADK Masterclass Part 6: Persisting Sessions to a Database
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorial](./2025-05-10-google-adk-masterclass-part5.md), we explored session and memory management with in-memory sessions. While in-memory sessions are great for development, they have a significant limitation: when your application stops running, all session data is lost. For production applications, you need a more persistent solution.
+In our [previous tutorial](./google-adk-masterclass-part5), we explored session and memory management with in-memory sessions. While in-memory sessions are great for development, they have a significant limitation: when your application stops running, all session data is lost. For production applications, you need a more persistent solution.
 
 This tutorial will show you how to use ADK's database session service to persist your agent sessions to a SQLite database. This enables your agents to maintain context across application restarts, providing a much more consistent user experience.
 
@@ -614,4 +614,4 @@ graph TD
     J --> K[Save Session to DB]
     K --> L[Return Response]
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part7)
+[Next...](./google-adk-masterclass-part7)

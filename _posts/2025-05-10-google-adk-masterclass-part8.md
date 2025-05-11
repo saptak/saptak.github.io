@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 8: Callbacks and Agent Lifecycle'
 
 # Google ADK Masterclass Part 8: Callbacks and Agent Lifecycle
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorial](./2025-05-10-google-adk-masterclass-part7.md), we explored building multi-agent systems where specialized agents collaborate to solve complex problems. Now, we'll dive into one of ADK's most powerful but lesser-known features: callbacks.
+In our [previous tutorial](./google-adk-masterclass-part7), we explored building multi-agent systems where specialized agents collaborate to solve complex problems. Now, we'll dive into one of ADK's most powerful but lesser-known features: callbacks.
 
 Callbacks allow you to hook into every stage of an agent's execution lifecycle, enabling you to monitor, modify, and extend agent behavior. This capability is essential for advanced applications, providing fine-grained control over the agent experience.
 
@@ -826,4 +826,4 @@ sequenceDiagram
     Runner-->>User: Return response
     deactivate Runner
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part9)
+[Next...](./google-adk-masterclass-part9)

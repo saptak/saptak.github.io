@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 3: Using Different Models with ADK'
 
 # Google ADK Masterclass Part 3: Using Different Models with ADK
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorials](./2025-05-10-google-adk-masterclass-part2.md), we explored the basics of Google's Agent Development Kit (ADK) and learned how to enhance agents with tools. One of ADK's most powerful features is its model-agnostic design, allowing you to leverage models from various providers beyond just Google's Gemini.
+In our [previous tutorials](./google-adk-masterclass-part2), we explored the basics of Google's Agent Development Kit (ADK) and learned how to enhance agents with tools. One of ADK's most powerful features is its model-agnostic design, allowing you to leverage models from various providers beyond just Google's Gemini.
 
 In this tutorial, we'll dive into connecting ADK to other leading language models like OpenAI's GPT and Anthropic's Claude. This capability gives you the flexibility to choose the best model for your specific use case or to use different models for different agent tasks.
 
@@ -350,4 +350,4 @@ graph TD
     F --> G
     G --> H[Agent Response]
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part4)
+[Next...](./google-adk-masterclass-part4)

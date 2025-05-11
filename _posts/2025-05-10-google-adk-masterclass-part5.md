@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 5: Session and Memory Management'
 
 # Google ADK Masterclass Part 5: Session and Memory Management
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorials](./2025-05-10-google-adk-masterclass-part4.md), we've been using ADK's web interface to interact with our agents. Behind the scenes, ADK has been managing sessions, state, and the agent lifecycle for us. Now it's time to pull back the curtain and understand these core components, which are essential for building more sophisticated agent applications.
+In our [previous tutorials](./google-adk-masterclass-part4), we've been using ADK's web interface to interact with our agents. Behind the scenes, ADK has been managing sessions, state, and the agent lifecycle for us. Now it's time to pull back the curtain and understand these core components, which are essential for building more sophisticated agent applications.
 
 In this tutorial, we'll explore how session management and state work in ADK, and how to implement them in your own applications without relying on the web interface.
 
@@ -532,4 +532,4 @@ graph TD
     J --> K[Return Response]
     K --> L[Save Session]
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part6)
+[Next...](./google-adk-masterclass-part6)

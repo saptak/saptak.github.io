@@ -13,9 +13,9 @@ title: 'Google ADK Masterclass Part 11: Looping Workflows'
 
 # Google ADK Masterclass Part 11: Looping Workflows
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
-In our [previous tutorials](./2025-05-10-google-adk-masterclass-part10.md), we explored sequential and parallel workflows in ADK. Now, we'll dive into the third major workflow pattern: looping workflows.
+In our [previous tutorials](./google-adk-masterclass-part10), we explored sequential and parallel workflows in ADK. Now, we'll dive into the third major workflow pattern: looping workflows.
 
 Looping workflows allow agents to repeat a process multiple times, refining their outputs until they meet specific criteria or achieve a desired outcome. This pattern is particularly useful for tasks that require multiple iterations to reach an optimal solution, such as content refinement, complex problem-solving, or optimization challenges.
 
@@ -1057,4 +1057,4 @@ graph TD
         J
     end
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part12)
+[Next...](./google-adk-masterclass-part12)

@@ -13,7 +13,7 @@ title: 'Google ADK Masterclass Part 1: Getting Started with Agent Development Ki
 
 # Google ADK Masterclass: Building AI Agents from Beginner to Pro
 
-[Overview](./2025-05-10-google-adk-masterclass-overview)
+[Overview](./google-adk-masterclass-overview)
 
 Google's Agent Development Kit (ADK) represents a significant advancement in the field of AI agent development. This powerful framework enables developers to create, deploy, and manage AI agents with unprecedented ease and flexibility. In this multi-part blog series, we'll explore ADK from the ground up, starting with the basics and progressively building more complex agent workflows.
 
@@ -214,4 +214,4 @@ graph TD
     F --> G[User Interface]
     G --> A
 ```
-[Next...](./2025-05-10-google-adk-masterclass-part2)
+[Next...](./google-adk-masterclass-part2)
