@@ -159,6 +159,8 @@ To maximize your learning from this masterclass:
 
 All source code for the examples in this masterclass is available on GitHub. Each module includes detailed code snippets and explanations, but you'll find complete, runnable examples in the repository.
 
+[https://github.com/saptak/adk-masterclass](https://github.com/saptak/adk-masterclass)
+
 ## Let's Begin!
 
 Ready to start your journey into building sophisticated AI agents with Google ADK? Begin with [Part 1: Getting Started with Agent Development Kit](./google-adk-masterclass-part1) and work your way through each module at your own pace.
