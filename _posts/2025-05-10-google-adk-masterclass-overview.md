@@ -49,7 +49,7 @@ To get the most out of this masterclass, you should have:
 
 This masterclass is divided into 12 parts, each focusing on a specific aspect of ADK development:
 
-### [Part 1: Getting Started with Agent Development Kit](./2025-05-10-google-adk-masterclass-part1.md)
+### [Part 1: Getting Started with Agent Development Kit](./2025-05-10-google-adk-masterclass-part1)
 
 In this foundational module, we cover the basics of setting up your environment and creating your first agent. You'll learn:
 - What ADK is and why it's important
@@ -57,7 +57,7 @@ In this foundational module, we cover the basics of setting up your environment 
 - Creating and running your first agent
 - Understanding the core components of an ADK agent
 
-### [Part 2: Adding Tools to Your Agents](./2025-05-10-google-adk-masterclass-part2.md)
+### [Part 2: Adding Tools to Your Agents](./2025-05-10-google-adk-masterclass-part2)
 
 Tools are what make agents truly powerful. In this module, you'll discover:
 - Different types of tools available in ADK
@@ -65,7 +65,7 @@ Tools are what make agents truly powerful. In this module, you'll discover:
 - Using Google's built-in tools like search
 - Best practices for tool development
 
-### [Part 3: Using Different Models with ADK](./2025-05-10-google-adk-masterclass-part3.md)
+### [Part 3: Using Different Models with ADK](./2025-05-10-google-adk-masterclass-part3)
 
 One of ADK's strengths is its model-agnostic design. This module explores:
 - Connecting to OpenAI's GPT models
@@ -73,7 +73,7 @@ One of ADK's strengths is its model-agnostic design. This module explores:
 - Using meta's Llama models
 - Strategies for choosing the right model for each task
 
-### [Part 4: Structured Outputs with ADK](./2025-05-10-google-adk-masterclass-part4.md)
+### [Part 4: Structured Outputs with ADK](./2025-05-10-google-adk-masterclass-part4)
 
 Ensuring your agents produce consistent, usable outputs is critical. Here we cover:
 - Output schemas using Pydantic
@@ -81,7 +81,7 @@ Ensuring your agents produce consistent, usable outputs is critical. Here we cov
 - Storing outputs in state
 - Handling schema validation
 
-### [Part 5: Session and Memory Management](./2025-05-10-google-adk-masterclass-part5.md)
+### [Part 5: Session and Memory Management](./2025-05-10-google-adk-masterclass-part5)
 
 Agents need to maintain context across interactions. This module teaches:
 - Understanding sessions and state
@@ -89,7 +89,7 @@ Agents need to maintain context across interactions. This module teaches:
 - Accessing and updating state
 - Building interactive agent loops
 
-### [Part 6: Persisting Sessions to a Database](./2025-05-10-google-adk-masterclass-part6.md)
+### [Part 6: Persisting Sessions to a Database](./2025-05-10-google-adk-masterclass-part6)
 
 For production applications, persistence is key. Here you'll learn:
 - Setting up database session services
@@ -97,7 +97,7 @@ For production applications, persistence is key. Here you'll learn:
 - Creating agents that remember previous interactions
 - Managing session expiration and cleanup
 
-### [Part 7: Building Multi-Agent Solutions](./2025-05-10-google-adk-masterclass-part7.md)
+### [Part 7: Building Multi-Agent Solutions](./2025-05-10-google-adk-masterclass-part7)
 
 Complex problems often require multiple specialized agents. This module covers:
 - Creating teams of specialized agents
@@ -105,7 +105,7 @@ Complex problems often require multiple specialized agents. This module covers:
 - Coordinating multi-agent workflows
 - Sharing information between agents
 
-### [Part 8: Callbacks and Agent Lifecycle](./2025-05-10-google-adk-masterclass-part8.md)
+### [Part 8: Callbacks and Agent Lifecycle](./2025-05-10-google-adk-masterclass-part8)
 
 For fine-grained control over your agents, you need to understand the agent lifecycle:
 - Implementing callbacks for each lifecycle stage
@@ -113,7 +113,7 @@ For fine-grained control over your agents, you need to understand the agent life
 - Monitoring and logging agent activities
 - Implementing safety and moderation filters
 
-### [Part 9: Sequential Workflows](./2025-05-10-google-adk-masterclass-part9.md)
+### [Part 9: Sequential Workflows](./2025-05-10-google-adk-masterclass-part9)
 
 Sequential workflows process tasks in a predetermined order. Here you'll learn:
 - Building step-by-step processing pipelines
@@ -121,7 +121,7 @@ Sequential workflows process tasks in a predetermined order. Here you'll learn:
 - Error handling in sequential workflows
 - Checkpointing for long-running processes
 
-### [Part 10: Parallel Execution Workflows](./2025-05-10-google-adk-masterclass-part10.md)
+### [Part 10: Parallel Execution Workflows](./2025-05-10-google-adk-masterclass-part10)
 
 For efficiency and speed, parallel execution is key. This module explores:
 - Running multiple agents simultaneously
@@ -129,7 +129,7 @@ For efficiency and speed, parallel execution is key. This module explores:
 - Implementing dynamic and conditional parallelism
 - Resource management for parallel execution
 
-### [Part 11: Looping Workflows](./2025-05-10-google-adk-masterclass-part11.md)
+### [Part 11: Looping Workflows](./2025-05-10-google-adk-masterclass-part11)
 
 Some tasks require iterative refinement. This module covers:
 - Implementing count-based and condition-based loops
@@ -137,7 +137,7 @@ Some tasks require iterative refinement. This module covers:
 - Convergence detection
 - A/B testing within loops
 
-### [Part 12: Practical Applications and Deployment](./2025-05-10-google-adk-masterclass-part12.md)
+### [Part 12: Practical Applications and Deployment](./2025-05-10-google-adk-masterclass-part12)
 
 The final module focuses on taking your agents to production:
 - Real-world applications of ADK
@@ -180,7 +180,7 @@ graph TD
     I --> J[Part 10: Parallel Execution]
     J --> K[Part 11: Looping Workflows]
     K --> L[Part 12: Deployment]
-    
+
     style A fill:#e6f7ff,stroke:#1890ff
     style L fill:#f6ffed,stroke:#52c41a
 ```
