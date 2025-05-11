@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 8: Callbacks and Agent Lifecycle'
 
 # Google ADK Masterclass Part 8: Callbacks and Agent Lifecycle
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorial](./2025-05-10-google-adk-masterclass-part7.md), we explored building multi-agent systems where specialized agents collaborate to solve complex problems. Now, we'll dive into one of ADK's most powerful but lesser-known features: callbacks.
 
 Callbacks allow you to hook into every stage of an agent's execution lifecycle, enabling you to monitor, modify, and extend agent behavior. This capability is essential for advanced applications, providing fine-grained control over the agent experience.
@@ -71,7 +73,7 @@ def get_current_time() -> dict:
     """
     from datetime import datetime
     now = datetime.now()
-    
+
     return {
         "current_time": now.strftime("%H:%M:%S"),
         "current_date": now.strftime("%Y-%m-%d"),
@@ -84,9 +86,9 @@ logger_agent = Agent(
     description="A helpful agent that demonstrates callbacks",
     instructions="""
     You are a helpful assistant that can provide information and answer questions.
-    
+
     When asked about the current time, use the get_current_time tool.
-    
+
     Be friendly and conversational in your responses.
     """,
     tools=[FunctionTool(get_current_time)]
@@ -119,51 +121,51 @@ log_file = "agent_logs.jsonl"
 
 class CallbackLogger:
     """Callback handler that logs details at each stage of the agent lifecycle."""
-    
+
     def __init__(self, log_file):
         self.log_file = log_file
         self.start_time = None
         self.execution_id = None
-    
+
     def log_event(self, event_type, details=None):
         """Log an event to the log file."""
         timestamp = datetime.now().isoformat()
-        
+
         log_entry = {
             "timestamp": timestamp,
             "execution_id": self.execution_id,
             "event_type": event_type,
             "details": details or {}
         }
-        
+
         with open(self.log_file, "a") as f:
             f.write(json.dumps(log_entry) + "\n")
-    
+
     async def on_run_start(self, runner, user_id, session_id, content, **kwargs):
         """Called before the agent starts processing."""
         self.start_time = time.time()
         self.execution_id = str(uuid.uuid4())
-        
+
         # Extract the user message
         user_message = None
         for part in content.parts:
             if hasattr(part, 'text'):
                 user_message = part.text
                 break
-        
+
         self.log_event("run_start", {
             "user_id": user_id,
             "session_id": session_id,
             "user_message": user_message
         })
-    
+
     async def on_agent_selection(self, runner, user_id, session_id, agent_name, **kwargs):
         """Called when an agent is selected to handle the request."""
         self.log_event("agent_selection", {
             "agent_name": agent_name
         })
-    
-    async def on_llm_call(self, runner, user_id, session_id, agent_name, 
+
+    async def on_llm_call(self, runner, user_id, session_id, agent_name,
                          prompt, **kwargs):
         """Called before sending a prompt to the language model."""
         # Note: In a real app, you might want to sanitize or truncate the prompt
@@ -172,7 +174,7 @@ class CallbackLogger:
             "agent_name": agent_name,
             "prompt_length": len(str(prompt))
         })
-    
+
     async def on_llm_response(self, runner, user_id, session_id, agent_name,
                              prompt, response, **kwargs):
         """Called after receiving a response from the language model."""
@@ -180,7 +182,7 @@ class CallbackLogger:
             "agent_name": agent_name,
             "response_length": len(str(response))
         })
-    
+
     async def on_tool_call(self, runner, user_id, session_id, agent_name,
                           tool_name, tool_params, **kwargs):
         """Called before executing a tool."""
@@ -189,7 +191,7 @@ class CallbackLogger:
             "tool_name": tool_name,
             "tool_params": tool_params
         })
-    
+
     async def on_tool_response(self, runner, user_id, session_id, agent_name,
                               tool_name, tool_params, tool_response, **kwargs):
         """Called after receiving a response from a tool."""
@@ -198,11 +200,11 @@ class CallbackLogger:
             "tool_name": tool_name,
             "tool_response": tool_response
         })
-    
+
     async def on_run_end(self, runner, user_id, session_id, content, **kwargs):
         """Called after the agent completes processing."""
         execution_time = time.time() - self.start_time
-        
+
         # Extract the final response
         agent_response = None
         if content and hasattr(content, 'parts'):
@@ -210,7 +212,7 @@ class CallbackLogger:
                 if hasattr(part, 'text'):
                     agent_response = part.text
                     break
-        
+
         self.log_event("run_end", {
             "execution_time_seconds": execution_time,
             "agent_response": agent_response
@@ -219,27 +221,27 @@ class CallbackLogger:
 async def process_user_input(runner, user_id, session_id, query):
     """Process a user query through the agent."""
     print(f"\nYou: {query}")
-    
+
     # Create content from the user query
     content = content_types.Content(
         role="user",
         parts=[Part.from_text(query)]
     )
-    
+
     # Run the agent with the user query
     response = await runner.run_async(
         user_id=user_id,
         session_id=session_id,
         content=content
     )
-    
+
     # Process the response
     final_response_text = None
-    
+
     for event in response.events:
         if event.type == "content" and event.content.role == "agent":
             final_response_text = event.content.parts[0].text
-    
+
     print(f"\nAgent: {final_response_text}")
     return final_response_text
 
@@ -247,13 +249,13 @@ async def main():
     # Clear or create the log file
     with open(log_file, "w") as f:
         f.write("")
-    
+
     # Create a session service
     session_service = InMemorySessionService()
-    
+
     # Create a callback logger
     callback_logger = CallbackLogger(log_file)
-    
+
     # Create a session
     session_id = str(uuid.uuid4())
     session = session_service.create_session(
@@ -261,7 +263,7 @@ async def main():
         user_id="example_user",
         session_id=session_id
     )
-    
+
     # Create a runner with callbacks
     runner = Runner(
         root_agent=logger_agent,
@@ -276,19 +278,19 @@ async def main():
             callback_logger.on_run_end
         ]
     )
-    
+
     # Interactive chat loop
     print("\nCallback Demo")
     print("Type 'exit' or 'quit' to end the conversation")
     print("--------------------------------------------------------")
-    
+
     while True:
         user_input = input("\nYou: ")
-        
+
         if user_input.lower() in ["exit", "quit"]:
             print("Goodbye! Check agent_logs.jsonl for the interaction logs.")
             break
-        
+
         # Process the user input
         await process_user_input(runner, "example_user", session_id, user_input)
 
@@ -343,7 +345,7 @@ Now that we understand the basics, let's explore some more advanced callback tec
 You can modify prompts before they're sent to the language model:
 
 ```python
-async def on_llm_call(self, runner, user_id, session_id, agent_name, 
+async def on_llm_call(self, runner, user_id, session_id, agent_name,
                      prompt, **kwargs):
     """Modify prompt before sending to the language model."""
     # Add additional context to every prompt
@@ -400,10 +402,10 @@ class AnalyticsCallback:
         self.sessions = {}
         self.tool_usage = {}
         self.response_times = []
-    
+
     async def on_run_start(self, runner, user_id, session_id, content, **kwargs):
         self.start_time = time.time()
-        
+
         # Track unique sessions
         if session_id not in self.sessions:
             self.sessions[session_id] = {
@@ -411,22 +413,22 @@ class AnalyticsCallback:
                 "message_count": 0,
                 "first_seen": datetime.now().isoformat()
             }
-        
+
         self.sessions[session_id]["message_count"] += 1
         self.sessions[session_id]["last_seen"] = datetime.now().isoformat()
-    
+
     async def on_tool_call(self, runner, user_id, session_id, agent_name,
                           tool_name, tool_params, **kwargs):
         # Track tool usage
         if tool_name not in self.tool_usage:
             self.tool_usage[tool_name] = 0
         self.tool_usage[tool_name] += 1
-    
+
     async def on_run_end(self, runner, user_id, session_id, content, **kwargs):
         # Track response times
         execution_time = time.time() - self.start_time
         self.response_times.append(execution_time)
-    
+
     def get_analytics_report(self):
         """Generate a report of usage analytics."""
         return {
@@ -444,7 +446,7 @@ You can add error handling to gracefully recover from failures:
 
 ```python
 class ErrorHandlingCallback:
-    async def on_llm_call(self, runner, user_id, session_id, agent_name, 
+    async def on_llm_call(self, runner, user_id, session_id, agent_name,
                          prompt, **kwargs):
         try:
             # Normal processing
@@ -455,7 +457,7 @@ class ErrorHandlingCallback:
             return {
                 "response": "I'm having trouble processing your request right now. Could you try again?"
             }
-    
+
     async def on_tool_call(self, runner, user_id, session_id, agent_name,
                           tool_name, tool_params, **kwargs):
         try:
@@ -495,12 +497,12 @@ runner = Runner(
         logger.on_tool_call,
         logger.on_tool_response,
         logger.on_run_end,
-        
+
         # Analytics callbacks
         analytics.on_run_start,
         analytics.on_tool_call,
         analytics.on_run_end,
-        
+
         # Error handling callbacks
         error_handler.on_llm_call,
         error_handler.on_tool_call
@@ -522,35 +524,35 @@ class ComprehensiveCallback(Callback):
         self.log_file = log_file
         self.start_time = None
         self.execution_id = None
-    
+
     async def on_run_start(self, runner, user_id, session_id, content, **kwargs):
         """Called before the agent starts processing."""
         # Implementation
-    
+
     async def on_agent_selection(self, runner, user_id, session_id, agent_name, **kwargs):
         """Called when an agent is selected to handle the request."""
         # Implementation
-    
-    async def on_llm_call(self, runner, user_id, session_id, agent_name, 
+
+    async def on_llm_call(self, runner, user_id, session_id, agent_name,
                          prompt, **kwargs):
         """Called before sending a prompt to the language model."""
         # Implementation
-    
+
     async def on_llm_response(self, runner, user_id, session_id, agent_name,
                              prompt, response, **kwargs):
         """Called after receiving a response from the language model."""
         # Implementation
-    
+
     async def on_tool_call(self, runner, user_id, session_id, agent_name,
                           tool_name, tool_params, **kwargs):
         """Called before executing a tool."""
         # Implementation
-    
+
     async def on_tool_response(self, runner, user_id, session_id, agent_name,
                               tool_name, tool_params, tool_response, **kwargs):
         """Called after receiving a response from a tool."""
         # Implementation
-    
+
     async def on_run_end(self, runner, user_id, session_id, content, **kwargs):
         """Called after the agent completes processing."""
         # Implementation
@@ -576,7 +578,7 @@ Callbacks run during every agent interaction, so keep them lightweight. Heavy pr
 async def on_run_end(self, runner, user_id, session_id, content, **kwargs):
     # Don't do this - blocking operation
     # time.sleep(5)
-    
+
     # Instead, start an async task
     asyncio.create_task(self.process_logs_async(session_id))
 ```
@@ -590,7 +592,7 @@ Modifying prompts or responses can have unintended consequences. Test thoroughly
 Always use try/except blocks to prevent callback errors from breaking the agent lifecycle:
 
 ```python
-async def on_llm_call(self, runner, user_id, session_id, agent_name, 
+async def on_llm_call(self, runner, user_id, session_id, agent_name,
                      prompt, **kwargs):
     try:
         # Your callback logic
@@ -614,11 +616,11 @@ def log_event(self, event_type, details=None):
         "event_type": event_type,
         "details": details or {}
     }
-    
+
     # Log to both file and monitoring service
     with open(self.log_file, "a") as f:
         f.write(json.dumps(log_entry) + "\n")
-    
+
     # Also send to monitoring service
     if self.monitoring_service:
         asyncio.create_task(self.monitoring_service.send(log_entry))
@@ -633,7 +635,7 @@ class CallbackWithState:
     def __init__(self):
         # Use a dictionary keyed by execution_id for thread safety
         self.states = {}
-    
+
     async def on_run_start(self, runner, user_id, session_id, content, **kwargs):
         execution_id = str(uuid.uuid4())
         self.states[execution_id] = {
@@ -642,7 +644,7 @@ class CallbackWithState:
             "session_id": session_id
         }
         return {"execution_id": execution_id}
-    
+
     async def on_run_end(self, runner, user_id, session_id, content, execution_id=None, **kwargs):
         if execution_id and execution_id in self.states:
             state = self.states[execution_id]
@@ -662,17 +664,17 @@ Here are some practical applications of callbacks in production environments:
 class ContentModerationCallback:
     def __init__(self, moderation_service):
         self.moderation_service = moderation_service
-    
+
     async def on_llm_response(self, runner, user_id, session_id, agent_name,
                              prompt, response, **kwargs):
         # Check response against moderation rules
         if isinstance(response, str):
             moderation_result = await self.moderation_service.check_content(response)
-            
+
             if moderation_result.flagged:
                 # Replace with safe content
                 return {"response": "I apologize, but I cannot provide that information."}
-        
+
         return None
 ```
 
@@ -683,21 +685,21 @@ class RateLimitingCallback:
     def __init__(self):
         self.user_requests = {}
         self.max_requests_per_minute = 10
-    
+
     async def on_run_start(self, runner, user_id, session_id, content, **kwargs):
         now = time.time()
         minute_ago = now - 60
-        
+
         # Initialize if new user
         if user_id not in self.user_requests:
             self.user_requests[user_id] = []
-        
+
         # Remove requests older than 1 minute
         self.user_requests[user_id] = [
             timestamp for timestamp in self.user_requests[user_id]
             if timestamp > minute_ago
         ]
-        
+
         # Check if user exceeds rate limit
         if len(self.user_requests[user_id]) >= self.max_requests_per_minute:
             # Return an early response to avoid LLM call
@@ -709,7 +711,7 @@ class RateLimitingCallback:
                     )]
                 )
             }
-        
+
         # Add this request to the log
         self.user_requests[user_id].append(now)
         return None
@@ -733,32 +735,32 @@ class CostTrackingCallback:
             "search_tool": 0.01,    # $0.01 per call
             "weather_tool": 0.005   # $0.005 per call
         }
-    
-    async def on_llm_call(self, runner, user_id, session_id, agent_name, 
+
+    async def on_llm_call(self, runner, user_id, session_id, agent_name,
                          prompt, **kwargs):
         # Estimate token count (simplified)
         token_count = len(str(prompt)) / 4  # Very rough estimate
-        
+
         # Get model info
         agent = runner.get_agent(agent_name)
         model_name = agent.model if hasattr(agent, 'model') else "unknown"
-        
+
         # Calculate cost
         rate = self.llm_rates.get(model_name, 0.0002)  # Default rate if unknown
         cost = (token_count / 1000) * rate
-        
+
         # Add to total
         self.costs["llm_calls"] += cost
-    
+
     async def on_tool_call(self, runner, user_id, session_id, agent_name,
                           tool_name, tool_params, **kwargs):
         # Track tool usage cost
         if tool_name not in self.costs["tool_calls"]:
             self.costs["tool_calls"][tool_name] = 0
-        
+
         rate = self.tool_rates.get(tool_name, 0.001)  # Default rate if unknown
         self.costs["tool_calls"][tool_name] += rate
-    
+
     def get_total_cost(self):
         tool_cost = sum(self.costs["tool_calls"].values())
         return {
@@ -795,7 +797,7 @@ sequenceDiagram
     participant Agent
     participant LLM
     participant Tool
-    
+
     User->>Runner: Send message
     activate Runner
     Runner->>Callbacks: on_run_start
@@ -808,7 +810,7 @@ sequenceDiagram
     LLM-->>Agent: Response
     deactivate LLM
     Agent->>Callbacks: on_llm_response
-    
+
     opt Tool Call Needed
         Agent->>Callbacks: on_tool_call
         Agent->>Tool: Execute tool
@@ -817,10 +819,11 @@ sequenceDiagram
         deactivate Tool
         Agent->>Callbacks: on_tool_response
     end
-    
+
     Agent-->>Runner: Final response
     deactivate Agent
     Runner->>Callbacks: on_run_end
     Runner-->>User: Return response
     deactivate Runner
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part9)

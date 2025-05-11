@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 3: Using Different Models with ADK'
 
 # Google ADK Masterclass Part 3: Using Different Models with ADK
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorials](./2025-05-10-google-adk-masterclass-part2.md), we explored the basics of Google's Agent Development Kit (ADK) and learned how to enhance agents with tools. One of ADK's most powerful features is its model-agnostic design, allowing you to leverage models from various providers beyond just Google's Gemini.
 
 In this tutorial, we'll dive into connecting ADK to other leading language models like OpenAI's GPT and Anthropic's Claude. This capability gives you the flexibility to choose the best model for your specific use case or to use different models for different agent tasks.
@@ -212,12 +214,12 @@ adk web
 
 ### Example Interaction with OpenAI Model
 
-**You**: Please tell me a joke  
+**You**: Please tell me a joke
 **Agent**: Sure, here's a dad joke for you: Why don't scientists trust atoms? Because they make up everything!
 
 ### Example Interaction with Claude Model
 
-**You**: Can you tell me a short story about a robot learning to paint?  
+**You**: Can you tell me a short story about a robot learning to paint?
 **Agent**: # The Color of Dreams
 
 In a laboratory on the outskirts of the city, Robot Unit RB-724 observed its human creator, Dr. Chen, painting a sunset. The robot's optical sensors recorded every brushstroke, every blend of orange and purple, every subtle transition of color across the canvas.
@@ -305,7 +307,7 @@ def create_agent(model_name):
         instructions = "You are a helpful assistant. When responding..."
     else:
         instructions = "You are a helpful assistant..."
-    
+
     # Create and return agent with appropriate instructions
 ```
 
@@ -348,3 +350,4 @@ graph TD
     F --> G
     G --> H[Agent Response]
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part4)

@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 2: Adding Tools to Your Agents'
 
 # Google ADK Masterclass Part 2: Adding Tools to Your Agents
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In the [previous part](./2025-05-10-google-adk-masterclass-part1.md) of our Google ADK Masterclass, we set up our environment and created our first basic agent. Now, let's take our agents to the next level by adding tools.
 
 Tools are one of the most powerful features in ADK, enabling agents to interact with external systems, perform complex calculations, search the web, and much more. In this tutorial, we'll explore the different types of tools available and how to integrate them into your agents.
@@ -125,10 +127,10 @@ For example, if you wanted to add parameters to your function:
 def format_date(format_string: str) -> dict:
     """
     Returns the current date in the specified format.
-    
+
     Args:
         format_string: A string representing the date format (e.g., "%Y-%m-%d")
-    
+
     Returns:
         A dictionary containing the formatted date
     """
@@ -166,7 +168,7 @@ adk web
 
 ### Example Interaction with Google Search Tool
 
-**You**: Do you have any news about Tesla this week?  
+**You**: Do you have any news about Tesla this week?
 **Agent**: Yes, I've found several recent news items about Tesla this week:
 
 1. Tesla reported their Q1 2025 earnings, showing a 12% increase in revenue compared to last year but a slight decrease in automotive gross margins.
@@ -181,7 +183,7 @@ Would you like me to elaborate on any specific aspect of Tesla's recent news?
 
 ### Example Interaction with Custom Time Tool
 
-**You**: What is the current time?  
+**You**: What is the current time?
 **Agent**: I checked the current time for you. It's 15:42:37 on 2025-05-10, and you're in the PST timezone.
 
 ## Tool Events and Debugging
@@ -206,10 +208,10 @@ from google.adk.tool import FunctionTool
 def get_stock_price(ticker: str) -> dict:
     """
     Retrieves the current stock price for a given ticker symbol.
-    
+
     Args:
         ticker: The stock ticker symbol (e.g., 'AAPL', 'GOOGL', 'MSFT')
-    
+
     Returns:
         Dictionary containing stock information including current price,
         daily high/low, and company name.
@@ -218,7 +220,7 @@ def get_stock_price(ticker: str) -> dict:
         stock = yf.Ticker(ticker)
         info = stock.info
         price_data = stock.history(period="1d")
-        
+
         return {
             "company_name": info.get('shortName', 'Unknown'),
             "current_price": float(price_data['Close'].iloc[-1]),
@@ -290,3 +292,4 @@ graph TD
     D --> I[Return to User]
     H --> I
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part3)

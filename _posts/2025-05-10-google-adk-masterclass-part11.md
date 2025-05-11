@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 11: Looping Workflows'
 
 # Google ADK Masterclass Part 11: Looping Workflows
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorials](./2025-05-10-google-adk-masterclass-part10.md), we explored sequential and parallel workflows in ADK. Now, we'll dive into the third major workflow pattern: looping workflows.
 
 Looping workflows allow agents to repeat a process multiple times, refining their outputs until they meet specific criteria or achieve a desired outcome. This pattern is particularly useful for tasks that require multiple iterations to reach an optimal solution, such as content refinement, complex problem-solving, or optimization challenges.
@@ -84,13 +86,13 @@ content_generator = Agent(
     description="Generates content based on specific requirements",
     instructions="""
     You are a skilled content creator. Your job is to generate high-quality content based on the user's requirements.
-    
+
     When given a content request:
     1. Analyze the topic, purpose, and any specific requirements
     2. Generate appropriate content that is engaging, informative, and well-structured
     3. Ensure the content matches the requested style, tone, and format
     4. Include a compelling title and clear key points
-    
+
     Format your response as a structured JSON object with the following fields:
     {
         "content": "The full content text",
@@ -100,7 +102,7 @@ content_generator = Agent(
         "content_type": "The type of content (e.g., blog post, email, social media)",
         "word_count": The approximate word count of the content
     }
-    
+
     Be creative, engaging, and focused on delivering value to the intended audience.
     """,
     output_schema=GeneratedContent,
@@ -130,13 +132,13 @@ content_evaluator = Agent(
     description="Evaluates content quality against specific criteria",
     instructions="""
     You are a content quality evaluator. Your job is to critically assess content against specific quality criteria.
-    
+
     When evaluating content:
     1. Analyze the content objectively against the provided requirements
     2. Identify strengths and weaknesses
     3. Suggest specific improvements
     4. Determine if the content meets a high-quality threshold
-    
+
     Quality criteria to consider:
     - Relevance to the topic and target audience
     - Clarity and coherence
@@ -145,7 +147,7 @@ content_evaluator = Agent(
     - Structure and organization
     - Language, grammar, and readability
     - Originality and uniqueness
-    
+
     Format your evaluation as a structured JSON object with the following fields:
     {
         "overall_score": A score from 1-10,
@@ -158,7 +160,7 @@ content_evaluator = Agent(
         ],
         "quality_threshold_met": true/false (true if overall_score >= 8)
     }
-    
+
     Be thorough, specific, and constructive in your evaluation.
     """,
     output_schema=ContentEvaluation,
@@ -189,13 +191,13 @@ content_refiner = Agent(
     description="Refines content based on evaluation feedback",
     instructions="""
     You are a content refinement specialist. Your job is to improve content based on specific evaluation feedback.
-    
+
     When refining content:
     1. Review the original content
     2. Analyze the evaluation feedback, focusing on weaknesses and improvement suggestions
     3. Make targeted improvements while maintaining the strengths
     4. Provide a summary of the improvements made
-    
+
     Format your response as a structured JSON object with the following fields:
     {
         "content": "The refined content text",
@@ -207,7 +209,7 @@ content_refiner = Agent(
         "improvement_summary": "A summary of the improvements made in this iteration",
         "iteration": The iteration number
     }
-    
+
     Focus on making substantial improvements that address the specific feedback, while preserving the original intent and strengths of the content.
     """,
     output_schema=RefinedContent,
@@ -241,14 +243,14 @@ load_dotenv()
 async def run_agent(runner, user_id, session_id, agent_name, content):
     """Run a specific agent with the given content."""
     print(f"\nRunning {agent_name}...")
-    
+
     # Create content object if string is provided
     if isinstance(content, str):
         content = content_types.Content(
             role="user",
             parts=[Part.from_text(content)]
         )
-    
+
     # Run the agent
     response = await runner.run_async(
         user_id=user_id,
@@ -256,19 +258,19 @@ async def run_agent(runner, user_id, session_id, agent_name, content):
         content=content,
         agent_name=agent_name
     )
-    
+
     # Process the response
     final_response_text = None
     for event in response.events:
         if event.type == "content" and event.content.role == "agent":
             final_response_text = event.content.parts[0].text
-    
+
     # Get the session to access state
     session = runner.session_service.get_session(
         user_id=user_id,
         session_id=session_id
     )
-    
+
     print(f"{agent_name} completed.")
     return final_response_text, session.state
 
@@ -276,7 +278,7 @@ async def count_based_loop_workflow(content_request, max_iterations=3):
     """Run a content refinement workflow with a fixed number of iterations."""
     # Create a session service
     session_service = InMemorySessionService()
-    
+
     # Create a session
     session_id = str(uuid.uuid4())
     user_id = "workflow_user"
@@ -285,66 +287,66 @@ async def count_based_loop_workflow(content_request, max_iterations=3):
         user_id=user_id,
         session_id=session_id
     )
-    
+
     # Create a runner with all our agents
     runner = Runner(
         root_agent=content_generator,  # This doesn't matter in our case as we specify agent_name
         agents=[content_generator, content_evaluator, content_refiner],
         session_service=session_service
     )
-    
+
     # Step 1: Generate initial content
     generator_prompt = f"Please create content based on this request: {content_request}"
     _, state = await run_agent(
         runner, user_id, session_id, "content_generator", generator_prompt
     )
-    
+
     # Get the generated content
     current_content = state.get("generated_content")
     if not current_content:
         print("Failed to generate initial content.")
         return
-    
+
     print("\nInitial Content Generated:")
     print(f"Title: {current_content['title']}")
     print(f"Word Count: {current_content['word_count']}")
-    
+
     # Loop through refinement iterations
     for i in range(max_iterations):
         # Step 2: Evaluate the current content
         evaluation_prompt = f"""
         Please evaluate this content:
-        
+
         Title: {current_content['title']}
-        
+
         Content: {current_content['content']}
-        
+
         Target Audience: {current_content['target_audience']}
-        
+
         Key Points: {', '.join(current_content['key_points'])}
-        
+
         Content Type: {current_content['content_type']}
-        
+
         Word Count: {current_content['word_count']}
-        
+
         Please provide a thorough evaluation based on quality criteria.
         """
-        
+
         _, evaluation_state = await run_agent(
             runner, user_id, session_id, "content_evaluator", evaluation_prompt
         )
-        
+
         # Get the evaluation
         evaluation = evaluation_state.get("content_evaluation")
         if not evaluation:
             print("Failed to evaluate content.")
             break
-        
+
         print(f"\nEvaluation for Iteration {i + 1}:")
         print(f"Overall Score: {evaluation['overall_score']}/10")
         print(f"Meets Requirements: {evaluation['meets_requirements']}")
         print(f"Quality Threshold Met: {evaluation['quality_threshold_met']}")
-        
+
         # If this is the final iteration or quality threshold is met, break the loop
         if i == max_iterations - 1 or evaluation["quality_threshold_met"]:
             if evaluation["quality_threshold_met"]:
@@ -352,36 +354,36 @@ async def count_based_loop_workflow(content_request, max_iterations=3):
             else:
                 print("\nReached maximum iterations. Stopping refinement.")
             break
-        
+
         # Step 3: Refine the content based on evaluation
         refinement_prompt = f"""
         Please refine this content based on the evaluation:
-        
+
         Original Content:
         {json.dumps(current_content, indent=2)}
-        
+
         Evaluation:
         {json.dumps(evaluation, indent=2)}
-        
+
         This is iteration {i + 1}.
         """
-        
+
         _, refinement_state = await run_agent(
             runner, user_id, session_id, "content_refiner", refinement_prompt
         )
-        
+
         # Get the refined content
         refined_content = refinement_state.get("refined_content")
         if not refined_content:
             print("Failed to refine content.")
             break
-        
+
         print(f"\nContent Refined (Iteration {i + 1}):")
         print(f"Improvement Summary: {refined_content['improvement_summary']}")
-        
+
         # Update current content for next iteration
         current_content = refined_content
-    
+
     # Return the final content
     return current_content
 
@@ -389,7 +391,7 @@ async def condition_based_loop_workflow(content_request, quality_threshold=8, ma
     """Run a content refinement workflow that continues until a quality threshold is met."""
     # Create a session service
     session_service = InMemorySessionService()
-    
+
     # Create a session
     session_id = str(uuid.uuid4())
     user_id = "workflow_user"
@@ -398,124 +400,124 @@ async def condition_based_loop_workflow(content_request, quality_threshold=8, ma
         user_id=user_id,
         session_id=session_id
     )
-    
+
     # Create a runner with all our agents
     runner = Runner(
         root_agent=content_generator,
         agents=[content_generator, content_evaluator, content_refiner],
         session_service=session_service
     )
-    
+
     # Step 1: Generate initial content
     generator_prompt = f"Please create content based on this request: {content_request}"
     _, state = await run_agent(
         runner, user_id, session_id, "content_generator", generator_prompt
     )
-    
+
     # Get the generated content
     current_content = state.get("generated_content")
     if not current_content:
         print("Failed to generate initial content.")
         return
-    
+
     print("\nInitial Content Generated:")
     print(f"Title: {current_content['title']}")
     print(f"Word Count: {current_content['word_count']}")
-    
+
     # Initialize loop variables
     iteration = 0
     quality_met = False
-    
+
     # Loop until quality threshold is met or max iterations reached
     while iteration < max_iterations and not quality_met:
         # Step 2: Evaluate the current content
         evaluation_prompt = f"""
         Please evaluate this content:
-        
+
         Title: {current_content['title']}
-        
+
         Content: {current_content['content']}
-        
+
         Target Audience: {current_content['target_audience']}
-        
+
         Key Points: {', '.join(current_content['key_points'])}
-        
+
         Content Type: {current_content['content_type']}
-        
+
         Word Count: {current_content['word_count']}
-        
+
         Please provide a thorough evaluation based on quality criteria.
         Consider a quality threshold of {quality_threshold} out of 10.
         """
-        
+
         _, evaluation_state = await run_agent(
             runner, user_id, session_id, "content_evaluator", evaluation_prompt
         )
-        
+
         # Get the evaluation
         evaluation = evaluation_state.get("content_evaluation")
         if not evaluation:
             print("Failed to evaluate content.")
             break
-        
+
         print(f"\nEvaluation for Iteration {iteration + 1}:")
         print(f"Overall Score: {evaluation['overall_score']}/10")
         print(f"Meets Requirements: {evaluation['meets_requirements']}")
-        
+
         # Check if quality threshold is met
         quality_met = evaluation["overall_score"] >= quality_threshold
-        
+
         if quality_met:
             print(f"\nQuality threshold of {quality_threshold}/10 met! Stopping refinement.")
             break
-        
+
         # Step 3: Refine the content based on evaluation
         refinement_prompt = f"""
         Please refine this content based on the evaluation:
-        
+
         Original Content:
         {json.dumps(current_content, indent=2)}
-        
+
         Evaluation:
         {json.dumps(evaluation, indent=2)}
-        
+
         This is iteration {iteration + 1}.
         """
-        
+
         _, refinement_state = await run_agent(
             runner, user_id, session_id, "content_refiner", refinement_prompt
         )
-        
+
         # Get the refined content
         refined_content = refinement_state.get("refined_content")
         if not refined_content:
             print("Failed to refine content.")
             break
-        
+
         print(f"\nContent Refined (Iteration {iteration + 1}):")
         print(f"Improvement Summary: {refined_content['improvement_summary']}")
-        
+
         # Update current content for next iteration
         current_content = refined_content
-        
+
         # Increment iteration counter
         iteration += 1
-    
+
     if iteration >= max_iterations and not quality_met:
         print(f"\nReached maximum iterations ({max_iterations}) without meeting quality threshold.")
-    
+
     # Return the final content
     return current_content
 
 async def main():
     # Content request
     content_request = "Create a blog post about artificial intelligence in healthcare. The target audience is healthcare professionals with limited technical knowledge. The post should be informative, engaging, and include practical examples."
-    
+
     print("=== DEMONSTRATION 1: COUNT-BASED LOOP ===")
     print(f"Running content refinement with a fixed number of iterations (3)...")
-    
+
     final_content_1 = await count_based_loop_workflow(content_request, max_iterations=3)
-    
+
     if final_content_1:
         print("\nFinal Content (Count-Based Loop):")
         print(f"Title: {final_content_1['title']}")
@@ -524,17 +526,17 @@ async def main():
         print("\nKey Points:")
         for point in final_content_1['key_points']:
             print(f"- {point}")
-        
+
         # Save the final content to a file
         with open("count_based_loop_output.json", "w") as f:
             json.dump(final_content_1, f, indent=2)
         print("\nFinal content saved to count_based_loop_output.json")
-    
+
     print("\n\n=== DEMONSTRATION 2: CONDITION-BASED LOOP ===")
     print(f"Running content refinement until quality threshold (8/10) is met...")
-    
+
     final_content_2 = await condition_based_loop_workflow(content_request, quality_threshold=8, max_iterations=5)
-    
+
     if final_content_2:
         print("\nFinal Content (Condition-Based Loop):")
         print(f"Title: {final_content_2['title']}")
@@ -543,7 +545,7 @@ async def main():
         print("\nKey Points:")
         for point in final_content_2['key_points']:
             print(f"- {point}")
-        
+
         # Save the final content to a file
         with open("condition_based_loop_output.json", "w") as f:
             json.dump(final_content_2, f, indent=2)
@@ -705,37 +707,37 @@ async def progressive_refinement_workflow(content_request, max_iterations=5):
         "engagement and tone",
         "overall coherence and flow"
     ]
-    
+
     # Generate initial content
     # ...
-    
+
     # Loop through iterations with different focuses
     for i in range(min(max_iterations, len(iteration_focuses))):
         current_focus = iteration_focuses[i]
-        
+
         # Evaluate with current focus
         evaluation_prompt = f"""
         Please evaluate this content with a specific focus on {current_focus}:
-        
+
         Content: {current_content['content']}
-        
+
         // Other content details...
-        
+
         Focus your evaluation primarily on {current_focus} for this iteration.
         """
-        
+
         # Refine with current focus
         refinement_prompt = f"""
         Please refine this content with a specific focus on improving {current_focus}:
-        
+
         // Content and evaluation details...
-        
+
         For this iteration ({i+1}), concentrate primarily on enhancing {current_focus}.
         """
-        
+
         # Run agents and update content
         # ...
-    
+
     # Return final content
 ```
 
@@ -748,10 +750,10 @@ async def branching_loop_workflow(content_request):
     """Run a workflow that branches based on evaluation results."""
     # Generate initial content
     # ...
-    
+
     # Initial evaluation
     # ...
-    
+
     # Branch based on evaluation
     if evaluation["overall_score"] < 5:
         # Major revisions needed
@@ -762,10 +764,10 @@ async def branching_loop_workflow(content_request):
     else:
         # Minor polishing needed
         refinement_prompt = "Minor refinements needed..."
-    
+
     # Run appropriate refinement
     # ...
-    
+
     # Continue with next iteration
     # ...
 ```
@@ -779,35 +781,35 @@ async def convergence_loop_workflow(content_request):
     """Run a workflow that stops when improvements become minimal."""
     # Generate initial content and evaluation
     # ...
-    
+
     previous_score = 0
     current_score = evaluation["overall_score"]
     improvement_threshold = 0.5
-    
+
     # Loop until convergence or max iterations
     while (current_score - previous_score) > improvement_threshold and iteration < max_iterations:
         # Store previous score
         previous_score = current_score
-        
+
         # Refine content
         # ...
-        
+
         # Evaluate new content
         # ...
-        
+
         # Update current score
         current_score = evaluation["overall_score"]
-        
+
         # Check improvement
         improvement = current_score - previous_score
         print(f"Improvement in this iteration: {improvement:.2f} points")
-        
+
         # Increment iteration counter
         iteration += 1
-    
+
     if (current_score - previous_score) <= improvement_threshold:
         print("Refinement converged! Minimal improvement detected.")
-    
+
     # Return final content
 ```
 
@@ -820,7 +822,7 @@ async def ab_testing_loop_workflow(content_request):
     """Run a workflow that tests multiple refinements and selects the best."""
     # Generate initial content
     # ...
-    
+
     # Loop through iterations
     for i in range(max_iterations):
         # Generate multiple refinement approaches
@@ -829,41 +831,41 @@ async def ab_testing_loop_workflow(content_request):
             f"Refine this content focusing on depth and detail...",
             f"Refine this content focusing on engagement and style..."
         ]
-        
+
         # Generate multiple refinements in parallel
         refinement_tasks = [
             run_agent(runner, user_id, session_id, "content_refiner", prompt)
             for prompt in refinement_prompts
         ]
-        
+
         refinement_results = await asyncio.gather(*refinement_tasks)
-        
+
         # Evaluate all refinements
         evaluation_tasks = [
-            run_agent(runner, user_id, session_id, "content_evaluator", 
+            run_agent(runner, user_id, session_id, "content_evaluator",
                     f"Evaluate this content: {refinement['refined_content']['content']}")
             for _, refinement in refinement_results
         ]
-        
+
         evaluation_results = await asyncio.gather(*evaluation_tasks)
-        
+
         # Find the best refinement
         best_score = 0
         best_refinement = None
-        
+
         for j, (_, eval_state) in enumerate(evaluation_results):
             score = eval_state["content_evaluation"]["overall_score"]
             if score > best_score:
                 best_score = score
                 best_refinement = refinement_results[j][1]["refined_content"]
-        
+
         # Update current content to the best refinement
         current_content = best_refinement
-        
+
         # Check if quality threshold is met
         if best_score >= quality_threshold:
             break
-    
+
     # Return final content
 ```
 
@@ -879,7 +881,7 @@ Always define clear stopping conditions to prevent infinite loops:
 # Good: Clear stopping conditions
 while iteration < max_iterations and not quality_met:
     # Loop body
-    
+
     # Update loop control variables
     iteration += 1
     quality_met = evaluation["overall_score"] >= quality_threshold
@@ -901,16 +903,16 @@ progress_log = []
 for i in range(max_iterations):
     # Run iteration
     # ...
-    
+
     # Log progress
     progress_log.append({
         "iteration": i + 1,
         "score": evaluation["overall_score"],
         "improvement": evaluation["overall_score"] - (progress_log[-1]["score"] if progress_log else 0)
     })
-    
+
     # Display progress
-    print(f"Iteration {i+1}: Score = {progress_log[-1]['score']}, " + 
+    print(f"Iteration {i+1}: Score = {progress_log[-1]['score']}, " +
           f"Improvement = {progress_log[-1]['improvement']:.2f}")
 ```
 
@@ -942,7 +944,7 @@ for i in range(max_iterations):
         session_id=iteration_session_id,
         state={"original_content": original_content, "current_iteration": i + 1}
     )
-    
+
     # Run agents with the new session
     # ...
 ```
@@ -955,14 +957,14 @@ Implement timeout protection for long-running loops:
 async def loop_with_timeout(max_runtime_seconds=300):
     """Run a loop with overall timeout protection."""
     start_time = time.time()
-    
+
     for i in range(max_iterations):
         # Check if we're approaching the timeout
         elapsed_time = time.time() - start_time
         if elapsed_time > max_runtime_seconds:
             print(f"Timeout reached after {elapsed_time:.2f} seconds. Stopping refinement.")
             break
-        
+
         # Run iteration with individual timeout
         remaining_time = max_runtime_seconds - elapsed_time
         try:
@@ -1040,12 +1042,12 @@ graph TD
     I --> J{Max Iterations?}
     J -->|No| D
     J -->|Yes| G
-    
+
     subgraph "Step 1: Generation"
         B
         C
     end
-    
+
     subgraph "Step 2: Iteration Loop"
         D
         E
@@ -1055,3 +1057,4 @@ graph TD
         J
     end
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part12)

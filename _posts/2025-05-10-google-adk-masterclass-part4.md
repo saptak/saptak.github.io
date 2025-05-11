@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 4: Structured Outputs with ADK'
 
 # Google ADK Masterclass Part 4: Structured Outputs with ADK
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorials](./2025-05-10-google-adk-masterclass-part3.md), we explored creating agents with different models and adding tools to enhance their capabilities. As you build more complex agent systems, especially those that interact with other applications or APIs, ensuring consistent and predictable output formats becomes crucial.
 
 In this tutorial, we'll explore how ADK enables structured outputs to ensure your agents return data in exactly the format your applications need.
@@ -76,13 +78,13 @@ email_agent = Agent(
     description="An email generation assistant",
     instructions="""
     You are an email generation assistant. You always write professional emails based on the user's request.
-    
+
     Guidelines for writing emails:
     1. Create a concise and relevant subject line
     2. Write a professional email body with a greeting, clear message, and appropriate closing
     3. Keep the tone business-friendly and formal
     4. Be concise but complete
-    
+
     IMPORTANT: Always return your response as a JSON object with the following structure:
     {
         "subject": "The email subject line",
@@ -122,7 +124,7 @@ adk web
 
 ### Example Interaction
 
-**You**: Please write an email to my wife Carly to see if she is available for coffee tomorrow morning.  
+**You**: Please write an email to my wife Carly to see if she is available for coffee tomorrow morning.
 **Agent**:
 ```json
 {
@@ -271,7 +273,7 @@ ticket_agent = Agent(
     description="A support ticket creation assistant",
     instructions="""
     You are a support ticket creation assistant. You help users create well-structured support tickets from their issues.
-    
+
     For each ticket request:
     1. Extract the key issue from the user's description
     2. Create a concise but descriptive title
@@ -279,7 +281,7 @@ ticket_agent = Agent(
     4. Determine the appropriate priority level and category
     5. For technical issues, list steps to reproduce
     6. Include customer contact information if provided
-    
+
     IMPORTANT: Return your response as a JSON object matching this structure:
     {
         "title": "Brief issue summary",
@@ -297,7 +299,7 @@ ticket_agent = Agent(
 
 ### Example Interaction
 
-**You**: I can't log in to my account. I've tried resetting my password three times but I never receive the reset email. I've checked my spam folder. I need this fixed ASAP as I have an important meeting tomorrow. You can reach me at alex@example.com.  
+**You**: I can't log in to my account. I've tried resetting my password three times but I never receive the reset email. I've checked my spam folder. I need this fixed ASAP as I have an important meeting tomorrow. You can reach me at alex@example.com.
 **Agent**:
 ```json
 {
@@ -357,3 +359,4 @@ graph TD
     F --> I[Return Structured Response]
     H --> I
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part5)

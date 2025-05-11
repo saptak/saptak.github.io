@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 5: Session and Memory Management'
 
 # Google ADK Masterclass Part 5: Session and Memory Management
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorials](./2025-05-10-google-adk-masterclass-part4.md), we've been using ADK's web interface to interact with our agents. Behind the scenes, ADK has been managing sessions, state, and the agent lifecycle for us. Now it's time to pull back the curtain and understand these core components, which are essential for building more sophisticated agent applications.
 
 In this tutorial, we'll explore how session management and state work in ADK, and how to implement them in your own applications without relying on the web interface.
@@ -91,15 +93,15 @@ qa_agent = Agent(
     description="An agent that answers questions about user preferences",
     instructions="""
     You are a helpful assistant that answers questions about the user's preferences.
-    
+
     The user's name is {username}.
-    
+
     The user has the following preferences:
     - Favorite color: {user_preferences.favorite_color}
     - Favorite food: {user_preferences.favorite_food}
     - Favorite movie: {user_preferences.favorite_movie}
     - Favorite TV show: {user_preferences.favorite_tv_show}
-    
+
     Always answer questions about the user's preferences based on this information.
     """
 )
@@ -300,11 +302,11 @@ def clean_old_sessions(session_service, max_age_hours=24):
     """Remove sessions older than the specified age."""
     all_sessions = session_service.list_sessions(app_name="MyApp")
     now = datetime.now()
-    
+
     for session in all_sessions:
         last_update = datetime.fromisoformat(session.last_update_time)
         age = now - last_update
-        
+
         if age.total_seconds() > max_age_hours * 3600:
             session_service.delete_session(
                 app_name="MyApp",
@@ -351,7 +353,7 @@ initial_state = {
 # Create or retrieve session
 def get_or_create_session(app_name, user_id):
     sessions = session_service.list_sessions(app_name=app_name, user_id=user_id)
-    
+
     if sessions:
         return sessions[0].id
     else:
@@ -384,23 +386,23 @@ def main():
     app_name = "PreferenceChat"
     user_id = "interactive_user"
     session_id = get_or_create_session(app_name, user_id)
-    
+
     # Create runner
     runner = Runner(
         root_agent=qa_agent,
         session_service=session_service
     )
-    
+
     print("Welcome to PreferenceChat! Type 'exit' to quit.")
     print("You can set preferences with: 'set preference [key] [value]'")
     print("Example: set preference favorite_color blue\n")
-    
+
     while True:
         user_input = input("You: ")
-        
+
         if user_input.lower() in ["exit", "quit"]:
             break
-            
+
         # Check for preference setting command
         if user_input.lower().startswith("set preference "):
             parts = user_input.split(" ", 3)
@@ -414,36 +416,36 @@ def main():
                 if update_preferences(session, key, value):
                     print(f"Agent: I've updated your {key} to {value}.")
                     continue
-        
+
         # Create message and run agent
         message = content_types.Content(
             role="user",
             parts=[Part.from_text(user_input)]
         )
-        
+
         response = runner.run(
             user_id=user_id,
             session_id=session_id,
             content=message
         )
-        
+
         agent_response = process_agent_response(response)
         print(f"Agent: {agent_response}")
-        
+
         # Update chat history in state
         session = session_service.get_session(
             app_name=app_name,
             user_id=user_id,
             session_id=session_id
         )
-        
+
         # Add to chat history
         session.state["chat_history"].append({
             "timestamp": datetime.now().isoformat(),
             "user": user_input,
             "agent": agent_response
         })
-        
+
         # Also update last interaction time
         session.state["last_interaction"] = datetime.now().isoformat()
 
@@ -466,25 +468,25 @@ When using tools with agents, you can access and modify state within tool functi
 def add_to_favorites(item: str, category: str, tool_context) -> dict:
     """
     Adds an item to the user's favorites in the specified category.
-    
+
     Args:
         item: The item to add as a favorite
         category: The category for this favorite (e.g., 'movie', 'food')
         tool_context: Provided by ADK, contains session information
-    
+
     Returns:
         A dictionary with the result of the operation
     """
     # Access state from tool_context
     state = tool_context.state
-    
+
     # Make sure favorites exist in state
     if "favorites" not in state:
         state["favorites"] = {}
-    
+
     # Add or update the favorite
     state["favorites"][category] = item
-    
+
     return {
         "action": "add_favorite",
         "category": category,
@@ -530,3 +532,4 @@ graph TD
     J --> K[Return Response]
     K --> L[Save Session]
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part6)

@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 12: Practical Applications and Deployment'
 
 # Google ADK Masterclass Part 12: Practical Applications and Deployment
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorials](./2025-05-10-google-adk-masterclass-part11.md), we've explored the fundamentals of Google's Agent Development Kit (ADK) and various workflow patterns. Now, in this final part of our series, we'll focus on practical applications and deployment strategies to move your agent systems into production.
 
 Building powerful agents locally is just the first step. To create real impact, you need to deploy these agents in a way that makes them accessible, reliable, and scalable. In this tutorial, we'll cover real-world applications of ADK and strategies for deploying your agents to production environments.
@@ -26,10 +28,10 @@ Before diving into deployment, let's explore some compelling real-world applicat
 ADK's multi-agent architecture is perfect for building sophisticated customer service systems:
 
 ```
-Customer Query → 
-    Router Agent (Classifies query type) → 
-        [Product Agent, Billing Agent, Technical Support Agent] → 
-            Resolution Synthesis Agent → 
+Customer Query →
+    Router Agent (Classifies query type) →
+        [Product Agent, Billing Agent, Technical Support Agent] →
+            Resolution Synthesis Agent →
                 Customer Response
 ```
 
@@ -44,12 +46,12 @@ This architecture allows for:
 Content creation can be streamlined with a multi-agent workflow:
 
 ```
-Content Brief → 
-    Research Agent → 
-        Outline Agent → 
-            Draft Agent → 
-                Editorial Agent → 
-                    SEO Optimization Agent → 
+Content Brief →
+    Research Agent →
+        Outline Agent →
+            Draft Agent →
+                Editorial Agent →
+                    SEO Optimization Agent →
                         Final Content
 ```
 
@@ -64,11 +66,11 @@ Benefits include:
 ADK excels at processing and analyzing documents:
 
 ```
-Document Upload → 
-    Extraction Agent → 
-        Classification Agent → 
-            [Contract Analyzer, Financial Analyzer, Legal Compliance Checker] → 
-                Summary Agent → 
+Document Upload →
+    Extraction Agent →
+        Classification Agent →
+            [Contract Analyzer, Financial Analyzer, Legal Compliance Checker] →
+                Summary Agent →
                     Actionable Insights
 ```
 
@@ -83,9 +85,9 @@ Key advantages:
 Educational applications benefit from ADK's ability to create personalized experiences:
 
 ```
-Student Query → 
-    Knowledge Assessment Agent → 
-        [Concept Explanation Agent, Practice Problem Generator, Learning Path Advisor] → 
+Student Query →
+    Knowledge Assessment Agent →
+        [Concept Explanation Agent, Practice Problem Generator, Learning Path Advisor] →
             Personalized Response
 ```
 
@@ -100,11 +102,11 @@ This enables:
 ADK can power sophisticated decision support systems:
 
 ```
-Decision Query → 
-    Parallel Research Agents → 
-        Options Analysis Agent → 
-            Risk Assessment Agent → 
-                Recommendation Agent → 
+Decision Query →
+    Parallel Research Agents →
+        Options Analysis Agent →
+            Risk Assessment Agent →
+                Recommendation Agent →
                     Decision Brief
 ```
 
@@ -216,15 +218,15 @@ async def process_query(request: QueryRequest):
     try:
         # Get or create session ID
         session_id = request.session_id or str(uuid.uuid4())
-        
+
         # Check if session exists
         existing_sessions = session_service.list_sessions(
             app_name="AgentAPI",
             user_id=request.user_id
         )
-        
+
         existing_session_ids = [session.id for session in existing_sessions]
-        
+
         if not request.session_id or request.session_id not in existing_session_ids:
             # Create a new session
             session_service.create_session(
@@ -232,38 +234,38 @@ async def process_query(request: QueryRequest):
                 user_id=request.user_id,
                 session_id=session_id
             )
-        
+
         # Create a message from the query
         from google.generativeai.types import content_types
         from google.generativeai.types.content_types import Part
-        
+
         content = content_types.Content(
             role="user",
             parts=[Part.from_text(request.query)]
         )
-        
+
         # Run the agent
         response = await runner.run_async(
             user_id=request.user_id,
             session_id=session_id,
             content=content
         )
-        
+
         # Extract the response text
         response_text = None
         for event in response.events:
             if event.type == "content" and event.content.role == "agent":
                 response_text = event.content.parts[0].text
                 break
-        
+
         if not response_text:
             raise HTTPException(status_code=500, detail="Failed to generate response")
-        
+
         return QueryResponse(
             response=response_text,
             session_id=session_id
         )
-    
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -392,29 +394,29 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v0
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
         service_account_key: ${{ secrets.GCP_SA_KEY }}
-    
+
     - name: Authenticate Docker
       run: gcloud auth configure-docker
-    
+
     - name: Build Docker image
       run: |
         docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/customer-support-api:${{ github.sha }} .
         docker tag gcr.io/${{ secrets.GCP_PROJECT_ID }}/customer-support-api:${{ github.sha }} gcr.io/${{ secrets.GCP_PROJECT_ID }}/customer-support-api:latest
-    
+
     - name: Push Docker image
       run: |
         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/customer-support-api:${{ github.sha }}
         docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/customer-support-api:latest
-    
+
     - name: Deploy to GKE
       run: |
         gcloud container clusters get-credentials customer-support-cluster --zone us-central1-a
@@ -528,21 +530,21 @@ graph TD
     B --> C[Cloud Deployment]
     C --> D[API Integration]
     D --> E[Monitoring & Maintenance]
-    
+
     subgraph "Development Phase"
         A
     end
-    
+
     subgraph "Deployment Phase"
         B
         C
     end
-    
+
     subgraph "Operation Phase"
         D
         E
     end
-    
+
     E --> F[User Feedback]
     F --> A
 ```

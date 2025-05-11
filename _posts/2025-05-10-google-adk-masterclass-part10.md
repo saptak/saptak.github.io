@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 10: Parallel Execution Workflows'
 
 # Google ADK Masterclass Part 10: Parallel Execution Workflows
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorial](./2025-05-10-google-adk-masterclass-part9.md), we explored sequential workflows, where agents execute in a predetermined order. While sequential workflows are excellent for step-by-step processes, they aren't the most efficient approach when multiple independent tasks need to be completed.
 
 This is where parallel execution workflows shine. Instead of running agents one after another, parallel workflows allow multiple agents to work simultaneously on different aspects of a task. This approach can dramatically improve efficiency and reduce overall processing time.
@@ -88,15 +90,15 @@ coordinator_agent = Agent(
     description="Breaks down research topics into specialized research questions",
     instructions="""
     You are a research coordinator. Your job is to take a research topic and break it down into specific questions for specialized research teams.
-    
+
     When given a research topic:
     1. Break it down into specific research questions for three specialized teams:
        - Market Research Team: Questions about market size, competitors, customer segments, etc.
        - Technical Research Team: Questions about technology, implementation, product details, etc.
        - Trend Research Team: Questions about industry trends, future developments, emerging patterns, etc.
-    
+
     2. Identify key considerations that should be addressed across all research areas
-    
+
     Provide your output as a structured JSON object with the following fields:
     {
         "topic": "The main research topic",
@@ -105,7 +107,7 @@ coordinator_agent = Agent(
         "trend_research_questions": ["Question 1", "Question 2", ...],
         "key_considerations": ["Consideration 1", "Consideration 2", ...]
     }
-    
+
     Include 3-5 questions for each specialized team. Make the questions specific, actionable, and relevant to the research topic.
     """,
     output_schema=ResearchPlan,
@@ -136,12 +138,12 @@ market_research_agent = Agent(
     description="Conducts market research on specific topics",
     instructions="""
     You are a market research specialist. Your job is to research and analyze market information based on specific questions.
-    
+
     When given market research questions:
     1. Conduct thorough market research on each question
     2. Focus on market size, competitors, customer segments, growth potential, and challenges
     3. Provide actionable insights and recommendations
-    
+
     Format your response as a structured JSON object with the following fields:
     {
         "key_findings": ["Finding 1", "Finding 2", ...],
@@ -158,7 +160,7 @@ market_research_agent = Agent(
         "challenges": ["Challenge 1", "Challenge 2", ...],
         "recommendations": ["Recommendation 1", "Recommendation 2", ...]
     }
-    
+
     Be thorough, data-driven, and objective in your analysis. Provide specific details where possible, but acknowledge when information is estimated or uncertain.
     """,
     output_schema=MarketResearchReport,
@@ -185,12 +187,12 @@ technical_research_agent = Agent(
     description="Conducts technical research on specific topics",
     instructions="""
     You are a technical research specialist. Your job is to research and analyze technical information based on specific questions.
-    
+
     When given technical research questions:
     1. Conduct thorough technical research on each question
     2. Focus on technologies, implementation approaches, technical challenges, resources required, and timeline estimates
     3. Provide actionable technical insights and recommendations
-    
+
     Format your response as a structured JSON object with the following fields:
     {
         "key_findings": ["Finding 1", "Finding 2", ...],
@@ -211,7 +213,7 @@ technical_research_agent = Agent(
         "timeline_estimate": "Estimated timeline for implementation",
         "recommendations": ["Recommendation 1", "Recommendation 2", ...]
     }
-    
+
     Be thorough, technically accurate, and practical in your analysis. Provide specific details where possible, but acknowledge when information is estimated or uncertain.
     """,
     output_schema=TechnicalResearchReport,
@@ -238,12 +240,12 @@ trend_research_agent = Agent(
     description="Conducts research on industry trends and future developments",
     instructions="""
     You are a trend research specialist. Your job is to research and analyze industry trends and future developments based on specific questions.
-    
+
     When given trend research questions:
     1. Conduct thorough trend research on each question
     2. Focus on current trends, emerging patterns, future predictions, potential disruptions, and strategic opportunities
     3. Provide forward-looking insights and recommendations
-    
+
     Format your response as a structured JSON object with the following fields:
     {
         "key_findings": ["Finding 1", "Finding 2", ...],
@@ -263,7 +265,7 @@ trend_research_agent = Agent(
         "strategic_opportunities": ["Opportunity 1", "Opportunity 2", ...],
         "recommendations": ["Recommendation 1", "Recommendation 2", ...]
     }
-    
+
     Be forward-thinking, holistic, and insightful in your analysis. Consider both short-term and long-term perspectives. Acknowledge the uncertainty inherent in future predictions.
     """,
     output_schema=TrendResearchReport,
@@ -293,13 +295,13 @@ synthesis_agent = Agent(
     description="Synthesizes multiple research reports into a comprehensive document",
     instructions="""
     You are a research synthesis specialist. Your job is to combine research from multiple specialized teams into a comprehensive, cohesive report.
-    
+
     When given research reports from market, technical, and trend research teams:
     1. Synthesize the information into a coherent whole
     2. Identify connections, patterns, and contradictions across the reports
     3. Develop integrated findings and strategic recommendations
     4. Create a comprehensive research report that presents a unified perspective
-    
+
     Format your response as a structured JSON object with the following fields:
     {
         "executive_summary": "A concise summary of the overall research findings and recommendations",
@@ -310,7 +312,7 @@ synthesis_agent = Agent(
         "strategic_recommendations": "Comprehensive recommendations based on all research",
         "conclusion": "Final thoughts and next steps"
     }
-    
+
     Be comprehensive but concise, highlighting the most important insights from each research area and how they relate to each other. Focus on actionable insights and strategic implications.
     """,
     output_schema=ComprehensiveResearchReport,
@@ -346,14 +348,14 @@ load_dotenv()
 async def run_agent(runner, user_id, session_id, agent_name, content):
     """Run a specific agent with the given content."""
     print(f"\nRunning {agent_name}...")
-    
+
     # Create content object if string is provided
     if isinstance(content, str):
         content = content_types.Content(
             role="user",
             parts=[Part.from_text(content)]
         )
-    
+
     # Run the agent
     response = await runner.run_async(
         user_id=user_id,
@@ -361,19 +363,19 @@ async def run_agent(runner, user_id, session_id, agent_name, content):
         content=content,
         agent_name=agent_name
     )
-    
+
     # Process the response
     final_response_text = None
     for event in response.events:
         if event.type == "content" and event.content.role == "agent":
             final_response_text = event.content.parts[0].text
-    
+
     # Get the session to access state
     session = runner.session_service.get_session(
         user_id=user_id,
         session_id=session_id
     )
-    
+
     print(f"{agent_name} completed.")
     return final_response_text, session.state
 
@@ -381,7 +383,7 @@ async def parallel_research_workflow(research_topic):
     """Run a parallel research workflow on the given topic."""
     # Create a session service
     session_service = InMemorySessionService()
-    
+
     # Create a session
     session_id = str(uuid.uuid4())
     user_id = "workflow_user"
@@ -390,7 +392,7 @@ async def parallel_research_workflow(research_topic):
         user_id=user_id,
         session_id=session_id
     )
-    
+
     # Create a runner with all our agents
     runner = Runner(
         root_agent=coordinator_agent,  # This doesn't matter in our case as we specify agent_name
@@ -403,98 +405,98 @@ async def parallel_research_workflow(research_topic):
         ],
         session_service=session_service
     )
-    
+
     # Step 1: Break down the research topic
     coordinator_prompt = f"Please break down this research topic into specific questions for our specialized teams: {research_topic}"
     _, state = await run_agent(
         runner, user_id, session_id, "coordinator_agent", coordinator_prompt
     )
-    
+
     # Get the research plan
     research_plan = state.get("research_plan")
     if not research_plan:
         print("Failed to create research plan.")
         return
-    
+
     print("\nResearch Plan:")
     pprint(research_plan)
-    
+
     # Step 2: Run specialized research agents in parallel
     # Prepare the prompts for each agent
     market_prompt = f"Please research these market questions about {research_plan['topic']}:\n" + "\n".join(f"- {q}" for q in research_plan["market_research_questions"]) + f"\n\nKey considerations: {research_plan['key_considerations']}"
-    
+
     technical_prompt = f"Please research these technical questions about {research_plan['topic']}:\n" + "\n".join(f"- {q}" for q in research_plan["technical_research_questions"]) + f"\n\nKey considerations: {research_plan['key_considerations']}"
-    
+
     trend_prompt = f"Please research these trend questions about {research_plan['topic']}:\n" + "\n".join(f"- {q}" for q in research_plan["trend_research_questions"]) + f"\n\nKey considerations: {research_plan['key_considerations']}"
-    
+
     # Run the three research agents in parallel
     research_tasks = [
         run_agent(runner, user_id, session_id, "market_research_agent", market_prompt),
         run_agent(runner, user_id, session_id, "technical_research_agent", technical_prompt),
         run_agent(runner, user_id, session_id, "trend_research_agent", trend_prompt)
     ]
-    
+
     # Await all research tasks to complete
     research_results = await asyncio.gather(*research_tasks)
-    
+
     # Extract the state from each result
     _, market_state = research_results[0]
     _, technical_state = research_results[1]
     _, trend_state = research_results[2]
-    
+
     # Get the research reports
     market_research = market_state.get("market_research")
     technical_research = technical_state.get("technical_research")
     trend_research = trend_state.get("trend_research")
-    
+
     if not market_research or not technical_research or not trend_research:
         print("One or more research reports are missing.")
         return
-    
+
     # Step 3: Synthesize the research
     synthesis_prompt = f"""
     Please synthesize these research reports on {research_plan['topic']}:
-    
+
     MARKET RESEARCH:
     {json.dumps(market_research, indent=2)}
-    
+
     TECHNICAL RESEARCH:
     {json.dumps(technical_research, indent=2)}
-    
+
     TREND RESEARCH:
     {json.dumps(trend_research, indent=2)}
-    
+
     Provide a comprehensive synthesis that integrates all three perspectives.
     """
-    
+
     _, synthesis_state = await run_agent(
         runner, user_id, session_id, "synthesis_agent", synthesis_prompt
     )
-    
+
     # Get the comprehensive report
     comprehensive_report = synthesis_state.get("comprehensive_report")
     if not comprehensive_report:
         print("Failed to create comprehensive report.")
         return
-    
+
     print("\n--- COMPREHENSIVE RESEARCH REPORT ---")
     print(f"\nExecutive Summary:\n{comprehensive_report['executive_summary']}")
     print(f"\nIntegrated Findings:\n{comprehensive_report['integrated_findings']}")
     print(f"\nStrategic Recommendations:\n{comprehensive_report['strategic_recommendations']}")
-    
+
     return comprehensive_report
 
 async def main():
     # Research topic
     research_topic = "The future of renewable energy storage technologies in 2025-2030"
-    
+
     print(f"Conducting parallel research on: {research_topic}")
-    
+
     report = await parallel_research_workflow(research_topic)
-    
+
     if report:
         print("\nParallel research workflow completed successfully!")
-        
+
         # Save the report to a file
         with open("research_output.json", "w") as f:
             json.dump(report, f, indent=2)
@@ -642,30 +644,30 @@ async def dynamic_parallel_workflow(research_topic):
     complexity_response, state = await run_agent(
         runner, user_id, session_id, "complexity_analyzer", research_topic
     )
-    
+
     # Extract required research areas
     required_areas = state.get("required_research_areas", [])
-    
+
     # Create tasks for each required area
     research_tasks = []
     for area in required_areas:
         if area == "market":
-            research_tasks.append(run_agent(runner, user_id, session_id, 
+            research_tasks.append(run_agent(runner, user_id, session_id,
                                          "market_research_agent", research_topic))
         elif area == "technical":
-            research_tasks.append(run_agent(runner, user_id, session_id, 
+            research_tasks.append(run_agent(runner, user_id, session_id,
                                          "technical_research_agent", research_topic))
         elif area == "trend":
-            research_tasks.append(run_agent(runner, user_id, session_id, 
+            research_tasks.append(run_agent(runner, user_id, session_id,
                                          "trend_research_agent", research_topic))
         elif area == "regulatory":
-            research_tasks.append(run_agent(runner, user_id, session_id, 
+            research_tasks.append(run_agent(runner, user_id, session_id,
                                          "regulatory_research_agent", research_topic))
         # Add other specialized areas as needed
-    
+
     # Run all required research tasks in parallel
     research_results = await asyncio.gather(*research_tasks)
-    
+
     # Continue with synthesis...
 ```
 
@@ -681,39 +683,39 @@ async def conditional_parallel_workflow(research_topic):
         run_agent(runner, user_id, session_id, "quick_market_scan", research_topic),
         run_agent(runner, user_id, session_id, "quick_technical_scan", research_topic)
     ]
-    
+
     initial_results = await asyncio.gather(*initial_tasks)
-    
+
     # Extract scan results
     _, market_scan_state = initial_results[0]
     _, technical_scan_state = initial_results[1]
-    
+
     market_opportunity = market_scan_state.get("market_opportunity", "low")
     technical_feasibility = technical_scan_state.get("technical_feasibility", "low")
-    
+
     # Determine next parallel tasks based on opportunity and feasibility
     next_tasks = []
-    
+
     if market_opportunity == "high":
-        next_tasks.append(run_agent(runner, user_id, session_id, 
+        next_tasks.append(run_agent(runner, user_id, session_id,
                                  "deep_market_research", research_topic))
-        next_tasks.append(run_agent(runner, user_id, session_id, 
+        next_tasks.append(run_agent(runner, user_id, session_id,
                                  "competitor_analysis", research_topic))
-    
+
     if technical_feasibility == "high":
-        next_tasks.append(run_agent(runner, user_id, session_id, 
+        next_tasks.append(run_agent(runner, user_id, session_id,
                                  "technology_deep_dive", research_topic))
-        next_tasks.append(run_agent(runner, user_id, session_id, 
+        next_tasks.append(run_agent(runner, user_id, session_id,
                                  "implementation_planning", research_topic))
-    
+
     # If both are low, run a pivot analysis
     if market_opportunity == "low" and technical_feasibility == "low":
-        next_tasks.append(run_agent(runner, user_id, session_id, 
+        next_tasks.append(run_agent(runner, user_id, session_id,
                                  "pivot_opportunity_analysis", research_topic))
-    
+
     # Run the next set of tasks in parallel
     next_results = await asyncio.gather(*next_tasks)
-    
+
     # Continue with appropriate synthesis...
 ```
 
@@ -733,20 +735,20 @@ async def parallel_with_timeout(research_topic, timeout_seconds=60):
         except asyncio.TimeoutError:
             print(f"Warning: {agent_name} timed out after {timeout_seconds} seconds")
             return None, {}
-    
+
     # Run research tasks with timeouts
     research_tasks = [
         run_agent_with_timeout("market_research_agent", f"Research market for: {research_topic}"),
         run_agent_with_timeout("technical_research_agent", f"Research technology for: {research_topic}"),
         run_agent_with_timeout("trend_research_agent", f"Research trends for: {research_topic}")
     ]
-    
+
     # Gather results, including potential timeouts
     research_results = await asyncio.gather(*research_tasks)
-    
+
     # Filter out any None results from timeouts
     valid_results = [(result, state) for result, state in research_results if result is not None]
-    
+
     # Continue with synthesis of available results...
 ```
 
@@ -765,35 +767,35 @@ async def parallel_with_priority(research_topic):
         "regulatory_research_agent": 2,
         "competitive_research_agent": 3
     }
-    
+
     # Group tasks by priority
     priority_1_tasks = []
     priority_2_tasks = []
     priority_3_tasks = []
-    
+
     for agent_name, priority in priorities.items():
         prompt = f"Research {agent_name.split('_')[0]} aspects of: {research_topic}"
         task = run_agent(runner, user_id, session_id, agent_name, prompt)
-        
+
         if priority == 1:
             priority_1_tasks.append(task)
         elif priority == 2:
             priority_2_tasks.append(task)
         else:
             priority_3_tasks.append(task)
-    
+
     # Run priority 1 tasks first and wait for them to complete
     priority_1_results = await asyncio.gather(*priority_1_tasks)
-    
+
     # Run priority 2 tasks next
     priority_2_results = await asyncio.gather(*priority_2_tasks)
-    
+
     # Run priority 3 tasks last
     priority_3_results = await asyncio.gather(*priority_3_tasks)
-    
+
     # Combine all results
     all_results = priority_1_results + priority_2_results + priority_3_results
-    
+
     # Continue with synthesis...
 ```
 
@@ -829,7 +831,7 @@ Implement robust error handling to manage failures in parallel tasks:
 async def run_parallel_with_error_handling(tasks):
     """Run tasks in parallel with error handling."""
     results = []
-    
+
     for completed_task in asyncio.as_completed(tasks):
         try:
             result = await completed_task
@@ -837,7 +839,7 @@ async def run_parallel_with_error_handling(tasks):
         except Exception as e:
             print(f"Task failed with error: {e}")
             results.append(None)  # Add None for failed tasks
-    
+
     return results
 ```
 
@@ -849,11 +851,11 @@ Be mindful of resource usage, especially when running many parallel tasks:
 async def resource_managed_parallel(tasks, max_concurrency=5):
     """Run parallel tasks with a limit on concurrency."""
     semaphore = asyncio.Semaphore(max_concurrency)
-    
+
     async def limited_task(task):
         async with semaphore:
             return await task
-    
+
     limited_tasks = [limited_task(task) for task in tasks]
     return await asyncio.gather(*limited_tasks)
 ```
@@ -894,24 +896,24 @@ Implement comprehensive monitoring for parallel workflows:
 async def run_agent_with_monitoring(runner, user_id, session_id, agent_name, content):
     """Run an agent with detailed monitoring."""
     start_time = time.time()
-    
+
     try:
         print(f"[{agent_name}] Starting execution")
         result = await run_agent(runner, user_id, session_id, agent_name, content)
         execution_time = time.time() - start_time
         print(f"[{agent_name}] Completed in {execution_time:.2f} seconds")
-        
+
         # Log successful execution
         log_execution(agent_name, "success", execution_time)
-        
+
         return result
     except Exception as e:
         execution_time = time.time() - start_time
         print(f"[{agent_name}] Failed after {execution_time:.2f} seconds: {e}")
-        
+
         # Log failed execution
         log_execution(agent_name, "failure", execution_time, str(e))
-        
+
         raise  # Re-raise the exception
 ```
 
@@ -922,40 +924,40 @@ Parallel workflows are ideal for many real-world applications:
 ### 1. Comprehensive Analysis
 
 ```
-Topic Breakdown → 
-    [Financial Analysis, Market Analysis, Risk Analysis, Competitive Analysis] → 
+Topic Breakdown →
+    [Financial Analysis, Market Analysis, Risk Analysis, Competitive Analysis] →
         Synthesis Report
 ```
 
 ### 2. Multi-perspective Content Creation
 
 ```
-Content Brief → 
-    [Technical Writer, Creative Writer, SEO Specialist, Fact Checker] → 
+Content Brief →
+    [Technical Writer, Creative Writer, SEO Specialist, Fact Checker] →
         Content Integration
 ```
 
 ### 3. Multi-source Research
 
 ```
-Research Question → 
-    [Academic Research, Industry Research, Social Media Analysis, News Analysis] → 
+Research Question →
+    [Academic Research, Industry Research, Social Media Analysis, News Analysis] →
         Research Synthesis
 ```
 
 ### 4. Product Development Evaluation
 
 ```
-Product Concept → 
-    [Market Viability, Technical Feasibility, Cost Analysis, Regulatory Compliance] → 
+Product Concept →
+    [Market Viability, Technical Feasibility, Cost Analysis, Regulatory Compliance] →
         Go/No-Go Decision
 ```
 
 ### 5. Customer Feedback Analysis
 
 ```
-Feedback Collection → 
-    [Sentiment Analysis, Feature Request Extraction, Bug Report Analysis, User Experience Evaluation] → 
+Feedback Collection →
+    [Sentiment Analysis, Feature Request Extraction, Bug Report Analysis, User Experience Evaluation] →
         Product Improvement Plan
 ```
 
@@ -990,20 +992,21 @@ graph TD
     F --> G
     G --> H[Synthesis Agent]
     H --> I[Comprehensive Report]
-    
+
     subgraph "Step 1: Coordination"
         B
     end
-    
+
     subgraph "Step 2: Parallel Execution"
         C
         D
         E
         F
     end
-    
+
     subgraph "Step 3: Synthesis"
         G
         H
     end
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part11)

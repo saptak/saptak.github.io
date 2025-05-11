@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 6: Persisting Sessions to a Database'
 
 # Google ADK Masterclass Part 6: Persisting Sessions to a Database
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorial](./2025-05-10-google-adk-masterclass-part5.md), we explored session and memory management with in-memory sessions. While in-memory sessions are great for development, they have a significant limitation: when your application stops running, all session data is lost. For production applications, you need a more persistent solution.
 
 This tutorial will show you how to use ADK's database session service to persist your agent sessions to a SQLite database. This enables your agents to maintain context across application restarts, providing a much more consistent user experience.
@@ -62,24 +64,24 @@ from google.adk.tool import FunctionTool
 def add_reminder(reminder_text: str, tool_context) -> dict:
     """
     Adds a new reminder to the user's reminder list.
-    
+
     Args:
         reminder_text: The text of the reminder to add
         tool_context: Provided by ADK, contains session information
-    
+
     Returns:
         A dictionary with the result of the operation
     """
     # Get current reminders from state
     state = tool_context.state
     reminders = state.get("reminders", [])
-    
+
     # Add the new reminder
     reminders.append(reminder_text)
-    
+
     # Update state with the new list
     state["reminders"] = reminders
-    
+
     return {
         "action": "add_reminder",
         "reminder": reminder_text,
@@ -89,17 +91,17 @@ def add_reminder(reminder_text: str, tool_context) -> dict:
 def view_reminders(tool_context) -> dict:
     """
     Retrieves all current reminders from the user's reminder list.
-    
+
     Args:
         tool_context: Provided by ADK, contains session information
-    
+
     Returns:
         A dictionary containing all current reminders
     """
     # Get current reminders from state
     state = tool_context.state
     reminders = state.get("reminders", [])
-    
+
     return {
         "action": "view_reminders",
         "reminders": reminders,
@@ -110,18 +112,18 @@ def view_reminders(tool_context) -> dict:
 def delete_reminder(index: int, tool_context) -> dict:
     """
     Deletes a reminder at the specified index from the user's reminder list.
-    
+
     Args:
         index: The index of the reminder to delete (0-based)
         tool_context: Provided by ADK, contains session information
-    
+
     Returns:
         A dictionary with the result of the operation
     """
     # Get current reminders from state
     state = tool_context.state
     reminders = state.get("reminders", [])
-    
+
     # Check if index is valid
     if not reminders or index < 0 or index >= len(reminders):
         return {
@@ -129,16 +131,16 @@ def delete_reminder(index: int, tool_context) -> dict:
             "success": False,
             "message": f"Cannot delete reminder. Invalid index: {index}"
         }
-    
+
     # Get the reminder text before removing it
     reminder_text = reminders[index]
-    
+
     # Remove the reminder
     del reminders[index]
-    
+
     # Update state with the modified list
     state["reminders"] = reminders
-    
+
     return {
         "action": "delete_reminder",
         "success": True,
@@ -149,21 +151,21 @@ def delete_reminder(index: int, tool_context) -> dict:
 def update_username(new_name: str, tool_context) -> dict:
     """
     Updates the user's name in the session state.
-    
+
     Args:
         new_name: The new name for the user
         tool_context: Provided by ADK, contains session information
-    
+
     Returns:
         A dictionary with the result of the operation
     """
     # Get state
     state = tool_context.state
     old_name = state.get("username", "User")
-    
+
     # Update username
     state["username"] = new_name
-    
+
     return {
         "action": "update_username",
         "old_name": old_name,
@@ -177,24 +179,24 @@ memory_agent = Agent(
     description="A reminder assistant that remembers user reminders",
     instructions="""
     You are a friendly reminder assistant. You help users manage their reminders and remember important tasks.
-    
+
     You are working with the following shared state information:
     - The user's name is: {username}
     - The user's current reminders: {reminders}
-    
+
     You have the following capabilities:
     1. Add new reminders
     2. View existing reminders
     3. Delete reminders
     4. Update the user's name
-    
+
     When handling reminders:
     - For adding reminders: Use the add_reminder tool
     - For viewing reminders: Use the view_reminders tool
     - For deleting reminders: Use the delete_reminder tool (indexes are 0-based)
     - For updating the username: Use the update_username tool
-    
-    Always be conversational and friendly when interacting with the user. 
+
+    Always be conversational and friendly when interacting with the user.
     Confirm actions you've taken, and list the user's reminders when relevant.
     """,
     tools=[
@@ -220,41 +222,41 @@ from google.generativeai.types.content_types import Part
 async def call_agent_async(runner, user_id, session_id, query):
     """Process a user query through the agent asynchronously."""
     print(f"\nUser: {query}")
-    
+
     # Create content from the user query
     content = content_types.Content(
         role="user",
         parts=[Part.from_text(query)]
     )
-    
+
     # Get the session to see state before processing
     session = runner.session_service.get_session(
         user_id=user_id,
         session_id=session_id
     )
     print(f"\nState before processing: {session.state}")
-    
+
     # Run the agent with the user query
     response = await runner.run_async(
         user_id=user_id,
         session_id=session_id,
         content=content
     )
-    
+
     # Process the response
     final_response_text = None
-    
+
     for event in response.events:
         if event.type == "content" and event.content.role == "agent":
             final_response_text = event.content.parts[0].text
-    
+
     # Get updated session to see state after processing
     session = runner.session_service.get_session(
         user_id=user_id,
         session_id=session_id
     )
     print(f"\nState after processing: {session.state}")
-    
+
     print(f"\nAgent: {final_response_text}")
     return final_response_text
 ```
@@ -292,23 +294,23 @@ async def main():
     session_service = DatabaseSessionService(
         database_path="my_agent_data.db"
     )
-    
+
     # Define initial state for new sessions
     initial_state = {
         "username": "User",
         "reminders": []
     }
-    
+
     # Application and user identifiers
     app_name = "ReminderApp"
     user_id = "example_user"
-    
+
     # Check if we have an existing session for this user
     existing_sessions = session_service.list_sessions(
         app_name=app_name,
         user_id=user_id
     )
-    
+
     if existing_sessions and len(existing_sessions) > 0:
         # Use the existing session
         session_id = existing_sessions[0].id
@@ -323,24 +325,24 @@ async def main():
             state=initial_state
         )
         print(f"Created new session: {session_id}")
-    
+
     # Create a runner with our agent and session service
     runner = Runner(
         root_agent=memory_agent,
         session_service=session_service
     )
-    
+
     # Interactive chat loop
     print("\nReminder Agent Chat (Type 'exit' or 'quit' to end)")
     print("--------------------------------------------------------")
-    
+
     while True:
         user_input = input("\nYou: ")
-        
+
         if user_input.lower() in ["exit", "quit"]:
             print("Goodbye! Your reminders have been saved.")
             break
-        
+
         # Process the user input
         await call_agent_async(runner, user_id, session_id, user_input)
 
@@ -455,10 +457,10 @@ def cleanup_old_sessions(session_service, max_age_days=30):
     all_sessions = session_service.list_sessions()
     now = datetime.now()
     expiration_threshold = now - timedelta(days=max_age_days)
-    
+
     for session in all_sessions:
         last_update = datetime.fromisoformat(session.last_update_time)
-        
+
         if last_update < expiration_threshold:
             session_service.delete_session(
                 user_id=session.user_id,
@@ -479,7 +481,7 @@ def migrate_session(in_memory_service, database_service, user_id, session_id):
         user_id=user_id,
         session_id=session_id
     )
-    
+
     # Create a new session in the database with the same data
     database_service.create_session(
         app_name=session.app_name,
@@ -500,7 +502,7 @@ def get_or_create_user_session(session_service, app_name, user_id):
         app_name=app_name,
         user_id=user_id
     )
-    
+
     if sessions:
         # Return the most recent session
         return sessions[0].id
@@ -532,7 +534,7 @@ def clean_state(session):
     """Remove unnecessary or temporary data from state."""
     if "temp_calculations" in session.state:
         del session.state["temp_calculations"]
-    
+
     # Limit history to most recent 20 entries
     if "chat_history" in session.state and len(session.state["chat_history"]) > 20:
         session.state["chat_history"] = session.state["chat_history"][-20:]
@@ -612,3 +614,4 @@ graph TD
     J --> K[Save Session to DB]
     K --> L[Return Response]
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part7)

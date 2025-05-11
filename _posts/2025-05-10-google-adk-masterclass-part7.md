@@ -13,6 +13,8 @@ title: 'Google ADK Masterclass Part 7: Building Multi-Agent Solutions'
 
 # Google ADK Masterclass Part 7: Building Multi-Agent Solutions
 
+[Overview](./2025-05-10-google-adk-masterclass-overview)
+
 In our [previous tutorials](./2025-05-10-google-adk-masterclass-part6.md), we've explored creating individual agents with various capabilities. While single agents can be powerful, complex problems often benefit from a divide-and-conquer approach where multiple specialized agents collaborate.
 
 In this tutorial, we'll dive into ADK's multi-agent capabilities, showing you how to build systems where agents with different specialties work together to accomplish complex tasks.
@@ -76,11 +78,11 @@ import random
 def get_weather(location: str, date: str) -> dict:
     """
     Get weather information for a specific location and date.
-    
+
     Args:
         location: City or location name
         date: Date in YYYY-MM-DD format
-    
+
     Returns:
         Weather information including temperature, conditions, and humidity
     """
@@ -90,7 +92,7 @@ def get_weather(location: str, date: str) -> dict:
     temp_celsius = random.randint(5, 35)
     temp_fahrenheit = (temp_celsius * 9/5) + 32
     humidity = random.randint(30, 90)
-    
+
     return {
         "location": location,
         "date": date,
@@ -107,14 +109,14 @@ weather_agent = Agent(
     description="Provides detailed weather information for specific locations and dates",
     instructions="""
     You are a helpful weather assistant that provides weather information.
-    
+
     When asked about weather for a specific location and date, use the get_weather tool to fetch data.
-    
+
     Present the weather information in a friendly, conversational manner. Include:
     - Temperature (in both Celsius and Fahrenheit)
     - Weather conditions
     - Humidity
-    
+
     If the user doesn't specify a date, assume they're asking about the current date.
     If the user doesn't specify a location, ask them to provide one.
     """,
@@ -135,25 +137,25 @@ import random
 def get_transportation_options(origin: str, destination: str, date: str) -> dict:
     """
     Get available transportation options between two locations.
-    
+
     Args:
         origin: Starting location
         destination: End location
         date: Travel date in YYYY-MM-DD format
-    
+
     Returns:
         Available transportation options with prices and durations
     """
     # In a real application, this would call a travel API
     # For this example, we'll generate simulated options
-    
+
     # Calculate mock distance (just for demonstration)
     distance = random.randint(100, 2000)
-    
+
     # Generate flight options
     flight_price = distance * (0.10 + (random.random() * 0.15))
     flight_duration = distance / 800 * 60  # minutes
-    
+
     # Generate train options if distance is reasonable
     train_available = distance < 1000
     train_price = None
@@ -161,11 +163,11 @@ def get_transportation_options(origin: str, destination: str, date: str) -> dict
     if train_available:
         train_price = distance * (0.07 + (random.random() * 0.07))
         train_duration = distance / 120 * 60  # minutes
-    
+
     # Generate car rental option
     car_price = 50 + (distance * 0.05)
     car_duration = distance / 80 * 60  # minutes
-    
+
     return {
         "origin": origin,
         "destination": destination,
@@ -197,18 +199,18 @@ def get_transportation_options(origin: str, destination: str, date: str) -> dict
 def get_accommodation_options(location: str, check_in: str, check_out: str) -> dict:
     """
     Get available accommodation options for a specific location and dates.
-    
+
     Args:
         location: City or destination
         check_in: Check-in date in YYYY-MM-DD format
         check_out: Check-out date in YYYY-MM-DD format
-    
+
     Returns:
         Available accommodation options with prices and amenities
     """
     # In a real application, this would call a hotel/accommodation API
     # For this example, we'll generate simulated options
-    
+
     # Mock accommodation types
     hotel_types = [
         {"name": "Luxury Hotel", "price_factor": 2.5, "amenities": ["Pool", "Spa", "Restaurant", "Gym", "Room Service"]},
@@ -217,11 +219,11 @@ def get_accommodation_options(location: str, check_in: str, check_out: str) -> d
         {"name": "Hostel", "price_factor": 0.4, "amenities": ["Shared Kitchen", "Common Area", "Lockers"]},
         {"name": "Apartment Rental", "price_factor": 1.5, "amenities": ["Kitchen", "Washer/Dryer", "Living Area"]}
     ]
-    
+
     # Generate 3 random accommodation options
     base_price = 50 + (random.random() * 50)
     accommodations = []
-    
+
     selected_types = random.sample(hotel_types, 3)
     for hotel_type in selected_types:
         price = base_price * hotel_type["price_factor"]
@@ -234,7 +236,7 @@ def get_accommodation_options(location: str, check_in: str, check_out: str) -> d
             "location": f"{location} city center",
             "availability": "Available"
         })
-    
+
     return {
         "location": location,
         "check_in": check_in,
@@ -249,16 +251,16 @@ travel_agent = Agent(
     description="Provides travel recommendations including transportation and accommodation options",
     instructions="""
     You are a helpful travel assistant that provides transportation and accommodation recommendations.
-    
+
     When asked about travel options, use:
     - get_transportation_options tool for flights, trains, and car rentals
     - get_accommodation_options tool for hotels and other lodging
-    
+
     Present options in a helpful, organized way, highlighting:
     - Best value options
     - Fastest/most convenient options
     - Any special features or considerations
-    
+
     If the user doesn't provide specific dates or locations, ask for clarification.
     """,
     tools=[
@@ -282,22 +284,22 @@ vacation_planner = Agent(
     description="A vacation planning assistant that helps users plan their perfect vacation",
     instructions="""
     You are a helpful vacation planning assistant. Your job is to coordinate vacation planning by delegating to specialized agents when appropriate.
-    
+
     You have access to these specialized agents:
     - weather_agent: For weather information at destinations
     - travel_agent: For transportation and accommodation recommendations
-    
+
     When to delegate:
     - For specific weather information: Delegate to the weather_agent
     - For transportation or accommodation options: Delegate to the travel_agent
     - For general vacation planning that requires combining weather and travel: First get information from both agents, then synthesize it into a cohesive plan
-    
+
     When responding directly (without delegation):
     - General travel advice
     - Coordination between different aspects of travel planning
     - Recommendations based on user preferences
     - Summary of information from multiple agents
-    
+
     Always maintain a helpful, enthusiastic tone about travel planning. Ask clarifying questions when needed to better assist the user.
     """
 )
@@ -331,34 +333,34 @@ load_dotenv()
 async def process_user_input(runner, user_id, session_id, query):
     """Process a user query through the agent system."""
     print(f"\nYou: {query}")
-    
+
     # Create content from the user query
     content = content_types.Content(
         role="user",
         parts=[Part.from_text(query)]
     )
-    
+
     # Run the agent with the user query
     response = await runner.run_async(
         user_id=user_id,
         session_id=session_id,
         content=content
     )
-    
+
     # Process the response
     final_response_text = None
-    
+
     for event in response.events:
         if event.type == "content" and event.content.role == "agent":
             final_response_text = event.content.parts[0].text
-    
+
     print(f"\nVacation Planner: {final_response_text}")
     return final_response_text
 
 async def main():
     # Create a session service
     session_service = InMemorySessionService()
-    
+
     # Create a session
     session_id = str(uuid.uuid4())
     session = session_service.create_session(
@@ -366,26 +368,26 @@ async def main():
         user_id="example_user",
         session_id=session_id
     )
-    
+
     # Create a runner with all our agents
     runner = Runner(
         root_agent=vacation_planner,
         agents=[weather_agent, travel_agent],
         session_service=session_service
     )
-    
+
     # Interactive chat loop
     print("\nVacation Planner Multi-Agent Demo")
     print("Type 'exit' or 'quit' to end the conversation")
     print("--------------------------------------------------------")
-    
+
     while True:
         user_input = input("\nYou: ")
-        
+
         if user_input.lower() in ["exit", "quit"]:
             print("Thank you for using the Vacation Planner! Goodbye!")
             break
-        
+
         # Process the user input
         await process_user_input(runner, "example_user", session_id, user_input)
 
@@ -578,7 +580,7 @@ Multi-agent systems become even more powerful when combined with state managemen
 async def main():
     # Create a session service
     session_service = InMemorySessionService()
-    
+
     # Define initial state with user preferences
     initial_state = {
         "user_preferences": {
@@ -590,7 +592,7 @@ async def main():
             "dietary_restrictions": []
         }
     }
-    
+
     # Create a session with initial state
     session_id = str(uuid.uuid4())
     session = session_service.create_session(
@@ -599,7 +601,7 @@ async def main():
         session_id=session_id,
         state=initial_state
     )
-    
+
     # Rest of the code remains the same...
 ```
 
@@ -613,7 +615,7 @@ vacation_planner = Agent(
     description="A vacation planning assistant that helps users plan their perfect vacation",
     instructions="""
     You are a helpful vacation planning assistant. Your job is to coordinate vacation planning by delegating to specialized agents when appropriate.
-    
+
     User Preferences:
     - Destinations of interest: {user_preferences.destinations}
     - Budget category: {user_preferences.budget_category}
@@ -621,24 +623,24 @@ vacation_planner = Agent(
     - Travel dates: {user_preferences.travel_dates}
     - Preferred accommodation: {user_preferences.accommodation_type}
     - Dietary restrictions: {user_preferences.dietary_restrictions}
-    
+
     You have access to these specialized agents:
     - weather_agent: For weather information at destinations
     - travel_agent: For transportation and accommodation recommendations
-    
+
     When to delegate:
     - For specific weather information: Delegate to the weather_agent
     - For transportation or accommodation options: Delegate to the travel_agent
     - For general vacation planning that requires combining weather and travel: First get information from both agents, then synthesize it into a cohesive plan
-    
+
     When responding directly (without delegation):
     - General travel advice
     - Coordination between different aspects of travel planning
     - Recommendations based on user preferences
     - Summary of information from multiple agents
-    
+
     Always maintain a helpful, enthusiastic tone about travel planning. Ask clarifying questions when needed to better assist the user.
-    
+
     As users mention preferences, remember these details and incorporate them into your recommendations.
     """
 )
@@ -651,35 +653,35 @@ Finally, we'd need tools to update these preferences:
 def update_user_preference(category: str, value: str, tool_context) -> dict:
     """
     Update a user preference in the session state.
-    
+
     Args:
         category: The preference category to update (e.g., 'destinations', 'budget_category')
         value: The new value for this preference
         tool_context: Provided by ADK, contains session information
-    
+
     Returns:
         A dictionary with the updated preference information
     """
     state = tool_context.state
-    
+
     # Ensure user_preferences exists
     if "user_preferences" not in state:
         state["user_preferences"] = {}
-    
+
     # Handle list-type preferences
     list_preferences = ["destinations", "interests", "dietary_restrictions"]
-    
+
     if category in list_preferences:
         if category not in state["user_preferences"]:
             state["user_preferences"][category] = []
-        
+
         # Add to list if not already present
         if value not in state["user_preferences"][category]:
             state["user_preferences"][category].append(value)
     else:
         # For simple string preferences
         state["user_preferences"][category] = value
-    
+
     return {
         "category": category,
         "value": value,
@@ -802,11 +804,11 @@ Chain agents in a sequence where each refines the previous output:
 initial_response = await get_agent_response(research_agent, query)
 
 # Agent 2: Fact-check and improve accuracy
-fact_checked = await get_agent_response(fact_check_agent, 
+fact_checked = await get_agent_response(fact_check_agent,
                                       f"Fact check this: {initial_response}")
 
 # Agent 3: Improve writing style
-final_response = await get_agent_response(writing_agent, 
+final_response = await get_agent_response(writing_agent,
                                        f"Improve the style of this response: {fact_checked}")
 ```
 
@@ -844,3 +846,4 @@ graph TD
     F --> J[Final Response]
     I --> J
 ```
+[Next...](./2025-05-10-google-adk-masterclass-part8)
