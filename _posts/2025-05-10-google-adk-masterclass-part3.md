@@ -4,7 +4,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part3.jpg
-image_credit: Photo by Luca Bravo on Unsplash
+image_credit: Photo by Firmbee.com on Unsplash
+image_credit_url: https://unsplash.com/photos/person-using-black-laptop-computer-eMemmpUojlw
 layout: post
 tags: google-adk ai-agents openai anthropic claude light-llm open-router
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part3.jpg
