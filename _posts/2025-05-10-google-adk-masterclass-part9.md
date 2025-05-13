@@ -4,7 +4,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part9.jpg
-image_credit: Photo by Carlos Muza on Unsplash
+image_credit: Photo by NOAA on Unsplash
+image_credit_url: https://unsplash.com/photos/two-men-standing-and-throwing-rope-on-sea-JZasFWXI2gA
 layout: post
 tags: google-adk ai-agents sequential-workflows pipelines step-by-step-execution
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part9.jpg
