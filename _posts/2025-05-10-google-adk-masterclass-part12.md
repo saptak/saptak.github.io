@@ -4,7 +4,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part12.jpg
-image_credit: Photo by Marius Masalar on Unsplash
+image_credit: Photo by Breno Assis on Unsplash
+image_credit_url: https://unsplash.com/photos/aerial-photography-of-rural-r3WAWU5Fi5Q
 layout: post
 tags: google-adk ai-agents deployment production-systems real-world-applications
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part12.jpg
@@ -349,7 +350,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part12.jpg
-image_credit: Photo by Marius Masalar on Unsplash
+image_credit: Photo by Breno Assis on Unsplash
+image_credit_url: https://unsplash.com/photos/aerial-photography-of-rural-r3WAWU5Fi5Q
 layout: post
 tags: google-adk ai-agents deployment production-systems real-world-applications
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part12.jpg
