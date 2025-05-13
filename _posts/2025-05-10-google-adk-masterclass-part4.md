@@ -4,7 +4,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part4.jpg
-image_credit: Photo by Kari Shea on Unsplash
+image_credit: Photo by Markus Spiske on Unsplash
+image_credit_url: https://unsplash.com/photos/computer-coding-screengrab-hvSr_CVecVI
 layout: post
 tags: google-adk ai-agents structured-data json-output pydantic
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part4.jpg
