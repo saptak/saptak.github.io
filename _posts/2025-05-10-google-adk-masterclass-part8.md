@@ -4,7 +4,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part8.jpg
-image_credit: Photo by Javier Quesada on Unsplash
+image_credit: Photo by Caleb Williams on Unsplash
+image_credit_url: https://unsplash.com/photos/brown-concrete-building-during-daytime-vsQyYgz0t70
 layout: post
 tags: google-adk ai-agents callbacks lifecycle-events monitoring
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part8.jpg
