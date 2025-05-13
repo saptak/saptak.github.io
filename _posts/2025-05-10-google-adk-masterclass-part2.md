@@ -4,7 +4,8 @@ categories:
 - agent-development
 date: 2025-05-10
 header_image_path: /assets/img/blog/headers/2025-05-10-google-adk-masterclass-part2.jpg
-image_credit: Photo by freestocks on Unsplash
+image_credit: Photo by NOAA on Unsplash
+image_credit_url: https://unsplash.com/photos/caution-area-map-0fitIxDWJSU
 layout: post
 tags: google-adk ai-agents llm-agents tools function-calling
 thumbnail_path: /assets/img/blog/thumbnails/2025-05-10-google-adk-masterclass-part2.jpg
