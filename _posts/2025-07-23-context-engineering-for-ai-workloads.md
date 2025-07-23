@@ -9,7 +9,7 @@ excerpt: Discover how Context Engineering is revolutionizing AI development by m
   beyond simple prompts to architecting comprehensive information ecosystems that
   enable reliable, scalable, and intelligent AI systems.
 header_image_path: /assets/img/blog/headers/2025-07-23-context-engineering-for-ai-workloads.jpg
-image_credit: Photo by Markus Spiske on Unsplash
+image_credit: Photo by Tai Bui on Unsplash
 layout: post
 tags:
 - context-engineering
@@ -466,6 +466,205 @@ Context engineering must respect data governance:
 3. **Purpose Limitation**: Tag context with allowed use cases
 4. **Geographic Boundaries**: Ensure context doesn't cross jurisdictions
 
+## Practical Implementation with LangGraph
+
+### The LangGraph Framework for Context Engineering
+
+LangGraph, developed by LangChain, provides a powerful low-level orchestration framework specifically designed to support all four pillars of context engineering. As Lance from LangChain explains, "Context engineering is the delicate art and science of filling the context window with just the right information at each step of the agent's trajectory."
+
+### State Management and Scratch Pads
+
+LangGraph's core innovation is its state object, which serves as a perfect implementation of the scratch pad concept:
+
+```python
+from langgraph.graph import StateGraph, State
+from typing import TypedDict, List
+
+class AgentState(TypedDict):
+    messages: List[str]
+    scratch_pad: dict
+    plan: str
+    tool_results: List[dict]
+
+# Define your agent graph
+workflow = StateGraph(AgentState)
+
+def planning_node(state: AgentState):
+    # Agent creates a plan and saves to scratch pad
+    plan = generate_plan(state["messages"])
+    return {
+        "plan": plan,
+        "scratch_pad": {"initial_plan": plan, "timestamp": now()}
+    }
+
+def execution_node(state: AgentState):
+    # Agent can reference the plan from state
+    plan = state["plan"]
+    results = execute_plan(plan)
+    return {"tool_results": results}
+```
+
+### Long-Term Memory Integration
+
+LangGraph provides first-class support for long-term memory across sessions:
+
+```python
+from langgraph.memory import MemoryStore
+
+# Initialize memory store
+memory = MemoryStore()
+
+def memory_enhanced_node(state: AgentState, config):
+    # Retrieve relevant memories
+    user_id = config["user_id"]
+    past_preferences = memory.search(
+        namespace=user_id,
+        query=state["messages"][-1],
+        filter={"type": "preference"}
+    )
+    
+    # Use memories to enhance response
+    context_enhanced_response = generate_with_memory(
+        current_query=state["messages"][-1],
+        memories=past_preferences
+    )
+    
+    # Save new learnings
+    if new_preference_detected(context_enhanced_response):
+        memory.put(
+            namespace=user_id,
+            content=extract_preference(context_enhanced_response),
+            metadata={"type": "preference", "timestamp": now()}
+        )
+    
+    return {"messages": [context_enhanced_response]}
+```
+
+### Advanced Tool Selection with RAG
+
+LangGraph's approach to tool selection addresses the challenge of tool proliferation:
+
+```python
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+
+class ToolSelector:
+    def __init__(self, tools):
+        self.tools = tools
+        self.embeddings = OpenAIEmbeddings()
+        
+        # Create tool description embeddings
+        tool_descriptions = [tool.description for tool in tools]
+        self.tool_index = FAISS.from_texts(
+            tool_descriptions, 
+            self.embeddings
+        )
+    
+    def select_tools(self, task_description, max_tools=5):
+        # Use semantic search to find relevant tools
+        relevant_tools = self.tool_index.similarity_search(
+            task_description, 
+            k=max_tools
+        )
+        
+        # Return only the most relevant tools
+        selected_indices = [
+            self.tool_descriptions.index(doc.page_content) 
+            for doc in relevant_tools
+        ]
+        
+        return [self.tools[i] for i in selected_indices]
+```
+
+### Context Compression Strategies
+
+LangGraph supports various compression techniques to manage token bloat:
+
+```python
+def compression_node(state: AgentState):
+    messages = state["messages"]
+    
+    # Check if approaching context limit
+    total_tokens = count_tokens(messages)
+    
+    if total_tokens > 0.8 * MAX_CONTEXT_TOKENS:
+        # Apply different compression strategies
+        if len(messages) > 50:
+            # Summarize older messages
+            compressed = summarize_message_history(messages[:-10])
+            recent = messages[-10:]
+            messages = [compressed] + recent
+        else:
+            # Selective trimming of tool outputs
+            messages = trim_tool_outputs(messages)
+    
+    return {"messages": messages}
+```
+
+### Multi-Agent Orchestration with Isolated Contexts
+
+LangGraph excels at managing multi-agent systems with proper context isolation:
+
+```python
+from langgraph.graph import Graph
+
+# Define specialized agents with isolated contexts
+research_agent = Graph()
+analysis_agent = Graph()
+synthesis_agent = Graph()
+
+# Supervisor agent orchestrates the team
+class SupervisorGraph(Graph):
+    def route_task(self, state):
+        task = state["task"]
+        
+        if "research" in task.lower():
+            # Research agent gets only research-relevant context
+            research_context = {
+                "query": task,
+                "sources": state.get("sources", []),
+                "constraints": state.get("research_constraints", {})
+            }
+            return research_agent.invoke(research_context)
+            
+        elif "analyze" in task.lower():
+            # Analysis agent gets data-focused context
+            analysis_context = {
+                "data": state.get("research_results", {}),
+                "metrics": state.get("required_metrics", [])
+            }
+            return analysis_agent.invoke(analysis_context)
+```
+
+### Environment-Based Context Isolation
+
+Following the Hugging Face OpenDeepResearch pattern, LangGraph can integrate with sandboxed environments:
+
+```python
+from e2b import Sandbox
+
+class CodeExecutionNode:
+    def __init__(self):
+        self.sandbox = Sandbox()
+        
+    def execute(self, state: AgentState):
+        code = state["generated_code"]
+        
+        # Execute in isolated environment
+        result = self.sandbox.run_python(code)
+        
+        # Only return essential information
+        return {
+            "execution_result": {
+                "stdout": result.stdout[-500:],  # Last 500 chars
+                "variables": extract_key_variables(result),
+                "success": result.exit_code == 0
+            }
+        }
+```
+
+This approach prevents token-heavy outputs like large dataframes or images from flooding the context window while maintaining necessary state in the sandbox.
+
 ## Emerging Trends and Future Directions
 
 ### Self-Optimizing Context Systems
@@ -516,6 +715,84 @@ AI systems are learning to anticipate context needs:
 - **Behavioral Analysis**: Predict information needs from user patterns
 - **Preemptive Retrieval**: Cache likely contexts before requests
 - **Dynamic Expansion**: Progressively add context based on interaction
+
+## Common Pitfalls and How to Avoid Them
+
+### 1. Context Overload
+**Problem**: Dumping everything into the context window "just in case"
+**Solution**: Implement selective retrieval and progressive disclosure
+
+```python
+# Bad: Loading everything
+context = load_all_documents() + load_all_tools() + load_all_memories()
+
+# Good: Selective loading based on task
+relevant_docs = retrieve_by_similarity(query, top_k=5)
+required_tools = select_tools_for_task(task_type)
+recent_memories = get_memories(time_window="7d", relevance_threshold=0.8)
+```
+
+### 2. Token Heavy Tool Outputs
+**Problem**: Tool outputs (like API responses) consuming excessive tokens
+**Solution**: Post-process and compress tool outputs immediately
+
+```python
+def process_tool_output(tool_name, raw_output):
+    if tool_name == "web_search":
+        # Extract only title and snippet
+        return [{
+            "title": result["title"],
+            "snippet": result["snippet"][:200]
+        } for result in raw_output[:5]]
+    
+    elif tool_name == "database_query":
+        # Summarize large result sets
+        if len(raw_output) > 100:
+            return {
+                "summary": f"Found {len(raw_output)} records",
+                "sample": raw_output[:5],
+                "statistics": compute_stats(raw_output)
+            }
+```
+
+### 3. Lost Context Between Agents
+**Problem**: Critical information lost when passing between agents
+**Solution**: Implement structured handoff protocols
+
+```python
+class AgentHandoff:
+    def prepare_handoff(self, from_agent, to_agent, full_context):
+        # Extract only what the next agent needs
+        handoff_package = {
+            "task_summary": summarize_progress(full_context),
+            "key_findings": extract_key_points(full_context),
+            "next_steps": identify_required_actions(to_agent.capabilities),
+            "constraints": full_context.get("constraints", {})
+        }
+        return handoff_package
+```
+
+### 4. Memory Retrieval Failures
+**Problem**: Relevant memories not found due to poor indexing
+**Solution**: Multi-modal retrieval strategies
+
+```python
+class HybridMemoryRetriever:
+    def retrieve(self, query):
+        # Combine multiple retrieval methods
+        semantic_results = self.vector_search(query)
+        keyword_results = self.keyword_search(query)
+        temporal_results = self.time_based_search(query)
+        
+        # Merge and re-rank
+        all_results = merge_results(
+            semantic_results, 
+            keyword_results, 
+            temporal_results
+        )
+        
+        return rerank_by_relevance(all_results, query)
+```
 
 ## Best Practices Checklist
 
@@ -577,8 +854,11 @@ The future belongs to those who can transform raw information into actionable in
 ## Resources and Further Reading
 
 - [Context Engineering Guide](https://www.promptingguide.ai/guides/context-engineering-guide)
-- [The PRP Framework Repository](https://github.com/example/prp-framework)
+- [The PRP Framework Repository](https://github.com/Wirasm/PRPs-agentic-eng)
 - [Multi-Agent Systems Architecture](https://www.lyzr.ai/blog/multi-agent-architecture/)
 - [Production RAG Best Practices](https://docs.llamaindex.ai/en/stable/optimizing/production_rag/)
+- [LangGraph Documentation](https://python.langchain.com/docs/langgraph)
+- [Context Engineering Video by Cole Medin](https://www.youtube.com/watch?v=Mk87sFlUG28)
+- [Context Engineering: The Ultimate Guide](https://www.youtube.com/watch?v=lQYozclcMoI)
 
 *Ready to revolutionize your AI systems with Context Engineering? Start with one use case, measure the impact, and scale from there. The journey from prompt engineering to context engineering is not just an upgrade—it's a transformation.*
