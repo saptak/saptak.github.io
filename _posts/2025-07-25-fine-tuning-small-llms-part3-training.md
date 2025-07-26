@@ -339,6 +339,18 @@ print(f"Estimated training time: {(training_args.max_steps * 0.5 / 60):.1f} minu
 
 ## Training Process with Real-Time Monitoring
 
+### Monitoring with TensorBoard
+
+TensorBoard is a powerful tool for visualizing and monitoring your training progress. You can use it to track metrics like loss, learning rate, and accuracy in real-time.
+
+To start TensorBoard, run the following command in a new terminal:
+
+```bash
+tensorboard --logdir=./models/sql-expert-v1/runs
+```
+
+This will start a web server on port 6006. You can then open your browser to `http://localhost:6006` to view the TensorBoard dashboard.
+
 ```python
 # Training with comprehensive monitoring
 class TrainingMonitor:
@@ -659,7 +671,7 @@ print("🧹 Memory optimized")
 
 ```python
 # Common training issues and solutions
-class TrainingTroubleshootir:
+class TrainingTroubleshooter:
     @staticmethod
     def diagnose_memory_issues():
         if not torch.cuda.is_available():

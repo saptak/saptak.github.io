@@ -1332,7 +1332,7 @@ check_prerequisites() {
     print_status "Checking prerequisites..."
     
     # Check Docker
-    if ! command -v docker &> /dev/null; then
+    if [ -z "$(command -v docker)" ]; then
         print_error "Docker is not installed. Please install Docker Desktop."
         exit 1
     fi
@@ -1465,6 +1465,20 @@ main "$@"
 ```
 
 ## Testing the Deployment
+
+### Viewing Logs
+
+You can view the logs of the running services using the `docker-compose logs` command. To view the logs of all services, run the following command:
+
+```bash
+docker-compose logs -f
+```
+
+To view the logs of a specific service, you can specify the service name after the `logs` command. For example, to view the logs of the `api` service, run the following command:
+
+```bash
+docker-compose logs -f api
+```
 
 Create a comprehensive test suite for your deployment:
 

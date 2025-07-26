@@ -65,7 +65,29 @@ Our final production architecture encompasses enterprise-grade components for re
     └── Usage Analytics
 ```
 
+```bash
+#!/bin/bash
+# setup_monitoring.sh
+
+echo "Setting up monitoring..."
+# Add monitoring setup commands here
+```
+
 ## 📁 Reference Code Repository
+
+### Stopping and Removing Services
+
+To stop and remove the running services, you can use the `docker-compose down` command. This will stop all the running containers and remove them, along with the networks that were created.
+
+```bash
+docker-compose down
+```
+
+If you also want to remove the volumes that were created, you can use the `-v` flag:
+
+```bash
+docker-compose down -v
+```
 
 All production code, monitoring configurations, and optimization tools are available in the GitHub repository:
 

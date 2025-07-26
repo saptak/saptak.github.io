@@ -923,6 +923,37 @@ if __name__ == "__main__":
 
 ## A/B Testing Framework
 
+### Detailed Evaluation with ExplainaBoard
+
+ExplainaBoard is a library for detailed analysis of NLP models. It can be used to get a more in-depth understanding of your model's performance, including fine-grained error analysis.
+
+To use ExplainaBoard, you first need to install it:
+
+```bash
+pip install explainaboard
+```
+
+Then, you can use the following code to generate a detailed evaluation report:
+
+```python
+from explainaboard import get_processor, get_loader, get_explainer
+
+# Load the data
+loader = get_loader("from_dict", data=test_cases)
+
+# Get the processor
+processor = get_processor("text-classification")
+
+# Get the explainer
+explainer = get_explainer(processor)
+
+# Generate the report
+report = explainer.explain(loader)
+
+# Print the report
+report.print_summary()
+```
+
 ```python
 # ab_testing.py
 import random
@@ -1127,6 +1158,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import pandas as pd
+import numpy as np
 
 def create_evaluation_dashboard():
     """Create Streamlit dashboard for evaluation results"""

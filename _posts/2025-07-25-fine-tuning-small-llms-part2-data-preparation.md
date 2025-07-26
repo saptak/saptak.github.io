@@ -859,6 +859,7 @@ if __name__ == "__main__":
 ### 2. Balanced Distribution
 ```python
 # Check dataset balance
+import numpy as np
 def analyze_dataset_distribution(dataset_path: str):
     with open(dataset_path, 'r') as f:
         data = json.load(f)
@@ -902,6 +903,23 @@ def analyze_dataset_distribution(dataset_path: str):
 - Cover different analysis types (sentiment, summarization, etc.)
 
 ## Preparing Data for Training
+
+### Loading and Inspecting Datasets
+
+Before we start training, it's important to load and inspect our datasets to ensure they are in the correct format. We can use the `datasets` library to do this:
+
+```python
+from datasets import load_dataset
+
+# Load the dataset
+dataset = load_dataset("json", data_files="./data/datasets/sql_dataset_alpaca.json")
+
+# Inspect the dataset
+print(dataset)
+
+# Print the first example
+print(dataset["train"][0])
+```
 
 ### Final Dataset Preparation Script
 

@@ -169,7 +169,17 @@ docker model --help
 #   run      Run a model
 ```
 
-### Step 4: Pull Your First Model
+### Step 4: Check GPU Availability
+
+If you have an NVIDIA GPU, you can check if it's properly configured by running the `nvidia-smi` command:
+
+```bash
+nvidia-smi
+```
+
+This command should output a table with information about your GPU, including the driver version, CUDA version, and a list of running processes.
+
+### Step 5: Pull Your First Model
 
 Let's test the setup by pulling a small model:
 
@@ -273,6 +283,7 @@ Create a test script to verify everything is working:
 
 ```python
 # test_setup.py
+import sys
 import torch
 import transformers
 import unsloth
@@ -281,7 +292,7 @@ import numpy as np
 
 print("🚀 Installation Verification")
 print("=" * 40)
-print(f"Python version: {torch.__version__}")
+print(f"Python version: {sys.version}")
 print(f"PyTorch version: {torch.__version__}")
 print(f"Transformers version: {transformers.__version__}")
 print(f"CUDA available: {torch.cuda.is_available()}")

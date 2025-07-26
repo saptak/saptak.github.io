@@ -1,6 +1,8 @@
-web:
-  image: 
-  volumes:
-    - .:/src
-  ports:
-    - "4000:4000"
+services:
+  jekyll:
+    image: jekyll/jekyll
+    volumes:
+      - .:/srv/jekyll
+    ports:
+      - "4000:4000"
+    command: jekyll serve --watch
