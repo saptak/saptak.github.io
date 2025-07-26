@@ -25,15 +25,15 @@ tags:
 - setup
 - environment
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part1-setup-environment.jpg
-title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 1: Setup and Environment'
+title: 'Fine-Tuning Small LLMs on a Desktop - Part 1: Setup and Environment'
 toc: true
 ---
 
 > 📚 **Reference Code Available**: All code examples from this blog series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). Clone it to follow along!
 
-# Fine-Tuning Small LLMs with Docker Desktop - Part 1: Setup and Environment
+# Fine-Tuning Small LLMs on a Desktop - Part 1: Setup and Environment
 
-Welcome to our comprehensive 6-part series on fine-tuning small language models using Docker Desktop! In this first part, we'll establish the foundation by setting up your development environment and understanding the key concepts.
+Welcome to our comprehensive 6-part series on fine-tuning small language models on a desktop! In this first part, I'll establish the foundation by setting up your development environment and understanding the key concepts.
 
 ## Series Overview
 
@@ -154,7 +154,7 @@ Avoid vendor lock-in and maintain control over your AI capabilities regardless o
 
 ### Step 2: Enable Docker Model Runner
 
-Docker Model Runner is a revolutionary new feature that makes running LLMs locally incredibly simple. Here's how to enable it:
+Docker Model Runner is a new feature that makes running LLMs locally incredibly simple. Here's how to enable it:
 
 1. **Open Docker Desktop**
 2. **Navigate to Settings** → **Beta Features**
@@ -256,12 +256,17 @@ pip install torch torchvision torchaudio
 Unsloth is our secret weapon for efficient fine-tuning. It provides up to 80% memory reduction and 2x speed improvements:
 
 ```bash
-# For CUDA systems:
+# For NVIDIA CUDA systems (Linux/Windows with NVIDIA GPU):
 pip install "unsloth[cu121] @ git+https://github.com/unslothai/unsloth.git"
 
-# For CPU-only systems:
+# For Apple Silicon Macs (M1/M2/M3 chips):
+pip install "unsloth @ git+https://github.com/unslothai/unsloth.git"
+
+# For CPU-only systems (Intel Macs, older hardware):
 pip install "unsloth[cpu] @ git+https://github.com/unslothai/unsloth.git"
 ```
+
+**Note for Apple Silicon Mac users**: Unsloth will automatically detect and use Metal Performance Shaders (MPS) for GPU acceleration when available. Make sure you have the latest PyTorch installed with MPS support.
 
 ### Step 4: Install Additional Dependencies
 
@@ -311,7 +316,10 @@ print("=" * 40)
 print(f"Python version: {sys.version}")
 print(f"PyTorch version: {torch.__version__}")
 print(f"Transformers version: {transformers.__version__}")
+
+# Check GPU support
 print(f"CUDA available: {torch.cuda.is_available()}")
+print(f"MPS available: {torch.backends.mps.is_available()}")
 
 if torch.cuda.is_available():
     print(f"CUDA version: {torch.version.cuda}")
@@ -320,8 +328,11 @@ if torch.cuda.is_available():
         print(f"  GPU {i}: {torch.cuda.get_device_name(i)}")
         memory_gb = torch.cuda.get_device_properties(i).total_memory / 1e9
         print(f"    Memory: {memory_gb:.1f} GB")
+elif torch.backends.mps.is_available():
+    print("✅ Apple Silicon GPU (MPS) available")
+    print("   Training will use Metal Performance Shaders")
 else:
-    print("CUDA not available - will use CPU")
+    print("⚠️ No GPU acceleration available - will use CPU")
 
 # Test Unsloth import
 try:
@@ -329,6 +340,16 @@ try:
     print("✅ Unsloth imported successfully")
 except ImportError as e:
     print(f"❌ Unsloth import failed: {e}")
+
+# Test device selection
+if torch.cuda.is_available():
+    device = "cuda"
+elif torch.backends.mps.is_available():
+    device = "mps"
+else:
+    device = "cpu"
+
+print(f"🎯 Recommended device for training: {device}")
 
 print("\n🎉 Setup verification complete!")
 ```
@@ -773,6 +794,43 @@ gradient_accumulation_steps = 8
 nvidia-smi
 # Reinstall PyTorch with correct CUDA version
 pip install torch --index-url https://download.pytorch.org/whl/cu121
+```
+
+### Apple Silicon Mac Issues
+
+**Issue: MPS not available on Apple Silicon**
+```bash
+# Ensure you have the latest PyTorch
+pip install --upgrade torch torchvision torchaudio
+
+# Check macOS version (MPS requires macOS 12.3+)
+sw_vers
+
+# Verify MPS in Python
+python -c "import torch; print('MPS available:', torch.backends.mps.is_available())"
+```
+
+**Issue: Unsloth installation fails on Apple Silicon**
+```bash
+# Install Xcode command line tools
+xcode-select --install
+
+# Install without extras first
+pip install "unsloth @ git+https://github.com/unslothai/unsloth.git"
+
+# If compilation issues persist, try:
+export PYTORCH_ENABLE_MPS_FALLBACK=1
+pip install "unsloth @ git+https://github.com/unslothai/unsloth.git"
+```
+
+**Issue: Training crashes with MPS backend**
+```python
+# Solution: Add MPS fallback for unsupported operations
+import os
+os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
+
+# Alternative: Force CPU for problematic operations
+device = "cpu"  # Instead of "mps" if issues persist
 ```
 
 ### Network Issues
