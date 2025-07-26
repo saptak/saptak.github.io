@@ -1,16 +1,35 @@
 ---
-layout: post
-title: "Fine-Tuning Small LLMs with Docker Desktop - Part 5: Deployment with Ollama and Docker"
-date: 2025-07-25 13:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning]
-tags: [llm, deployment, ollama, docker, gguf, api, streamlit, production]
 author: Saptak
-description: "Part 5 of our comprehensive series. Learn how to deploy your fine-tuned model using Ollama and Docker with production-ready APIs, web interfaces, and containerized solutions."
-featured_image: "/assets/images/llm-fine-tuning-part5.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 13:00:00 -0800
+description: Part 5 of our comprehensive series. Learn how to deploy your fine-tuned
+  model using Ollama and Docker with production-ready APIs, web interfaces, and containerized
+  solutions.
+featured_image: /assets/images/llm-fine-tuning-part5.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part5-deployment.jpg
+image_credit: Photo by Glen Carrie on Unsplash
+layout: post
 part: 5
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- deployment
+- ollama
+- docker
+- gguf
+- api
+- streamlit
+- production
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part5-deployment.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 5: Deployment with Ollama
+  and Docker'
 toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
 ---
 
 > 📚 **Reference Code Available**: All deployment configurations and production code are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part5-deployment/` for complete deployment solutions!
