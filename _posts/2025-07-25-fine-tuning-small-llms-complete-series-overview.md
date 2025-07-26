@@ -1,355 +1,158 @@
 ---
-author: Saptak
-categories:
-- AI
-- Machine Learning
-- Docker
-- LLM
-- Fine-tuning
-- Series
-date: 2025-07-25 15:00:00 -0800
-description: Complete overview of our comprehensive 6-part series on fine-tuning small
-  language models with Docker Desktop. From environment setup to production deployment,
-  learn everything you need to build production-ready AI applications.
-featured: true
-featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
-header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-image_credit: Photo by Patrick Martin on Unsplash
 layout: post
-repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
-tags:
-- llm
-- fine-tuning
-- docker
-- unsloth
-- production
-- overview
-- tutorial-series
-thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - 6-Part Series
-  Overview'
+title: "Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - Series Overview"
+date: 2025-07-25 15:00:00 -0800
+categories: [AI, Machine Learning, Docker, LLM, Fine-tuning, Series]
+tags: [llm, fine-tuning, docker, unsloth, production, overview, tutorial-series]
+author: Saptak
+description: "Complete overview of our comprehensive 6-part series on fine-tuning small language models with Docker Desktop. From environment setup to production deployment, learn everything you need to build production-ready AI applications."
+featured_image: "/assets/images/llm-fine-tuning-series-overview.jpg"
+series: "Fine-Tuning Small LLMs with Docker Desktop"
 toc: true
+repository: "https://github.com/saptak/fine-tuning-small-llms"
+featured: true
 ---
 
-> 🚀 **Complete Implementation Available**: All code, configurations, and examples from this series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). Get started with a single command!
+> **Complete Implementation Available**: All code, configurations, and examples from this series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). Get started with a single command!
 
 # Complete Guide: Fine-Tuning Small LLMs with Docker Desktop
 
-Welcome to the complete overview of our comprehensive **6-part series** on fine-tuning small language models using Docker Desktop. This series takes you from absolute beginner to production deployment, providing everything you need to build, train, evaluate, and deploy your own custom LLM applications.
+Welcome to the complete overview of our comprehensive 6-part series on fine-tuning small language models using Docker Desktop. This series represents a complete journey from absolute beginner to production deployment, providing everything you need to build, train, evaluate, and deploy your own custom language model applications.
 
-## 🎯 What You'll Achieve
+## What This Series Achieves
 
-By the end of this series, you'll have:
+This tutorial series addresses one of the most significant challenges in modern AI development: how to efficiently fine-tune language models for specific use cases while maintaining production-ready standards. Traditional approaches to LLM fine-tuning often require expensive cloud infrastructure, complex environment setups, and deep expertise in multiple domains.
 
-✅ **Production-Ready LLM Application** with web interface and API  
-✅ **80% Faster Training** using Unsloth optimization techniques  
-✅ **Complete Development Environment** with Docker and GPU support  
-✅ **Advanced Monitoring** with Prometheus and Grafana dashboards  
-✅ **Enterprise Security** with authentication and rate limiting  
-✅ **Cost Optimization** strategies for efficient resource usage  
-✅ **Disaster Recovery** with automated backups and restoration  
+Our approach changes this paradigm entirely. By leveraging Docker Desktop and modern optimization techniques like Unsloth, we've created a pathway that allows developers to achieve professional-grade results using readily available hardware. The series demonstrates how to reduce training time by 80%, cut memory requirements by the same margin, and deploy models that perform comparably to much larger, more expensive alternatives.
 
-## 📚 Series Overview
+The complete implementation shows how to build a SQL query generation system that transforms natural language requests into accurate SQL queries. However, the techniques and infrastructure we develop are broadly applicable to any domain-specific fine-tuning task, from code generation to customer support automation.
 
-### The Journey: From Zero to Production
+## The Complete Journey
 
-```mermaid
-graph LR
-    A[Part 1: Setup] --> B[Part 2: Data]
-    B --> C[Part 3: Training]
-    C --> D[Part 4: Evaluation]
-    D --> E[Part 5: Deployment]
-    E --> F[Part 6: Production]
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#fce4ec
-    style F fill:#f1f8e9
-```
+### Part 1: Setup and Environment
 
-Our series follows a logical progression that mirrors real-world AI development:
+The foundation of any successful machine learning project lies in its development environment. [Part 1: Setup and Environment](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part1-setup-environment/) establishes this crucial groundwork by guiding you through the complete setup of a Docker-based development environment optimized for machine learning workloads.
 
-1. **Foundation**: Environment setup and tooling
-2. **Preparation**: High-quality data creation and model selection
-3. **Training**: Efficient fine-tuning with modern techniques
-4. **Validation**: Comprehensive evaluation and testing
-5. **Deployment**: Production-ready containerized services
-6. **Operations**: Enterprise monitoring, scaling, and optimization
+The environment setup goes far beyond basic Docker installation. We implement GPU acceleration support, configure CUDA drivers for optimal performance, and establish a development workflow that supports both interactive experimentation and automated training pipelines. The setup includes comprehensive system requirements checking, ensuring your hardware can support the training workloads effectively.
 
-## 🔗 Complete GitHub Repository
+One of the key innovations in our approach is the containerized development environment. This ensures complete reproducibility across different machines and operating systems, eliminating the common "it works on my machine" problem that plagues many machine learning projects. The Docker configuration includes optimized base images, pre-installed dependencies, and volume mappings that preserve your work while maintaining clean separation between the host system and the training environment.
 
-**🚀 [fine-tuning-small-llms](https://github.com/saptak/fine-tuning-small-llms)**
+### Part 2: Data Preparation and Model Selection
 
-Get started immediately with our complete reference implementation:
+Data quality determines model performance more than any other factor in machine learning. [Part 2: Data Preparation and Model Selection](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part2-data-preparation/) tackles this challenge head-on with a comprehensive framework for creating, validating, and optimizing training datasets.
 
-```bash
-git clone https://github.com/saptak/fine-tuning-small-llms.git
-cd fine-tuning-small-llms
-./scripts/quick_start.sh
-```
+The data preparation process begins with understanding the specific requirements of instruction-following models. Unlike traditional machine learning datasets, language model training data requires careful attention to prompt formatting, response quality, and diversity of examples. We demonstrate how to create high-quality training examples that effectively teach models to follow instructions while maintaining consistency and accuracy.
 
-**What's included:**
-- Complete Docker-based development environment
-- Ready-to-use datasets and training configurations
-- Production deployment stack with monitoring
-- Interactive web interfaces and API endpoints
-- Comprehensive documentation and examples
+Our data validation framework implements multiple quality checks, including syntax validation for domain-specific outputs like SQL queries, diversity analysis to ensure broad coverage of use cases, and statistical analysis to identify potential issues before they impact training. The framework also includes tools for converting between different data formats, enabling integration with various training frameworks and evaluation tools.
 
----
-author: Saptak
-categories:
-- AI
-- Machine Learning
-- Docker
-- LLM
-- Fine-tuning
-- Series
-date: 2025-07-25 15:00:00 -0800
-description: Complete overview of our comprehensive 6-part series on fine-tuning small
-  language models with Docker Desktop. From environment setup to production deployment,
-  learn everything you need to build production-ready AI applications.
-featured: true
-featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
-header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-image_credit: Photo by Patrick Martin on Unsplash
-layout: post
-repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
-tags:
-- llm
-- fine-tuning
-- docker
-- unsloth
-- production
-- overview
-- tutorial-series
-thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - 6-Part Series
-  Overview'
-toc: true
----
+Model selection represents another critical decision point. The series provides a framework for choosing base models based on your specific requirements, available hardware, and target performance characteristics. We explore trade-offs between model size, performance, and training efficiency, helping you make informed decisions about which foundation model best suits your use case.
 
-### [Part 2: Data Preparation and Model Selection](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
+### Part 3: Fine-Tuning with Unsloth
 
-**📊 Quality Data: The Foundation of Great Models**
+The heart of our approach lies in [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part3-training/), where we demonstrate how to achieve dramatic improvements in training efficiency using cutting-edge optimization techniques.
 
-Master the art of creating high-quality training datasets and selecting the optimal base model for your use case.
+Unsloth represents a breakthrough in parameter-efficient fine-tuning, enabling 80% reductions in memory usage and training time compared to traditional approaches. The technique builds on Low-Rank Adaptation (LoRA) methods but adds significant optimizations for modern GPU architectures. Our implementation shows how to configure Unsloth for different model architectures, from Llama and Mistral to Phi-3 and Code Llama.
 
-**What You'll Learn:**
-- Dataset creation strategies for different domains (SQL, code, support)
-- Data quality validation and syntax checking
-- Format conversion between Alpaca, Chat, and Completion formats
-- Model selection framework based on resources and use case
-- Data augmentation techniques for dataset expansion
+The training pipeline we develop includes comprehensive monitoring and logging, automated checkpointing for training resumption, and integration with Weights & Biases for experiment tracking. These features transform ad-hoc training scripts into production-ready workflows that can scale from individual experiments to organizational deployment.
 
-**Key Deliverables:**
-- ✅ Comprehensive dataset creation toolkit
-- ✅ Data validation and quality assurance framework
-- ✅ Format conversion utilities
-- ✅ Smart model recommendation system
+One of the most valuable aspects of this part is the detailed exploration of hyperparameter optimization. Rather than providing generic recommendations, we show how to adapt training parameters based on your specific dataset characteristics, hardware constraints, and quality requirements. This includes techniques for dynamic batch size adjustment, learning rate scheduling, and early stopping criteria that maximize training efficiency.
 
-**Time Investment:** 2-3 hours  
-**Difficulty:** Intermediate
+### Part 4: Evaluation and Testing
 
-**💡 Pro Tip:** Quality beats quantity - 500 high-quality examples outperform 5,000 mediocre ones!
+Model evaluation extends far beyond simple accuracy metrics. [Part 4: Evaluation and Testing](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part4-evaluation/) implements a comprehensive evaluation framework that assesses model performance across multiple dimensions, ensuring your fine-tuned models meet production quality standards.
 
----
-author: Saptak
-categories:
-- AI
-- Machine Learning
-- Docker
-- LLM
-- Fine-tuning
-- Series
-date: 2025-07-25 15:00:00 -0800
-description: Complete overview of our comprehensive 6-part series on fine-tuning small
-  language models with Docker Desktop. From environment setup to production deployment,
-  learn everything you need to build production-ready AI applications.
-featured: true
-featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
-header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-image_credit: Photo by Patrick Martin on Unsplash
-layout: post
-repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
-tags:
-- llm
-- fine-tuning
-- docker
-- unsloth
-- production
-- overview
-- tutorial-series
-thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - 6-Part Series
-  Overview'
-toc: true
----
+The evaluation framework implements both automated and human evaluation methods. Automated metrics include BLEU, ROUGE, METEOR, and BERTScore for general text quality, as well as domain-specific metrics like SQL syntax validation and semantic correctness checking. These metrics provide quantitative baselines for comparing different model configurations and training approaches.
 
-### [Part 4: Evaluation and Testing](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
+Human evaluation represents an equally important component, particularly for tasks requiring nuanced understanding or creative generation. We implement a streamlined human evaluation interface that enables efficient collection of quality ratings, comparative judgments, and detailed feedback on model outputs. This combination of automated and human evaluation provides a complete picture of model performance.
 
-**🎯 Quality Assurance: Measuring Model Performance**
+The A/B testing framework enables rigorous comparison between different models or training configurations. Rather than relying on single-point comparisons, the framework implements statistical significance testing and confidence interval calculation, ensuring that performance differences are meaningful rather than random variation.
 
-Implement comprehensive evaluation frameworks to ensure your fine-tuned model meets quality standards.
+### Part 5: Deployment with Ollama and Docker
 
-**What You'll Learn:**
-- Multi-metric evaluation: BLEU, ROUGE, METEOR, BERTScore
-- A/B testing framework for model comparison
-- Domain-specific evaluation (SQL syntax validation, code correctness)
-- Human evaluation setup and management
-- Performance benchmarking and regression testing
+Moving from experimental models to production services requires careful attention to deployment architecture, performance optimization, and operational concerns. [Part 5: Deployment with Ollama and Docker](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part5-deployment/) addresses these challenges with a complete deployment stack that scales from development to production.
 
-**Key Deliverables:**
-- ✅ Automated evaluation pipeline with multiple metrics
-- ✅ A/B testing framework for model comparison
-- ✅ Interactive evaluation dashboard
-- ✅ Quality assurance and regression testing suite
+The deployment architecture centers around Ollama for model serving, which provides efficient local inference with minimal operational overhead. Our implementation includes automatic model conversion from training formats to optimized inference formats, supporting quantization techniques that reduce model size while maintaining performance.
 
-**Time Investment:** 1-2 hours  
-**Difficulty:** Intermediate
+The FastAPI backend provides a production-ready REST API with comprehensive authentication, request validation, and error handling. The API design follows modern best practices for microservices architecture, including health checks, metrics endpoints, and graceful shutdown handling. Rate limiting and request throttling protect against abuse while ensuring fair resource allocation across users.
 
-**📊 Evaluation Coverage:** Test accuracy, relevance, fluency, and task-specific correctness
+The Streamlit web interface demonstrates how to build user-friendly applications on top of the API infrastructure. The interface includes real-time interaction capabilities, model comparison tools, and administrative features for monitoring usage and performance. This combination provides both programmatic access for developers and intuitive interfaces for end users.
+
+Container orchestration ties everything together with Docker Compose configurations that manage the complete service stack. This includes the model server, API backend, web interface, caching layer, and monitoring infrastructure. The orchestration setup supports both development and production deployments, with environment-specific configurations for scaling and security.
+
+### Part 6: Production, Monitoring, and Scaling
+
+Enterprise deployment requires sophisticated monitoring, optimization, and operational capabilities. [Part 6: Production, Monitoring, and Scaling](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part6-production/) completes the journey with advanced techniques for production operations, cost optimization, and performance scaling.
+
+The monitoring infrastructure implements comprehensive observability across all system components. Prometheus collects detailed metrics on API performance, model inference times, resource utilization, and business-level indicators like request volumes and error rates. Grafana dashboards provide real-time visualization and alerting capabilities, enabling proactive identification and resolution of performance issues.
+
+Auto-scaling capabilities ensure efficient resource utilization while maintaining service availability. The scaling logic considers multiple factors including request queue length, response times, and resource utilization patterns. This enables automatic scaling up during peak usage periods and scaling down during quiet periods, optimizing both performance and cost.
+
+Security implementation addresses multiple threat vectors with layered protection mechanisms. JWT-based authentication provides secure API access, while input validation and rate limiting protect against common attack patterns. Web application firewall integration adds additional protection against sophisticated attacks, while encryption ensures data protection in transit and at rest.
+
+Cost optimization represents a crucial concern for sustainable AI deployment. Our implementation includes comprehensive cost tracking and optimization recommendations, covering compute resources, storage utilization, and network transfer costs. The cost optimization framework provides actionable recommendations for right-sizing resources, implementing efficient caching strategies, and leveraging cost-effective infrastructure options.
+
+## Technical Innovation and Performance
+
+The technical approach demonstrated throughout this series achieves remarkable performance improvements through careful optimization at every level of the stack. The combination of Unsloth optimization, efficient model serving, and comprehensive monitoring creates a deployment pipeline that rivals enterprise-grade solutions while remaining accessible to individual developers and small teams.
+
+Training performance improvements are particularly dramatic. Traditional fine-tuning approaches for models like Llama-3.1-8B typically require 16-24GB of GPU memory and training times measured in days. Our optimized approach reduces memory requirements to 6-8GB while completing training in 1-2 hours, representing order-of-magnitude improvements in both resource efficiency and development velocity.
+
+Deployment performance benefits from multiple optimization layers. Model quantization reduces inference memory requirements while maintaining accuracy. Intelligent caching minimizes redundant computation for similar requests. Connection pooling and async processing maximize throughput while minimizing latency. The result is a deployment architecture that can handle production workloads on modest hardware configurations.
+
+## Broader Applications and Use Cases
+
+While our examples focus on SQL query generation, the techniques and infrastructure developed throughout this series apply broadly to many domain-specific AI applications. The instruction-following training approach works effectively for code generation, technical writing, customer support automation, and creative content generation.
+
+The deployment architecture supports various integration patterns, from standalone applications to microservices in larger systems. The REST API design enables integration with existing applications, while the containerized deployment supports various orchestration platforms from Docker Compose to Kubernetes.
+
+Organizations can adapt these techniques for internal applications like automated documentation generation, code review assistance, or specialized chatbots for domain-specific knowledge. The cost-effective training approach makes it feasible to develop custom models for narrow use cases where general-purpose models may not provide sufficient accuracy or appropriate behavior.
+
+## Getting Started
+
+The complete implementation is available in our [GitHub repository](https://github.com/saptak/fine-tuning-small-llms), providing immediate access to all code, configurations, and documentation. The repository includes a quick-start script that sets up the complete development environment with a single command.
+
+For newcomers to machine learning, we recommend following the series sequentially, spending time with each component to understand the underlying concepts and implementation details. The progression from basic environment setup to production deployment provides a comprehensive education in modern AI development practices.
+
+Experienced developers may prefer to focus on specific components that address their immediate needs. The modular architecture enables selective adoption of techniques like Unsloth optimization for training efficiency or the monitoring infrastructure for production operations.
+
+## Learning Path Recommendations
+
+The series accommodates different experience levels and learning objectives through flexible pathways that emphasize hands-on implementation over theoretical discussion.
+
+**Beginners** should plan 2-3 weeks for complete implementation, focusing first on environment setup and data preparation before progressing to training and deployment. This timeline allows adequate time for understanding core concepts while building practical skills.
+
+**Intermediate developers** can typically complete the implementation in 1-2 weeks, spending more time on advanced topics like hyperparameter optimization and production monitoring. This group benefits from the comprehensive examples while adapting techniques to their specific requirements.
+
+**Advanced practitioners** often complete the core implementation in 3-5 days, using the series as a reference for best practices and implementation patterns. This group typically focuses on production concerns like monitoring, optimization, and integration with existing systems.
+
+## Community and Contribution
+
+The open-source implementation encourages community contribution and collaborative improvement. The repository includes comprehensive documentation for contributors, covering development setup, testing procedures, and architectural decisions.
+
+Common contribution areas include support for additional model architectures, integration with different deployment platforms, and enhanced monitoring capabilities. The modular architecture facilitates these contributions while maintaining backward compatibility and system stability.
+
+## Future Directions
+
+The techniques demonstrated in this series represent current best practices, but the field continues evolving rapidly. Future enhancements may include support for multi-modal models, advanced techniques like reinforcement learning from human feedback, and integration with emerging deployment platforms.
+
+The foundational architecture provides a strong base for incorporating these advances as they become available. The emphasis on modular design and comprehensive testing ensures that the system can evolve while maintaining reliability and performance.
+
+## Conclusion
+
+This series represents more than a tutorial; it provides a complete blueprint for professional AI development that addresses real-world deployment challenges. By combining cutting-edge optimization techniques with production-ready infrastructure, we've created an approach that democratizes access to advanced AI capabilities while maintaining enterprise-grade quality standards.
+
+The complete implementation serves as both a learning resource and a production-ready foundation for custom AI applications. Whether you're building your first machine learning application or scaling AI capabilities within an organization, this series provides the tools, techniques, and infrastructure needed for success.
+
+The journey from concept to production deployment represents one of the most exciting frontiers in modern software development. This series ensures you have everything needed to participate in that journey, creating AI applications that provide real value while maintaining the quality and reliability standards expected in professional software development.
 
 ---
-author: Saptak
-categories:
-- AI
-- Machine Learning
-- Docker
-- LLM
-- Fine-tuning
-- Series
-date: 2025-07-25 15:00:00 -0800
-description: Complete overview of our comprehensive 6-part series on fine-tuning small
-  language models with Docker Desktop. From environment setup to production deployment,
-  learn everything you need to build production-ready AI applications.
-featured: true
-featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
-header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-image_credit: Photo by Patrick Martin on Unsplash
-layout: post
-repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
-tags:
-- llm
-- fine-tuning
-- docker
-- unsloth
-- production
-- overview
-- tutorial-series
-thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - 6-Part Series
-  Overview'
-toc: true
----
 
-### [Part 6: Production, Monitoring, and Scaling](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part6-production/)
+**Repository**: [https://github.com/saptak/fine-tuning-small-llms](https://github.com/saptak/fine-tuning-small-llms)
 
-**🏭 Enterprise Grade: Monitoring, Security, and Optimization**
-
-Complete your journey with enterprise-grade monitoring, security, auto-scaling, and cost optimization.
-
-**What You'll Learn:**
-- Advanced monitoring with Prometheus and Grafana
-- Security implementation: JWT, rate limiting, WAF
-- Auto-scaling strategies and resource optimization
-- Cost management and usage analytics
-- Disaster recovery and backup procedures
-
-**Key Deliverables:**
-- ✅ Comprehensive monitoring and alerting system
-- ✅ Multi-layer security framework
-- ✅ Auto-scaling and performance optimization
-- ✅ Cost tracking and optimization tools
-- ✅ Disaster recovery and backup solutions
-
-**Time Investment:** 3-4 hours  
-**Difficulty:** Advanced
-
-**🛡️ Enterprise Ready:** Security, compliance, monitoring, and 99.9% uptime capabilities
-
----
-author: Saptak
-categories:
-- AI
-- Machine Learning
-- Docker
-- LLM
-- Fine-tuning
-- Series
-date: 2025-07-25 15:00:00 -0800
-description: Complete overview of our comprehensive 6-part series on fine-tuning small
-  language models with Docker Desktop. From environment setup to production deployment,
-  learn everything you need to build production-ready AI applications.
-featured: true
-featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
-header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-image_credit: Photo by Patrick Martin on Unsplash
-layout: post
-repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
-tags:
-- llm
-- fine-tuning
-- docker
-- unsloth
-- production
-- overview
-- tutorial-series
-thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - 6-Part Series
-  Overview'
-toc: true
----
-
-## 📚 Complete Series Navigation
-
-| Part | Topic | Focus | Time | Difficulty |
-|------|-------|--------|------|------------|
-| **[Part 1](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)** | Setup and Environment | Foundation | 30-60 min | Beginner |
-| **[Part 2](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)** | Data Preparation | Quality Data | 2-3 hours | Intermediate |
-| **[Part 3](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part3-training/)** | Fine-Tuning with Unsloth | Efficient Training | 1-4 hours | Intermediate-Advanced |
-| **[Part 4](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part4-evaluation/)** | Evaluation and Testing | Quality Assurance | 1-2 hours | Intermediate |
-| **[Part 5](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part5-deployment/)** | Deployment with Ollama | Production Ready | 2-3 hours | Intermediate-Advanced |
-| **[Part 6](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part6-production/)** | Production & Monitoring | Enterprise Grade | 3-4 hours | Advanced |
-
----
-author: Saptak
-categories:
-- AI
-- Machine Learning
-- Docker
-- LLM
-- Fine-tuning
-- Series
-date: 2025-07-25 15:00:00 -0800
-description: Complete overview of our comprehensive 6-part series on fine-tuning small
-  language models with Docker Desktop. From environment setup to production deployment,
-  learn everything you need to build production-ready AI applications.
-featured: true
-featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
-header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-image_credit: Photo by Patrick Martin on Unsplash
-layout: post
-repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
-tags:
-- llm
-- fine-tuning
-- docker
-- unsloth
-- production
-- overview
-- tutorial-series
-thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - 6-Part Series
-  Overview'
-toc: true
----
-
-*Found this series helpful? Share it with others who might benefit from learning these techniques. Your feedback and contributions make this resource better for everyone!*
+**Series Navigation**:
+- [Part 1: Setup and Environment](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
+- [Part 2: Data Preparation](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
+- [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part3-training/)
+- [Part 4: Evaluation and Testing](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
+- [Part 5: Deployment with Ollama](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part5-deployment/)
+- [Part 6: Production and Monitoring](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part6-production/)
