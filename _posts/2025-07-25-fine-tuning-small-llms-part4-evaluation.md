@@ -1,16 +1,32 @@
 ---
-layout: post
-title: "Fine-Tuning Small LLMs with Docker Desktop - Part 4: Evaluation and Testing"
-date: 2025-07-25 12:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning]
-tags: [llm, evaluation, testing, metrics, benchmarking, validation]
 author: Saptak
-description: "Part 4 of our comprehensive series. Learn how to evaluate your fine-tuned model with comprehensive testing frameworks, automated benchmarks, and quality assurance techniques."
-featured_image: "/assets/images/llm-fine-tuning-part4.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 12:00:00 -0800
+description: Part 4 of our comprehensive series. Learn how to evaluate your fine-tuned
+  model with comprehensive testing frameworks, automated benchmarks, and quality assurance
+  techniques.
+featured_image: /assets/images/llm-fine-tuning-part4.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part4-evaluation.jpg
+image_credit: Photo by Brecht Corbeel on Unsplash
+layout: post
 part: 4
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- evaluation
+- testing
+- metrics
+- benchmarking
+- validation
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part4-evaluation.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 4: Evaluation and Testing'
 toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
 ---
 
 > 📚 **Reference Code Available**: All evaluation frameworks and testing utilities are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part4-evaluation/` for comprehensive testing tools!
