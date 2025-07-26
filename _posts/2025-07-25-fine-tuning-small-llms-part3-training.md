@@ -33,16 +33,16 @@ toc: true
 
 # Fine-Tuning Small LLMs with Docker Desktop - Part 3: Fine-Tuning with Unsloth
 
-Welcome to the most exciting part of our series! In [Part 1](/2025/07/25/fine-tuning-small-llms-part1-setup-environment/), we set up our environment, and in [Part 2](/2025/07/25/fine-tuning-small-llms-part2-data-preparation/), we prepared our high-quality dataset. Now it's time to fine-tune our model using Unsloth's revolutionary approach to efficient training.
+Welcome to the most exciting part of our series! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/), we set up our environment, and in [Part 2](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/), we prepared our high-quality dataset. Now it's time to fine-tune our model using Unsloth's revolutionary approach to efficient training.
 
 ## Series Navigation
 
-1. [Part 1: Setup and Environment](/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-2. [Part 2: Data Preparation and Model Selection](/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
+1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
 3. **Part 3: Fine-Tuning with Unsloth** (This post)
-4. [Part 4: Evaluation and Testing](/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-5. [Part 5: Deployment with Ollama and Docker](/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-6. [Part 6: Production, Monitoring, and Scaling](/2025/07/25/fine-tuning-small-llms-part6-production/)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
 
 ## Why Unsloth is a Game-Changer
 
@@ -117,7 +117,7 @@ print(f"CUDA available: {torch.cuda.is_available()}")
 if torch.cuda.is_available():
     print(f"GPU: {torch.cuda.get_device_name(0)}")
     print(f"GPU Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB")
-    
+
     # Clear GPU cache
     torch.cuda.empty_cache()
 else:
@@ -208,24 +208,24 @@ try:
     # Load from preprocessed datasets
     train_dataset = load_from_disk("./data/processed/train_dataset")
     val_dataset = load_from_disk("./data/processed/val_dataset")
-    
+
     print(f"✅ Training examples: {len(train_dataset):,}")
     print(f"✅ Validation examples: {len(val_dataset):,}")
-    
+
 except Exception as e:
     print(f"❌ Error loading preprocessed data: {e}")
     print("Creating datasets from JSON files...")
-    
+
     # Fallback to JSON loading
     with open("./data/processed/train_data.json", 'r') as f:
         train_data = json.load(f)
-    
+
     with open("./data/processed/val_data.json", 'r') as f:
         val_data = json.load(f)
-    
+
     train_dataset = Dataset.from_list(train_data)
     val_dataset = Dataset.from_list(val_data)
-    
+
     print(f"✅ Training examples: {len(train_dataset):,}")
     print(f"✅ Validation examples: {len(val_dataset):,}")
 
@@ -305,7 +305,7 @@ training_args = TrainingArguments(**training_config)
 # Weights & Biases Integration
 if os.getenv("WANDB_API_KEY"):
     print("\n📊 Initializing Weights & Biases")
-    
+
     wandb.init(
         project=os.getenv("WANDB_PROJECT", "llm-fine-tuning"),
         entity=os.getenv("WANDB_ENTITY"),
@@ -320,7 +320,7 @@ if os.getenv("WANDB_API_KEY"):
         },
         tags=["fine-tuning", "sql", "unsloth", "lora"]
     )
-    
+
     print("✅ W&B initialized")
 else:
     print("⚠️ W&B not configured - set WANDB_API_KEY to enable tracking")
@@ -374,31 +374,31 @@ class TrainingMonitor:
         self.start_time = None
         self.step_times = []
         self.losses = []
-    
+
     def on_train_begin(self):
         self.start_time = datetime.now()
         print(f"🚀 Training started at {self.start_time.strftime('%H:%M:%S')}")
-    
+
     def on_step_end(self, step, logs):
         current_time = datetime.now()
         if self.start_time:
             elapsed = (current_time - self.start_time).total_seconds()
             self.step_times.append(elapsed)
-            
+
             if 'train_loss' in logs:
                 self.losses.append(logs['train_loss'])
-            
+
             # Print progress every 10 steps
             if step % 10 == 0:
                 avg_step_time = sum(self.step_times[-10:]) / min(10, len(self.step_times))
                 eta_seconds = avg_step_time * (trainer.state.max_steps - step)
                 eta_minutes = eta_seconds / 60
-                
+
                 print(f"Step {step:4d}/{trainer.state.max_steps} | "
                       f"Loss: {logs.get('train_loss', 0):.4f} | "
                       f"LR: {logs.get('learning_rate', 0):.2e} | "
                       f"ETA: {eta_minutes:.1f}m")
-                
+
                 if torch.cuda.is_available():
                     memory_used = torch.cuda.memory_allocated() / 1e9
                     memory_cached = torch.cuda.memory_reserved() / 1e9
@@ -410,10 +410,10 @@ from transformers.trainer_callback import TrainerCallback
 class CustomTrainingCallback(TrainerCallback):
     def __init__(self):
         self.monitor = TrainingMonitor()
-    
+
     def on_train_begin(self, args, state, control, **kwargs):
         self.monitor.on_train_begin()
-    
+
     def on_log(self, args, state, control, logs=None, **kwargs):
         if logs:
             self.monitor.on_step_end(state.global_step, logs)
@@ -427,29 +427,29 @@ print("=" * 60)
 # Start training
 try:
     trainer_stats = trainer.train()
-    
+
     print("\n🎉 Training Completed!")
     print("=" * 60)
-    
+
     # Training summary
     final_loss = trainer_stats.metrics.get('train_loss', 'N/A')
     training_time = trainer_stats.metrics.get('train_runtime', 0)
-    
+
     print(f"📊 Training Summary:")
     print(f"Final loss: {final_loss}")
     print(f"Training time: {training_time / 60:.1f} minutes")
     print(f"Steps completed: {trainer_stats.global_step}")
     print(f"Samples processed: {trainer_stats.global_step * BATCH_SIZE * GRADIENT_ACCUMULATION_STEPS}")
-    
+
     if torch.cuda.is_available():
         max_memory = torch.cuda.max_memory_allocated() / 1e9
         print(f"Peak GPU memory: {max_memory:.1f} GB")
-    
+
 except KeyboardInterrupt:
     print("\n⚠️ Training interrupted by user")
     print("Saving current progress...")
     trainer.save_model("./models/sql-expert-checkpoint")
-    
+
 except Exception as e:
     print(f"\n❌ Training failed: {e}")
     print("Saving checkpoint for debugging...")
@@ -481,16 +481,16 @@ tokenizer.save_pretrained(output_dirs["lora"])
 # Save merged model (base model + LoRA adapters)
 print("Saving merged model...")
 model.save_pretrained_merged(
-    output_dirs["merged"], 
-    tokenizer, 
+    output_dirs["merged"],
+    tokenizer,
     save_method="merged_16bit"
 )
 
 # Save quantized version for efficient inference
 print("Saving quantized model...")
 model.save_pretrained_merged(
-    output_dirs["quantized"], 
-    tokenizer, 
+    output_dirs["quantized"],
+    tokenizer,
     save_method="merged_4bit"
 )
 
@@ -597,7 +597,7 @@ def test_model(prompt, max_new_tokens=256):
         [prompt],
         return_tensors="pt"
     ).to(model.device)
-    
+
     with torch.no_grad():
         outputs = model.generate(
             **inputs,
@@ -608,7 +608,7 @@ def test_model(prompt, max_new_tokens=256):
             top_p=0.9,
             pad_token_id=tokenizer.eos_token_id,
         )
-    
+
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     # Extract only the generated part
     generated_text = response[len(tokenizer.decode(inputs['input_ids'][0], skip_special_tokens=True)):]
@@ -636,17 +636,17 @@ print("=" * 60)
 for i, test_case in enumerate(test_cases, 1):
     print(f"\nTest {i}: {test_case['description']}")
     print("-" * 40)
-    
+
     try:
         start_time = datetime.now()
         response = test_model(test_case['prompt'])
         end_time = datetime.now()
-        
+
         generation_time = (end_time - start_time).total_seconds()
-        
+
         print(f"Generated SQL: {response}")
         print(f"Generation time: {generation_time:.2f}s")
-        
+
     except Exception as e:
         print(f"❌ Error: {e}")
 
@@ -662,33 +662,33 @@ class MemoryTracker:
     def get_gpu_memory_info():
         if not torch.cuda.is_available():
             return "GPU not available"
-        
+
         allocated = torch.cuda.memory_allocated() / 1e9
         cached = torch.cuda.memory_reserved() / 1e9
         max_allocated = torch.cuda.max_memory_allocated() / 1e9
-        
+
         return f"Allocated: {allocated:.1f}GB, Cached: {cached:.1f}GB, Peak: {max_allocated:.1f}GB"
-    
+
     @staticmethod
     def optimize_memory():
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
             torch.cuda.synchronize()
-        
+
         import gc
         gc.collect()
-    
+
     @staticmethod
     def get_model_memory_footprint(model):
         param_size = 0
         buffer_size = 0
-        
+
         for param in model.parameters():
             param_size += param.nelement() * param.element_size()
-        
+
         for buffer in model.buffers():
             buffer_size += buffer.nelement() * buffer.element_size()
-        
+
         model_size = (param_size + buffer_size) / 1e9
         return f"Model size: {model_size:.2f}GB"
 
@@ -710,13 +710,13 @@ class TrainingTroubleshooter:
     def diagnose_memory_issues():
         if not torch.cuda.is_available():
             return "Using CPU - no GPU memory issues"
-        
+
         total_memory = torch.cuda.get_device_properties(0).total_memory / 1e9
         allocated = torch.cuda.memory_allocated() / 1e9
-        
+
         issues = []
         solutions = []
-        
+
         if allocated / total_memory > 0.9:
             issues.append("GPU memory usage > 90%")
             solutions.extend([
@@ -725,7 +725,7 @@ class TrainingTroubleshooter:
                 "Use 4-bit quantization",
                 "Reduce max_seq_length"
             ])
-        
+
         return {
             "total_memory_gb": total_memory,
             "allocated_gb": allocated,
@@ -733,20 +733,20 @@ class TrainingTroubleshooter:
             "issues": issues,
             "solutions": solutions
         }
-    
+
     @staticmethod
     def check_training_stability(losses):
         if len(losses) < 10:
             return "Not enough data points"
-        
+
         recent_losses = losses[-10:]
         trend = "stable"
-        
+
         if recent_losses[-1] > recent_losses[0] * 1.1:
             trend = "increasing"
         elif recent_losses[-1] < recent_losses[0] * 0.9:
             trend = "decreasing"
-        
+
         return {
             "trend": trend,
             "recent_avg": sum(recent_losses) / len(recent_losses),
@@ -798,7 +798,7 @@ The Part 3 directory includes:
 
 Congratulations! You've successfully fine-tuned your first small language model using Unsloth. Your model is now specialized for your specific use case and ready for evaluation.
 
-**[Part 4: Evaluation and Testing](/2025/07/25/fine-tuning-small-llms-part4-evaluation/)**
+**[Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)**
 
 In Part 4, you'll learn:
 - Comprehensive evaluation frameworks
@@ -809,11 +809,11 @@ In Part 4, you'll learn:
 
 ### Key Achievements from Part 3
 
-✅ **Efficient Training**: Used Unsloth for 80% memory reduction and 2x speed improvement  
-✅ **LoRA Integration**: Implemented parameter-efficient fine-tuning  
-✅ **Memory Optimization**: Handled large models on consumer hardware  
-✅ **Experiment Tracking**: Monitored training with Weights & Biases  
-✅ **Model Management**: Saved multiple model variants for different use cases  
+✅ **Efficient Training**: Used Unsloth for 80% memory reduction and 2x speed improvement
+✅ **LoRA Integration**: Implemented parameter-efficient fine-tuning
+✅ **Memory Optimization**: Handled large models on consumer hardware
+✅ **Experiment Tracking**: Monitored training with Weights & Biases
+✅ **Model Management**: Saved multiple model variants for different use cases
 
 ## Troubleshooting Quick Reference
 
@@ -834,4 +834,4 @@ In Part 4, you'll learn:
 
 ---
 
-*Continue to [Part 4: Evaluation and Testing](/2025/07/25/fine-tuning-small-llms-part4-evaluation/) to validate your model's performance!*
+*Continue to [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/) to validate your model's performance!*

@@ -77,7 +77,7 @@ One of the most valuable aspects of this part is the detailed exploration of hyp
 
 ### Part 4: Evaluation and Testing
 
-Model evaluation extends far beyond simple accuracy metrics. [Part 4: Evaluation and Testing](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part4-evaluation/) implements a comprehensive evaluation framework that assesses model performance across multiple dimensions, ensuring your fine-tuned models meet production quality standards.
+Model evaluation extends far beyond simple accuracy metrics. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/) implements a comprehensive evaluation framework that assesses model performance across multiple dimensions, ensuring your fine-tuned models meet production quality standards.
 
 The evaluation framework implements both automated and human evaluation methods. Automated metrics include BLEU, ROUGE, METEOR, and BERTScore for general text quality, as well as domain-specific metrics like SQL syntax validation and semantic correctness checking. These metrics provide quantitative baselines for comparing different model configurations and training approaches.
 
@@ -87,7 +87,7 @@ The A/B testing framework enables rigorous comparison between different models o
 
 ### Part 5: Deployment with Ollama and Docker
 
-Moving from experimental models to production services requires careful attention to deployment architecture, performance optimization, and operational concerns. [Part 5: Deployment with Ollama and Docker](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part5-deployment/) addresses these challenges with a complete deployment stack that scales from development to production.
+Moving from experimental models to production services requires careful attention to deployment architecture, performance optimization, and operational concerns. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/) addresses these challenges with a complete deployment stack that scales from development to production.
 
 The deployment architecture centers around Ollama for model serving, which provides efficient local inference with minimal operational overhead. Our implementation includes automatic model conversion from training formats to optimized inference formats, supporting quantization techniques that reduce model size while maintaining performance.
 
@@ -99,7 +99,7 @@ Container orchestration ties everything together with Docker Compose configurati
 
 ### Part 6: Production, Monitoring, and Scaling
 
-Enterprise deployment requires sophisticated monitoring, optimization, and operational capabilities. [Part 6: Production, Monitoring, and Scaling](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part6-production/) completes the journey with advanced techniques for production operations, cost optimization, and performance scaling.
+Enterprise deployment requires sophisticated monitoring, optimization, and operational capabilities. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/) completes the journey with advanced techniques for production operations, cost optimization, and performance scaling.
 
 The monitoring infrastructure implements comprehensive observability across all system components. Prometheus collects detailed metrics on API performance, model inference times, resource utilization, and business-level indicators like request volumes and error rates. Grafana dashboards provide real-time visualization and alerting capabilities, enabling proactive identification and resolution of performance issues.
 
@@ -168,9 +168,9 @@ The journey from concept to production deployment represents one of the most exc
 **Repository**: [https://github.com/saptak/fine-tuning-small-llms](https://github.com/saptak/fine-tuning-small-llms)
 
 **Series Navigation**:
-- [Part 1: Setup and Environment](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-- [Part 2: Data Preparation](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-- [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part3-training/)
-- [Part 4: Evaluation and Testing](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-- [Part 5: Deployment with Ollama](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-- [Part 6: Production and Monitoring](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part6-production/)
+- [Part 1: Setup and Environment](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
+- [Part 2: Data Preparation](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
+- [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
+- [Part 4: Evaluation and Testing](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
+- [Part 5: Deployment with Ollama](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
+- [Part 6: Production and Monitoring](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part6-production/)

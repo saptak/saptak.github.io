@@ -40,11 +40,11 @@ Welcome to our comprehensive 6-part series on fine-tuning small language models 
 This series will take you from zero to having a production-ready fine-tuned language model:
 
 1. **Part 1: Setup and Environment** (This post)
-2. [Part 2: Data Preparation and Model Selection](/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-3. [Part 3: Fine-Tuning with Unsloth](/2025/07/25/fine-tuning-small-llms-part3-training/)
-4. [Part 4: Evaluation and Testing](/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-5. [Part 5: Deployment with Ollama and Docker](/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-6. [Part 6: Production, Monitoring, and Scaling](/2025/07/25/fine-tuning-small-llms-part6-production/)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
+3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
 
 ## Why Fine-Tune Small Language Models?
 
@@ -56,7 +56,7 @@ Using API-based models like GPT-4 can quickly become expensive for high-volume a
 ### Data Privacy and Control
 Your sensitive data never leaves your infrastructure. This is crucial for:
 - Healthcare applications with patient data
-- Financial services with confidential information  
+- Financial services with confidential information
 - Internal corporate tools with proprietary data
 - Government and defense applications
 
@@ -122,7 +122,7 @@ Avoid vendor lock-in and maintain control over your AI capabilities regardless o
    ```bash
    # Using Homebrew (recommended)
    brew install --cask docker
-   
+
    # Or download DMG and install manually
    ```
 
@@ -130,7 +130,7 @@ Avoid vendor lock-in and maintain control over your AI capabilities regardless o
    ```powershell
    # Ensure WSL2 is installed first
    wsl --install
-   
+
    # Then install Docker Desktop from the downloaded installer
    ```
 
@@ -139,7 +139,7 @@ Avoid vendor lock-in and maintain control over your AI capabilities regardless o
    # Ubuntu/Debian
    curl -fsSL https://get.docker.com -o get-docker.sh
    sudo sh get-docker.sh
-   
+
    # Add user to docker group
    sudo usermod -aG docker $USER
    ```
@@ -174,9 +174,9 @@ docker model --help
 
 # You should see output like:
 # Usage: docker model COMMAND
-# 
+#
 # Manage models
-# 
+#
 # Commands:
 #   list     List models
 #   pull     Pull a model
@@ -259,7 +259,7 @@ Unsloth is our secret weapon for efficient fine-tuning. It provides up to 80% me
 # For CUDA systems:
 pip install "unsloth[cu121] @ git+https://github.com/unslothai/unsloth.git"
 
-# For CPU-only systems:  
+# For CPU-only systems:
 pip install "unsloth[cpu] @ git+https://github.com/unslothai/unsloth.git"
 ```
 
@@ -385,11 +385,11 @@ You might wonder why we're using both Docker Model Runner and Ollama. Here's the
 - **Port**: Uses port 12434
 - **Best for**: Development workflows, containerized applications
 
-### Ollama  
+### Ollama
 - **Standalone Tool**: Independent model server
 - **Community**: Larger model repository and community
 - **Flexibility**: More customization options
-- **Port**: Uses port 11434  
+- **Port**: Uses port 11434
 - **Best for**: Production deployment, model experimentation
 
 We'll use Docker Model Runner for development and Ollama for serving our final fine-tuned models.
@@ -538,12 +538,12 @@ def test_python_environment():
     """Test Python environment and packages"""
     print("🐍 Testing Python Environment")
     print("-" * 30)
-    
+
     required_packages = [
         'torch', 'transformers', 'datasets', 'accelerate',
         'unsloth', 'bitsandbytes', 'peft', 'wandb'
     ]
-    
+
     missing_packages = []
     for package in required_packages:
         try:
@@ -552,7 +552,7 @@ def test_python_environment():
         except ImportError:
             print(f"❌ {package}")
             missing_packages.append(package)
-    
+
     if missing_packages:
         print(f"\n⚠️  Missing packages: {', '.join(missing_packages)}")
         return False
@@ -562,11 +562,11 @@ def test_gpu_setup():
     """Test GPU availability and configuration"""
     print("\n🖥️  Testing GPU Setup")
     print("-" * 30)
-    
+
     if torch.cuda.is_available():
         gpu_count = torch.cuda.device_count()
         print(f"✅ CUDA available with {gpu_count} GPU(s)")
-        
+
         for i in range(gpu_count):
             name = torch.cuda.get_device_name(i)
             memory = torch.cuda.get_device_properties(i).total_memory / 1e9
@@ -580,26 +580,26 @@ def test_docker_setup():
     """Test Docker and Docker Model Runner"""
     print("\n🐳 Testing Docker Setup")
     print("-" * 30)
-    
+
     try:
         # Test basic Docker
-        result = subprocess.run(['docker', '--version'], 
+        result = subprocess.run(['docker', '--version'],
                               capture_output=True, text=True)
         if result.returncode == 0:
             print(f"✅ Docker: {result.stdout.strip()}")
         else:
             print("❌ Docker not available")
             return False
-        
+
         # Test Docker Model Runner
-        result = subprocess.run(['docker', 'model', '--help'], 
+        result = subprocess.run(['docker', 'model', '--help'],
                               capture_output=True, text=True)
         if result.returncode == 0:
             print("✅ Docker Model Runner available")
         else:
             print("❌ Docker Model Runner not enabled")
             return False
-        
+
         return True
     except FileNotFoundError:
         print("❌ Docker not found in PATH")
@@ -609,17 +609,17 @@ def test_ollama_setup():
     """Test Ollama installation and service"""
     print("\n🦙 Testing Ollama Setup")
     print("-" * 30)
-    
+
     try:
         # Test Ollama binary
-        result = subprocess.run(['ollama', '--version'], 
+        result = subprocess.run(['ollama', '--version'],
                               capture_output=True, text=True)
         if result.returncode == 0:
             print(f"✅ Ollama: {result.stdout.strip()}")
         else:
             print("❌ Ollama not available")
             return False
-        
+
         # Test Ollama service
         try:
             response = requests.get("http://localhost:11434/api/tags", timeout=5)
@@ -631,7 +631,7 @@ def test_ollama_setup():
                 print("⚠️  Ollama service not responding (run 'ollama serve')")
         except requests.exceptions.ConnectionError:
             print("⚠️  Ollama service not running (run 'ollama serve')")
-        
+
         return True
     except FileNotFoundError:
         print("❌ Ollama not found in PATH")
@@ -641,12 +641,12 @@ def test_project_structure():
     """Test project directory structure"""
     print("\n📁 Testing Project Structure")
     print("-" * 30)
-    
+
     required_dirs = [
-        'data', 'models', 'notebooks', 'scripts', 
+        'data', 'models', 'notebooks', 'scripts',
         'configs', 'logs', 'tests', 'docker'
     ]
-    
+
     missing_dirs = []
     for dir_name in required_dirs:
         if Path(dir_name).exists():
@@ -654,7 +654,7 @@ def test_project_structure():
         else:
             print(f"❌ {dir_name}/")
             missing_dirs.append(dir_name)
-    
+
     if missing_dirs:
         print(f"\n⚠️  Missing directories: {', '.join(missing_dirs)}")
         return False
@@ -664,10 +664,10 @@ def test_model_loading():
     """Test loading a small model"""
     print("\n🤖 Testing Model Loading")
     print("-" * 30)
-    
+
     try:
         from unsloth import FastLanguageModel
-        
+
         print("Loading small test model...")
         model, tokenizer = FastLanguageModel.from_pretrained(
             model_name="unsloth/tinyllama-bnb-4bit",
@@ -676,12 +676,12 @@ def test_model_loading():
             load_in_4bit=True,
         )
         print("✅ Model loaded successfully")
-        
+
         # Test tokenization
         test_text = "Hello, world!"
         tokens = tokenizer(test_text, return_tensors="pt")
         print(f"✅ Tokenization test passed ({len(tokens['input_ids'][0])} tokens)")
-        
+
         return True
     except Exception as e:
         print(f"❌ Model loading failed: {e}")
@@ -691,7 +691,7 @@ def main():
     """Run all tests"""
     print("🧪 Complete Setup Testing")
     print("=" * 50)
-    
+
     tests = [
         test_python_environment,
         test_gpu_setup,
@@ -700,7 +700,7 @@ def main():
         test_project_structure,
         test_model_loading
     ]
-    
+
     results = []
     for test in tests:
         try:
@@ -709,15 +709,15 @@ def main():
         except Exception as e:
             print(f"❌ Test failed with error: {e}")
             results.append(False)
-    
+
     # Summary
     print("\n📊 Test Summary")
     print("=" * 50)
     passed = sum(results)
     total = len(results)
-    
+
     print(f"Tests passed: {passed}/{total}")
-    
+
     if passed == total:
         print("🎉 All tests passed! Your environment is ready for fine-tuning.")
     else:
@@ -727,7 +727,7 @@ def main():
         print("- Enable Docker Model Runner in Docker Desktop settings")
         print("- Start Ollama service: ollama serve")
         print("- Create missing directories: mkdir -p data models notebooks scripts configs logs tests docker")
-    
+
     return passed == total
 
 if __name__ == "__main__":
@@ -813,7 +813,7 @@ The repository includes:
 
 Congratulations! You've successfully set up your development environment for fine-tuning small language models with Docker Desktop. In the next part of our series, we'll dive into:
 
-**[Part 2: Data Preparation and Model Selection](/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)**
+**[Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)**
 - Creating high-quality training datasets
 - Data formatting and preprocessing
 - Choosing the right base model for your use case
