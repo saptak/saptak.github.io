@@ -1,16 +1,34 @@
 ---
-layout: post
-title: "Fine-Tuning Small LLMs with Docker Desktop - Part 6: Production, Monitoring, and Scaling"
-date: 2025-07-25 14:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning]
-tags: [llm, production, monitoring, scaling, security, optimization, devops]
 author: Saptak
-description: "Final part of our comprehensive series. Learn production best practices including advanced monitoring, auto-scaling, security, performance optimization, and cost management for your fine-tuned LLM deployment."
-featured_image: "/assets/images/llm-fine-tuning-part6.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 14:00:00 -0800
+description: Final part of our comprehensive series. Learn production best practices
+  including advanced monitoring, auto-scaling, security, performance optimization,
+  and cost management for your fine-tuned LLM deployment.
+featured_image: /assets/images/llm-fine-tuning-part6.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part6-production.jpg
+image_credit: Photo by Van Tay Media on Unsplash
+layout: post
 part: 6
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- production
+- monitoring
+- scaling
+- security
+- optimization
+- devops
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part6-production.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 6: Production, Monitoring,
+  and Scaling'
 toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
 ---
 
 > 📚 **Reference Code Available**: All production code, monitoring configurations, and optimization scripts are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part6-production/` for enterprise-grade operations!
