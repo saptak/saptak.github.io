@@ -25,16 +25,16 @@ tags:
 - datasets
 - unsloth
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part2-data-preparation.jpg
-title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 2: Data Preparation and
+title: 'Fine-Tuning Small LLMs on your Desktop - Part 2: Data Preparation and
   Model Selection'
 toc: true
 ---
 
 > 📚 **Reference Code Available**: All code examples from this blog series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part2-data-preparation/` for the complete data preparation toolkit!
 
-# Fine-Tuning Small LLMs with Docker Desktop - Part 2: Data Preparation and Model Selection
+# Fine-Tuning Small LLMs on your Desktop - Part 2: Data Preparation and Model Selection
 
-Welcome back! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/), we set up our development environment with Docker Desktop, CUDA support, and all necessary tools. Now we dive into the critical foundation of any successful fine-tuning project: **data preparation and model selection**.
+Welcome back! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/), we set up our development environment with Docker Desktop, CUDA support, and all necessary tools. Now we dive into the foundation of any successful fine-tuning project: **data preparation and model selection**.
 
 This is where the magic begins—the quality of your training data will ultimately determine the success of your fine-tuned model. We'll explore advanced techniques for creating, validating, and optimizing datasets that produce exceptional results.
 
@@ -51,7 +51,7 @@ This is where the magic begins—the quality of your training data will ultimate
 
 Before we dive into code, let's understand why data quality is paramount:
 
-> **"Garbage in, garbage out"** - This age-old principle is especially true for LLM fine-tuning. A model trained on 500 high-quality, diverse examples will consistently outperform one trained on 5,000 mediocre, repetitive samples.
+> **"Garbage in, garbage out"** - This age-old adage is especially true for LLM fine-tuning. A model trained on 500 high-quality, diverse examples will consistently outperform one trained on 5,000 mediocre, repetitive samples.
 
 ### Key Principles for High-Quality Training Data
 
