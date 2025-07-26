@@ -1,16 +1,33 @@
 ---
-layout: post
-title: "Fine-Tuning Small LLMs with Docker Desktop - Part 2: Data Preparation and Model Selection"
-date: 2025-07-25 10:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning]
-tags: [llm, fine-tuning, data-preparation, model-selection, datasets, unsloth]
 author: Saptak
-description: "Part 2 of our comprehensive series. Learn how to prepare high-quality training datasets, select the optimal base model, and format data for efficient fine-tuning with Unsloth."
-featured_image: "/assets/images/llm-fine-tuning-part2.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 10:00:00 -0800
+description: Part 2 of our comprehensive series. Learn how to prepare high-quality
+  training datasets, select the optimal base model, and format data for efficient
+  fine-tuning with Unsloth.
+featured_image: /assets/images/llm-fine-tuning-part2.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part2-data-preparation.jpg
+image_credit: Photo by Safar Safarov on Unsplash
+layout: post
 part: 2
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- fine-tuning
+- data-preparation
+- model-selection
+- datasets
+- unsloth
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part2-data-preparation.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 2: Data Preparation and
+  Model Selection'
 toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
 ---
 
 > 📚 **Reference Code Available**: All code examples from this blog series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part2-data-preparation/` for the complete data preparation toolkit!
