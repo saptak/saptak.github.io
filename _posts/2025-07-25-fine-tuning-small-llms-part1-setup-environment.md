@@ -1,16 +1,32 @@
 ---
-layout: post
-title: "Fine-Tuning Small LLMs with Docker Desktop - Part 1: Setup and Environment"
-date: 2025-07-25 09:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning]
-tags: [llm, fine-tuning, docker, docker-model-runner, setup, environment]
 author: Saptak
-description: "Part 1 of our comprehensive series on fine-tuning small language models. Learn how to set up Docker Desktop with Model Runner and prepare your development environment."
-featured_image: "/assets/images/llm-fine-tuning-part1.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 09:00:00 -0800
+description: Part 1 of our comprehensive series on fine-tuning small language models.
+  Learn how to set up Docker Desktop with Model Runner and prepare your development
+  environment.
+featured_image: /assets/images/llm-fine-tuning-part1.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part1-setup-environment.jpg
+image_credit: Photo by Tai Bui on Unsplash
+layout: post
 part: 1
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- fine-tuning
+- docker
+- docker-model-runner
+- setup
+- environment
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part1-setup-environment.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 1: Setup and Environment'
 toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
 ---
 
 > 📚 **Reference Code Available**: All code examples from this blog series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). Clone it to follow along!
