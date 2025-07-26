@@ -1,16 +1,34 @@
 ---
-layout: post
-title: "Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - Series Overview"
-date: 2025-07-25 15:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning, Series]
-tags: [llm, fine-tuning, docker, unsloth, production, overview, tutorial-series]
 author: Saptak
-description: "Complete overview of our comprehensive 6-part series on fine-tuning small language models with Docker Desktop. From environment setup to production deployment, learn everything you need to build production-ready AI applications."
-featured_image: "/assets/images/llm-fine-tuning-series-overview.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
-toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+- Series
+date: 2025-07-25 15:00:00 -0800
+description: Complete overview of our comprehensive 6-part series on fine-tuning small
+  language models with Docker Desktop. From environment setup to production deployment,
+  learn everything you need to build production-ready AI applications.
 featured: true
+featured_image: /assets/images/llm-fine-tuning-series-overview.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
+image_credit: Photo by NEXT Academy on Unsplash
+layout: post
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- fine-tuning
+- docker
+- unsloth
+- production
+- overview
+- tutorial-series
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
+title: 'Complete Guide: Fine-Tuning Small LLMs with Docker Desktop - Series Overview'
+toc: true
 ---
 
 > **Complete Implementation Available**: All code, configurations, and examples from this series are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). Get started with a single command!
