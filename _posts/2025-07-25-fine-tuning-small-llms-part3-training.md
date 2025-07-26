@@ -1,16 +1,32 @@
 ---
-layout: post
-title: "Fine-Tuning Small LLMs with Docker Desktop - Part 3: Fine-Tuning with Unsloth"
-date: 2025-07-25 11:00:00 -0800
-categories: [AI, Machine Learning, Docker, LLM, Fine-tuning]
-tags: [llm, fine-tuning, unsloth, training, lora, qlora, huggingface]
 author: Saptak
-description: "Part 3 of our comprehensive series. Learn how to fine-tune your selected model using Unsloth with LoRA adapters for efficient, memory-optimized training."
-featured_image: "/assets/images/llm-fine-tuning-part3.jpg"
-series: "Fine-Tuning Small LLMs with Docker Desktop"
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 11:00:00 -0800
+description: Part 3 of our comprehensive series. Learn how to fine-tune your selected
+  model using Unsloth with LoRA adapters for efficient, memory-optimized training.
+featured_image: /assets/images/llm-fine-tuning-part3.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part3-training.jpg
+image_credit: Photo by Volodymyr Dobrovolskyy on Unsplash
+layout: post
 part: 3
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
+tags:
+- llm
+- fine-tuning
+- unsloth
+- training
+- lora
+- qlora
+- huggingface
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part3-training.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 3: Fine-Tuning with Unsloth'
 toc: true
-repository: "https://github.com/saptak/fine-tuning-small-llms"
 ---
 
 > 📚 **Reference Code Available**: All training scripts and configurations are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part3-training/` for complete training workflows!
@@ -482,16 +498,34 @@ print("✅ All model variants saved!")
 
 # Create model card
 model_card_content = f"""---
-language: en
-library_name: transformers
-base_model: {SELECTED_MODEL}
+author: Saptak
+categories:
+- AI
+- Machine Learning
+- Docker
+- LLM
+- Fine-tuning
+date: 2025-07-25 11:00:00 -0800
+description: Part 3 of our comprehensive series. Learn how to fine-tune your selected
+  model using Unsloth with LoRA adapters for efficient, memory-optimized training.
+featured_image: /assets/images/llm-fine-tuning-part3.jpg
+header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-part3-training.jpg
+image_credit: Photo by Volodymyr Dobrovolskyy on Unsplash
+layout: post
+part: 3
+repository: https://github.com/saptak/fine-tuning-small-llms
+series: Fine-Tuning Small LLMs with Docker Desktop
 tags:
-- sql
-- code-generation
-- fine-tuned
+- llm
+- fine-tuning
 - unsloth
+- training
 - lora
-license: apache-2.0
+- qlora
+- huggingface
+thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part3-training.jpg
+title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 3: Fine-Tuning with Unsloth'
+toc: true
 ---
 
 # SQL Expert Model
