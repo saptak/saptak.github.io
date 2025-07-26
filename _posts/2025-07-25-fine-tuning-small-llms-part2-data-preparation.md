@@ -208,6 +208,37 @@ print(f"Recommended model: {recommended_model}")
 
 ## Creating High-Quality Training Datasets
 
+You have two excellent options for creating training datasets: using public datasets for quick setup or creating custom datasets for specific needs.
+
+### Option 1: Using Public Datasets (Recommended for Desktop)
+
+For faster setup and efficient desktop training, you can leverage high-quality public datasets:
+
+```bash
+# Quick Start with HuggingFace Datasets
+
+# Load 1K examples for fast training (30min-1hr on desktop)
+python src/dataset_creation.py --source huggingface --num-examples 1000 --format alpaca
+
+# Load 5K examples for comprehensive training (1-2hr on desktop)  
+python src/dataset_creation.py --source huggingface --num-examples 5000 --format alpaca
+
+# Use different HuggingFace dataset
+python src/dataset_creation.py --source huggingface --hf-dataset "spider" --num-examples 500
+```
+
+**Desktop Training Recommendations:**
+- **1K examples**: ~30min training, 2-4GB memory, ideal for testing
+- **5K examples**: ~1-2hr training, 4-6GB memory, good balance  
+- **10K+ examples**: 3hr+ training, 8GB+ memory, comprehensive but slow
+
+**Available Public Datasets:**
+- **b-mc2/sql-create-context**: 78K examples, professionally curated, best for general SQL
+- **spider**: 10K examples, complex cross-domain queries, good for advanced SQL
+- **wikisql**: 80K examples, simpler single-table queries, good for beginners
+
+### Option 2: Manual Dataset Creation
+
 Let's create a practical example with SQL generation - a common and valuable use case:
 
 ### Step 1: Define Your Dataset Structure
@@ -343,6 +374,47 @@ WHERE rn = 2;""",
             explanation="Uses CTE with ROW_NUMBER() to find second highest values",
             difficulty="expert"
         )
+    
+    def load_huggingface_dataset(self, dataset_name: str = "b-mc2/sql-create-context", 
+                               num_examples: int = 1000):
+        """Load dataset from HuggingFace Hub"""
+        try:
+            from datasets import load_dataset
+        except ImportError:
+            print("❌ Error: datasets library not found. Install with: pip install datasets")
+            return False
+        
+        print(f"🔄 Loading {num_examples} examples from {dataset_name}...")
+        
+        try:
+            # Load dataset with specified number of examples
+            dataset = load_dataset(dataset_name, split=f"train[:{num_examples}]")
+            
+            # Convert HuggingFace format to internal format
+            for i, item in enumerate(dataset):
+                # Handle different possible field names
+                instruction = item.get('question', item.get('instruction', ''))
+                context = item.get('context', item.get('input', ''))
+                answer = item.get('answer', item.get('output', ''))
+                
+                if instruction and answer:
+                    self.add_example(
+                        instruction=instruction,
+                        table_schema=context,
+                        sql_query=answer,
+                        difficulty="medium"
+                    )
+                    
+                    if (i + 1) % 100 == 0:
+                        print(f"  Loaded {i + 1}/{num_examples} examples...")
+            
+            print(f"✅ Successfully loaded {len(self.examples)} examples from {dataset_name}")
+            return True
+            
+        except Exception as e:
+            print(f"❌ Error loading dataset: {e}")
+            print("💡 Falling back to manual dataset creation...")
+            return False
 
     def format_for_training(self, format_type: str = "alpaca") -> List[Dict]:
         """Format examples for different training approaches"""
@@ -398,25 +470,34 @@ WHERE rn = 2;""",
         return json_path
 
 # Create comprehensive SQL dataset
-def create_sql_dataset():
+def create_sql_dataset(source: str = "manual", hf_dataset: str = "b-mc2/sql-create-context", 
+                      num_examples: int = 1000):
     creator = SQLDatasetCreator(output_dir="./data/datasets")
+    
+    if source == "huggingface":
+        # Load from HuggingFace
+        success = creator.load_huggingface_dataset(hf_dataset, num_examples)
+        if not success:
+            print("⚠️  Falling back to manual dataset creation...")
+            source = "manual"
+    
+    if source == "manual":
+        # Create manual examples
+        creator.create_basic_examples()
+        creator.create_advanced_examples()
 
-    # Add examples
-    creator.create_basic_examples()
-    creator.create_advanced_examples()
+        # Add domain-specific examples
+        creator.add_example(
+            instruction="Create a query to find the top 10 products by sales volume",
+            table_schema="products (id, name, category), order_items (id, product_id, quantity, order_id)",
+            sql_query="SELECT p.name, SUM(oi.quantity) as total_sold FROM products p JOIN order_items oi ON p.id = oi.product_id GROUP BY p.id, p.name ORDER BY total_sold DESC LIMIT 10;",
+            difficulty="medium"
+        )
 
-    # Add domain-specific examples
-    creator.add_example(
-        instruction="Create a query to find the top 10 products by sales volume",
-        table_schema="products (id, name, category), order_items (id, product_id, quantity, order_id)",
-        sql_query="SELECT p.name, SUM(oi.quantity) as total_sold FROM products p JOIN order_items oi ON p.id = oi.product_id GROUP BY p.id, p.name ORDER BY total_sold DESC LIMIT 10;",
-        difficulty="medium"
-    )
-
-    creator.add_example(
-        instruction="Calculate monthly revenue growth rate",
-        table_schema="orders (id, amount, order_date)",
-        sql_query="""WITH monthly_revenue AS (
+        creator.add_example(
+            instruction="Calculate monthly revenue growth rate",
+            table_schema="orders (id, amount, order_date)",
+            sql_query="""WITH monthly_revenue AS (
     SELECT
         DATE_FORMAT(order_date, '%Y-%m') as month,
         SUM(amount) as revenue
@@ -436,18 +517,24 @@ SELECT
     ROUND(((revenue - prev_revenue) / prev_revenue) * 100, 2) as growth_rate_percent
 FROM revenue_with_lag
 WHERE prev_revenue IS NOT NULL;""",
-        difficulty="expert"
-    )
+            difficulty="expert"
+        )
 
     # Save in multiple formats
-    creator.save_dataset("sql_dataset", "alpaca")
-    creator.save_dataset("sql_dataset", "chat")
+    dataset_name = "sql_dataset_hf" if source == "huggingface" else "sql_dataset"
+    creator.save_dataset(dataset_name, "alpaca")
+    creator.save_dataset(dataset_name, "chat")
 
     return creator
 
 # Usage
 if __name__ == "__main__":
-    dataset_creator = create_sql_dataset()
+    # Option 1: Use HuggingFace dataset (recommended for desktop)
+    dataset_creator = create_sql_dataset(source="huggingface", num_examples=1000)
+    
+    # Option 2: Create manual dataset
+    # dataset_creator = create_sql_dataset(source="manual")
+    
     print(f"Created dataset with {len(dataset_creator.examples)} examples")
 ```
 
@@ -1030,20 +1117,34 @@ All data preparation code and examples are available in the GitHub repository:
 git clone https://github.com/saptak/fine-tuning-small-llms.git
 cd fine-tuning-small-llms
 
-# Create a SQL dataset
-python part2-data-preparation/src/dataset_creation.py --output-dir ./data/datasets --format alpaca
+# Quick Start: Use HuggingFace dataset (recommended for desktop)
+python part2-data-preparation/src/dataset_creation.py --source huggingface --num-examples 1000 --format alpaca
+
+# Alternative: Create manual dataset  
+python part2-data-preparation/src/dataset_creation.py --source manual --format alpaca
+
+# Quick script for common sizes
+chmod +x part2-data-preparation/scripts/quick_dataset.sh
+./part2-data-preparation/scripts/quick_dataset.sh --size medium  # 1K examples
 
 # Validate the dataset
-python part2-data-preparation/src/data_validation.py --dataset ./data/datasets/sql_dataset_alpaca.json
+python part2-data-preparation/src/data_validation.py --dataset ./data/datasets/sql_dataset_hf_alpaca.json
 ```
 
 The Part 2 directory includes:
-- `src/dataset_creation.py` - Complete dataset creation toolkit
+- `src/dataset_creation.py` - Complete dataset creation toolkit with HuggingFace integration
 - `src/data_validation.py` - Quality validation framework
 - `src/format_converter.py` - Format conversion utilities
 - `src/model_selection.py` - Smart model recommendation system
+- `scripts/quick_dataset.sh` - One-command dataset generation script
 - `examples/` - Sample datasets and templates
 - Documentation and usage guides
+
+### New Features Added:
+- **HuggingFace Integration**: Load popular public datasets directly
+- **Desktop Optimization**: Configurable dataset sizes for memory constraints
+- **Quick Setup Script**: Generate datasets with single command
+- **Backward Compatibility**: All original manual creation still works
 
 ## What's Next?
 
