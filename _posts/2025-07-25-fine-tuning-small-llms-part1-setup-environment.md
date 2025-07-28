@@ -16,7 +16,7 @@ image_credit: Photo by Tai Bui on Unsplash
 layout: post
 part: 1
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - fine-tuning
@@ -40,11 +40,11 @@ Welcome to our comprehensive 6-part series on fine-tuning small language models 
 This series will take you from zero to having a production-ready fine-tuned language model:
 
 1. **Part 1: Setup and Environment** (This post)
-2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
-4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
+3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production)
 
 ## Why Fine-Tune Small Language Models?
 
@@ -871,7 +871,7 @@ The repository includes:
 
 Congratulations! You've successfully set up your development environment for fine-tuning small language models with Docker Desktop. In the next part of our series, we'll dive into:
 
-**[Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)**
+**[Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)**
 - Creating high-quality training datasets
 - Data formatting and preprocessing
 - Choosing the right base model for your use case

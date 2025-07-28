@@ -16,7 +16,7 @@ image_credit: Photo by Safar Safarov on Unsplash
 layout: post
 part: 2
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - fine-tuning
@@ -34,18 +34,18 @@ toc: true
 
 # Fine-Tuning Small LLMs on your Desktop - Part 2: Data Preparation and Model Selection
 
-Welcome back! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/), we set up our development environment with Docker Desktop, CUDA support, and all necessary tools. Now we dive into the foundation of any successful fine-tuning project: **data preparation and model selection**.
+Welcome back! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment), we set up our development environment with Docker Desktop, CUDA support, and all necessary tools. Now we dive into the foundation of any successful fine-tuning project: **data preparation and model selection**.
 
 This is where the magic begins—the quality of your training data will ultimately determine the success of your fine-tuned model. We'll explore advanced techniques for creating, validating, and optimizing datasets that produce exceptional results.
 
 ## Series Navigation
 
-1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
+1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
 2. **Part 2: Data Preparation and Model Selection** (This post)
-3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
-4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
+3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production)
 
 ## The Data Quality Imperative
 
@@ -220,7 +220,7 @@ For faster setup and efficient desktop training, you can leverage high-quality p
 # Load 1K examples for fast training (30min-1hr on desktop)
 python src/dataset_creation.py --source huggingface --num-examples 1000 --format alpaca
 
-# Load 5K examples for comprehensive training (1-2hr on desktop)  
+# Load 5K examples for comprehensive training (1-2hr on desktop)
 python src/dataset_creation.py --source huggingface --num-examples 5000 --format alpaca
 
 # Use different HuggingFace dataset
@@ -229,7 +229,7 @@ python src/dataset_creation.py --source huggingface --hf-dataset "spider" --num-
 
 **Desktop Training Recommendations:**
 - **1K examples**: ~30min training, 2-4GB memory, ideal for testing
-- **5K examples**: ~1-2hr training, 4-6GB memory, good balance  
+- **5K examples**: ~1-2hr training, 4-6GB memory, good balance
 - **10K+ examples**: 3hr+ training, 8GB+ memory, comprehensive but slow
 
 **Available Public Datasets:**
@@ -374,8 +374,8 @@ WHERE rn = 2;""",
             explanation="Uses CTE with ROW_NUMBER() to find second highest values",
             difficulty="expert"
         )
-    
-    def load_huggingface_dataset(self, dataset_name: str = "b-mc2/sql-create-context", 
+
+    def load_huggingface_dataset(self, dataset_name: str = "b-mc2/sql-create-context",
                                num_examples: int = 1000):
         """Load dataset from HuggingFace Hub"""
         try:
@@ -383,20 +383,20 @@ WHERE rn = 2;""",
         except ImportError:
             print("❌ Error: datasets library not found. Install with: pip install datasets")
             return False
-        
+
         print(f"🔄 Loading {num_examples} examples from {dataset_name}...")
-        
+
         try:
             # Load dataset with specified number of examples
             dataset = load_dataset(dataset_name, split=f"train[:{num_examples}]")
-            
+
             # Convert HuggingFace format to internal format
             for i, item in enumerate(dataset):
                 # Handle different possible field names
                 instruction = item.get('question', item.get('instruction', ''))
                 context = item.get('context', item.get('input', ''))
                 answer = item.get('answer', item.get('output', ''))
-                
+
                 if instruction and answer:
                     self.add_example(
                         instruction=instruction,
@@ -404,13 +404,13 @@ WHERE rn = 2;""",
                         sql_query=answer,
                         difficulty="medium"
                     )
-                    
+
                     if (i + 1) % 100 == 0:
                         print(f"  Loaded {i + 1}/{num_examples} examples...")
-            
+
             print(f"✅ Successfully loaded {len(self.examples)} examples from {dataset_name}")
             return True
-            
+
         except Exception as e:
             print(f"❌ Error loading dataset: {e}")
             print("💡 Falling back to manual dataset creation...")
@@ -470,17 +470,17 @@ WHERE rn = 2;""",
         return json_path
 
 # Create comprehensive SQL dataset
-def create_sql_dataset(source: str = "manual", hf_dataset: str = "b-mc2/sql-create-context", 
+def create_sql_dataset(source: str = "manual", hf_dataset: str = "b-mc2/sql-create-context",
                       num_examples: int = 1000):
     creator = SQLDatasetCreator(output_dir="./data/datasets")
-    
+
     if source == "huggingface":
         # Load from HuggingFace
         success = creator.load_huggingface_dataset(hf_dataset, num_examples)
         if not success:
             print("⚠️  Falling back to manual dataset creation...")
             source = "manual"
-    
+
     if source == "manual":
         # Create manual examples
         creator.create_basic_examples()
@@ -531,10 +531,10 @@ WHERE prev_revenue IS NOT NULL;""",
 if __name__ == "__main__":
     # Option 1: Use HuggingFace dataset (recommended for desktop)
     dataset_creator = create_sql_dataset(source="huggingface", num_examples=1000)
-    
+
     # Option 2: Create manual dataset
     # dataset_creator = create_sql_dataset(source="manual")
-    
+
     print(f"Created dataset with {len(dataset_creator.examples)} examples")
 ```
 
@@ -1120,7 +1120,7 @@ cd fine-tuning-small-llms
 # Quick Start: Use HuggingFace dataset (recommended for desktop)
 python part2-data-preparation/src/dataset_creation.py --source huggingface --num-examples 1000 --format alpaca
 
-# Alternative: Create manual dataset  
+# Alternative: Create manual dataset
 python part2-data-preparation/src/dataset_creation.py --source manual --format alpaca
 
 # Quick script for common sizes
@@ -1150,7 +1150,7 @@ The Part 2 directory includes:
 
 Excellent work! You now have a comprehensive understanding of data preparation and model selection. In our next installment, we'll put this knowledge to work:
 
-**[Part 3: Fine-Tuning with Unsloth](/2025/07/25/fine-tuning-small-llms-part3-training/)**
+**[Part 3: Fine-Tuning with Unsloth](/2025/07/25/fine-tuning-small-llms-part3-training)**
 
 In Part 3, you'll learn:
 - Setting up Unsloth for efficient training
@@ -1181,4 +1181,4 @@ In Part 3, you'll learn:
 
 ---
 
-*Continue to [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/) to start training your model!*
+*Continue to [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training) to start training your model!*

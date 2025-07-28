@@ -16,7 +16,7 @@ image_credit: Photo by Van Tay Media on Unsplash
 layout: post
 part: 6
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - production
@@ -26,24 +26,24 @@ tags:
 - optimization
 - devops
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part6-production.jpg
-title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 6: Production, Monitoring,
+title: 'Fine-Tuning Small LLMs on a Desktop - Part 6: Production, Monitoring,
   and Scaling'
 toc: true
 ---
 
 > 📚 **Reference Code Available**: All production code, monitoring configurations, and optimization scripts are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part6-production/` for enterprise-grade operations!
 
-# Fine-Tuning Small LLMs with Docker Desktop - Part 6: Production, Monitoring, and Scaling
+# Fine-Tuning Small LLMs on a Desktop - Part 6: Production, Monitoring, and Scaling
 
-Welcome to the final part of our comprehensive series! In [Part 5](/2025/07/25/fine-tuning-small-llms-part5-deployment/), we successfully deployed our fine-tuned model with a complete stack. Now we'll take it to the next level with **production-grade monitoring, scaling, security, and optimization** to ensure your LLM service runs reliably at scale.
+Welcome to the final part of our comprehensive series! In [Part 5](/2025/07/25/fine-tuning-small-llms-part5-deployment), we successfully deployed our fine-tuned model with a complete stack. Now we'll take it to the next level with **production-grade monitoring, scaling, security, and optimization** to ensure your LLM service runs reliably at scale.
 
 ## Series Navigation
 
-1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
-4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
+1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
+3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
 6. **Part 6: Production, Monitoring, and Scaling** (This post)
 
 ## Production Architecture Overview

@@ -16,7 +16,7 @@ image_credit: Photo by Brecht Corbeel on Unsplash
 layout: post
 part: 4
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - evaluation
@@ -25,24 +25,24 @@ tags:
 - benchmarking
 - validation
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part4-evaluation.jpg
-title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 4: Evaluation and Testing'
+title: 'Fine-Tuning Small LLMs on a Desktop - Part 4: Evaluation and Testing'
 toc: true
 ---
 
 > 📚 **Reference Code Available**: All evaluation frameworks and testing utilities are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part4-evaluation/` for comprehensive testing tools!
 
-# Fine-Tuning Small LLMs with Docker Desktop - Part 4: Evaluation and Testing
+# Fine-Tuning Small LLMs on a Desktop - Part 4: Evaluation and Testing
 
-Welcome back! In [Part 3](/2025/07/25/fine-tuning-small-llms-part3-training/), we successfully fine-tuned our model using Unsloth. Now comes the critical phase: **rigorous evaluation and testing**. This determines whether your fine-tuning was successful and your model is ready for production use.
+Welcome back! In [Part 3](/writing/2025/07/25/fine-tuning-small-llms-part3-training), we successfully fine-tuned our model using Unsloth. Now comes the critical phase: **rigorous evaluation and testing**. This determines whether your fine-tuning was successful and your model is ready for production use.
 
 ## Series Navigation
 
-1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
+1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
+3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training)
 4. **Part 4: Evaluation and Testing** (This post)
-5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production)
 
 ## Why Comprehensive Evaluation Matters
 
@@ -1430,7 +1430,7 @@ The Part 4 directory includes:
 
 Fantastic work! You've now implemented a comprehensive evaluation framework that thoroughly tests your fine-tuned model across multiple dimensions. Your model has been rigorously validated and is ready for deployment.
 
-**[Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)**
+**[Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)**
 
 In Part 5, you'll learn:
 - Converting models to GGUF format for Ollama
@@ -1464,4 +1464,4 @@ In Part 5, you'll learn:
 
 ---
 
-*Continue to [Part 5: Deployment with Ollama and Docker](/2025/07/25/fine-tuning-small-llms-part5-deployment/) to deploy your validated model!*
+*Continue to [Part 5: Deployment with Ollama and Docker](/2025/07/25/fine-tuning-small-llms-part5-deployment) to deploy your validated model!*

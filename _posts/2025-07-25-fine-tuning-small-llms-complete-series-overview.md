@@ -17,7 +17,7 @@ header_image_path: /assets/img/blog/headers/2025-07-25-fine-tuning-small-llms-co
 image_credit: Photo by NEXT Academy on Unsplash
 layout: post
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - fine-tuning
@@ -27,7 +27,7 @@ tags:
 - overview
 - tutorial-series
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-complete-series-overview.jpg
-title: 'Fine-Tuning Small LLMs on your Desktop - Series Overview'
+title: 'Fine-Tuning Small LLMs on a Desktop - Series Overview'
 toc: true
 ---
 
@@ -49,7 +49,7 @@ The complete implementation shows how to build a SQL query generation system tha
 
 ### Part 1: Setup and Environment
 
-The foundation of any successful machine learning project lies in its development environment. [Part 1: Setup and Environment](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part1-setup-environment/) establishes this crucial groundwork by guiding you through the complete setup of a Docker-based development environment optimized for machine learning workloads.
+The foundation of any successful machine learning project lies in its development environment. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment) establishes this crucial groundwork by guiding you through the complete setup of a Docker-based development environment optimized for machine learning workloads.
 
 The environment setup goes far beyond basic Docker installation. We implement GPU acceleration support, configure CUDA drivers for optimal performance, and establish a development workflow that supports both interactive experimentation and automated training pipelines. The setup includes system requirements checking, ensuring your hardware can support the training workloads effectively.
 
@@ -57,7 +57,7 @@ One of the key innovations in our approach is the containerized development envi
 
 ### Part 2: Data Preparation and Model Selection
 
-Data quality determines model performance more than any other factor in machine learning. [Part 2: Data Preparation and Model Selection](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part2-data-preparation/) tackles this challenge head-on with a comprehensive framework for creating, validating, and optimizing training datasets.
+Data quality determines model performance more than any other factor in machine learning. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation) tackles this challenge head-on with a comprehensive framework for creating, validating, and optimizing training datasets.
 
 The data preparation process begins with understanding the specific requirements of instruction-following models. Unlike traditional machine learning datasets, language model training data requires careful attention to prompt formatting, response quality, and diversity of examples. We demonstrate how to create high-quality training examples that effectively teach models to follow instructions while maintaining consistency and accuracy.
 
@@ -67,7 +67,7 @@ Model selection represents another critical decision point. The series provides 
 
 ### Part 3: Fine-Tuning with Unsloth
 
-The heart of our approach lies in [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/2025/07/25/fine-tuning-small-llms-part3-training/), where we demonstrate how to achieve dramatic improvements in training efficiency using cutting-edge optimization techniques.
+The heart of our approach lies in [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training), where we demonstrate how to achieve dramatic improvements in training efficiency using cutting-edge optimization techniques.
 
 Unsloth represents a breakthrough in parameter-efficient fine-tuning, enabling 80% reductions in memory usage and training time compared to traditional approaches. The technique builds on Low-Rank Adaptation (LoRA) methods but adds significant optimizations for modern GPU architectures. Our implementation shows how to configure Unsloth for different model architectures, from Llama and Mistral to Phi-3 and Code Llama.
 
@@ -77,7 +77,7 @@ One of the most valuable aspects of this part is the detailed exploration of hyp
 
 ### Part 4: Evaluation and Testing
 
-Model evaluation extends far beyond simple accuracy metrics. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/) implements a comprehensive evaluation framework that assesses model performance across multiple dimensions, ensuring your fine-tuned models meet production quality standards.
+Model evaluation extends far beyond simple accuracy metrics. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation) implements a comprehensive evaluation framework that assesses model performance across multiple dimensions, ensuring your fine-tuned models meet production quality standards.
 
 The evaluation framework implements both automated and human evaluation methods. Automated metrics include BLEU, ROUGE, METEOR, and BERTScore for general text quality, as well as domain-specific metrics like SQL syntax validation and semantic correctness checking. These metrics provide quantitative baselines for comparing different model configurations and training approaches.
 
@@ -87,7 +87,7 @@ The A/B testing framework enables rigorous comparison between different models o
 
 ### Part 5: Deployment with Ollama and Docker
 
-Moving from experimental models to production services requires careful attention to deployment architecture, performance optimization, and operational concerns. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/) addresses these challenges with a complete deployment stack that scales from development to production.
+Moving from experimental models to production services requires careful attention to deployment architecture, performance optimization, and operational concerns. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment) addresses these challenges with a complete deployment stack that scales from development to production.
 
 The deployment architecture centers around Ollama for model serving, which provides efficient local inference with minimal operational overhead. Our implementation includes automatic model conversion from training formats to optimized inference formats, supporting quantization techniques that reduce model size while maintaining performance.
 
@@ -99,7 +99,7 @@ Container orchestration ties everything together with Docker Compose configurati
 
 ### Part 6: Production, Monitoring, and Scaling
 
-Enterprise deployment requires sophisticated monitoring, optimization, and operational capabilities. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/) completes the journey with advanced techniques for production operations, cost optimization, and performance scaling.
+Enterprise deployment requires sophisticated monitoring, optimization, and operational capabilities. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production) completes the journey with advanced techniques for production operations, cost optimization, and performance scaling.
 
 The monitoring infrastructure implements comprehensive observability across all system components. Prometheus collects detailed metrics on API performance, model inference times, resource utilization, and business-level indicators like request volumes and error rates. Grafana dashboards provide real-time visualization and alerting capabilities, enabling proactive identification and resolution of performance issues.
 
@@ -148,9 +148,9 @@ Whether you're building your first machine learning application or scaling AI ca
 **Repository**: [https://github.com/saptak/fine-tuning-small-llms](https://github.com/saptak/fine-tuning-small-llms)
 
 **Series Navigation**:
-- [Part 1: Setup and Environment](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
-- [Part 2: Data Preparation](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
-- [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part3-training)
-- [Part 4: Evaluation and Testing](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
-- [Part 5: Deployment with Ollama](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
-- [Part 6: Production and Monitoring](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part6-production)
+- [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
+- [Part 2: Data Preparation](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
+- [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training)
+- [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
+- [Part 5: Deployment with Ollama](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
+- [Part 6: Production and Monitoring](/writing/2025/07/25/fine-tuning-small-llms-part6-production)

@@ -15,7 +15,7 @@ image_credit: Photo by Volodymyr Dobrovolskyy on Unsplash
 layout: post
 part: 3
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - fine-tuning
@@ -25,24 +25,24 @@ tags:
 - qlora
 - huggingface
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part3-training.jpg
-title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 3: Fine-Tuning with Unsloth'
+title: 'Fine-Tuning Small LLMs on a Desktop - Part 3: Fine-Tuning with Unsloth'
 toc: true
 ---
 
 > 📚 **Reference Code Available**: All training scripts and configurations are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part3-training/` for complete training workflows!
 
-# Fine-Tuning Small LLMs with Docker Desktop - Part 3: Fine-Tuning with Unsloth
+# Fine-Tuning Small LLMs on a Desktop - Part 3: Fine-Tuning with Unsloth
 
-Welcome to the most exciting part of our series! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/), we set up our environment, and in [Part 2](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/), we prepared our high-quality dataset. Now it's time to fine-tune our model using Unsloth's revolutionary approach to efficient training.
+Welcome to the most exciting part of our series! In [Part 1](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment), we set up our environment, and in [Part 2](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation), we prepared our high-quality dataset. Now it's time to fine-tune our model using Unsloth's revolutionary approach to efficient training.
 
 ## Series Navigation
 
-1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
+1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
 3. **Part 3: Fine-Tuning with Unsloth** (This post)
-4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
+5. [Part 5: Deployment with Ollama and Docker](/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production)
 
 ## Why Unsloth is a Game-Changer
 
@@ -798,7 +798,7 @@ The Part 3 directory includes:
 
 Congratulations! You've successfully fine-tuned your first small language model using Unsloth. Your model is now specialized for your specific use case and ready for evaluation.
 
-**[Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)**
+**[Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)**
 
 In Part 4, you'll learn:
 - Comprehensive evaluation frameworks
@@ -834,4 +834,4 @@ In Part 4, you'll learn:
 
 ---
 
-*Continue to [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/) to validate your model's performance!*
+*Continue to [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation) to validate your model's performance!*

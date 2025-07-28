@@ -16,7 +16,7 @@ image_credit: Photo by Glen Carrie on Unsplash
 layout: post
 part: 5
 repository: https://github.com/saptak/fine-tuning-small-llms
-series: Fine-Tuning Small LLMs with Docker Desktop
+series: Fine-Tuning Small LLMs on a Desktop
 tags:
 - llm
 - deployment
@@ -27,25 +27,25 @@ tags:
 - streamlit
 - production
 thumbnail_path: /assets/img/blog/thumbnails/2025-07-25-fine-tuning-small-llms-part5-deployment.jpg
-title: 'Fine-Tuning Small LLMs with Docker Desktop - Part 5: Deployment with Ollama
+title: 'Fine-Tuning Small LLMs on a Desktop - Part 5: Deployment with Ollama
   and Docker'
 toc: true
 ---
 
 > 📚 **Reference Code Available**: All deployment configurations and production code are available in the [GitHub repository](https://github.com/saptak/fine-tuning-small-llms). See `part5-deployment/` for complete deployment solutions!
 
-# Fine-Tuning Small LLMs with Docker Desktop - Part 5: Deployment with Ollama and Docker
+# Fine-Tuning Small LLMs on a Desktop - Part 5: Deployment with Ollama and Docker
 
-Welcome to Part 5! In [Part 4](/2025/07/25/fine-tuning-small-llms-part4-evaluation/), we thoroughly evaluated our fine-tuned model. Now it's time for the exciting finale: **deploying your model for real-world use**. We'll explore multiple deployment strategies using Ollama, Docker, and create production-ready APIs and interfaces.
+Welcome to Part 5! In [Part 4](/2025/07/25/fine-tuning-small-llms-part4-evaluation), we thoroughly evaluated our fine-tuned model. Now it's time for the exciting finale: **deploying your model for real-world use**. We'll explore multiple deployment strategies using Ollama, Docker, and create production-ready APIs and interfaces.
 
 ## Series Navigation
 
-1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
-4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
+1. [Part 1: Setup and Environment](/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
+2. [Part 2: Data Preparation and Model Selection](/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
+3. [Part 3: Fine-Tuning with Unsloth](/writing/2025/07/25/fine-tuning-small-llms-part3-training)
+4. [Part 4: Evaluation and Testing](/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
 5. **Part 5: Deployment with Ollama and Docker** (This post)
-6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
+6. [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production)
 
 ## Deployment Architecture Overview
 
@@ -1762,7 +1762,7 @@ The Part 5 directory includes:
 
 Congratulations! You've successfully deployed your fine-tuned SQL expert model with a complete production stack including APIs, web interfaces, monitoring, and load balancing.
 
-**[Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/)**
+**[Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production)**
 
 In our final part, you'll learn:
 - Advanced monitoring and alerting
@@ -1799,4 +1799,4 @@ In our final part, you'll learn:
 
 ---
 
-*Continue to [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production/) to complete your production-ready deployment!*
+*Continue to [Part 6: Production, Monitoring, and Scaling](/writing/2025/07/25/fine-tuning-small-llms-part6-production) to complete your production-ready deployment!*
