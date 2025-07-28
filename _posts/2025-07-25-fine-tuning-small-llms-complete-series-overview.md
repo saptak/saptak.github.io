@@ -148,9 +148,9 @@ Whether you're building your first machine learning application or scaling AI ca
 **Repository**: [https://github.com/saptak/fine-tuning-small-llms](https://github.com/saptak/fine-tuning-small-llms)
 
 **Series Navigation**:
-- [Part 1: Setup and Environment](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment/)
-- [Part 2: Data Preparation](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation/)
-- [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part3-training/)
-- [Part 4: Evaluation and Testing](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation/)
-- [Part 5: Deployment with Ollama](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part5-deployment/)
-- [Part 6: Production and Monitoring](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part6-production/)
+- [Part 1: Setup and Environment](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part1-setup-environment)
+- [Part 2: Data Preparation](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part2-data-preparation)
+- [Part 3: Fine-Tuning with Unsloth](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part3-training)
+- [Part 4: Evaluation and Testing](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part4-evaluation)
+- [Part 5: Deployment with Ollama](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part5-deployment)
+- [Part 6: Production and Monitoring](https://saptak.github.io/writing/2025/07/25/fine-tuning-small-llms-part6-production)
