@@ -12,6 +12,7 @@
   .label {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
+    fill: var(--text-color, #333) !important;
   }
   
   .node rect,
@@ -41,6 +42,10 @@
 // Dark mode specific styles
 [data-theme="dark"] {
   .mermaid {
+    .label {
+      fill: var(--text-color, #ddd) !important;
+    }
+    
     .node rect,
     .node circle,
     .node ellipse,
