@@ -13,7 +13,8 @@ description: A detailed, narrative guide to building a neurosymbolic SQL adapter
 featured: true
 header_image_path: /assets/img/blog/headers/2025-08-25-neurosymbolic-sql-adapter.jpg
 image: /assets/images/neurosymbolic-sql-adapter-architecture.png
-image_credit: Photo by Growtika on Unsplash
+image_credit: Photo by COPPERTIST WU on Unsplash
+image_credit_url: https://unsplash.com/photos/a-hand-holding-a-gold-snake-ring-in-its-palm-yCncjXuBJmI
 layout: post
 tags:
 - PyTorch
@@ -877,7 +878,8 @@ description: A detailed, narrative guide to building a neurosymbolic SQL adapter
 featured: true
 header_image_path: /assets/img/blog/headers/2025-08-25-neurosymbolic-sql-adapter.jpg
 image: /assets/images/neurosymbolic-sql-adapter-architecture.png
-image_credit: Photo by Growtika on Unsplash
+image_credit: Photo by COPPERTIST WU on Unsplash
+image_credit_url: https://unsplash.com/photos/a-hand-holding-a-gold-snake-ring-in-its-palm-yCncjXuBJmI
 layout: post
 tags:
 - PyTorch
