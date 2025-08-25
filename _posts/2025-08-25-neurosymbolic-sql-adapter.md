@@ -6,7 +6,7 @@ categories:
 - SQL
 - Neurosymbolic AI
 - Tutorial
-date: 2025-01-01
+date: 2025-08-25
 description: A detailed, narrative guide to building a neurosymbolic SQL adapter from
   scratch, combining neural language models with a custom symbolic reasoning engine
   for enhanced SQL generation.
@@ -870,7 +870,7 @@ categories:
 - SQL
 - Neurosymbolic AI
 - Tutorial
-date: 2025-01-01
+date: 2025-08-25
 description: A detailed, narrative guide to building a neurosymbolic SQL adapter from
   scratch, combining neural language models with a custom symbolic reasoning engine
   for enhanced SQL generation.
